@@ -1,0 +1,40 @@
+# {{name}}
+
+{{description}}
+
+## Setup
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Install browsers:
+```bash
+npx playwright install
+```
+
+## Available Scripts
+
+- `npm test` - Run all tests
+- `npm run test:ui` - Run tests in UI mode
+- `npm run test:debug` - Run tests in debug mode
+- `npm run test:chromium` - Run tests only in Chrome
+- `npm run codegen` - Generate tests with Codegen
+
+## Project Structure
+
+```
+src/
+  ├── api/          # API clients
+  ├── features/     # .feature files (Gherkin)
+  ├── fixtures/     # Test data
+  ├── schemas/      # Validation schemas
+  ├── steps/        # Step definitions
+  ├── tests/        # E2E tests
+  └── types/        # TypeScript types
+```
+
+## Author
+
+{{author}} 

@@ -1,0 +1,158 @@
+import { faker } from '@faker-js/faker';
+import { {{entityName}}, Create{{entityName}}Dto, Update{{entityName}}Dto } from '../../types/{{section}}/{{entityLower}}';
+
+/**
+ * {{entityName}} test data fixtures using Faker.js
+ */
+export class {{entityName}}Fixture {
+  /**
+   * Generate a complete {{entityName}} object
+   */
+  static create{{entityName}}(overrides: Partial<{{entityName}}> = {}): {{entityName}} {
+    return {
+      id: faker.string.uuid(),
+      {{#each fields}}
+      {{name}}: {{#if isFaker}}{{fakerMethod}}{{else}}{{{defaultValue}}}{{/if}},
+      {{/each}}
+      createdAt: faker.date.past().toISOString(),
+      updatedAt: faker.date.recent().toISOString(),
+      ...overrides
+    };
+  }
+
+  {{#if hasCreate}}
+  /**
+   * Generate {{entityName}} creation data
+   */
+  static create{{entityName}}Dto(overrides: Partial<Create{{entityName}}Dto> = {}): Create{{entityName}}Dto {
+    return {
+      {{#each createFields}}
+      {{name}}: {{#if isFaker}}{{fakerMethod}}{{else}}{{{defaultValue}}}{{/if}},
+      {{/each}}
+      ...overrides
+    };
+  }
+  {{/if}}
+
+  {{#if hasUpdate}}
+  /**
+   * Generate {{entityName}} update data
+   */
+  static update{{entityName}}Dto(overrides: Partial<Update{{entityName}}Dto> = {}): Update{{entityName}}Dto {
+    const updates: Update{{entityName}}Dto = {};
+    
+    // Randomly include some fields
+    {{#each updateFields}}
+    if (faker.datatype.boolean()) updates.{{name}} = {{#if isFaker}}{{fakerMethod}}{{else}}{{{defaultValue}}}{{/if}};
+    {{/each}}
+
+    return { ...updates, ...overrides };
+  }
+  {{/if}}
+
+  /**
+   * Generate multiple {{entityNamePlural}}
+   */
+  static create{{entityNamePlural}}(count: number = 10, overrides: Partial<{{entityName}}> = {}): {{entityName}}[] {
+    return Array.from({ length: count }, () => this.create{{entityName}}(overrides));
+  }
+
+  {{#if hasCreate}}
+  /**
+   * Generate invalid {{entityName}} data for negative testing
+   */
+  static createInvalid{{entityName}}() {
+    return {
+      {{#each createFields}}
+      {{#if required}}
+      without{{capitalize name}}: this.create{{../entityName}}Dto({ {{name}}: undefined as any }),
+      {{#if (eq type "string")}}withEmpty{{capitalize name}}: this.create{{../entityName}}Dto({ {{name}}: '' }),{{/if}}
+      {{#if (eq type "string")}}withShort{{capitalize name}}: this.create{{../entityName}}Dto({ {{name}}: 'A' }),{{/if}}
+      {{#if (eq type "number")}}withNegative{{capitalize name}}: this.create{{../entityName}}Dto({ {{name}}: -10 }),{{/if}}
+      {{/if}}
+      {{/each}}
+    };
+  }
+
+  /**
+   * Generate invalid {{entityName}} data for testing validation
+   */
+  static createInvalid{{entityName}}Data(field: string): Partial<Create{{entityName}}Dto> {
+    const baseData = {
+      {{#each createFields}}
+      {{name}}: {{#if isFaker}}{{fakerMethod}}{{else}}{{{defaultValue}}}{{/if}},
+      {{/each}}
+    };
+
+    switch (field) {
+      {{#each createFields}}
+      {{#if required}}
+      case '{{name}}':
+        {{#if (eq type "string")}}
+        return { ...baseData, {{name}}: '' }; // Empty string
+        {{else if (eq type "number")}}
+        return { ...baseData, {{name}}: -100 }; // Negative value
+        {{else if (eq type "boolean")}}
+        return { ...baseData, {{name}}: null as any }; // null instead of boolean
+        {{else}}
+        return { ...baseData, {{name}}: {{{invalidValue}}} };
+        {{/if}}
+      {{/if}}
+      {{/each}}
+      default:
+        return baseData;
+    }
+  }
+
+  /**
+   * Generate {{entityName}} data with invalid field values
+   */
+  static create{{entityName}}DataWithInvalidField(field: string): Partial<Create{{entityName}}Dto> {
+    const baseData = {
+      {{#each createFields}}
+      {{name}}: {{#if isFaker}}{{fakerMethod}}{{else}}{{{defaultValue}}}{{/if}},
+      {{/each}}
+    };
+
+    switch (field) {
+      {{#each createFields}}
+      {{#if required}}
+      {{#if (eq type "string")}}
+      case '{{name}}':
+        return { ...baseData, {{name}}: '' }; // Empty string
+      {{/if}}
+      {{#if (eq type "number")}}
+      case '{{name}}':
+        return { ...baseData, {{name}}: -100 }; // Negative value
+      {{/if}}
+      {{#if (eq type "boolean")}}
+      case '{{name}}':
+        return { ...baseData, {{name}}: null as any }; // null instead of boolean
+      {{/if}}
+      {{/if}}
+      {{/each}}
+      default:
+        return baseData;
+    }
+  }
+  {{/if}}
+
+  /**
+   * Generate {{entityName}} for specific testing scenarios
+   */
+  static createTestScenarios() {
+    return {
+      valid: this.create{{entityName}}(),
+      {{#if hasStockField}}outOfStock: this.createOutOfStock{{entityName}}(),{{/if}}
+      {{#if hasActiveField}}inactive: this.createInactive{{entityName}}(),{{/if}}
+      {{#if hasPriceField}}highValue: this.createHighValue{{entityName}}(),{{/if}}
+      withMinimalData: this.create{{entityName}}({
+        {{#each createFields}}
+        {{#if required}}
+        {{name}}: {{#if (eq type "string")}}'Test {{capitalize name}}'{{else if (eq type "number")}}{{#if (eq name "stock")}}5{{else}}10.99{{/if}}{{else}}true{{/if}},
+        {{/if}}
+        {{/each}}
+      })
+    };
+  }
+}

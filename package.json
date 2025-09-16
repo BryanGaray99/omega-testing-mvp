@@ -1,0 +1,45 @@
+{
+  "name": "omega-testing-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo for Omega Testing MVP: frontend (React) and backend (NestJS)",
+  "bin": {
+    "omega-testing": "./bin/omega-testing.js"
+  },
+  "files": [
+    "bin/",
+    "dist/",
+    "scripts/",
+    "README.md"
+  ],
+  "workspaces": [
+    "apps/*",
+    "shared/*"
+  ],
+  "scripts": {
+    "dev": "node scripts/start-dev.js",
+    "start": "node scripts/start-prod.js",
+    "dev:frontend": "npm run dev -w apps/frontend",
+    "dev:backend": "npm run start:dev -w apps/backend",
+    "build": "npm run build:dist",
+    "build:dist": "npm run build:frontend && npm run build:backend && npm run copy:builds",
+    "build:frontend": "npm run build -w apps/frontend",
+    "build:backend": "npm run build -w apps/backend",
+    "copy:builds": "node scripts/copy-builds.js",
+    "prepublishOnly": "npm run build:dist",
+    "test:cli": "node bin/omega-testing.js info",
+    "health": "node scripts/health-check.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.0.0"
+  },
+  "devDependencies": {},
+  "overrides": {},
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
+
+
