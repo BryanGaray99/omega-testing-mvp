@@ -2,6 +2,8 @@
 
 Monorepo with a React (Vite) dashboard and a NestJS backend for generating, managing, and executing API test projects using Playwright + BDD. Includes a local CLI to run production builds (monolithic or split) and a development workflow with unified logs.
 
+NPM package: [omega-testing-mvp](https://www.npmjs.com/package/omega-testing-mvp)
+
 ## What this app does
 
 - Centralizes API testing management in a dashboard: projects, endpoints, test cases, executions, and reports.
@@ -10,9 +12,6 @@ Monorepo with a React (Vite) dashboard and a NestJS backend for generating, mana
 - Provides AI-assisted utilities for suggesting/generating test cases (configurable via OpenAI key).
 - Exposes a documented REST API with Swagger for automation and integrations.
 
-## Architecture (current)
-
-![Architecture](apps/frontend/arquitectura.png)
 
 The diagram reflects the current local architecture: React dashboard + NestJS API, with Playwright workspaces stored outside the repo, and optional future cloud/AI integrations.
 
