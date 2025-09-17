@@ -10,6 +10,57 @@ const CLI_ROOT = path.dirname(__dirname);
 const FRONTEND_DIST = path.join(CLI_ROOT, 'dist', 'frontend');
 const BACKEND_DIST = path.join(CLI_ROOT, 'dist', 'backend');
 
+function ensurePackageJson() {
+  const packageJsonPath = path.join(process.cwd(), 'package.json');
+  
+  if (!fs.existsSync(packageJsonPath)) {
+    console.log(chalk.yellow('No package.json found. Creating one...'));
+    
+    const defaultPackageJson = {
+      name: path.basename(process.cwd()),
+      version: '1.0.0',
+      description: 'Omega Testing workspace',
+      main: 'index.js',
+      scripts: {
+        test: 'echo "Error: no test specified" && exit 1'
+      },
+      keywords: [],
+      author: '',
+      license: 'ISC'
+    };
+    
+    fs.writeFileSync(packageJsonPath, JSON.stringify(defaultPackageJson, null, 2));
+    console.log(chalk.green('✅ package.json created'));
+  }
+}
+
+function ensurePackageInstalled() {
+  const packageJsonPath = path.join(process.cwd(), 'package.json');
+  
+  if (fs.existsSync(packageJsonPath)) {
+    try {
+      const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+      const isInstalled = packageJson.dependencies?.['omega-testing-mvp'] || 
+                         packageJson.devDependencies?.['omega-testing-mvp'];
+      
+      if (!isInstalled) {
+        console.error(chalk.red('❌ omega-testing-mvp not found in package.json'));
+        console.error(chalk.blue('💡 Run: npm i omega-testing-mvp'));
+        console.error(chalk.gray('   This will install the package locally and create package.json if needed'));
+        process.exit(1);
+      }
+    } catch (error) {
+      console.error(chalk.red('❌ Error reading package.json:'), error.message);
+      process.exit(1);
+    }
+  } else {
+    console.error(chalk.red('❌ No package.json found'));
+    console.error(chalk.blue('💡 Run: npm i omega-testing-mvp'));
+    console.error(chalk.gray('   This will create package.json and install the package locally'));
+    process.exit(1);
+  }
+}
+
 function checkBuilds() {
   const frontendExists = fs.existsSync(path.join(FRONTEND_DIST, 'index.html'));
   const backendExists = fs.existsSync(path.join(BACKEND_DIST, 'main.js'));
@@ -24,7 +75,7 @@ function checkBuilds() {
 }
 
 function run(command, args, options = {}) {
-  const p = spawn(command, args, { stdio: 'inherit', shell: true, ...options });
+  const p = spawn(command, args, { stdio: 'inherit', shell: false, ...options });
   p.on('error', (e) => console.error(chalk.red(`Error: ${e.message}`)));
   return p;
 }
@@ -71,7 +122,7 @@ function startSplit(options) {
     },
   });
 
-  const backendProcess = run('node', ['main.js'], {
+  const backendProcess = run(process.execPath, ['main.js'], {
     cwd: BACKEND_DIST,
     env: {
       ...process.env,
@@ -110,6 +161,7 @@ program
   .description('Start in split mode with default ports (frontend 5173, backend 3000)')
   .option('--no-open', 'Do not open the browser automatically')
   .action((options) => {
+    ensurePackageInstalled();
     checkBuilds();
     startSplit({ frontendPort: 5173, port: 3000, open: options.open });
   });
@@ -131,6 +183,7 @@ program
   .option('--workspace-path <path>', 'Playwright workspaces path')
   .option('--no-open', 'Do not open the browser automatically')
   .action((options) => {
+    ensurePackageInstalled();
     checkBuilds();
     startSplit(options);
   });
@@ -158,5 +211,3 @@ program
   });
 
 program.parse();
-
-
