@@ -90,17 +90,43 @@ npm run build:dist
 
 2) Run compiled builds with the local CLI
 
-- Monolithic (backend serves frontend):
-
-```bash
-node bin/omega-testing.js start --port 3000
-```
-
 - Split mode (static frontend + backend separately):
 
 ```bash
 node bin/omega-testing.js split --frontend-port 5173 --port 3000
 ```
+
+## Use as npm library
+
+You can consume this as a CLI from npm. Three common ways:
+
+1) No installation (recommended)
+
+```bash
+npx omega-testing-mvp start-local
+# or with custom ports
+npx omega-testing-mvp split --frontend-port 5173 --port 3000
+```
+
+2) Global installation
+
+```bash
+npm i -g omega-testing-mvp
+omega-testing-mvp start-local
+# or
+omega-testing-mvp split --frontend-port 5173 --port 3000
+```
+
+3) Local project installation
+
+```bash
+npm i omega-testing-mvp
+npx omega-testing-mvp start-local
+```
+
+Notes:
+- `start-local` uses split mode with default ports (frontend 5173, backend 3000) and opens the browser automatically. Use `--no-open` to disable.
+- The Playwright workspaces folder is created as a sibling of the installation root by default (e.g., `../playwright-workspaces`). Override with `--workspace-path` or `PLAYWRIGHT_WORKSPACES_PATH`.
 
 ## Playwright Workspaces
 
@@ -126,7 +152,6 @@ npm run health         # Health check utility (local)
 
 ## Troubleshooting
 
-- 404 at `/` in production start: ensure `npm run build:dist` was executed and `dist/frontend/index.html` exists.
 - Frontend not reachable in split mode on Windows: use `node bin/omega-testing.js split ...` (the server uses a dedicated script to avoid quoting issues).
 - Database path: the SQLite DB is created under the workspaces directory by default.
 

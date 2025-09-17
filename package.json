@@ -1,11 +1,32 @@
 {
   "name": "omega-testing-mvp",
   "version": "1.0.0",
-  "private": true,
-  "description": "Monorepo for Omega Testing MVP: frontend (React) and backend (NestJS)",
+  "private": false,
+  "description": "CLI to run Omega Testing dashboard (React) + API (NestJS) with Playwright workspaces.",
   "author": "Bryan Garay",
+  "license": "MIT",
+  "keywords": [
+    "testing",
+    "playwright",
+    "bdd",
+    "nestjs",
+    "react",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/omega-testing-mvp.git"
+  },
+  "homepage": "https://github.com/your-org/omega-testing-mvp#readme",
+  "bugs": {
+    "url": "https://github.com/your-org/omega-testing-mvp/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
-    "omega-testing": "./bin/omega-testing.js"
+    "omega-testing": "./bin/omega-testing.js",
+    "omega-testing-mvp": "./bin/omega-testing.js"
   },
   "files": [
     "bin/",

@@ -29,39 +29,20 @@ function run(command, args, options = {}) {
   return p;
 }
 
-function startProduction(options) {
-  console.log(chalk.blue.bold('Starting Omega Testing (production)'));
-
-  const backendPort = options.port || '3000';
-  // Default: sibling to the package root (outside the installed folder)
-  const defaultWorkspace = path.resolve(CLI_ROOT, '..', 'playwright-workspaces');
-  const workspacePath = options.workspacePath
-    ? path.resolve(process.cwd(), options.workspacePath)
-    : defaultWorkspace;
-
-  console.log(chalk.green(`Frontend served on http://localhost:${backendPort}`));
-  console.log(chalk.green(`Backend API on http://localhost:${backendPort}/v1/api`));
-  console.log(chalk.green(`Swagger docs: http://localhost:${backendPort}/docs`));
-
-  const backendProcess = run('node', ['main.js'], {
-    cwd: BACKEND_DIST,
-    env: {
-      ...process.env,
-      NODE_ENV: 'production',
-      PORT: backendPort,
-      PLAYWRIGHT_WORKSPACES_PATH: workspacePath,
-    },
-  });
-
-  const cleanup = () => {
-    console.log(chalk.gray('Shutting down...'));
-    try { backendProcess.kill(); } catch {}
-    process.exit(0);
-  };
-
-  process.on('SIGINT', cleanup);
-  process.on('SIGTERM', cleanup);
+function openBrowser(url) {
+  try {
+    if (process.platform === 'win32') {
+      run('cmd', ['/c', 'start', '', url]);
+    } else if (process.platform === 'darwin') {
+      run('open', [url]);
+    } else {
+      run('xdg-open', [url]);
+    }
+  } catch (_) {
+    // ignore
+  }
 }
+
 
 function startDevelopment() {
   console.log(chalk.red('Development mode not available in CLI distribution.'));
@@ -103,6 +84,10 @@ function startSplit(options) {
   console.log(chalk.green(`Backend : http://localhost:${backendPort}`));
   console.log(chalk.green(`Swagger : http://localhost:${backendPort}/docs`));
 
+  if (options.open !== false) {
+    setTimeout(() => openBrowser(`http://localhost:${frontendPort}`), 1200);
+  }
+
   const cleanup = () => {
     console.log(chalk.gray('Shutting down...'));
     try { staticServer.kill(); } catch {}
@@ -120,14 +105,15 @@ program
   .version('1.0.0');
 
 program
-  .command('start')
-  .description('Start Omega Testing in production mode')
-  .option('-p, --port <port>', 'Backend port', '3000')
-  .option('--workspace-path <path>', 'Playwright workspaces path (default: ./playwright-workspaces)')
+  .command('start-local')
+  .description('Start in split mode with default ports (frontend 5173, backend 3000)')
+  .option('--no-open', 'Do not open the browser automatically')
   .action((options) => {
     checkBuilds();
-    startProduction(options);
+    startSplit({ frontendPort: 5173, port: 3000, open: options.open });
   });
+
+// Removed monolithic start command until fully validated
 
 program
   .command('dev')
@@ -142,6 +128,7 @@ program
   .option('-p, --port <port>', 'Backend port', '3000')
   .option('-f, --frontend-port <port>', 'Frontend port', '5173')
   .option('--workspace-path <path>', 'Playwright workspaces path')
+  .option('--no-open', 'Do not open the browser automatically')
   .action((options) => {
     checkBuilds();
     startSplit(options);
