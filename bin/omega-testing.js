@@ -55,7 +55,8 @@ function startSplit(options) {
 
   const backendPort = options.port || '3000';
   const frontendPort = options.frontendPort || '5173';
-  const defaultWorkspace = path.resolve(CLI_ROOT, '..', 'playwright-workspaces');
+  // Default to a folder in the user's current working directory (visible to the user)
+  const defaultWorkspace = path.resolve(process.cwd(), 'playwright-workspaces');
   const workspacePath = options.workspacePath
     ? path.resolve(process.cwd(), options.workspacePath)
     : defaultWorkspace;

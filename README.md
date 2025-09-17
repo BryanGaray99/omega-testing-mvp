@@ -97,30 +97,15 @@ node bin/omega-testing.js split --frontend-port 5173 --port 3000
 
 ## Use as npm library
 
-You can consume this as a CLI from npm. Three common ways:
+You can consume this as a CLI from npm:
 
-1) No installation (recommended)
-
-```bash
-npx omega-testing-mvp start-local
-# or with custom ports
-npx omega-testing-mvp split --frontend-port 5173 --port 3000
-```
-
-2) Global installation
-
-```bash
-npm i -g omega-testing-mvp
-omega-testing-mvp start-local
-# or
-omega-testing-mvp split --frontend-port 5173 --port 3000
-```
-
-3) Local project installation
+1) Local project installation
 
 ```bash
 npm i omega-testing-mvp
 npx omega-testing-mvp start-local
+# or
+omega-testing-mvp split --frontend-port 5173 --port 3000
 ```
 
 Notes:
