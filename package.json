@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Monorepo for Omega Testing MVP: frontend (React) and backend (NestJS)",
+  "author": "Bryan Garay",
   "bin": {
     "omega-testing": "./bin/omega-testing.js"
   },
