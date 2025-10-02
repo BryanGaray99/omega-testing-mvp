@@ -1,6 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Project } from '../project.entity';
+import { Project, ProjectStatus } from '../project.entity';
 import { GenerationService } from '../generation.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 /**
  * Interface for queue items.
@@ -37,11 +39,11 @@ export class QueueService {
   /** Internal queue storage */
   private readonly queue: QueueItem[] = [];
   
-  /** Maximum number of retry attempts */
-  private readonly maxRetries = 3;
+  /** Maximum number of retry attempts (1 retry => 2 intentos en total) */
+  private readonly maxRetries = 1;
   
   /** Timeout for generation operations in milliseconds */
-  private readonly timeoutMs = 5 * 60 * 1000;
+  private readonly timeoutMs = 10 * 60 * 1000;
   
   /** Flag indicating if the queue is currently being processed */
   private isProcessing = false;
@@ -51,7 +53,11 @@ export class QueueService {
    * 
    * @param generationService - Service for project generation
    */
-  constructor(private readonly generationService: GenerationService) {}
+  constructor(
+    private readonly generationService: GenerationService,
+    @InjectRepository(Project)
+    private readonly projectRepo: Repository<Project>,
+  ) {}
 
   /**
    * Adds a project to the generation queue.
@@ -182,6 +188,16 @@ export class QueueService {
         this.logger.error(
           `Project ${item.project.name} failed after ${this.maxRetries} attempts`,
         );
+        // Also mark the project as FAILED in case of timeouts or other external errors
+        try {
+          await this.projectRepo.update(item.project.id, {
+            status: ProjectStatus.FAILED,
+          });
+        } catch (markErr) {
+          this.logger.warn(
+            `Could not mark project as FAILED: ${markErr?.message || markErr}`,
+          );
+        }
       }
     }
   }

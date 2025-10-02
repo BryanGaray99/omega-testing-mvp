@@ -59,7 +59,7 @@ export class PlaywrightService {
       // Step 1: Initialize Playwright project with skip browser download
       this.logger.log('Step 1: Initializing Playwright project...');
       await this.execCommandWithTimeout(
-        'npm init playwright@latest -- --yes --quiet',
+        'npm init playwright@latest -- --quiet',
         project.path,
         'Playwright initialization',
         {
