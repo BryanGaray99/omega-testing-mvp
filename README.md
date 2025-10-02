@@ -112,6 +112,14 @@ Notes:
 - `start-local` uses split mode with default ports (frontend 5173, backend 3000) and opens the browser automatically. Use `--no-open` to disable.
 - The Playwright workspaces folder is created as a sibling of the installation root by default (e.g., `../playwright-workspaces`). Override with `--workspace-path` or `PLAYWRIGHT_WORKSPACES_PATH`.
 
+## Publish npm patch update
+
+- npm version patch -m "fix(cli) message"
+- git push & git push --tags
+- npm install
+- npm run build:dist
+- npm publish --access public 
+
 ## Playwright Workspaces
 
 - Default location: sibling directory to the repo root.
