@@ -1,6 +1,6 @@
 {
   "name": "omega-testing-mvp",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": false,
   "description": "CLI to run Omega Testing dashboard (React) + API (NestJS) with Playwright workspaces.",
   "author": "Bryan Garay",
