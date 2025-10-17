@@ -15,11 +15,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-org/omega-testing-mvp.git"
+    "url": "git+https://github.com/BryanGaray99/omega-testing-mvp"
   },
-  "homepage": "https://github.com/your-org/omega-testing-mvp#readme",
+  "homepage": "https://github.com/BryanGaray99",
   "bugs": {
-    "url": "https://github.com/your-org/omega-testing-mvp/issues"
+    "url": "https://github.com/BryanGaray99/omega-testing-mvp"
   },
   "publishConfig": {
     "access": "public"
