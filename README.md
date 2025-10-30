@@ -155,10 +155,7 @@ npm run health         # Health check utility (local)
   - `npm publish`
   - Consumers can run: `npx omega-testing start`
 
-## License
-
-MVP for internal use. Choose a license before publishing.
-
 ## Author
 
 Bryan Garay
+b.garay.adm@gmail.com
