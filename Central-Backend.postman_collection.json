@@ -1,0 +1,1033 @@
+{
+  "info": {
+    "_postman_id": "87c6f9c5-31b2-4997-a935-00dc2126ae38",
+    "name": "Central-Backend",
+    "description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38011082"
+  },
+  "item": [
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "/health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/health",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Parseamos el body como JSON\r",
+                  "let response = pm.response.json();\r",
+                  "\r",
+                  "// Tomamos el valor del id\r",
+                  "let idValue = response.data.id;\r",
+                  "\r",
+                  "// Lo guardamos como variable de carpeta (nivel collection-folder)\r",
+                  "pm.collectionVariables.set(\"idFromResponse\", idValue);\r",
+                  "\r",
+                  "// Log para verificar\r",
+                  "console.log(\"ID guardado:\", idValue);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"mi-proyecto-test-1\",\r\n    \"displayName\": \"Mi Proyecto de Testing E2E\",\r\n    \"baseUrl\": \"http://localhost:3004\",\r\n    \"basePath\": \"/v1/api\",\r\n    \"type\": \"playwright-bdd\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects/{id}",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects/{id}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects/{id}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"displayName\": \"Nuevo Nombre para Mostrar\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Endpoints",
+      "item": [
+        {
+          "name": "/projects/{id}/endpoints",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Parseamos el body como JSON\r",
+                  "let response = pm.response.json();\r",
+                  "\r",
+                  "// Tomamos el valor del endpointId\r",
+                  "let endpointIdValue = response.data.data.endpointId;\r",
+                  "\r",
+                  "// Lo guardamos como variable de carpeta (nivel collection-folder)\r",
+                  "pm.collectionVariables.set(\"endpointId\", endpointIdValue);\r",
+                  "\r",
+                  "// Log para verificar\r",
+                  "console.log(\"Endpoint ID guardado:\", endpointIdValue);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"projectId\": \"2a3db121-b2d8-4bd2-8278-d6ad804152f0\",\r\n  \"section\": \"ecommerce\",\r\n  \"name\": \"Product CRUD\",\r\n  \"entityName\": \"Product\",\r\n  \"path\": \"/products\",\r\n  \"methods\": [\r\n    {\r\n      \"method\": \"GET\"\r\n    },\r\n    {\r\n      \"method\": \"POST\",\r\n      \"requestBodyDefinition\": [\r\n        {\r\n          \"name\": \"name\",\r\n          \"type\": \"string\",\r\n          \"example\": \"iPhone 15 Pro\",\r\n          \"validations\": {\r\n            \"minLength\": 2,\r\n            \"required\": true\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"description\",\r\n          \"type\": \"string\",\r\n          \"example\": \"Latest Apple iPhone with advanced features\",\r\n          \"validations\": {\r\n            \"required\": true\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"price\",\r\n          \"type\": \"number\",\r\n          \"example\": 999.99,\r\n          \"validations\": {\r\n            \"minimum\": 0,\r\n            \"required\": true\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"categoryId\",\r\n          \"type\": \"string\",\r\n          \"example\": \"cat-1\",\r\n          \"validations\": {\r\n            \"required\": true\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"stock\",\r\n          \"type\": \"number\",\r\n          \"example\": 50,\r\n          \"validations\": {\r\n            \"minimum\": 0,\r\n            \"required\": true\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"imageUrl\",\r\n          \"type\": \"string\",\r\n          \"example\": \"https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg\"\r\n        },\r\n        {\r\n          \"name\": \"isActive\",\r\n          \"type\": \"boolean\",\r\n          \"example\": true,\r\n          \"validations\": {\r\n            \"default\": true\r\n          }\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"method\": \"PATCH\",\r\n      \"requestBodyDefinition\": [\r\n        {\r\n          \"name\": \"name\",\r\n          \"type\": \"string\",\r\n          \"example\": \"iPhone 15 Pro Max\",\r\n          \"validations\": {\r\n            \"minLength\": 2,\r\n            \"required\": false\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"description\",\r\n          \"type\": \"string\",\r\n          \"example\": \"Updated description for iPhone 15 Pro Max\",\r\n          \"validations\": {\r\n            \"required\": false\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"price\",\r\n          \"type\": \"number\",\r\n          \"example\": 1099.99,\r\n          \"validations\": {\r\n            \"minimum\": 0,\r\n            \"required\": false\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"categoryId\",\r\n          \"type\": \"string\",\r\n          \"example\": \"cat-1\",\r\n          \"validations\": {\r\n            \"required\": false\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"stock\",\r\n          \"type\": \"number\",\r\n          \"example\": 75,\r\n          \"validations\": {\r\n            \"minimum\": 0,\r\n            \"required\": false\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"imageUrl\",\r\n          \"type\": \"string\",\r\n          \"example\": \"https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg\",\r\n          \"validations\": {\r\n            \"required\": false\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"isActive\",\r\n          \"type\": \"boolean\",\r\n          \"example\": true,\r\n          \"validations\": {\r\n            \"required\": false\r\n          }\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"method\": \"DELETE\"\r\n    }\r\n  ]\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/endpoints",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "endpoints"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects/{id}/endpoints",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/endpoints",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "endpoints"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/endpoints",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/endpoints",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "endpoints"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects{id}/endpoints/{endpointId}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"entityName\": \"Product\",\r\n  \"section\": \"ecommerce\",\r\n  \"description\": \"Updated CRUD for products with improved validations\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/endpoints/{{endpointId}}",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "endpoints",
+                "{{endpointId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects{id}/endpoints/{endpointId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/endpoints/{{endpointId}}",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "endpoints",
+                "{{endpointId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Test Cases",
+      "item": [
+        {
+          "name": "/projects{id}/test-cases",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-cases",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-cases"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects{id}/test-cases",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Predefine test case\",\r\n  \"entityName\": \"Product\",\r\n  \"section\": \"ecommerce\",\r\n  \"method\": \"GET\",\r\n  \"testType\": \"positive\",\r\n  \"scenario\": \"Given I have valid Product data\\nWhen I get the Product by ID\\nThen I should receive a 200 status code\",\r\n  \"description\": \"Predefine test case\",\r\n  \"tags\": [\r\n    \"@predefined\"\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-cases",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-cases"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects{id}/test-templates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-cases/step-templates/organized",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-cases",
+                "step-templates",
+                "organized"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects{id}/test-cases",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-cases/TC-ecommerce-Product-1",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-cases",
+                "TC-ecommerce-Product-1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects{id}/test-cases/{test-case-id}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-cases/TC-ecommerce-Product-10",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-cases",
+                "TC-ecommerce-Product-10"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects{id}/test-cases/test-steps",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-cases/test-steps",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-cases",
+                "test-steps"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/test-cases",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/test-cases",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "test-cases"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects/{{idFromResponse}}/test-cases/TC-ecommerce-Product-1/scenario",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tags\": [\r\n    \"@read @smoke\"\r\n  ],\r\n  \"scenario\": \"Given a Product exists in the system\\nWhen I get the Product by ID\\nThen I should get the Product details\\nAnd I should receive a 200 status code\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-cases/TC-ecommerce-Product-1/scenario",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-cases",
+                "TC-ecommerce-Product-1",
+                "scenario"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Test-Executions",
+      "item": [
+        {
+          "name": "/projects/mi-proyecto-test-1/test-execution/execute",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Parseamos el body como JSON\r",
+                  "let response = pm.response.json();\r",
+                  "\r",
+                  "// Tomamos el valor del id\r",
+                  "let idValue = response.data.executionId;\r",
+                  "\r",
+                  "// Lo guardamos como variable de carpeta (nivel collection-folder)\r",
+                  "pm.collectionVariables.set(\"executionIdFromResponse\", idValue);\r",
+                  "\r",
+                  "// Log para verificar\r",
+                  "console.log(\"ID guardado:\", idValue);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"entityName\": \"Product\",\r\n  \"specificScenario\": \"Get Product by ID\"\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-execution/execute",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-execution",
+                "execute"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects/{projectId}/test-execution/results/{executionId}",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"entityName\": \"Product\"\r\n  }"
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-execution/results/{{executionIdFromResponse}}",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-execution",
+                "results",
+                "{{executionIdFromResponse}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects/{projectId}/test-execution/results/{executionId}",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-execution/results/{{executionIdFromResponse}}",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-execution",
+                "results",
+                "{{executionIdFromResponse}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects/{projectId}/test-execution/results/{executionId} Copy",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/test-execution/summary",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "test-execution",
+                "summary"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects/mi-proyecto-test-1/test-execution/execute/results",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-execution/results",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-execution",
+                "results"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/projects/mi-proyecto-test-1/test-execution/execute/results Copy",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"entityName\": \"Product\"\r\n  }"
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-execution/summary",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-execution",
+                "summary"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AI Gen",
+      "item": [
+        {
+          "name": "/generations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{projectId}/ai-test-generation/generations",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{projectId}",
+                "ai-test-generation",
+                "generations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/generations by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{projectId}/ai-test-generation/generation/{{}}/raw",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{projectId}",
+                "ai-test-generation",
+                "generation",
+                "{{}}",
+                "raw"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/health ai",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/ai-test-generation/health",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "ai-test-generation",
+                "health"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "analyze-project",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/ai-test-generation/analyze-project",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "ai-test-generation",
+                "analyze-project"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/test-cases/ai/generate",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"entityName\": \"Product\",\r\n  \"section\": \"ecommerce\", \r\n  \"operation\": \"add-scenario\",\r\n  \"requirements\": \"Crear producto con precio 330\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/test-cases/ai/generate",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "test-cases",
+                "ai",
+                "generate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/test-cases/ai/generate Copy",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"section\": \"ecommerce\",\r\n  \"entityName\": \"Product\",\r\n  \"requirements\": \"Test cases for edge case for product creation\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/ai/test-cases/suggest",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "ai",
+                "test-cases",
+                "suggest"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/ai/assistant/init",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"section\": \"ecommerce\",       \r\n  \"assistantName\": \"API Ecommerce Asistente\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/ai/assistant/init",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "ai",
+                "assistant",
+                "init"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/ai/assistant",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/ai/assistant",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "ai",
+                "assistant"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/ai/assistant/init Copy",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"section\": \"ecommerce\",       \r\n  \"assistantName\": \"API Ecommerce Asistente\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url_core_agent}}/projects/{{idFromResponse}}/ai/assistant",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "projects",
+                "{{idFromResponse}}",
+                "ai",
+                "assistant"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bugs",
+      "item": [
+        {
+          "name": "/test-cases Copy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_core_agent}}/bugs",
+              "host": [
+                "{{base_url_core_agent}}"
+              ],
+              "path": [
+                "bugs"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "id",
+      "value": "1"
+    },
+    {
+      "key": "base_url",
+      "value": "https://postman-rest-api-learner.glitch.me/"
+    },
+    {
+      "key": "idFromResponse",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "endpointId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "endpointIdFromResponse",
+      "value": ""
+    },
+    {
+      "key": "executionIdFromResponse",
+      "value": ""
+    }
+  ]
+}
