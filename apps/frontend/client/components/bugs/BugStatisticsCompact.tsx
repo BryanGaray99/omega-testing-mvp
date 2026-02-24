@@ -44,7 +44,7 @@ const PieChartComponent = ({ data, size = 80 }: { data: { name: string; value: n
       </div>
       
       {/* Center total */}
-      <div className="text-xs font-medium text-gray-600">
+      <div className="text-xs font-medium text-foreground">
         {data.reduce((sum, item) => sum + item.value, 0)}
       </div>
     </div>
@@ -101,7 +101,7 @@ export function BugStatisticsCompact({ statistics }: BugStatisticsCompactProps) 
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-3xl font-bold">{total}</div>
+          <div className="text-3xl font-bold text-foreground">{total}</div>
           <p className="text-xs text-muted-foreground mt-1">
             Bugs reported across all projects
           </p>
@@ -116,7 +116,7 @@ export function BugStatisticsCompact({ statistics }: BugStatisticsCompactProps) 
         <CardContent className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <AlertTriangle className="h-4 w-4 text-red-500" />
+              <AlertTriangle className="h-4 w-4 text-[#F87171]" />
               <span className="text-sm">Open</span>
             </div>
             <Badge variant="outline" className={`${getStatusColor('open').bg} ${getStatusColor('open').text} ${getStatusColor('open').border}`}>
@@ -126,7 +126,7 @@ export function BugStatisticsCompact({ statistics }: BugStatisticsCompactProps) 
           
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Clock className="h-4 w-4 text-purple-500" />
+              <Clock className="h-4 w-4 text-[#FBBF24]" />
               <span className="text-sm">In Progress</span>
             </div>
             <Badge variant="outline" className={`${getStatusColor('in_progress').bg} ${getStatusColor('in_progress').text} ${getStatusColor('in_progress').border}`}>
@@ -136,7 +136,7 @@ export function BugStatisticsCompact({ statistics }: BugStatisticsCompactProps) 
           
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <CheckCircle className="h-4 w-4 text-green-500" />
+              <CheckCircle className="h-4 w-4 text-[#34D399]" />
               <span className="text-sm">Resolved</span>
             </div>
             <Badge variant="outline" className={`${getStatusColor('resolved').bg} ${getStatusColor('resolved').text} ${getStatusColor('resolved').border}`}>
@@ -146,7 +146,7 @@ export function BugStatisticsCompact({ statistics }: BugStatisticsCompactProps) 
           
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <XCircle className="h-4 w-4 text-gray-500" />
+              <XCircle className="h-4 w-4 text-[#9CA3AF]" />
               <span className="text-sm">Closed</span>
             </div>
             <Badge variant="outline" className={`${getStatusColor('closed').bg} ${getStatusColor('closed').text} ${getStatusColor('closed').border}`}>
@@ -159,7 +159,7 @@ export function BugStatisticsCompact({ statistics }: BugStatisticsCompactProps) 
       {/* Priority Distribution - Pie Chart */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-base">Priority Distribution</CardTitle>
+          <CardTitle className="text-base text-muted-foreground">Priority Distribution</CardTitle>
         </CardHeader>
         <CardContent className="flex justify-center">
           <PieChartComponent data={priorityData} />
@@ -169,7 +169,7 @@ export function BugStatisticsCompact({ statistics }: BugStatisticsCompactProps) 
       {/* Severity Distribution - Pie Chart */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-base">Severity Distribution</CardTitle>
+          <CardTitle className="text-base text-muted-foreground">Severity Distribution</CardTitle>
         </CardHeader>
         <CardContent className="flex justify-center">
           <PieChartComponent data={severityData} />
@@ -179,7 +179,7 @@ export function BugStatisticsCompact({ statistics }: BugStatisticsCompactProps) 
       {/* Type Distribution - Pie Chart */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-base">Type Distribution</CardTitle>
+          <CardTitle className="text-base text-muted-foreground">Type Distribution</CardTitle>
         </CardHeader>
         <CardContent className="flex justify-center">
           <PieChartComponent data={typeData} />

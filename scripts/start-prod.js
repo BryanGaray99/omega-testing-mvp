@@ -1,30 +1,85 @@
 const { spawn } = require('child_process');
 const chalk = require('chalk');
 const path = require('path');
+const fs = require('fs');
 
-function run(command, args, options = {}) {
-  return new Promise((resolve, reject) => {
-    const p = spawn(command, args, { stdio: 'inherit', shell: true, ...options });
-    p.on('error', reject);
-    p.on('close', (code) => (code === 0 ? resolve() : reject(new Error(`${command} exited ${code}`))));
-  });
+const ROOT = path.join(__dirname, '..');
+const FRONTEND_DIST = path.join(ROOT, 'dist', 'frontend');
+const BACKEND_DIST = path.join(ROOT, 'dist', 'backend');
+
+function runDetached(command, args, options = {}) {
+  const p = spawn(command, args, { stdio: 'inherit', shell: false, ...options });
+  p.on('error', (e) => console.error(chalk.red(`Error: ${e.message}`)));
+  return p;
+}
+
+function openBrowser(url) {
+  try {
+    if (process.platform === 'win32') {
+      runDetached('cmd', ['/c', 'start', '', url]);
+    } else if (process.platform === 'darwin') {
+      runDetached('open', [url]);
+    } else {
+      runDetached('xdg-open', [url]);
+    }
+  } catch (_) {
+    // ignore
+  }
 }
 
 async function main() {
-  const cwd = path.join(__dirname, '..');
-  console.log(chalk.blue.bold('🏗️ Building applications...'));
+  if (!fs.existsSync(path.join(FRONTEND_DIST, 'index.html'))) {
+    console.error(chalk.red('❌ Frontend build not found at dist/frontend'));
+    console.error(chalk.yellow('   Run: npm run build'));
+    process.exit(1);
+  }
+  if (!fs.existsSync(path.join(BACKEND_DIST, 'main.js'))) {
+    console.error(chalk.red('❌ Backend build not found at dist/backend'));
+    console.error(chalk.yellow('   Run: npm run build'));
+    process.exit(1);
+  }
 
-  await run('npm', ['run', 'build', '-w', 'apps/frontend'], { cwd });
-  console.log(chalk.green('✅ Frontend built'));
+  const frontendPort = '5173';
+  const backendPort = '3000';
+  // playwright-workspaces al mismo nivel que omega-testing-mvp (hermano, no dentro)
+  const defaultWorkspace = path.resolve(ROOT, '..', 'playwright-workspaces');
+  if (!fs.existsSync(defaultWorkspace)) {
+    fs.mkdirSync(defaultWorkspace, { recursive: true });
+    console.log(chalk.gray(`Created playwright-workspaces: ${defaultWorkspace}`));
+  }
 
-  await run('npm', ['run', 'build', '-w', 'apps/backend'], { cwd });
-  console.log(chalk.green('✅ Backend built'));
+  console.log(chalk.blue.bold('🚀 Starting Omega Testing (split mode)...'));
 
-  console.log(chalk.blue.bold('🚀 Starting backend (serves API on 3000)...'));
-  await run('npm', ['run', 'start:prod', '-w', 'apps/backend'], {
-    cwd,
-    env: { ...process.env, NODE_ENV: 'production', PORT: '3000' },
+  const staticServer = runDetached(process.execPath, [path.join(ROOT, 'bin', 'static-frontend.js')], {
+    cwd: ROOT,
+    env: { ...process.env, FRONTEND_DIST, PORT: frontendPort },
   });
+
+  const backendProcess = runDetached(process.execPath, ['main.js'], {
+    cwd: BACKEND_DIST,
+    env: {
+      ...process.env,
+      NODE_ENV: 'production',
+      PORT: backendPort,
+      PLAYWRIGHT_WORKSPACES_PATH: defaultWorkspace,
+    },
+  });
+
+  console.log(chalk.green(`Frontend: http://localhost:${frontendPort}`));
+  console.log(chalk.green(`Backend : http://localhost:${backendPort}`));
+  console.log(chalk.green(`Swagger : http://localhost:${backendPort}/docs`));
+
+  setTimeout(() => openBrowser(`http://localhost:${frontendPort}`), 1200);
+
+  const cleanup = () => {
+    console.log(chalk.gray('\n🛑 Shutting down...'));
+    try { staticServer.kill(); } catch {}
+    try { backendProcess.kill(); } catch {}
+    process.exit(0);
+  };
+
+  process.on('SIGINT', cleanup);
+  process.on('SIGTERM', cleanup);
 }
 
 main().catch((e) => {

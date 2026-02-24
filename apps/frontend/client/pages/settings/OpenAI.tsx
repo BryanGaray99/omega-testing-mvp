@@ -178,7 +178,7 @@ export default function OpenAISettings() {
                   href="https://platform.openai.com/api-keys"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:underline"
+                  className="text-primary hover:underline dark:text-[#60A5FA] dark:hover:text-[#93C5FD]"
                 >
                   OpenAI Platform
                 </a>

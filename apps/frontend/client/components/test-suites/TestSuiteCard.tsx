@@ -15,7 +15,7 @@ import {
   MoreVertical,
   Eye,
   Edit,
-  Trash,
+  Trash2,
   Play,
   Layers,
   Clock,
@@ -70,32 +70,32 @@ export default function TestSuiteCard({
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800 hover:bg-yellow-100';
+        return 'bg-yellow-100 dark:bg-[#3F2A0E] text-yellow-800 dark:text-[#FBBF24]';
       case 'running':
-        return 'bg-blue-100 text-blue-800 hover:bg-blue-100';
+        return 'bg-blue-100 dark:bg-[#1E3A8A] text-blue-800 dark:text-[#93C5FD]';
       case 'passed':
-        return 'bg-blue-500 text-white hover:bg-blue-700';
+        return 'bg-green-100 dark:bg-[#064E3B] text-green-800 dark:text-[#34D399]';
       case 'failed':
-        return 'bg-red-100 text-red-800 hover:bg-red-100';
+        return 'bg-red-100 dark:bg-[#3F1D1D] text-red-800 dark:text-[#F87171]';
       case 'skipped':
-        return 'bg-gray-100 text-gray-800 hover:bg-gray-100';
+        return 'bg-gray-100 dark:bg-[#1F2937] text-gray-800 dark:text-[#9CA3AF]';
       default:
-        return 'bg-gray-100 text-gray-800 hover:bg-gray-100';
+        return 'bg-gray-100 dark:bg-[#1F2937] text-gray-800 dark:text-[#9CA3AF]';
     }
   };
 
   const getExecutionStatusIcon = (status?: string) => {
     if (!status || status === 'pending') {
-      return <Clock className="h-4 w-4 text-yellow-500" />;
+      return <Clock className="h-4 w-4 text-[#FBBF24]" />;
     }
     
     switch (status) {
       case "passed":
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
+        return <CheckCircle className="h-4 w-4 text-[#34D399]" />;
       case "failed":
-        return <XCircle className="h-4 w-4 text-red-500" />;
+        return <XCircle className="h-4 w-4 text-[#F87171]" />;
       default:
-        return <Calendar className="h-4 w-4 text-gray-500" />;
+        return <Calendar className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
@@ -135,7 +135,7 @@ export default function TestSuiteCard({
             onOpenChange={(open) => setOpenDropdownId(open ? testSuite.suiteId : null)}
           >
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
+              <Button variant="ghost" className="h-8 w-8 p-0 text-foreground hover:text-foreground">
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -151,10 +151,10 @@ export default function TestSuiteCard({
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="text-destructive"
+                className="text-white [&_svg]:text-[#F87171]"
                 onClick={() => onDelete(testSuite)}
               >
-                <Trash className="mr-2 h-4 w-4" />
+                <Trash2 className="mr-2 h-4 w-4" />
                 Delete Test Suite
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -163,11 +163,11 @@ export default function TestSuiteCard({
         <div className="text-xs text-muted-foreground mb-1">{testSuite.suiteId}</div>
         <CardTitle className="text-lg">{testSuite.name}</CardTitle>
         <div className="flex flex-wrap gap-2 mt-2">
-          <span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800">
+          <span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 dark:bg-[#1E3A8A] text-blue-800 dark:text-[#93C5FD]">
             {testSuite.type === 'test_set' ? 'Test Set' : 'Test Plan'}
           </span>
           {testSuite.section && (
-            <span className="px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-800">
+            <span className="px-2 py-1 rounded text-xs font-medium bg-gray-100 dark:bg-[#1F2937] text-gray-800 dark:text-[#9CA3AF]">
               {testSuite.section}
               {testSuite.entity && ` • ${testSuite.entity}`}
             </span>
@@ -215,15 +215,15 @@ export default function TestSuiteCard({
             </div>
             <div>
               <span className="text-muted-foreground">Passed:</span>
-              <span className="ml-1 font-medium text-green-600">{testSuite.passedTestCases}</span>
+              <span className="ml-1 font-medium text-[#34D399]">{testSuite.passedTestCases}</span>
             </div>
             <div>
               <span className="text-muted-foreground">Failed:</span>
-              <span className="ml-1 font-medium text-red-600">{testSuite.failedTestCases}</span>
+              <span className="ml-1 font-medium text-[#F87171]">{testSuite.failedTestCases}</span>
             </div>
             <div>
               <span className="text-muted-foreground">Skipped:</span>
-              <span className="ml-1 font-medium text-yellow-600">{testSuite.skippedTestCases}</span>
+              <span className="ml-1 font-medium text-[#FBBF24]">{testSuite.skippedTestCases}</span>
             </div>
           </div>
         </div>
@@ -232,7 +232,7 @@ export default function TestSuiteCard({
         <div className="pt-3 border-t mt-auto">
           <div className="relative">
             {isExecuting(executionId) && (
-              <div className="absolute inset-0 bg-green-100 rounded-md overflow-hidden">
+              <div className="absolute inset-0 bg-green-100 dark:bg-[#052E26] rounded-md overflow-hidden">
                 <div 
                   className="h-full w-full"
                   style={{
@@ -256,8 +256,8 @@ export default function TestSuiteCard({
             )}
             {showExecuted(executionId) && realExecutionId ? (
               <Button
-                className="w-full relative z-10 bg-blue-100 hover:bg-blue-200 text-blue-800 border-blue-300 hover:border-blue-400"
-                variant="outline"
+                className="w-full relative z-10"
+                variant="default"
                 size="sm"
                 onClick={handleNavigateToExecution}
               >
@@ -266,12 +266,8 @@ export default function TestSuiteCard({
               </Button>
             ) : (
               <Button
-                className={`w-full relative z-10 ${
-                  isExecuting(executionId)
-                    ? 'bg-green-500 text-white hover:bg-green-600 border-green-500' 
-                    : 'bg-green-100 hover:bg-green-200 text-green-800 border-green-300 hover:border-green-400'
-                }`}
-                variant="outline"
+                className="w-full relative z-10"
+                variant="success"
                 size="sm"
                 onClick={handleExecute}
                 disabled={isExecuting(executionId)}

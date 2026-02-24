@@ -57,9 +57,12 @@ omega-testing-mvp/
 ├─ bin/
 │  ├─ omega-testing.js    # Local CLI entry (start/split/info)
 │  └─ static-frontend.js  # Tiny static server for split mode
-├─ dist/                  # Distribution builds (created by build:dist)
+├─ dist/                  # Production builds (created by npm run build)
 ├─ scripts/
-│  └─ copy-builds.js      # Packages frontend/backend builds into dist/
+│  ├─ build.js            # Build frontend + backend → dist/
+│  ├─ start-prod.js       # Start frontend + backend (no build)
+│  ├─ start-dev.js        # Dev with unified logs
+│  └─ copy-builds.js      # Copy builds to dist/
 ├─ package.json           # Workspaces, scripts, and CLI wiring
 └─ README.md
 ```
@@ -81,15 +84,27 @@ Unified logs and parallel startup are handled by the dev script.
 
 ## Build & Run (production)
 
-1) Build frontend and backend, and package builds into `dist/`:
+Commands are separated for speed: build once, then start as many times as you want without rebuilding.
+
+1) **Build** (frontend + backend → `dist/`):
 
 ```bash
-npm run build:dist
+npm run build
 ```
 
-2) Run compiled builds with the local CLI
+2) **Start** (uses existing build, fast startup ~3–4 s):
 
-- Split mode (static frontend + backend separately):
+```bash
+npm run start
+```
+
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000
+- Swagger: http://localhost:3000/docs
+
+If you run `npm run start` without a prior build, you'll see a message telling you to run `npm run build`.
+
+CLI alternative:
 
 ```bash
 node bin/omega-testing.js split --frontend-port 5173 --port 3000
@@ -110,20 +125,21 @@ omega-testing-mvp split --frontend-port 5173 --port 3000
 
 Notes:
 - `start-local` uses split mode with default ports (frontend 5173, backend 3000) and opens the browser automatically. Use `--no-open` to disable.
-- The Playwright workspaces folder is created as a sibling of the installation root by default (e.g., `../playwright-workspaces`). Override with `--workspace-path` or `PLAYWRIGHT_WORKSPACES_PATH`.
+- Playwright workspaces: sibling folder of the project, created only if it doesn't exist. Override: `--workspace-path` or `PLAYWRIGHT_WORKSPACES_PATH`.
 
 ## Publish npm patch update
 
 - npm version patch -m "fix(cli) message"
 - git push & git push --tags
 - npm install
-- npm run build:dist
+- npm run build
 - npm publish --access public 
 
 ## Playwright Workspaces
 
-- Default location: sibling directory to the repo root.
+- Default location: sibling directory to the repo root (not inside the project).
   - If your repo is `.../omega-testing-mvp`, workspaces default to `.../playwright-workspaces`.
+- Created automatically only if it doesn't exist.
 - Contains: generated projects, `.env` for keys, and `central-backend.sqlite`.
 - Override via CLI `--workspace-path` or env `PLAYWRIGHT_WORKSPACES_PATH`.
 
@@ -136,9 +152,10 @@ Notes:
 ## Available Scripts
 
 ```bash
-npm run dev            # Start frontend + backend in parallel with unified logs
-npm run build          # Build frontend and backend inside apps/
-npm run build:dist     # Build and package to dist/ for CLI run
+npm run dev            # Development: frontend + backend in parallel with unified logs
+npm run build          # Production: build frontend + backend → dist/
+npm run start          # Start app (no build, uses existing dist/)
+npm run build:dist     # Alias for build
 npm run health         # Health check utility (local)
 ```
 

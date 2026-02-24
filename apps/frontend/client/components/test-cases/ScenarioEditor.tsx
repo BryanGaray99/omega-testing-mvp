@@ -113,15 +113,15 @@ interface ScenarioEditorProps {
   onChange?: (steps: Step[], tags: string[], scenario: string) => void;
 }
 
-// Función para obtener colores pastel según el tipo de step
+// Función para obtener colores según el tipo de step (light + dark mode)
 const getStepColor = (type: string, steps?: Step[], currentIndex?: number) => {
   switch (type) {
     case 'Given':
-      return 'bg-yellow-50 hover:bg-yellow-100 border-yellow-200 text-yellow-800';
+      return 'bg-yellow-50 hover:bg-yellow-100 border-yellow-200 text-yellow-800 dark:bg-[#3F2A0E] dark:hover:bg-[#4A3510] dark:border-[#92400E] dark:text-[#FBBF24]';
     case 'When':
-      return 'bg-green-50 hover:bg-green-100 border-green-200 text-green-800';
+      return 'bg-green-50 hover:bg-green-100 border-green-200 text-green-800 dark:bg-[#052E26] dark:hover:bg-[#065F46] dark:border-[#065F46] dark:text-[#34D399]';
     case 'Then':
-      return 'bg-blue-50 hover:bg-blue-100 border-blue-200 text-blue-800';
+      return 'bg-blue-50 hover:bg-blue-100 border-blue-200 text-blue-800 dark:bg-[#1E3A8A] dark:hover:bg-[#1D4ED8] dark:border-[#1D4ED8] dark:text-[#93C5FD]';
     case 'And':
       // Para And, usar el color del último step del tipo correspondiente
       if (steps && currentIndex !== undefined) {
@@ -134,9 +134,9 @@ const getStepColor = (type: string, steps?: Step[], currentIndex?: number) => {
         }
       }
       // Si no hay step anterior, usar amarillo por defecto
-      return 'bg-yellow-50 hover:bg-yellow-100 border-yellow-200 text-yellow-800';
+      return 'bg-yellow-50 hover:bg-yellow-100 border-yellow-200 text-yellow-800 dark:bg-[#3F2A0E] dark:hover:bg-[#4A3510] dark:border-[#92400E] dark:text-[#FBBF24]';
     default:
-      return 'bg-gray-50 hover:bg-gray-100 border-gray-200 text-gray-800';
+      return 'bg-gray-50 hover:bg-gray-100 border-gray-200 text-gray-800 dark:bg-[#1E293B] dark:hover:bg-[#334155] dark:border-[#334155] dark:text-[#E5E7EB]';
   }
 };
 
@@ -199,7 +199,7 @@ function SortableStep({
           <GripVertical className="h-3 w-3 text-muted-foreground" />
         </div>
         
-        <div className="w-16 text-xs font-medium px-2 py-1 bg-white/80 rounded border">
+        <div className="w-16 text-xs font-medium px-2 py-1 bg-card/80 rounded border">
           {step.type}
         </div>
         

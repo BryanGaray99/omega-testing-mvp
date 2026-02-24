@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { getProjectSectionsAndEntities, getProjectEntities } from "@/services/testCaseService";
 import { testSuiteService } from "@/services/testSuiteService";
+import { getMethodColor as getMethodColorClass } from "@/lib/colors";
 
 interface ProjectOption {
   id: string;
@@ -340,32 +341,16 @@ export default function TestSuiteCreateDialog({
 
   const getProjectName = (p: ProjectOption) => p.displayName || p.name || p.id;
 
-  // Color functions for methods and test types
-  const getMethodColor = (method: string) => {
-    switch (method) {
-      case "GET":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
-      case "POST":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-      case "PUT":
-        return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300";
-      case "PATCH":
-        return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300";
-      case "DELETE":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300";
-      default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
-    }
-  };
-
+  // Color functions for methods and test types - use centralized colors
+  const getMethodColor = (method: string) => getMethodColorClass(method);
   const getTestTypeColor = (testType: string) => {
     switch (testType) {
       case "positive":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
+        return "bg-green-100 dark:bg-[#064E3B] text-green-800 dark:text-[#34D399]";
       case "negative":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300";
+        return "bg-red-100 dark:bg-[#3F1D1D] text-red-800 dark:text-[#F87171]";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
+        return "bg-gray-100 dark:bg-[#1F2937] text-gray-800 dark:text-[#9CA3AF]";
     }
   };
 

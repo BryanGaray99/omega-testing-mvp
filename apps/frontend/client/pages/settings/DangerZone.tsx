@@ -355,7 +355,7 @@ export default function DangerZoneSettings() {
                   For security and compliance purposes, some metadata may be
                   retained for up to 90 days after account deletion. Personal
                   data and test content are deleted immediately.{" "}
-                  <a href="#" className="text-primary hover:underline">
+                  <a href="#" className="text-primary hover:underline dark:text-[#60A5FA] dark:hover:text-[#93C5FD]">
                     Learn more
                   </a>
                 </p>

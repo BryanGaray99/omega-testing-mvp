@@ -259,7 +259,7 @@ export default function TestSuiteDetailsDialog({
                                 <TooltipTrigger asChild>
                                   <button
                                     onClick={() => onNavigateToTestCase?.(testCase.testCaseId)}
-                                    className="text-sm font-medium text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors flex items-center gap-1"
+                                    className="text-sm font-medium text-left text-blue-600 hover:text-blue-800 dark:text-[#60A5FA] dark:hover:text-[#93C5FD] hover:underline cursor-pointer transition-colors flex items-center gap-1"
                                   >
                                     {testCase.name}
                                     <ExternalLink className="h-3 w-3 opacity-60" />
@@ -295,7 +295,7 @@ export default function TestSuiteDetailsDialog({
                                 <TooltipTrigger asChild>
                                   <button
                                     onClick={() => onNavigateToTestSet?.(testSet.setId)}
-                                    className="text-sm font-medium text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors flex items-center gap-1"
+                                    className="text-sm font-medium text-left text-blue-600 hover:text-blue-800 dark:text-[#60A5FA] dark:hover:text-[#93C5FD] hover:underline cursor-pointer transition-colors flex items-center gap-1"
                                   >
                                     {testSet.name}
                                     <ExternalLink className="h-3 w-3 opacity-60" />
@@ -367,7 +367,7 @@ export default function TestSuiteDetailsDialog({
                             <TooltipTrigger asChild>
                               <button
                                 onClick={() => onNavigateToExecution(lastExecution.executionId)}
-                                className="text-sm font-medium text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors flex items-center gap-1"
+                                className="text-sm font-medium text-left text-blue-600 hover:text-blue-800 dark:text-[#60A5FA] dark:hover:text-[#93C5FD] hover:underline cursor-pointer transition-colors flex items-center gap-1"
                               >
                                 {testSuite.lastExecutedAt ? formatDate(testSuite.lastExecutedAt) : "Not executed yet"}
                                 <ExternalLink className="h-3 w-3 opacity-60" />

@@ -103,11 +103,11 @@ export default function Layout({ children }: LayoutProps) {
             className="fixed inset-0 bg-black/50"
             onClick={() => setSidebarOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 w-64 bg-card border-r border-border">
+          <div className="fixed inset-y-0 left-0 w-64 bg-sidebar border-r border-sidebar-border">
             <div className="flex h-16 items-center justify-between px-6">
               <Link to="/" className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                  <TestTube className="h-4 w-4 text-primary-foreground" />
+                <div className="h-8 w-8 rounded-lg bg-success flex items-center justify-center">
+                  <TestTube className="h-4 w-4 text-success-foreground" />
                 </div>
                 <span className="font-bold text-foreground">Omega Testing</span>
               </Link>
@@ -129,8 +129,8 @@ export default function Layout({ children }: LayoutProps) {
                     className={cn(
                       "flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors mb-1",
                       isActive
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent",
+                        ? "bg-sidebar-accent text-sidebar-accent-foreground [&_svg]:text-sidebar-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-sidebar-accent-hover dark:hover:bg-sidebar-accent-hover",
                     )}
                     onClick={() => setSidebarOpen(false)}
                   >
@@ -151,21 +151,21 @@ export default function Layout({ children }: LayoutProps) {
           sidebarWidth,
         )}
       >
-        <div className="flex h-full flex-col bg-card border-r border-border">
+        <div className="flex h-full flex-col bg-sidebar border-r border-sidebar-border">
           {/* Header */}
           <div className="flex h-16 items-center justify-between px-4">
             {!sidebarCollapsed && (
               <Link to="/" className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                  <TestTube className="h-4 w-4 text-primary-foreground" />
+                <div className="h-8 w-8 rounded-lg bg-success flex items-center justify-center">
+                  <TestTube className="h-4 w-4 text-success-foreground" />
                 </div>
                 <span className="font-bold text-foreground">Omega Testing</span>
               </Link>
             )}
             {sidebarCollapsed && (
               <Link to="/" className="mx-auto">
-                <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                  <TestTube className="h-4 w-4 text-primary-foreground" />
+                <div className="h-8 w-8 rounded-lg bg-success flex items-center justify-center">
+                  <TestTube className="h-4 w-4 text-success-foreground" />
                 </div>
               </Link>
             )}
@@ -187,8 +187,8 @@ export default function Layout({ children }: LayoutProps) {
                       ? "justify-center p-3"
                       : "space-x-3 px-3 py-2",
                     isActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent",
+                      ? "bg-sidebar-accent text-sidebar-accent-foreground [&_svg]:text-sidebar-primary"
+                      : "text-muted-foreground hover:text-foreground hover:bg-sidebar-accent-hover dark:hover:bg-sidebar-accent-hover",
                   )}
                   title={sidebarCollapsed ? item.name : undefined}
                 >

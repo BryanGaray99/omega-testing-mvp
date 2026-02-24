@@ -20,6 +20,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import { Endpoint } from "../types/endpoint.types";
+import { getMethodColor } from "@/lib/colors";
 
 interface EndpointCardProps {
   endpoint: Endpoint;
@@ -41,13 +42,13 @@ export default function EndpointCard({
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "ready":
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
+        return <CheckCircle className="h-4 w-4 text-[#34D399]" />;
       case "failed":
-        return <XCircle className="h-4 w-4 text-red-500" />;
+        return <XCircle className="h-4 w-4 text-[#F87171]" />;
       case "analyzing":
       case "generating":
       case "pending":
-        return <Clock className="h-4 w-4 text-yellow-500" />;
+        return <Clock className="h-4 w-4 text-[#FBBF24]" />;
       default:
         return <Clock className="h-4 w-4 text-muted-foreground" />;
     }
@@ -68,22 +69,6 @@ export default function EndpointCard({
     }
   };
 
-  const getMethodColor = (method: string) => {
-    switch (method) {
-      case "GET":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
-      case "POST":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-      case "PUT":
-        return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300";
-      case "PATCH":
-        return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300";
-      case "DELETE":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300";
-      default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
-    }
-  };
 
   return (
     <Card className="relative">
@@ -100,7 +85,7 @@ export default function EndpointCard({
             onOpenChange={(open) => setOpenDropdownId(open ? endpoint.endpointId : null)}
           >
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
+              <Button variant="ghost" className="h-8 w-8 p-0 text-foreground hover:text-foreground">
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -157,8 +142,8 @@ export default function EndpointCard({
           </div>
           <div className="pt-3 border-t">
             <Button 
-              className="w-full bg-green-100 hover:bg-green-200 text-green-800 border-green-300 hover:border-green-400" 
-              variant="outline" 
+              className="w-full" 
+              variant="success" 
               size="sm"
               onClick={() => onViewDetails(endpoint)}
             >

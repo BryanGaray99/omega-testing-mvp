@@ -360,7 +360,7 @@ export default function Bugs() {
       {/* Bugs Grid */}
               <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 transition-all duration-500 ${isRefreshing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
         {bugs.map((bug) => (
-                  <div key={bug.bugId} className="border rounded-lg p-4 hover:shadow-md transition-shadow bg-white">
+                  <div key={bug.bugId} className="border border-border rounded-lg p-4 hover:shadow-md transition-shadow bg-card">
                     {/* Header with Bug ID, Icon and Options */}
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-2">
@@ -395,8 +395,8 @@ export default function Bugs() {
                             <Edit className="mr-2 h-4 w-4" />
                             Edit Bug
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => handleDelete(bug)}>
-                            <Trash2 className="mr-2 h-4 w-4 text-red-500" />
+                          <DropdownMenuItem onClick={() => handleDelete(bug)} className="text-white [&_svg]:text-[#F87171]">
+                            <Trash2 className="mr-2 h-4 w-4" />
                             Delete Bug
                           </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -521,12 +521,12 @@ export default function Bugs() {
 
                     {/* Error message preview at bottom */}
                     {bug.errorMessage && (
-                      <div className="p-2 bg-red-50 border border-red-200 rounded text-xs">
-                        <div className="flex items-center space-x-1 text-red-700 mb-1">
+                      <div className="p-2 bg-red-50 dark:bg-[#3F1D1D] border border-red-200 dark:border-[#7F1D1D] rounded text-xs">
+                        <div className="flex items-center space-x-1 text-red-700 dark:text-[#FCA5A5] mb-1">
                           <span>⚠️</span>
                           <span className="font-medium">Error:</span>
                         </div>
-                        <p className="text-red-600 line-clamp-2">
+                        <p className="text-red-600 dark:text-[#FCA5A5] line-clamp-2">
                           {bug.errorMessage}
                         </p>
                       </div>

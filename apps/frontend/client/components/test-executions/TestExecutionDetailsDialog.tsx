@@ -113,18 +113,18 @@ export default function TestExecutionDetailsDialog({
     switch (status) {
       case 'completed':
       case 'passed':
-        return 'bg-green-100 text-green-800 border-green-200';
+        return 'bg-green-100 text-green-800 border-green-200 dark:bg-[#052E26] dark:text-[#34D399] dark:border-[#065F46]';
       case 'failed':
-        return 'bg-red-100 text-red-800 border-red-200';
+        return 'bg-red-100 text-red-800 border-red-200 dark:bg-[#3F1D1D] dark:text-[#F87171] dark:border-[#7F1D1D]';
       case 'running':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
+        return 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-[#1E3A8A] dark:text-[#93C5FD] dark:border-[#1D4ED8]';
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+        return 'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-[#3F2A0E] dark:text-[#FBBF24] dark:border-[#92400E]';
       case 'cancelled':
       case 'skipped':
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-[#1E293B] dark:text-[#E5E7EB] dark:border-[#334155]';
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-[#1E293B] dark:text-[#E5E7EB] dark:border-[#334155]';
     }
   };
 
@@ -231,12 +231,12 @@ export default function TestExecutionDetailsDialog({
         <TableBody>
           {steps.map((step, index) => (
             <TableRow key={index} className={
-              step.isHook ? 'bg-gray-50' : ''
+              step.isHook ? 'bg-gray-50 dark:bg-[#1E293B]' : ''
             }>
               <TableCell className="font-medium">
                 <div className="flex items-center gap-2">
                   {step.isHook ? (
-                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1E3A8A] dark:text-[#93C5FD] dark:border-[#1D4ED8]">
                       {step.hookType || 'Hook'}
                     </Badge>
                   ) : null}
@@ -245,11 +245,11 @@ export default function TestExecutionDetailsDialog({
               </TableCell>
               <TableCell>
                 {step.isHook ? (
-                  <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">
+                  <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1E3A8A] dark:text-[#93C5FD] dark:border-[#1D4ED8]">
                     Hook
                   </Badge>
                 ) : (
-                  <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+                  <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200 dark:bg-[#052E26] dark:text-[#34D399] dark:border-[#065F46]">
                     Step
                   </Badge>
                 )}
@@ -276,7 +276,7 @@ export default function TestExecutionDetailsDialog({
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-auto p-1 text-red-600 hover:text-red-700"
+                      className="h-auto p-1 text-red-600 hover:text-red-700 dark:text-[#F87171] dark:hover:text-[#FCA5A5]"
                       onClick={() => toggleError(index)}
                     >
                       <div className="flex items-center gap-1">
@@ -289,7 +289,7 @@ export default function TestExecutionDetailsDialog({
                       </div>
                     </Button>
                     {expandedErrors.has(index) && (
-                      <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-700 max-w-xs">
+                      <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-700 dark:bg-[#3F1D1D] dark:border-[#7F1D1D] dark:text-[#FCA5A5] max-w-xs">
                         <pre className="whitespace-pre-wrap break-words">{step.errorMessage}</pre>
                       </div>
                     )}
@@ -365,7 +365,7 @@ export default function TestExecutionDetailsDialog({
                                 <TooltipTrigger asChild>
                                   <button
                                     onClick={() => onNavigateToTestCase?.(execution.testCaseId!)}
-                                    className="text-blue-600 hover:text-blue-800 hover:underline cursor-pointer transition-colors flex items-center gap-1"
+                                    className="text-blue-600 hover:text-blue-800 dark:text-[#60A5FA] dark:hover:text-[#93C5FD] hover:underline cursor-pointer transition-colors flex items-center gap-1"
                                   >
                                     {execution.testCaseId}
                                     <ExternalLink className="h-3 w-3 opacity-60" />
@@ -421,7 +421,7 @@ export default function TestExecutionDetailsDialog({
                                 <TooltipTrigger asChild>
                                   <button
                                     onClick={() => onNavigateToTestSuite?.(execution.testSuiteId!)}
-                                    className="text-blue-600 hover:text-blue-800 hover:underline cursor-pointer transition-colors flex items-center gap-1"
+                                    className="text-blue-600 hover:text-blue-800 dark:text-[#60A5FA] dark:hover:text-[#93C5FD] hover:underline cursor-pointer transition-colors flex items-center gap-1"
                                   >
                                     {execution.testSuiteId}
                                     <ExternalLink className="h-3 w-3 opacity-60" />
@@ -452,11 +452,11 @@ export default function TestExecutionDetailsDialog({
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Passed:</span>
-                    <span className="text-sm font-bold text-green-600">{execution.passedScenarios}</span>
+                    <span className="text-sm font-bold text-green-600 dark:text-[#34D399]">{execution.passedScenarios}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Failed:</span>
-                    <span className="text-sm font-bold text-red-600">{execution.failedScenarios}</span>
+                    <span className="text-sm font-bold text-red-600 dark:text-[#F87171]">{execution.failedScenarios}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Success Rate:</span>
@@ -471,13 +471,13 @@ export default function TestExecutionDetailsDialog({
                   {execution.passedSteps !== undefined && (
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium">Steps Passed:</span>
-                      <span className="text-sm font-bold text-green-600">{execution.passedSteps}</span>
+                      <span className="text-sm font-bold text-green-600 dark:text-[#34D399]">{execution.passedSteps}</span>
                     </div>
                   )}
                   {execution.failedSteps !== undefined && (
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium">Steps Failed:</span>
-                      <span className="text-sm font-bold text-red-600">{execution.failedSteps}</span>
+                      <span className="text-sm font-bold text-red-600 dark:text-[#F87171]">{execution.failedSteps}</span>
                     </div>
                   )}
                   {execution.stepSuccessRate !== undefined && (
@@ -517,7 +517,7 @@ export default function TestExecutionDetailsDialog({
             {execution.errorMessage && (
               <div className="border rounded-lg p-3">
                 <h4 className="font-medium mb-2">Error Message</h4>
-                <div className="text-sm bg-red-50 border border-red-200 rounded p-2">
+                <div className="text-sm bg-red-50 border border-red-200 rounded p-2 dark:bg-[#3F1D1D] dark:border-[#7F1D1D] dark:text-[#FCA5A5]">
                   {execution.errorMessage}
                 </div>
               </div>
@@ -570,7 +570,7 @@ export default function TestExecutionDetailsDialog({
                                   <TooltipTrigger asChild>
                                     <button
                                       onClick={() => onNavigateToTestCase?.(execution.testCaseId!)}
-                                      className="text-blue-600 hover:text-blue-800 hover:underline cursor-pointer transition-colors flex items-center gap-1"
+                                      className="text-blue-600 hover:text-blue-800 dark:text-[#60A5FA] dark:hover:text-[#93C5FD] hover:underline cursor-pointer transition-colors flex items-center gap-1"
                                     >
                                       {execution.testCaseId}
                                       <ExternalLink className="h-3 w-3 opacity-60" />
@@ -596,7 +596,7 @@ export default function TestExecutionDetailsDialog({
                       {execution?.errorMessage && (
                         <div className="mt-3">
                           <span className="text-sm font-medium">Error:</span>
-                          <div className="text-sm bg-red-50 border border-red-200 rounded p-2 mt-1">
+                          <div className="text-sm bg-red-50 border border-red-200 rounded p-2 mt-1 dark:bg-[#3F1D1D] dark:border-[#7F1D1D] dark:text-[#FCA5A5]">
                             {execution.errorMessage}
                           </div>
                         </div>
@@ -636,7 +636,7 @@ export default function TestExecutionDetailsDialog({
                                     <TooltipTrigger asChild>
                                       <button
                                         onClick={() => onNavigateToTestSuite?.(execution.testSuiteId!)}
-                                        className="text-blue-600 hover:text-blue-800 hover:underline cursor-pointer transition-colors flex items-center gap-1"
+                                        className="text-blue-600 hover:text-blue-800 dark:text-[#60A5FA] dark:hover:text-[#93C5FD] hover:underline cursor-pointer transition-colors flex items-center gap-1"
                                       >
                                         {execution.testSuiteId}
                                         <ExternalLink className="h-3 w-3 opacity-60" />
@@ -660,10 +660,10 @@ export default function TestExecutionDetailsDialog({
                         <div className="space-y-2">
                           <h6 className="font-medium text-sm">Individual Scenarios:</h6>
                           {execution.specificScenario.split(',').map((scenarioName, index) => (
-                            <div key={index} className="border rounded p-2 bg-gray-50">
+                            <div key={index} className="border rounded p-2 bg-gray-50 dark:bg-[#1E293B]">
                               <div className="flex items-center justify-between">
                                 <span className="text-sm font-medium">{scenarioName.trim()}</span>
-                                <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+                                <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200 dark:bg-[#052E26] dark:text-[#34D399] dark:border-[#065F46]">
                                   Passed
                                 </Badge>
                               </div>
@@ -676,7 +676,7 @@ export default function TestExecutionDetailsDialog({
                       {execution?.errorMessage && (
                         <div className="mt-3">
                           <span className="text-sm font-medium">Error:</span>
-                          <div className="text-sm bg-red-50 border border-red-200 rounded p-2 mt-1">
+                          <div className="text-sm bg-red-50 border border-red-200 rounded p-2 mt-1 dark:bg-[#3F1D1D] dark:border-[#7F1D1D] dark:text-[#FCA5A5]">
                             {execution.errorMessage}
                           </div>
                         </div>

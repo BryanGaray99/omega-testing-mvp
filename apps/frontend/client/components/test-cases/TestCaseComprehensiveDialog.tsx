@@ -473,7 +473,7 @@ export default function TestCaseComprehensiveDialog({
                                 <TooltipTrigger asChild>
                                   <button
                                     onClick={() => onNavigateToExecution(lastExecution.executionId)}
-                                    className="text-sm font-medium text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors flex items-center gap-1"
+                                    className="text-sm font-medium text-left text-blue-600 hover:text-blue-800 dark:text-[#60A5FA] dark:hover:text-[#93C5FD] hover:underline cursor-pointer transition-colors flex items-center gap-1"
                                   >
                                     {testCase.lastRun ? formatDate(testCase.lastRun) : "Not executed yet"}
                                     <ExternalLink className="h-3 w-3 opacity-60" />

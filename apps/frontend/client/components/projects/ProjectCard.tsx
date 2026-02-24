@@ -13,7 +13,7 @@ import {
 import {
   MoreVertical,
   Edit,
-  Trash,
+  Trash2,
   Globe,
   CheckCircle,
   XCircle,
@@ -178,11 +178,11 @@ export default function ProjectCard({
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "ready":
-        return <CheckCircle className="h-4 w-4 text-success" />;
+        return <CheckCircle className="h-4 w-4 text-[#34D399]" />;
       case "failed":
-        return <XCircle className="h-4 w-4 text-error" />;
+        return <XCircle className="h-4 w-4 text-[#F87171]" />;
       case "pending":
-        return <Clock className="h-4 w-4 text-warning" />;
+        return <Clock className="h-4 w-4 text-[#FBBF24]" />;
       default:
         return <Clock className="h-4 w-4 text-muted-foreground" />;
     }
@@ -222,7 +222,7 @@ export default function ProjectCard({
             }}
           >
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
+              <Button variant="ghost" className="h-8 w-8 p-0 text-foreground hover:text-foreground">
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -238,10 +238,10 @@ export default function ProjectCard({
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem 
-                className="text-destructive"
+                className="text-white [&_svg]:text-[#F87171]"
                 onClick={() => onDelete(project)}
               >
-                <Trash className="mr-2 h-4 w-4" />
+                <Trash2 className="mr-2 h-4 w-4" />
                 Delete Project
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -277,7 +277,7 @@ export default function ProjectCard({
           <div className="pt-3 border-t">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                            <Button className="w-full bg-green-100 hover:bg-green-200 text-green-800 border-green-300 hover:border-green-400" variant="outline">
+                            <Button className="w-full" variant="success">
               <ExternalLink className="h-4 w-4 mr-2" />
               Open Project
             </Button>

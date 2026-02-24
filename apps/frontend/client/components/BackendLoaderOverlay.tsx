@@ -29,13 +29,17 @@ export default function BackendLoaderOverlay() {
     let mounted = true;
     const controller = new AbortController();
 
-    const base = (import.meta as any).env?.VITE_API_URL || "/v1/api";
+    // En modo split (frontend 5173, backend 3000) usar URL absoluta; si no, relativa
+    const envBase = (import.meta as any).env?.VITE_API_URL;
+    const base = envBase || (typeof window !== "undefined" && window.location.port === "5173"
+      ? "http://localhost:3000/v1/api"
+      : "/v1/api");
     const url = `${base}/health`;
 
     async function waitForBackend() {
       const start = Date.now();
       const timeoutMs = 90_000; // 90s safety timeout
-      const pollDelayMs = 2000; // Poll every 2 seconds
+      const pollDelayMs = 500; // Poll every 500ms para quitar el loader en cuanto Nest esté listo
 
       while (mounted && Date.now() - start < timeoutMs) {
         try {

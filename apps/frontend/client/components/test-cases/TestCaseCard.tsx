@@ -15,7 +15,7 @@ import {
   MoreVertical,
   Eye,
   Edit,
-  Trash,
+  Trash2,
   Play,
   Copy,
   Bot,
@@ -168,7 +168,7 @@ export default function TestCaseCard({
             onOpenChange={(open) => setOpenDropdownId(open ? testCase.testCaseId : null)}
           >
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
+              <Button variant="ghost" className="h-8 w-8 p-0 text-foreground hover:text-foreground">
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -184,10 +184,10 @@ export default function TestCaseCard({
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="text-destructive"
+                className="text-white [&_svg]:text-[#F87171]"
                 onClick={() => onDelete(testCase)}
               >
-                <Trash className="mr-2 h-4 w-4" />
+                <Trash2 className="mr-2 h-4 w-4" />
                 Delete Test Case
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -242,7 +242,7 @@ export default function TestCaseCard({
         <div className="pt-3 border-t mt-auto">
            <div className="relative">
              {isExecuting(executionId) && (
-               <div className="absolute inset-0 bg-green-100 rounded-md overflow-hidden pointer-events-none">
+               <div className="absolute inset-0 bg-green-100 dark:bg-[#052E26] rounded-md overflow-hidden pointer-events-none">
                  <div 
                    className="h-full w-full"
                    style={{
@@ -266,8 +266,8 @@ export default function TestCaseCard({
              )}
              {showExecuted(executionId) && realExecutionId ? (
                <Button
-                 className="w-full relative z-10 bg-blue-100 hover:bg-blue-200 text-blue-800 border-blue-300 hover:border-blue-400"
-                 variant="outline"
+                 className="w-full relative z-10"
+                 variant="default"
                  size="sm"
                  onClick={handleNavigateToExecution}
                >
@@ -276,12 +276,8 @@ export default function TestCaseCard({
                </Button>
              ) : (
                <Button
-                 className={`w-full relative z-10 ${
-                   isExecuting(executionId)
-                     ? 'bg-green-500 text-white hover:bg-green-600 border-green-500' 
-                     : 'bg-green-100 hover:bg-green-200 text-green-800 border-green-300 hover:border-green-400'
-                 }`}
-                 variant="outline"
+                 className="w-full relative z-10"
+                 variant="success"
                  size="sm"
                  onClick={handleRun}
                  disabled={isExecuting(executionId)}

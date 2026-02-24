@@ -137,57 +137,57 @@ export default function Dashboard() {
       <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-500 ${isRefreshing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Total Projects</CardTitle>
             <FolderKanban className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{loading ? "-" : totalProjects}</div>
+            <div className="text-2xl font-bold text-foreground">{loading ? "-" : totalProjects}</div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Endpoints</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Total Endpoints</CardTitle>
             <BarChart3 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{loading ? "-" : totalEndpoints}</div>
+            <div className="text-2xl font-bold text-foreground">{loading ? "-" : totalEndpoints}</div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Success Rate</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Success Rate</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{loading ? "-" : `${successRate.toFixed(1)}%`}</div>
+            <div className="text-2xl font-bold text-foreground">{loading ? "-" : `${successRate.toFixed(1)}%`}</div>
             <Progress value={successRate} className="mt-2" />
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Passed Tests</CardTitle>
-            <CheckCircle className="h-4 w-4 text-success" />
+            <CardTitle className="text-sm font-medium text-muted-foreground">Passed Tests</CardTitle>
+            <CheckCircle className="h-4 w-4 text-[#34D399]" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-success">{loading ? "-" : passedTests}</div>
+            <div className="text-2xl font-bold text-[#34D399]">{loading ? "-" : passedTests}</div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Failed Tests</CardTitle>
-            <XCircle className="h-4 w-4 text-error" />
+            <CardTitle className="text-sm font-medium text-muted-foreground">Failed Tests</CardTitle>
+            <XCircle className="h-4 w-4 text-[#F87171]" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-error">{loading ? "-" : failedTests}</div>
+            <div className="text-2xl font-bold text-[#F87171]">{loading ? "-" : failedTests}</div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Average Execution Time</CardTitle>
-            <Clock className="h-4 w-4 text-warning" />
+            <CardTitle className="text-sm font-medium text-muted-foreground">Average Execution Time</CardTitle>
+            <Clock className="h-4 w-4 text-[#FBBF24]" />
           </CardHeader>
           <CardContent>
-                            <div className="text-2xl font-bold text-warning">{loading ? "-" : normalizeTimeToSeconds(averageExecutionTime)}</div>
+                            <div className="text-2xl font-bold text-[#FBBF24]">{loading ? "-" : normalizeTimeToSeconds(averageExecutionTime)}</div>
           </CardContent>
         </Card>
       </div>

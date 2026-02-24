@@ -36,6 +36,7 @@ import {
   FileText,
 } from "lucide-react";
 import { Endpoint, EndpointMethod, FieldDefinition } from "../types/endpoint.types";
+import { getMethodColor } from "@/lib/colors";
 
 interface EndpointRegisterDialogProps {
   isOpen: boolean;
@@ -76,22 +77,6 @@ export default function EndpointRegisterDialog({
   const [showJsonInput, setShowJsonInput] = React.useState<number | null>(null);
   const [collapsedSections, setCollapsedSections] = React.useState<Record<string, boolean>>({});
 
-  const getMethodColor = (method: string) => {
-    switch (method) {
-      case "GET":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
-      case "POST":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-      case "PUT":
-        return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300";
-      case "PATCH":
-        return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300";
-      case "DELETE":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300";
-      default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
-    }
-  };
 
   const hasAdditionalValidations = (validations: Record<string, any> | undefined) => {
     if (!validations) return false;

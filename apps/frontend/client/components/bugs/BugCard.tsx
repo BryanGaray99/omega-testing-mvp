@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Eye, Edit, Trash2, Bug } from "lucide-react";
+import { MoreVertical, Eye, Edit, Trash2, Bug } from "lucide-react";
 import { Bug as BugType, BugType as BugTypeEnum, BugSeverity, BugPriority, BugStatus } from "@/components/types/bug.types";
 import { getPriorityColor, getSeverityColor, getStatusColor } from "@/lib/colors";
 
@@ -67,8 +67,8 @@ export function BugCard({ bug, onViewDetails, onEdit, onDelete }: BugCardProps) 
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                <MoreHorizontal className="h-4 w-4" />
+              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-foreground hover:text-foreground">
+                <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -82,7 +82,7 @@ export function BugCard({ bug, onViewDetails, onEdit, onDelete }: BugCardProps) 
               </DropdownMenuItem>
               <DropdownMenuItem 
                 onClick={() => onDelete(bug)}
-                className="text-red-600"
+                className="text-white [&_svg]:text-[#F87171]"
               >
                 <Trash2 className="h-4 w-4 mr-2" />
                 Delete
@@ -154,7 +154,8 @@ export function BugCard({ bug, onViewDetails, onEdit, onDelete }: BugCardProps) 
         {/* Main Action Button */}
         <div className="pt-2">
           <Button 
-            className="w-full bg-green-600 hover:bg-green-700"
+            className="w-full"
+            variant="success"
             onClick={() => onViewDetails(bug)}
           >
             <Eye className="h-4 w-4 mr-2" />

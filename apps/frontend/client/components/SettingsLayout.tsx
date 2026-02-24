@@ -58,8 +58,8 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
           {/* Header */}
           <div className="flex h-16 items-center justify-between px-6 border-b border-border">
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Settings className="h-4 w-4 text-primary-foreground" />
+              <div className="h-8 w-8 rounded-lg bg-success flex items-center justify-center">
+                <Settings className="h-4 w-4 text-success-foreground" />
               </div>
               <span className="font-bold text-foreground">Settings</span>
             </div>

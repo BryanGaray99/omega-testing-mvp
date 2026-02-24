@@ -42,7 +42,7 @@ import {
   ChevronRight,
   ChevronDown,
   Edit,
-  Trash,
+  Trash2,
   Copy,
   Download,
   Upload,
@@ -554,7 +554,7 @@ export default function ProjectEditor() {
               <Save className="h-4 w-4 mr-2" />
               Save
             </Button>
-            <Button size="sm">
+            <Button size="sm" variant="success">
               <Play className="h-4 w-4 mr-2" />
               Run Tests
             </Button>
@@ -703,8 +703,8 @@ export default function ProjectEditor() {
                               Rename
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem className="text-destructive">
-                              <Trash className="mr-2 h-4 w-4" />
+                            <DropdownMenuItem className="text-white [&_svg]:text-[#F87171]">
+                              <Trash2 className="mr-2 h-4 w-4" />
                               Delete
                             </DropdownMenuItem>
                           </DropdownMenuContent>

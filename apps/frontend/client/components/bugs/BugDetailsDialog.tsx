@@ -537,7 +537,7 @@ export default function BugDetailsDialog({
         <DialogFooter>
           <div className="flex gap-2 w-full justify-end">
             {!isEditing ? (
-              <Button variant="default" onClick={() => setIsEditing(true)} className="bg-blue-600 hover:bg-blue-700">
+              <Button variant="default" onClick={() => setIsEditing(true)}>
                 <Edit className="h-4 w-4 mr-2" />
                 Edit
               </Button>

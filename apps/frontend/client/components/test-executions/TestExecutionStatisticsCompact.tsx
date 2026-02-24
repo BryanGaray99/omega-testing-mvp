@@ -21,17 +21,17 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'bg-green-100 text-green-800 border-green-200';
+        return 'bg-green-100 dark:bg-[#064E3B] text-green-800 dark:text-[#34D399] border-green-200 dark:border-[#065F46]';
       case 'failed':
-        return 'bg-red-100 text-red-800 border-red-200';
+        return 'bg-red-100 dark:bg-[#3F1D1D] text-red-800 dark:text-[#F87171] border-red-200 dark:border-[#7F1D1D]';
       case 'running':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
+        return 'bg-blue-100 dark:bg-[#1E3A8A] text-blue-800 dark:text-[#93C5FD] border-blue-200 dark:border-[#1D4ED8]';
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+        return 'bg-yellow-100 dark:bg-[#3F2A0E] text-yellow-800 dark:text-[#FBBF24] border-yellow-200 dark:border-[#92400E]';
       case 'cancelled':
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return 'bg-gray-100 dark:bg-[#1F2937] text-gray-800 dark:text-[#9CA3AF] border-gray-200 dark:border-[#334155]';
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return 'bg-gray-100 dark:bg-[#1F2937] text-gray-800 dark:text-[#9CA3AF] border-gray-200 dark:border-[#334155]';
     }
   };
 
@@ -44,11 +44,11 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
       {/* Total Executions */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Executions</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Total Executions</CardTitle>
           <Activity className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{statistics.totalExecutions}</div>
+          <div className="text-2xl font-bold text-foreground">{statistics.totalExecutions}</div>
           <p className="text-xs text-muted-foreground">
             All time executions
           </p>
@@ -58,11 +58,11 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
       {/* Success Rate */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Success Rate</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Success Rate</CardTitle>
           <TrendingUp className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">
+          <div className="text-2xl font-bold text-foreground">
             {Math.round(statistics.successRate)}%
           </div>
           <p className="text-xs text-muted-foreground">
@@ -74,11 +74,11 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
       {/* Average Execution Time */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Avg Execution Time</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Avg Execution Time</CardTitle>
           <Clock className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">
+          <div className="text-2xl font-bold text-foreground">
             {formatDuration(statistics.averageExecutionTime)}
           </div>
           <p className="text-xs text-muted-foreground">
@@ -90,11 +90,11 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
       {/* Total Scenarios */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Scenarios</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Total Scenarios</CardTitle>
           <Play className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{statistics.totalScenarios}</div>
+          <div className="text-2xl font-bold text-foreground">{statistics.totalScenarios}</div>
           <p className="text-xs text-muted-foreground">
             {statistics.totalPassed} passed, {statistics.totalFailed} failed
           </p>
@@ -104,7 +104,7 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
       {/* Status Overview */}
       <Card className="col-span-full">
         <CardHeader>
-          <CardTitle className="text-sm font-medium">Execution Status Overview</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Execution Status Overview</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">

@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MoreHorizontal, Eye, Edit, Trash2, Calendar, User, AlertTriangle } from "lucide-react";
+import { MoreVertical, Eye, Edit, Trash2, Calendar, User, AlertTriangle } from "lucide-react";
 import { Bug as BugType, BugType as BugTypeEnum, BugSeverity, BugPriority, BugStatus } from "@/components/types/bug.types";
 import { getPriorityColor, getSeverityColor, getStatusColor } from "@/lib/colors";
 
@@ -98,9 +98,9 @@ export function BugJiraCard({ bug, onViewDetails, onEdit, onDelete, onStatusChan
                 <Button
                   variant="ghost"
                   size="sm"
-                  className={`h-8 w-8 p-0 ${isHovered ? 'opacity-100' : 'opacity-0'} transition-opacity`}
+                  className={`h-8 w-8 p-0 text-foreground hover:text-foreground ${isHovered ? 'opacity-100' : 'opacity-0'} transition-opacity`}
                 >
-                  <MoreHorizontal className="h-4 w-4" />
+                  <MoreVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">

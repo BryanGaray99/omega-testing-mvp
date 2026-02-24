@@ -23,7 +23,7 @@ import {
   Target,
   TrendingUp,
   TrendingDown,
-  Trash,
+  Trash2,
 } from 'lucide-react';
 import { TestExecution, TestExecutionStatus } from '@/components/types/test-execution.types';
 
@@ -51,17 +51,17 @@ export function TestExecutionCard({
   const getStatusColor = (status: TestExecutionStatus) => {
     switch (status) {
       case TestExecutionStatus.COMPLETED:
-        return 'bg-green-100 text-green-800 border-green-200';
+        return 'bg-green-100 dark:bg-[#064E3B] text-green-800 dark:text-[#34D399] border-green-200 dark:border-[#065F46]';
       case TestExecutionStatus.FAILED:
-        return 'bg-red-100 text-red-800 border-red-200';
+        return 'bg-red-100 dark:bg-[#3F1D1D] text-red-800 dark:text-[#F87171] border-red-200 dark:border-[#7F1D1D]';
       case TestExecutionStatus.RUNNING:
-        return 'bg-blue-100 text-blue-800 border-blue-200';
+        return 'bg-blue-100 dark:bg-[#1E3A8A] text-blue-800 dark:text-[#93C5FD] border-blue-200 dark:border-[#1D4ED8]';
       case TestExecutionStatus.PENDING:
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+        return 'bg-yellow-100 dark:bg-[#3F2A0E] text-yellow-800 dark:text-[#FBBF24] border-yellow-200 dark:border-[#92400E]';
       case TestExecutionStatus.CANCELLED:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return 'bg-gray-100 dark:bg-[#1F2937] text-gray-800 dark:text-[#9CA3AF] border-gray-200 dark:border-[#334155]';
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return 'bg-gray-100 dark:bg-[#1F2937] text-gray-800 dark:text-[#9CA3AF] border-gray-200 dark:border-[#334155]';
     }
   };
 
@@ -184,7 +184,7 @@ export function TestExecutionCard({
               <Button
                 variant="ghost"
                 size="sm"
-                className={`h-8 w-8 p-0 ${isHovered ? 'opacity-100' : 'opacity-0'} transition-opacity`}
+                className={`h-8 w-8 p-0 text-foreground hover:text-foreground ${isHovered ? 'opacity-100' : 'opacity-0'} transition-opacity`}
               >
                 <MoreVertical className="h-4 w-4" />
               </Button>
@@ -196,10 +196,10 @@ export function TestExecutionCard({
               </DropdownMenuItem>
               {onDelete && (
                 <DropdownMenuItem
-                  className="text-destructive"
+                  className="text-white [&_svg]:text-[#F87171]"
                   onClick={() => onDelete(execution)}
                 >
-                  <Trash className="h-4 w-4 mr-2" />
+                  <Trash2 className="h-4 w-4 mr-2" />
                   Delete Execution
                 </DropdownMenuItem>
               )}
@@ -225,13 +225,13 @@ export function TestExecutionCard({
 
         {/* Execution Summary */}
         <div className="grid grid-cols-2 gap-2 mb-3">
-          <div className="text-center p-2 bg-green-50 rounded border border-green-200">
-            <div className="text-lg font-bold text-green-600">{execution.passedScenarios}</div>
-            <div className="text-xs text-green-700">Scenarios Passed</div>
+          <div className="text-center p-2 bg-green-50 dark:bg-[#052E26] rounded border border-green-200 dark:border-[#065F46]">
+            <div className="text-lg font-bold text-green-600 dark:text-[#34D399]">{execution.passedScenarios}</div>
+            <div className="text-xs text-green-700 dark:text-[#34D399]">Scenarios Passed</div>
           </div>
-          <div className="text-center p-2 bg-red-50 rounded border border-red-200">
-            <div className="text-lg font-bold text-red-600">{execution.failedScenarios}</div>
-            <div className="text-xs text-red-700">Scenarios Failed</div>
+          <div className="text-center p-2 bg-red-50 dark:bg-[#3F1D1D] rounded border border-red-200 dark:border-[#7F1D1D]">
+            <div className="text-lg font-bold text-red-600 dark:text-[#F87171]">{execution.failedScenarios}</div>
+            <div className="text-xs text-red-700 dark:text-[#F87171]">Scenarios Failed</div>
           </div>
         </div>
 
@@ -283,12 +283,12 @@ export function TestExecutionCard({
 
         {/* Error Message Preview */}
         {execution.errorMessage && (
-          <div className="mt-3 p-2 bg-red-50 border border-red-200 rounded text-xs">
-            <div className="flex items-center gap-1 text-red-700 mb-1">
+          <div className="mt-3 p-2 bg-red-50 dark:bg-[#3F1D1D] border border-red-200 dark:border-[#7F1D1D] rounded text-xs">
+            <div className="flex items-center gap-1 text-red-700 dark:text-[#FCA5A5] mb-1">
               <XCircle className="h-3 w-3" />
               <span className="font-medium">Error:</span>
             </div>
-            <p className="text-red-600 line-clamp-2">
+            <p className="text-red-600 dark:text-[#FCA5A5] line-clamp-2">
               {execution.errorMessage}
             </p>
           </div>

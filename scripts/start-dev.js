@@ -1,7 +1,10 @@
 const { spawn } = require('child_process');
 const chalk = require('chalk');
 const path = require('path');
+const fs = require('fs');
 const readline = require('readline');
+
+const ROOT = path.join(__dirname, '..');
 
 function startAndPrefix(label, color, command, args, options = {}) {
   const child = spawn(command, args, { stdio: ['ignore', 'pipe', 'pipe'], shell: true, ...options });
@@ -32,6 +35,12 @@ function startAndPrefix(label, color, command, args, options = {}) {
 async function main() {
   console.log(chalk.blue.bold('🚀 Starting Omega Testing (parallel dev processes)'));
 
+  const workspacePath = path.resolve(ROOT, '..', 'playwright-workspaces');
+  if (!fs.existsSync(workspacePath)) {
+    fs.mkdirSync(workspacePath, { recursive: true });
+    console.log(chalk.gray(`Created playwright-workspaces: ${workspacePath}`));
+  }
+
   // Start both immediately, show unified logs with prefixes
   const frontend = startAndPrefix(
     'frontend',
@@ -51,7 +60,12 @@ async function main() {
     ['run', 'start:dev', '-w', 'apps/backend'],
     {
       cwd: path.join(__dirname, '..'),
-      env: { ...process.env, PORT: '3000', NODE_ENV: 'development' },
+      env: {
+        ...process.env,
+        PORT: '3000',
+        NODE_ENV: 'development',
+        PLAYWRIGHT_WORKSPACES_PATH: workspacePath,
+      },
     }
   );
 
