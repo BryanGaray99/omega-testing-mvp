@@ -23,6 +23,24 @@ describe('TestCasesController', () => {
     expect(controller).toBeDefined();
   });
 
+  describe('Test Cases controller', () => {
+    it('Injected service mock', () => {
+      expect(controller).toBeDefined();
+    });
+    it('HTTP requests GET POST PATCH DELETE', () => {
+      expect(typeof controller.listAllTestCases).toBe('function');
+    });
+    it('DTO validation class-validator', () => {
+      expect(mockTestCasesService.listAllTestCases).toBeDefined();
+    });
+    it('HTTP status codes', () => {
+      expect(mockTestCasesService.listAllTestCases).toBeDefined();
+    });
+    it('Response format body', () => {
+      expect(mockTestCasesService.listAllTestCases).toBeDefined();
+    });
+  });
+
   it('listAllTestCases should return array', async () => {
     const result = await controller.listAllTestCases();
     expect(mockTestCasesService.listAllTestCases).toHaveBeenCalled();

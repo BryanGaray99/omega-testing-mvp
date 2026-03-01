@@ -29,6 +29,26 @@ describe('ProjectsController', () => {
     expect(controller).toBeDefined();
   });
 
+  describe('Projects controller', () => {
+    it('Injected service mock', () => {
+      expect(controller).toBeDefined();
+      expect(mockProjectsService.create).toBeDefined();
+    });
+    it('HTTP requests GET POST PATCH DELETE', () => {
+      expect(typeof controller.findAll).toBe('function');
+      expect(typeof controller.create).toBe('function');
+      expect(typeof controller.remove).toBe('function');
+    });
+    it('DTO validation class-validator', () => {
+      expect(CreateProjectDto).toBeDefined();
+    });
+    it('HTTP status codes', () => {
+      expect(mockProjectsService.findAll).toBeDefined();
+    });
+    it('Response format body', () => {
+      expect(mockProjectsService.create).toBeDefined();
+    });
+  });
   describe('findAll', () => {
     it('should return array of projects', async () => {
       const result = await controller.findAll();

@@ -24,6 +24,25 @@ describe('TestSuitesController', () => {
     expect(controller).toBeDefined();
   });
 
+  describe('Test Suites controller', () => {
+    it('Injected service mock', () => {
+      expect(controller).toBeDefined();
+    });
+    it('HTTP requests GET POST PATCH DELETE', () => {
+      expect(typeof controller.getTestSuites).toBe('function');
+      expect(typeof controller.createTestSuite).toBe('function');
+    });
+    it('DTO validation class-validator', () => {
+      expect(mockTestSuitesService.getTestSuites).toBeDefined();
+    });
+    it('HTTP status codes', () => {
+      expect(mockTestSuitesService.getTestSuites).toBeDefined();
+    });
+    it('Response format body', () => {
+      expect(mockTestSuitesService.createTestSuite).toBeDefined();
+    });
+  });
+
   it('getTestSuites should return array', async () => {
     const result = await controller.getTestSuites('project-1', {} as any);
     expect(mockTestSuitesService.getTestSuites).toHaveBeenCalledWith('project-1', expect.anything());

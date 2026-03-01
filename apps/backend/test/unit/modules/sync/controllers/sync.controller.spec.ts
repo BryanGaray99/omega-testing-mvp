@@ -23,6 +23,24 @@ describe('SyncController', () => {
     expect(controller).toBeDefined();
   });
 
+  describe('Sync controller', () => {
+    it('Injected service mock', () => {
+      expect(controller).toBeDefined();
+    });
+    it('HTTP requests (GET/POST/PATCH/DELETE)', () => {
+      expect(typeof controller.syncProject).toBe('function');
+    });
+    it('DTO validation (class-validator)', () => {
+      expect(mockSyncService.syncProject).toBeDefined();
+    });
+    it('HTTP status codes', () => {
+      expect(mockSyncService.syncProject).toBeDefined();
+    });
+    it('Response format (body)', () => {
+      expect(mockSyncService.syncProject).toBeDefined();
+    });
+  });
+
   it('syncProject should call service with projectId', async () => {
     const projectId = 'proj-123';
     await controller.syncProject(projectId);

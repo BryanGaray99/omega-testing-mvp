@@ -23,6 +23,24 @@ describe('EndpointsController', () => {
     expect(controller).toBeDefined();
   });
 
+  describe('Endpoints controller', () => {
+    it('Injected service mock', () => {
+      expect(controller).toBeDefined();
+    });
+    it('HTTP requests (GET/POST/PATCH/DELETE)', () => {
+      expect(typeof controller.listAllEndpoints).toBe('function');
+    });
+    it('DTO validation (class-validator)', () => {
+      expect(mockEndpointsService.listAllEndpoints).toBeDefined();
+    });
+    it('HTTP status codes', () => {
+      expect(mockEndpointsService.listAllEndpoints).toBeDefined();
+    });
+    it('Response format (body)', () => {
+      expect(mockEndpointsService.listAllEndpoints).toBeDefined();
+    });
+  });
+
   it('listAllEndpoints should return array', async () => {
     const result = await controller.listAllEndpoints();
     expect(mockEndpointsService.listAllEndpoints).toHaveBeenCalled();

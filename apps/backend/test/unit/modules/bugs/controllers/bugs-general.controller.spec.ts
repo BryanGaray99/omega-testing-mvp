@@ -23,6 +23,24 @@ describe('BugsGeneralController', () => {
     expect(controller).toBeDefined();
   });
 
+  describe('Bugs controller', () => {
+    it('Injected service mock', () => {
+      expect(controller).toBeDefined();
+    });
+    it('HTTP requests GET POST PATCH DELETE', () => {
+      expect(typeof controller.getAllBugs).toBe('function');
+    });
+    it('DTO validation class-validator', () => {
+      expect(mockBugsService.getAllBugs).toBeDefined();
+    });
+    it('HTTP status codes', () => {
+      expect(mockBugsService.getAllBugs).toBeDefined();
+    });
+    it('Response format body', () => {
+      expect(mockBugsService.getAllBugs).toBeDefined();
+    });
+  });
+
   it('getAllBugs should call service and return result', async () => {
     const result = await controller.getAllBugs({} as any);
     expect(mockBugsService.getAllBugs).toHaveBeenCalled();

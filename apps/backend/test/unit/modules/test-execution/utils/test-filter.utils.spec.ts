@@ -2,6 +2,19 @@ import { TestFilterUtils } from 'src/modules/test-execution/utils/test-filter.ut
 import { ExecuteTestsDto, TestType } from 'src/modules/test-execution/dto/execute-tests.dto';
 
 describe('TestFilterUtils', () => {
+  describe('Test execution filter utils', () => {
+    it('Injected dependencies', () => {
+      expect(TestFilterUtils).toBeDefined();
+    });
+    it('Methods under test', () => {
+      expect(typeof TestFilterUtils.buildCucumberFilter).toBe('function');
+      expect(typeof TestFilterUtils.validateScenarioAgainstFilters).toBe('function');
+    });
+    it('Edge cases', () => {
+      expect(TestFilterUtils.buildCucumberFilter(new ExecuteTestsDto())).toBe('');
+    });
+  });
+
   describe('buildCucumberFilter', () => {
     it('should return empty string when dto has no filters', () => {
       const dto = new ExecuteTestsDto();

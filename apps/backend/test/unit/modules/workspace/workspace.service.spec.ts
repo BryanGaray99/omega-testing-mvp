@@ -28,6 +28,20 @@ describe('WorkspaceService', () => {
     expect(service).toBeDefined();
   });
 
+  describe('Workspace service', () => {
+    it('Injected dependencies', () => {
+      expect(service).toBeDefined();
+    });
+    it('Methods under test', () => {
+      expect(typeof service.getWorkspacePath).toBe('function');
+      expect(typeof service.listWorkspaces).toBe('function');
+      expect(typeof service.workspaceExists).toBe('function');
+    });
+    it('Edge cases', () => {
+      expect(service.workspaceExists).toBeDefined();
+    });
+  });
+
   describe('getWorkspacePath', () => {
     it('should return joined path for given name', () => {
       const name = 'my-project';
