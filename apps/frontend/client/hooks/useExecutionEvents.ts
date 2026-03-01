@@ -43,7 +43,7 @@ export function useExecutionEvents({
 
       // Crear nueva conexión SSE
       const eventSource = new EventSource(
-        `${import.meta.env.VITE_API_URL || 'http://localhost:3000/v1/api'}/projects/${projectId}/test-execution/execution-events`
+        `${import.meta.env.VITE_API_URL || "/v1/api"}/projects/${projectId}/test-execution/execution-events`
       );
 
       eventSource.onopen = () => {

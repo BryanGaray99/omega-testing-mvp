@@ -10,6 +10,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { TestSuite } from "@/services/testSuiteService";
+import { useTranslation } from "@/contexts/LanguageContext";
+import { replaceParams } from "@/lib/translations";
 
 interface TestSuiteDeleteDialogProps {
   isOpen: boolean;
@@ -32,25 +34,26 @@ export default function TestSuiteDeleteDialog({
   onCancel,
   isPending,
 }: TestSuiteDeleteDialogProps) {
+  const { t } = useTranslation();
+  const name = deletingTestSuite?.name ?? "";
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-destructive">Delete Test Suite</DialogTitle>
+          <DialogTitle className="text-destructive">{t("testSuites.deleteTitle")}</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete the test suite
-            <strong> "{deletingTestSuite?.name}"</strong> and all its associated data.
+            {replaceParams(t("testSuites.deleteDescription"), { name })}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <Label htmlFor="delete-confirmation">
-              Type <strong>"{deletingTestSuite?.name}"</strong> to confirm
+              {replaceParams(t("testSuites.deleteTypeToConfirm"), { name })}
             </Label>
             <Input
               id="delete-confirmation"
               name="delete-confirmation"
-              placeholder={deletingTestSuite?.name}
+              placeholder={name}
               value={deleteConfirmation}
               onChange={(e) => setDeleteConfirmation(e.target.value)}
               className="border-destructive focus:border-destructive"
@@ -58,20 +61,20 @@ export default function TestSuiteDeleteDialog({
           </div>
           <div className="p-3 bg-destructive/10 rounded-lg">
             <p className="text-xs text-destructive">
-              This will delete the test suite from the database and remove all associated test cases and execution history.
+              {t("testSuites.deleteWarning")}
             </p>
           </div>
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onCancel}>
-            Cancel
+            {t("common.cancel")}
           </Button>
           <Button 
             variant="destructive"
             onClick={onConfirmDelete}
             disabled={isPending || deleteConfirmation !== deletingTestSuite?.name}
           >
-            {isPending ? "Deleting..." : "Delete Test Suite"}
+            {isPending ? t("testSuites.deleting") : t("testSuites.deleteTestSuite")}
           </Button>
         </DialogFooter>
       </DialogContent>

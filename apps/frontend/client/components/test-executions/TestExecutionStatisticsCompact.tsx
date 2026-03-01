@@ -1,4 +1,6 @@
 import React from 'react';
+import { useTranslation } from '@/contexts/LanguageContext';
+import { replaceParams } from '@/lib/translations';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { normalizeTimeToSeconds } from '@/lib/utils';
@@ -18,6 +20,7 @@ interface TestExecutionStatisticsCompactProps {
 }
 
 export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStatisticsCompactProps) {
+  const { t } = useTranslation();
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
@@ -44,13 +47,13 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
       {/* Total Executions */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Total Executions</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">{t("exec.totalExecutions")}</CardTitle>
           <Activity className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold text-foreground">{statistics.totalExecutions}</div>
           <p className="text-xs text-muted-foreground">
-            All time executions
+            {t("exec.allTimeExecutions")}
           </p>
         </CardContent>
       </Card>
@@ -58,7 +61,7 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
       {/* Success Rate */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Success Rate</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">{t("exec.successRate")}</CardTitle>
           <TrendingUp className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
@@ -66,7 +69,7 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
             {Math.round(statistics.successRate)}%
           </div>
           <p className="text-xs text-muted-foreground">
-            {statistics.totalPassed} successful
+            {statistics.totalPassed} {t("exec.successful")}
           </p>
         </CardContent>
       </Card>
@@ -74,7 +77,7 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
       {/* Average Execution Time */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Avg Execution Time</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">{t("exec.avgExecutionTime")}</CardTitle>
           <Clock className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
@@ -82,7 +85,7 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
             {formatDuration(statistics.averageExecutionTime)}
           </div>
           <p className="text-xs text-muted-foreground">
-            Per execution
+            {t("exec.perExecution")}
           </p>
         </CardContent>
       </Card>
@@ -90,13 +93,13 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
       {/* Total Scenarios */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Total Scenarios</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">{t("exec.totalScenariosLabel")}</CardTitle>
           <Play className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold text-foreground">{statistics.totalScenarios}</div>
           <p className="text-xs text-muted-foreground">
-            {statistics.totalPassed} passed, {statistics.totalFailed} failed
+            {replaceParams(t("exec.passedFailed"), { passed: String(statistics.totalPassed), failed: String(statistics.totalFailed) })}
           </p>
         </CardContent>
       </Card>
@@ -104,7 +107,7 @@ export function TestExecutionStatisticsCompact({ statistics }: TestExecutionStat
       {/* Status Overview */}
       <Card className="col-span-full">
         <CardHeader>
-          <CardTitle className="text-sm font-medium text-muted-foreground">Execution Status Overview</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">{t("exec.statusOverview")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">

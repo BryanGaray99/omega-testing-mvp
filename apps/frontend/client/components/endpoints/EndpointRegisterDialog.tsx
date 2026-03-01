@@ -37,6 +37,7 @@ import {
 } from "lucide-react";
 import { Endpoint, EndpointMethod, FieldDefinition } from "../types/endpoint.types";
 import { getMethodColor } from "@/lib/colors";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface EndpointRegisterDialogProps {
   isOpen: boolean;
@@ -110,6 +111,7 @@ export default function EndpointRegisterDialog({
 
   // Estado para controlar si se muestran las validaciones para cada campo
   const [showValidationsForField, setShowValidationsForField] = React.useState<Record<string, boolean>>({});
+  const { t } = useTranslation();
 
   const addMethod = () => {
     setNewEndpoint({
@@ -179,33 +181,32 @@ export default function EndpointRegisterDialog({
       <DialogTrigger asChild>
         <Button>
           <Plus className="h-4 w-4 mr-2" />
-          Register Endpoint
+          {t("endpoints.registerEndpoint")}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[700px] max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {editingEndpoint ? "Edit Endpoint" : "Register New Endpoint"}
+            {editingEndpoint ? t("endpoints.editEndpoint") : t("endpoints.registerNewEndpoint")}
           </DialogTitle>
           <DialogDescription>
-            {editingEndpoint 
-              ? "Update the endpoint configuration."
-              : "Configure a new API endpoint for testing and analysis."
-            }
+            {editingEndpoint
+              ? t("endpoints.editEndpointDescription")
+              : t("endpoints.registerEndpointDescription")}
           </DialogDescription>
         </DialogHeader>
         <Tabs value={registerActiveTab} onValueChange={setRegisterActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="basic">Basic Info</TabsTrigger>
-            <TabsTrigger value="methods">Methods</TabsTrigger>
+            <TabsTrigger value="basic">{t("endpoints.basicInfo")}</TabsTrigger>
+            <TabsTrigger value="methods">{t("endpoints.methods")}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="basic" className="space-y-4">
             <div className="border rounded-lg p-4">
-              <h4 className="font-medium mb-3">Basic Information</h4>
+              <h4 className="font-medium mb-3">{t("endpoints.basicInformation")}</h4>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Project</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.project")}</label>
                   <Select
                     value={newEndpoint.projectId}
                     onValueChange={(value) =>
@@ -213,7 +214,7 @@ export default function EndpointRegisterDialog({
                     }
                   >
                     <SelectTrigger className="text-sm">
-                      <SelectValue placeholder="Select project" />
+                      <SelectValue placeholder={t("endpoints.selectProject")} />
                     </SelectTrigger>
                     <SelectContent>
                       {projects.map((project) => (
@@ -225,9 +226,9 @@ export default function EndpointRegisterDialog({
                   </Select>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Section</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.section")}</label>
                   <Input
-                    placeholder="e.g., ecommerce"
+                    placeholder={t("endpoints.placeholderSection")}
                     value={newEndpoint.section}
                     onChange={(e) =>
                       setNewEndpoint({
@@ -239,9 +240,9 @@ export default function EndpointRegisterDialog({
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Entity *</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.entity")}</label>
                   <Input
-                    placeholder="e.g., Product"
+                    placeholder={t("endpoints.placeholderEntity")}
                     value={newEndpoint.entityName}
                     onChange={(e) =>
                       setNewEndpoint({
@@ -254,9 +255,9 @@ export default function EndpointRegisterDialog({
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Display Name (Optional)</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.displayNameOptional")}</label>
                   <Input
-                    placeholder="Product Management API"
+                    placeholder={t("endpoints.placeholderDisplayName")}
                     value={newEndpoint.name}
                     onChange={(e) =>
                       setNewEndpoint({
@@ -268,9 +269,9 @@ export default function EndpointRegisterDialog({
                   />
                 </div>
                 <div className="col-span-2">
-                  <label className="text-sm font-medium text-muted-foreground">Path *</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.path")}</label>
                   <Input
-                    placeholder="/products"
+                    placeholder={t("endpoints.placeholderPath")}
                     value={newEndpoint.path}
                     onChange={(e) =>
                       setNewEndpoint({
@@ -283,9 +284,9 @@ export default function EndpointRegisterDialog({
                   />
                 </div>
                 <div className="col-span-2">
-                  <label className="text-sm font-medium text-muted-foreground">Description (Optional)</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.descriptionOptional")}</label>
                   <Textarea
-                    placeholder="Brief description of the endpoint..."
+                    placeholder={t("endpoints.placeholderDescription")}
                     value={newEndpoint.description}
                     onChange={(e) =>
                       setNewEndpoint({
@@ -303,14 +304,14 @@ export default function EndpointRegisterDialog({
           <TabsContent value="methods" className="space-y-4">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h4 className="font-medium">HTTP Methods</h4>
+                <h4 className="font-medium">{t("endpoints.httpMethods")}</h4>
               </div>
               
               {newEndpoint.methods.length === 0 ? (
                 <div className="text-center py-8 text-muted-foreground">
                   <TestTube className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p className="text-sm">No HTTP methods configured yet.</p>
-                  <p className="text-xs mt-1">Click "Add Method" to start configuring your endpoint.</p>
+                  <p className="text-sm">{t("endpoints.noMethodsYet")}</p>
+                  <p className="text-xs mt-1">{t("endpoints.clickAddMethod")}</p>
                 </div>
               ) : (
                 newEndpoint.methods.map((method, index) => (
@@ -370,7 +371,7 @@ export default function EndpointRegisterDialog({
                             }));
                           }}
                         >
-                          <h5 className="font-medium text-sm">Request Body Definition</h5>
+                          <h5 className="font-medium text-sm">{t("endpoints.requestBodyDefinition")}</h5>
                           {collapsedSections[`method-${index}`] ? (
                             <ChevronRight className="h-4 w-4" />
                           ) : (
@@ -741,7 +742,7 @@ export default function EndpointRegisterDialog({
                                   className="flex-1 max-w-xs"
                                 >
                                   <Plus className="h-4 w-4 mr-2" />
-                                  Add Field
+                                  {t("endpoints.addField")}
                                 </Button>
                                 <Button 
                                   variant="outline" 
@@ -750,7 +751,7 @@ export default function EndpointRegisterDialog({
                                   className="flex-1 max-w-xs"
                                 >
                                   <FileText className="h-4 w-4 mr-2" />
-                                  Add Fields with JSON
+                                  {t("endpoints.addFieldsWithJson")}
                                 </Button>
                               </div>
                               
@@ -826,7 +827,7 @@ export default function EndpointRegisterDialog({
                   className="w-full max-w-xs"
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  Add Method
+                  {t("endpoints.addMethod")}
                 </Button>
               </div>
             </div>
@@ -838,27 +839,27 @@ export default function EndpointRegisterDialog({
               variant="outline"
               onClick={() => setRegisterActiveTab("basic")}
             >
-              Back
+              {t("endpoints.back")}
             </Button>
           ) : (
             <Button
               variant="outline"
               onClick={onCancel}
             >
-              Cancel
+              {t("common.cancel")}
             </Button>
           )}
           {editingEndpoint ? (
             <Button onClick={onUpdate}>
-              Update Endpoint
+              {t("endpoints.updateEndpoint")}
             </Button>
           ) : registerActiveTab === "basic" ? (
             <Button onClick={() => setRegisterActiveTab("methods")}>
-              Next
+              {t("endpoints.next")}
             </Button>
           ) : (
             <Button onClick={onRegister}>
-              Register & Analyze
+              {t("endpoints.registerAndAnalyze")}
             </Button>
           )}
         </DialogFooter>

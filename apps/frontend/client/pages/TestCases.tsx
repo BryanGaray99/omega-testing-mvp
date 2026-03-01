@@ -12,8 +12,11 @@ import { Button } from "@/components/ui/button";
 import { TestCase } from "@/components/types/testCase.types";
 import { RefreshCw, Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useCallback } from "react";
+import { useTranslation } from "@/contexts/LanguageContext";
+import { replaceParams } from "@/lib/translations";
 
 export default function TestCases() {
+  const { t } = useTranslation();
   const {
     // State
     loading,
@@ -178,7 +181,7 @@ export default function TestCases() {
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Loading test cases...</p>
+            <p className="text-muted-foreground">{t("testCases.loading")}</p>
           </div>
         </div>
       </div>
@@ -264,7 +267,7 @@ export default function TestCases() {
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <span className="text-sm text-muted-foreground">
-            Page {currentPage} of {totalPages}
+            {replaceParams(t("testCases.pageOf"), { current: currentPage, total: totalPages })}
           </span>
           <Button variant="outline" size="sm" disabled={currentPage === totalPages} onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}>
             <ChevronRight className="h-4 w-4" />

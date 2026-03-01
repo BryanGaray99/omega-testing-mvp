@@ -1,15 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface ProjectEmptyStateProps {
   onRegisterClick: () => void;
 }
 
 export default function ProjectEmptyState({ onRegisterClick }: ProjectEmptyStateProps) {
+  const { t } = useTranslation();
   return (
     <div className="text-center py-12">
       <p className="text-muted-foreground">
-        No projects found matching your criteria.
+        {t("projects.emptyMessage")}
       </p>
       <Button
         variant="outline"
@@ -17,7 +19,7 @@ export default function ProjectEmptyState({ onRegisterClick }: ProjectEmptyState
         onClick={onRegisterClick}
       >
         <Plus className="h-4 w-4 mr-2" />
-        Create Your First Project
+        {t("projects.createFirst")}
       </Button>
     </div>
   );

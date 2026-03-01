@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Plus, RefreshCw, Play, Activity, CheckCircle, XCircle, Clock, AlertTriangle } from "lucide-react";
 import { useProjects } from "@/hooks/useProjects";
 import { useTestExecutions } from "@/hooks/useTestExecutions";
+import { useTranslation } from "@/contexts/LanguageContext";
+import { replaceParams } from "@/lib/translations";
 import { TestExecutionStatisticsCompact } from "@/components/test-executions/TestExecutionStatisticsCompact";
 import { TestExecutionFilters as TestExecutionFiltersComponent } from "@/components/test-executions/TestExecutionFilters";
 import { TestExecutionCard } from "@/components/test-executions/TestExecutionCard";
@@ -10,6 +12,7 @@ import TestExecutionDetailsDialog from "@/components/test-executions/TestExecuti
 import TestExecutionDeleteDialog from "@/components/test-executions/TestExecutionDeleteDialog";
 
 export default function TestExecutions() {
+  const { t } = useTranslation();
   const { filteredProjects } = useProjects();
   const projects = filteredProjects || [];
   const currentProjectId = projects.length > 0 ? projects[0].id : '';
@@ -66,11 +69,11 @@ export default function TestExecutions() {
     return (
       <div className="container mx-auto p-6">
         <div className="text-center py-8">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Test Executions</h2>
+          <h2 className="text-2xl font-bold text-red-600 mb-4">{t("exec.errorLoading")}</h2>
           <p className="text-muted-foreground mb-4">
-            {error instanceof Error ? error.message : 'An unknown error occurred'}
+            {error instanceof Error ? error.message : t("exec.errorLoading")}
           </p>
-          <Button onClick={() => refetch()}>Try Again</Button>
+          <Button onClick={() => refetch()}>{t("exec.tryAgain")}</Button>
         </div>
       </div>
     );
@@ -81,9 +84,9 @@ export default function TestExecutions() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold">Test Executions</h1>
+          <h1 className="text-3xl font-bold">{t("exec.title")}</h1>
           <p className="text-muted-foreground">
-            Monitor and analyze test execution results
+            {t("exec.subtitle")}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -97,7 +100,7 @@ export default function TestExecutions() {
             ) : (
               <RefreshCw className="h-4 w-4 mr-2" />
             )}
-            {isRefreshing ? "Refreshing..." : "Refresh Data"}
+            {isRefreshing ? t("exec.refreshing") : t("exec.refreshData")}
           </Button>
         </div>
       </div>
@@ -132,16 +135,16 @@ export default function TestExecutions() {
             {isLoading ? (
               <div className="text-center py-8">
                 <Activity className="h-8 w-8 animate-spin mx-auto mb-4 text-muted-foreground" />
-                <p className="text-muted-foreground">Loading test executions...</p>
+                <p className="text-muted-foreground">{t("exec.loading")}</p>
               </div>
             ) : executions.length === 0 ? (
               <div className="text-center py-8">
                 <Play className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-lg font-medium mb-2">No test executions found</h3>
+                <h3 className="text-lg font-medium mb-2">{t("exec.emptyTitle")}</h3>
                 <p className="text-muted-foreground">
                   {filters.search || filters.status || filters.entityName || filters.testType
-                    ? "Try adjusting your filters to see more results."
-                    : "No test executions have been created yet."}
+                    ? t("exec.emptyFiltered")
+                    : t("exec.emptyNone")}
                 </p>
               </div>
             ) : (
@@ -155,7 +158,7 @@ export default function TestExecutions() {
                        onViewDetails={handleViewDetails}
                        onDelete={handleDeleteExecution}
                        onNavigateToTestExecution={handleNavigateToTestExecution}
-                       projectName={projects.length > 0 ? projects[0].name : 'Current Project'}
+                       projectName={projects.length > 0 ? projects[0].name : t("exec.currentProject")}
                        openDropdownId={openDropdownId}
                        setOpenDropdownId={setOpenDropdownId}
                      />
@@ -166,7 +169,7 @@ export default function TestExecutions() {
                 {totalPages > 1 && (
                   <div className="flex items-center justify-between mt-6">
                     <div className="text-sm text-muted-foreground">
-                      Showing {((filters.page - 1) * filters.limit) + 1} to {Math.min(filters.page * filters.limit, totalItems)} of {totalItems} executions
+                      {replaceParams(t("exec.showing"), { from: String(((filters.page - 1) * filters.limit) + 1), to: String(Math.min(filters.page * filters.limit, totalItems)), total: String(totalItems) })}
                     </div>
                     <div className="flex items-center space-x-2">
                       <Button 
@@ -175,10 +178,10 @@ export default function TestExecutions() {
                         onClick={() => handleFiltersChange({ ...filters, page: filters.page - 1 })}
                         disabled={filters.page === 1}
                       >
-                        Previous
+                        {t("exec.previous")}
                       </Button>
                       <span className="text-sm">
-                        Page {filters.page} of {totalPages}
+                        {replaceParams(t("exec.pageOf"), { current: String(filters.page), total: String(totalPages) })}
                       </span>
                       <Button 
                         variant="outline" 
@@ -186,7 +189,7 @@ export default function TestExecutions() {
                         onClick={() => handleFiltersChange({ ...filters, page: filters.page + 1 })}
                         disabled={filters.page === totalPages}
                       >
-                        Next
+                        {t("exec.next")}
                       </Button>
                     </div>
                   </div>

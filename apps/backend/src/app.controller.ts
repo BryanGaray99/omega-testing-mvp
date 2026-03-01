@@ -9,8 +9,9 @@
  * @author Central Backend MVP Team
  */
 
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
+import { TestReportService } from './test-report/test-report.service';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 /**
@@ -24,7 +25,10 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 @ApiTags('health')
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly testReportService: TestReportService,
+  ) {}
 
   /**
    * Health check endpoint to verify service status and dependencies.
@@ -168,5 +172,36 @@ export class AppController {
         },
       },
     };
+  }
+
+  /**
+   * Test report for Settings > Tests Report UI.
+   * Returns real data from Jest JSON outputs (unit-results.json, e2e-results.json) when present.
+   */
+  @Get('test-report')
+  @ApiOperation({
+    summary: 'Test report',
+    description: 'Aggregated test results (backend unit & e2e) from last run. Run tests with --json --outputFile to populate.',
+  })
+  @ApiResponse({ status: 200, description: 'Report data (may be empty if tests have not been run with JSON output).' })
+  getTestReport() {
+    return this.testReportService.getReport();
+  }
+
+  /**
+   * Start a backend test suite (unit or e2e) in a background process (silent CMD on Windows).
+   * Does not block; client should poll GET /test-report to get results when the run finishes.
+   */
+  @Post('test-report/run')
+  @HttpCode(HttpStatus.ACCEPTED)
+  @ApiOperation({
+    summary: 'Run test suite in background',
+    description: 'Starts unit or e2e tests in a detached process. Poll GET /test-report for results.',
+  })
+  @ApiResponse({ status: 202, description: 'Tests started in background.' })
+  runTestReport(@Body() body: { suite: 'unit' | 'e2e' }) {
+    const suite = body?.suite === 'e2e' ? 'e2e' : 'unit';
+    this.testReportService.runSuiteInBackground(suite);
+    return { started: true };
   }
 }

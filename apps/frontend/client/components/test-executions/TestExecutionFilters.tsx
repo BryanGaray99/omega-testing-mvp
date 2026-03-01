@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -34,6 +35,7 @@ export function TestExecutionFilters({
   sections,
   projects,
 }: TestExecutionFiltersProps) {
+  const { t } = useTranslation();
   const [showAdvanced, setShowAdvanced] = useState(false);
   const getProjectName = (p: ProjectOption) => p.displayName || p.name || p.id;
 
@@ -80,7 +82,7 @@ export function TestExecutionFilters({
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search executions..."
+            placeholder={t("exec.searchPlaceholder")}
             value={filters.search}
             onChange={(e) => handleInputChange('search', e.target.value)}
             className="pl-10"
@@ -88,7 +90,7 @@ export function TestExecutionFilters({
         </div>
         <Button variant="outline" onClick={() => setShowAdvanced(v => !v)}>
           <SlidersHorizontal className="h-4 w-4 mr-2" />
-          {showAdvanced ? 'Hide Filters' : 'Show Filters'}
+          {showAdvanced ? t("exec.hideFilters") : t("exec.showFilters")}
         </Button>
       </div>
 
@@ -100,10 +102,10 @@ export function TestExecutionFilters({
             onValueChange={(v) => handleInputChange('projectId', v === 'all' ? undefined : v)}
           >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="All Projects" />
+              <SelectValue placeholder={t("exec.allProjects")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Projects</SelectItem>
+              <SelectItem value="all">{t("exec.allProjects")}</SelectItem>
               {projects.map((project) => (
                 <SelectItem key={project.id} value={project.id}>
                   {getProjectName(project)}
@@ -118,10 +120,10 @@ export function TestExecutionFilters({
             onValueChange={(v) => handleInputChange('section', v === 'all' ? undefined : v)}
           >
             <SelectTrigger className="w-[160px]">
-              <SelectValue placeholder="All Sections" />
+              <SelectValue placeholder={t("exec.allSections")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Sections</SelectItem>
+              <SelectItem value="all">{t("exec.allSections")}</SelectItem>
               {sections.map((s) => (
                 <SelectItem key={s} value={s}>{s}</SelectItem>
               ))}
@@ -134,10 +136,10 @@ export function TestExecutionFilters({
             onValueChange={(v) => handleInputChange('entityName', v === 'all' ? undefined : v)}
           >
             <SelectTrigger className="w-[160px]">
-              <SelectValue placeholder="All Entities" />
+              <SelectValue placeholder={t("exec.allEntities")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Entities</SelectItem>
+              <SelectItem value="all">{t("exec.allEntities")}</SelectItem>
               {entities.map((e) => (
                 <SelectItem key={e} value={e}>{e}</SelectItem>
               ))}
@@ -152,13 +154,13 @@ export function TestExecutionFilters({
             onValueChange={(v) => handleInputChange('status', v === 'all' ? undefined : v)}
           >
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="Status" />
+              <SelectValue placeholder={t("exec.statusPlaceholder")} />
             </SelectTrigger>
                          <SelectContent>
-               <SelectItem value="all">All Status</SelectItem>
-               <SelectItem value="running">Running</SelectItem>
-               <SelectItem value="completed">Completed</SelectItem>
-               <SelectItem value="failed">Failed</SelectItem>
+               <SelectItem value="all">{t("exec.allStatus")}</SelectItem>
+               <SelectItem value="running">{t("exec.statusRunning")}</SelectItem>
+               <SelectItem value="completed">{t("exec.statusCompleted")}</SelectItem>
+               <SelectItem value="failed">{t("exec.statusFailed")}</SelectItem>
              </SelectContent>
           </Select>
 
@@ -168,15 +170,15 @@ export function TestExecutionFilters({
             onValueChange={(v) => handleInputChange('sortBy', v)}
           >
             <SelectTrigger className="w-[160px]">
-              <SelectValue placeholder="Sort by" />
+              <SelectValue placeholder={t("exec.sortBy")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="startedAt">Started At</SelectItem>
-              <SelectItem value="completedAt">Completed At</SelectItem>
-              <SelectItem value="executionTime">Execution Time</SelectItem>
-              <SelectItem value="totalScenarios">Total Scenarios</SelectItem>
-              <SelectItem value="passedScenarios">Passed Scenarios</SelectItem>
-              <SelectItem value="failedScenarios">Failed Scenarios</SelectItem>
+              <SelectItem value="startedAt">{t("exec.startedAt")}</SelectItem>
+              <SelectItem value="completedAt">{t("exec.completedAt")}</SelectItem>
+              <SelectItem value="executionTime">{t("exec.executionTime")}</SelectItem>
+              <SelectItem value="totalScenarios">{t("exec.totalScenarios")}</SelectItem>
+              <SelectItem value="passedScenarios">{t("exec.passedScenarios")}</SelectItem>
+              <SelectItem value="failedScenarios">{t("exec.failedScenarios")}</SelectItem>
             </SelectContent>
           </Select>
 
@@ -186,11 +188,11 @@ export function TestExecutionFilters({
             onValueChange={(v) => handleInputChange('sortOrder', v)}
           >
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="Order" />
+              <SelectValue placeholder={t("exec.order")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="desc">Desc</SelectItem>
-              <SelectItem value="asc">Asc</SelectItem>
+              <SelectItem value="desc">{t("exec.desc")}</SelectItem>
+              <SelectItem value="asc">{t("exec.asc")}</SelectItem>
             </SelectContent>
           </Select>
         </div>

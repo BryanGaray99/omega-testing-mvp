@@ -14,13 +14,13 @@ import {
   Eye,
   Globe,
   MoreVertical,
-  TestTube,
   XCircle,
   Zap,
   BarChart3,
 } from "lucide-react";
 import { Endpoint } from "../types/endpoint.types";
 import { getMethodColor } from "@/lib/colors";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface EndpointCardProps {
   endpoint: Endpoint;
@@ -39,6 +39,7 @@ export default function EndpointCard({
   openDropdownId,
   setOpenDropdownId,
 }: EndpointCardProps) {
+  const { t } = useTranslation();
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "ready":
@@ -69,6 +70,22 @@ export default function EndpointCard({
     }
   };
 
+  const getStatusLabel = (status: string) => {
+    switch (status) {
+      case "ready":
+        return t("endpoints.statusReady");
+      case "failed":
+        return t("endpoints.statusFailed");
+      case "analyzing":
+        return t("endpoints.statusAnalyzing");
+      case "generating":
+        return t("endpoints.statusGenerating");
+      case "pending":
+        return t("endpoints.statusPending");
+      default:
+        return status;
+    }
+  };
 
   return (
     <Card className="relative">
@@ -77,7 +94,7 @@ export default function EndpointCard({
           <div className="flex items-center space-x-2">
             {getStatusIcon(endpoint.status)}
             <Badge variant={getStatusColor(endpoint.status) as any}>
-              {endpoint.status}
+              {getStatusLabel(endpoint.status)}
             </Badge>
           </div>
           <DropdownMenu 
@@ -90,18 +107,18 @@ export default function EndpointCard({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("endpoints.actions")}</DropdownMenuLabel>
               <DropdownMenuItem onClick={() => onViewDetails(endpoint)}>
                 <Eye className="mr-2 h-4 w-4" />
-                View & Edit
+                {t("endpoints.viewEdit")}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => onGenerateTests(endpoint)}>
                 <BarChart3 className="mr-2 h-4 w-4" />
-                Generate Tests
+                {t("endpoints.generateTests")}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => onReanalyze(endpoint)}>
                 <Zap className="mr-2 h-4 w-4" />
-                Re-analyze
+                {t("endpoints.reanalyze")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -128,16 +145,16 @@ export default function EndpointCard({
           </div>
           {endpoint.projectName && (
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Project:</span>
+              <span className="text-muted-foreground">{t("endpoints.projectLabel")}</span>
               <span className="font-medium">{endpoint.projectName}</span>
             </div>
           )}
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Section:</span>
+            <span className="text-muted-foreground">{t("endpoints.sectionLabel")}</span>
             <span className="font-medium">{endpoint.section}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Entity:</span>
+            <span className="text-muted-foreground">{t("endpoints.entityLabel")}</span>
             <span className="font-medium">{endpoint.entityName}</span>
           </div>
           <div className="pt-3 border-t">
@@ -148,7 +165,7 @@ export default function EndpointCard({
               onClick={() => onViewDetails(endpoint)}
             >
               <Eye className="h-4 w-4 mr-2" />
-              View Details
+              {t("endpoints.viewDetails")}
             </Button>
           </div>
         </div>

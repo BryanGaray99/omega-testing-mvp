@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -19,6 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface CreateProjectData {
   name: string;
@@ -47,28 +47,29 @@ export default function ProjectRegisterDialog({
   onCancel,
   isPending,
 }: ProjectRegisterDialogProps) {
+  const { t } = useTranslation();
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
         <Button>
           <Plus className="h-4 w-4 mr-2" />
-          New Project
+          {t("projects.newProject")}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
-          <DialogTitle>Create New Project</DialogTitle>
+          <DialogTitle>{t("projects.createTitle")}</DialogTitle>
           <DialogDescription>
-            Set up a new testing project with its basic configuration.
+            {t("projects.createDescription")}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
-            <Label htmlFor="project-name">Project Name</Label>
+            <Label htmlFor="project-name">{t("projects.fieldProjectName")}</Label>
             <Input
               id="project-name"
               name="project-name"
-              placeholder="e.g., ecommerce-api"
+              placeholder={t("projects.placeholderName")}
               value={newProject.name}
               onChange={(e) =>
                 setNewProject({ ...newProject, name: e.target.value })
@@ -76,11 +77,11 @@ export default function ProjectRegisterDialog({
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="display-name">Display Name</Label>
+            <Label htmlFor="display-name">{t("projects.fieldDisplayName")}</Label>
             <Input
               id="display-name"
               name="display-name"
-              placeholder="e.g., E-commerce Platform API"
+              placeholder={t("projects.placeholderDisplayName")}
               value={newProject.displayName}
               onChange={(e) =>
                 setNewProject({
@@ -91,11 +92,11 @@ export default function ProjectRegisterDialog({
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="base-url">Base URL</Label>
+            <Label htmlFor="base-url">{t("projects.fieldBaseUrl")}</Label>
             <Input
               id="base-url"
               name="base-url"
-              placeholder="https://api.example.com"
+              placeholder={t("projects.placeholderBaseUrl")}
               value={newProject.baseUrl}
               onChange={(e) =>
                 setNewProject({ ...newProject, baseUrl: e.target.value })
@@ -103,11 +104,11 @@ export default function ProjectRegisterDialog({
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="basePath">Base Path (Optional)</Label>
+            <Label htmlFor="basePath">{t("projects.fieldBasePathOptional")}</Label>
             <Input
               id="basePath"
               name="basePath"
-              placeholder="/v1/api"
+              placeholder={t("projects.placeholderBasePath")}
               value={newProject.basePath}
               onChange={(e) =>
                 setNewProject({
@@ -118,7 +119,7 @@ export default function ProjectRegisterDialog({
             />
           </div>
           <div className="grid w-full items-center gap-1.5">
-            <Label htmlFor="project-type">Project Type</Label>
+            <Label htmlFor="project-type">{t("projects.fieldProjectType")}</Label>
             <Select
               value={newProject.type}
               onValueChange={(value) =>
@@ -129,21 +130,21 @@ export default function ProjectRegisterDialog({
               }
             >
               <SelectTrigger id="project-type">
-                <SelectValue placeholder="Select project type" />
+                <SelectValue placeholder={t("projects.placeholderProjectType")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="playwright-bdd">Playwright BDD</SelectItem>
-                <SelectItem value="api-only">API Only</SelectItem>
+                <SelectItem value="playwright-bdd">{t("projects.typePlaywrightBdd")}</SelectItem>
+                <SelectItem value="api-only">{t("projects.typeApiOnly")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onCancel}>
-            Cancel
+            {t("common.cancel")}
           </Button>
           <Button onClick={onCreateProject} disabled={isPending}>
-            {isPending ? "Creating..." : "Create Project"}
+            {isPending ? t("projects.creating") : t("projects.createProject")}
           </Button>
         </DialogFooter>
       </DialogContent>

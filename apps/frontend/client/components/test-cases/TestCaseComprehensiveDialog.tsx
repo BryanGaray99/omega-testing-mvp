@@ -40,6 +40,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 interface TestCaseComprehensiveDialogProps {
   isOpen: boolean;
@@ -80,12 +81,13 @@ export default function TestCaseComprehensiveDialog({
   onEditScenario,
   onNavigateToExecution,
 }: TestCaseComprehensiveDialogProps) {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('basic');
   const [isEditingScenario, setIsEditingScenario] = useState(false);
   const [lastExecution, setLastExecution] = useState<any>(null);
   const [loadingLastExecution, setLoadingLastExecution] = useState(false);
 
-  // Cargar la última ejecución cuando se abre el modal
+  // Cargar la ?ltima ejecuci?n cuando se abre el modal
   useEffect(() => {
     if (isOpen && selectedTestCase && selectedTestCase.projectId) {
       loadLastExecution();
@@ -102,7 +104,7 @@ export default function TestCaseComprehensiveDialog({
         sessionStorage.removeItem('openDialogTab');
       }
 
-      // Si el modal se abrió desde "Edit Test Case", activar la edición del escenario
+      // Si el modal se abri? desde "Edit Test Case", activar la edici?n del escenario
       const shouldEditScenario = sessionStorage.getItem('editScenario') === 'true';
       if (shouldEditScenario) {
         setIsEditingScenario(true);
@@ -218,11 +220,11 @@ export default function TestCaseComprehensiveDialog({
       
       // Show success message
       toast({
-        title: "Success",
-        description: "Test case scenario updated successfully",
+        title: t("common.success"),
+        description: t("caseDetails.toastScenarioSuccess"),
       });
       
-      // Solo salir del modo de edición del scenario, no cerrar el modal
+      // Solo salir del modo de edici?n del scenario, no cerrar el modal
       setIsEditingScenario(false);
       
       // Recargar la data y actualizar el test case seleccionado
@@ -230,8 +232,8 @@ export default function TestCaseComprehensiveDialog({
     } catch (error) {
       console.error("Error updating test case scenario:", error);
       toast({
-        title: "Error",
-        description: "Failed to update test case scenario",
+        title: t("common.error"),
+        description: t("caseDetails.toastScenarioError"),
         variant: "destructive",
       });
     }
@@ -243,17 +245,17 @@ export default function TestCaseComprehensiveDialog({
 
   const handleDialogClose = (open: boolean) => {
     if (!open) {
-      // Si está en modo de edición, cancelar la edición pero mantener el modal abierto
+      // Si est? en modo de edici?n, cancelar la edici?n pero mantener el modal abierto
       if (isEditing) {
         setIsEditing(false);
         setEditingTestCase(selectedTestCase);
-        // No cerrar el modal, solo cancelar la edición
+        // No cerrar el modal, solo cancelar la edici?n
         return;
       }
-      // Si está editando el scenario, cancelar la edición del scenario pero mantener el modal abierto
+      // Si est? editando el scenario, cancelar la edici?n del scenario pero mantener el modal abierto
       if (isEditingScenario) {
         setIsEditingScenario(false);
-        // No cerrar el modal, solo cancelar la edición
+        // No cerrar el modal, solo cancelar la edici?n
         return;
       }
     }
@@ -266,10 +268,10 @@ export default function TestCaseComprehensiveDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <TestTube className="h-5 w-5" />
-            {selectedTestCase?.name || "Test Case Details"}
+            {selectedTestCase?.name || t("caseDetails.title")}
           </DialogTitle>
           <DialogDescription>
-            View test case details, execution history, and edit scenario information.
+            {t("caseDetails.description")}
           </DialogDescription>
         </DialogHeader>
         
@@ -285,30 +287,30 @@ export default function TestCaseComprehensiveDialog({
           <>
             <Tabs defaultValue="basic" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="basic">Basic Info</TabsTrigger>
-                <TabsTrigger value="scenario">Scenario</TabsTrigger>
-                <TabsTrigger value="execution">Execution</TabsTrigger>
+                <TabsTrigger value="basic">{t("caseDetails.basicInfo")}</TabsTrigger>
+                <TabsTrigger value="scenario">{t("caseDetails.scenario")}</TabsTrigger>
+                <TabsTrigger value="execution">{t("caseDetails.execution")}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="basic" className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
                   {/* Test Case Details */}
                   <div className="border rounded-lg p-3">
-                    <h4 className="font-medium mb-2">Test Case Details</h4>
+                    <h4 className="font-medium mb-2">{t("caseDetails.detailsHeader")}</h4>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-2">
                         <div>
-                          <label className="text-sm font-medium text-muted-foreground">Test Case ID</label>
+                          <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.testCaseId")}</label>
                           <p className="text-sm font-mono bg-muted px-2 py-1 rounded text-xs">
                             {testCase.testCaseId}
                           </p>
                         </div>
                         <div>
-                          <label className="text-sm font-medium text-muted-foreground">Project</label>
+                          <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.project")}</label>
                           <p className="text-sm">{project?.displayName || testCase.projectId}</p>
                         </div>
                         <div>
-                          <label className="text-sm font-medium text-muted-foreground">Section</label>
+                          <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.section")}</label>
                           {isEditing ? (
                             <Input
                               value={editingTestCase?.section || ''}
@@ -329,7 +331,7 @@ export default function TestCaseComprehensiveDialog({
                       </div>
                       <div className="space-y-2">
                         <div>
-                          <label className="text-sm font-medium text-muted-foreground">Entity</label>
+                          <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.entity")}</label>
                           {isEditing ? (
                             <Input
                               value={editingTestCase?.entityName || ''}
@@ -348,7 +350,7 @@ export default function TestCaseComprehensiveDialog({
                           )}
                         </div>
                         <div>
-                          <label className="text-sm font-medium text-muted-foreground">Name</label>
+                          <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.name")}</label>
                           {isEditing ? (
                             <Input
                               value={editingTestCase?.name || ''}
@@ -367,7 +369,7 @@ export default function TestCaseComprehensiveDialog({
                           )}
                         </div>
                         <div>
-                          <label className="text-sm font-medium text-muted-foreground">Status</label>
+                          <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.status")}</label>
                           <p className="text-sm">{testCase.status}</p>
                         </div>
                       </div>
@@ -379,7 +381,7 @@ export default function TestCaseComprehensiveDialog({
                     <h4 className="font-medium mb-2">Test Configuration</h4>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-sm font-medium text-muted-foreground">Test Type</label>
+                        <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.testType")}</label>
                         <div className="flex items-center gap-2 mt-1">
                           <span className={`px-2 py-1 rounded text-xs font-medium ${getTestTypeColor(testCase.testType)}`}>
                             {testCase.testType}
@@ -387,7 +389,7 @@ export default function TestCaseComprehensiveDialog({
                         </div>
                       </div>
                       <div>
-                        <label className="text-sm font-medium text-muted-foreground">Method</label>
+                        <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.method")}</label>
                         <div className="flex items-center gap-2 mt-1">
                           <span className={`px-2 py-1 rounded text-xs font-medium ${getMethodColor(testCase.method)}`}>
                             {testCase.method}
@@ -456,7 +458,7 @@ export default function TestCaseComprehensiveDialog({
                     <h4 className="font-medium mb-2">Last Execution</h4>
                     <div className="space-y-2">
                       <div>
-                        <label className="text-sm font-medium text-muted-foreground">Status</label>
+                        <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.status")}</label>
                         <div className="flex items-center gap-2 mt-1">
                           {getExecutionStatusIcon(testCase.lastRunStatus, testCase.lastRun)}
                           <Badge variant="outline">
@@ -480,7 +482,7 @@ export default function TestCaseComprehensiveDialog({
                                   </button>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                  <p>Ver detalles de la ejecución</p>
+                                  <p>Ver detalles de la ejecuci?n</p>
                                 </TooltipContent>
                               </Tooltip>
                             </TooltipProvider>

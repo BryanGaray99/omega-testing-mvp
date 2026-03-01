@@ -18,6 +18,8 @@ import {
 import { testSuiteService } from "@/services/testSuiteService";
 import { TestSuite } from "@/services/testSuiteService";
 import { getMethodColor as getMethodColorClass } from "@/lib/colors";
+import { useTranslation } from "@/contexts/LanguageContext";
+import { replaceParams } from "@/lib/translations";
 
 interface TestCase {
   testCaseId: string;
@@ -42,6 +44,7 @@ export default function TestSuiteEditDialog({
   testSuite,
   onSave,
 }: TestSuiteEditDialogProps) {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoadingTestCases, setIsLoadingTestCases] = useState(false);
@@ -77,8 +80,8 @@ export default function TestSuiteEditDialog({
         setAvailableTestCases([]);
       } else {
         toast({
-          title: "Error",
-          description: "Failed to load available test cases",
+          title: t("common.error"),
+          description: t("suiteEdit.toastFailedLoad"),
           variant: "destructive",
         });
       }
@@ -113,14 +116,14 @@ export default function TestSuiteEditDialog({
       setIsSubmitting(true);
       await onSave(testSuite.suiteId, selectedTestCases);
       toast({
-        title: "Success",
-        description: "Test suite updated successfully",
+        title: t("common.success"),
+        description: t("suiteEdit.toastSuccess"),
       });
       onOpenChange(false);
     } catch (error: any) {
       toast({
-        title: "Error",
-        description: error.message || "Failed to update test suite",
+        title: t("common.error"),
+        description: error.message || t("suiteEdit.toastFailedUpdate"),
         variant: "destructive",
       });
     } finally {
@@ -176,10 +179,10 @@ export default function TestSuiteEditDialog({
         <DialogHeader className="flex-shrink-0">
           <DialogTitle className="flex items-center gap-2">
             <Layers className="h-5 w-5" />
-            Edit Test Suite: {testSuite.name}
+            {replaceParams(t("suiteEdit.title"), { name: testSuite.name })}
           </DialogTitle>
           <DialogDescription>
-            Manage test cases for {testSuite.section} - {testSuite.entity}
+            {replaceParams(t("suiteEdit.description"), { section: testSuite.section, entity: testSuite.entity })}
           </DialogDescription>
         </DialogHeader>
 
@@ -189,28 +192,28 @@ export default function TestSuiteEditDialog({
               {/* Test Suite Info */}
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">Test Suite Information</CardTitle>
+                  <CardTitle className="text-lg">{t("suiteEdit.suiteInformation")}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="text-muted-foreground">Type:</span>
+                      <span className="text-muted-foreground">{t("suiteEdit.typeLabel")}</span>
                       <Badge className="ml-2">
-                        {testSuite.type === 'test_set' ? 'Test Set' : 'Test Plan'}
+                        {testSuite.type === 'test_set' ? t("suiteEdit.typeTestSet") : t("suiteEdit.typeTestPlan")}
                       </Badge>
                     </div>
                     <div>
-                      <span className="text-muted-foreground">Status:</span>
+                      <span className="text-muted-foreground">{t("suiteEdit.statusLabel")}</span>
                       <Badge variant="outline" className="ml-2">
                         {testSuite.status}
                       </Badge>
                     </div>
                     <div>
-                      <span className="text-muted-foreground">Section:</span>
+                      <span className="text-muted-foreground">{t("suiteEdit.sectionLabel")}</span>
                       <span className="ml-2 font-medium">{testSuite.section}</span>
                     </div>
                     <div>
-                      <span className="text-muted-foreground">Entity:</span>
+                      <span className="text-muted-foreground">{t("suiteEdit.entityLabel")}</span>
                       <span className="ml-2 font-medium">{testSuite.entity}</span>
                     </div>
                   </div>
@@ -221,18 +224,18 @@ export default function TestSuiteEditDialog({
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold">Manage Test Cases</h3>
+                    <h3 className="text-lg font-semibold">{t("suiteEdit.manageTestCases")}</h3>
                     <p className="text-sm text-muted-foreground">
-                      Select test cases for {testSuite.section} - {testSuite.entity}
+                      {replaceParams(t("suiteEdit.selectTestCasesFor"), { section: testSuite.section, entity: testSuite.entity })}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
                     <Select value={methodFilter} onValueChange={setMethodFilter}>
                       <SelectTrigger className="w-32">
-                        <SelectValue placeholder="Method" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Methods</SelectItem>
+<SelectValue placeholder={t("suiteCreate.methodPlaceholder")} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="all">{t("suiteCreate.allMethods")}</SelectItem>
                         {availableMethods.map((method) => (
                           <SelectItem key={method} value={method}>
                             {method}
@@ -242,10 +245,10 @@ export default function TestSuiteEditDialog({
                     </Select>
                     <Select value={testTypeFilter} onValueChange={setTestTypeFilter}>
                       <SelectTrigger className="w-32">
-                        <SelectValue placeholder="Type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Types</SelectItem>
+<SelectValue placeholder={t("suiteCreate.typePlaceholder")} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="all">{t("suiteCreate.allTypes")}</SelectItem>
                         {availableTestTypes.map((testType) => (
                           <SelectItem key={testType} value={testType}>
                             {testType}
@@ -260,7 +263,7 @@ export default function TestSuiteEditDialog({
                   <Card>
                     <CardContent className="p-6 text-center">
                       <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2" />
-                      <p className="text-sm">Loading test cases...</p>
+                      <p className="text-sm">{t("suiteCreate.loadingTestCases")}</p>
                     </CardContent>
                   </Card>
                 ) : (
@@ -272,10 +275,10 @@ export default function TestSuiteEditDialog({
                             checked={selectedTestCases.length === filteredTestCases.length && filteredTestCases.length > 0}
                             onCheckedChange={handleSelectAllTestCases}
                           />
-                          <span className="font-medium">Select All</span>
+                          <span className="font-medium">{t("suiteCreate.selectAll")}</span>
                         </div>
                         <Badge variant="secondary">
-                          {selectedTestCases.length} of {filteredTestCases.length} selected
+                          {replaceParams(t("suiteCreate.ofSelected"), { selected: String(selectedTestCases.length), total: String(filteredTestCases.length) })}
                         </Badge>
                       </div>
                     </CardHeader>
@@ -310,7 +313,7 @@ export default function TestSuiteEditDialog({
                           ))
                         ) : (
                           <div className="p-4 text-center text-sm text-muted-foreground">
-                            No test cases available for this section and entity
+                            {t("suiteEdit.noTestCasesAvailable")}
                           </div>
                         )}
                       </div>
@@ -324,18 +327,18 @@ export default function TestSuiteEditDialog({
 
         <DialogFooter className="flex-shrink-0 mt-4">
           <Button variant="outline" onClick={handleClose} disabled={isSubmitting}>
-            Cancel
+            {t("common.cancel")}
           </Button>
           <Button onClick={handleSubmit} disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Updating...
+                {t("suiteEdit.updating")}
               </>
             ) : (
               <>
                 <CheckCircle className="h-4 w-4 mr-2" />
-                Update Test Suite
+                {t("suiteEdit.updateButton")}
               </>
             )}
           </Button>

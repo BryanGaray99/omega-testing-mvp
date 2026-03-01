@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/contexts/LanguageContext";
+import type { TranslationKey } from "@/lib/translations";
 import SyncProjectDialog from "./SyncProjectDialog";
 import {
   BarChart3,
@@ -18,11 +20,9 @@ import {
   Home,
   ChevronLeft,
   ChevronRight,
-  FileText,
   RefreshCw,
   Layers,
   Bug,
-  ClipboardList,
 } from "lucide-react";
 
 interface LayoutProps {
@@ -30,26 +30,27 @@ interface LayoutProps {
 }
 
 interface NavigationItem {
-  name: string;
+  nameKey: TranslationKey;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   hidden?: boolean;
 }
 
 const navigation: NavigationItem[] = [
-  { name: "Dashboard", href: "/", icon: Home },
-  { name: "Projects", href: "/projects", icon: FolderKanban },
-  { name: "Endpoints", href: "/endpoints", icon: BarChart3 },
-  { name: "Test Cases", href: "/test-cases", icon: TestTube },
-  { name: "Test Suites", href: "/test-suites", icon: Layers },
-  { name: "Bugs", href: "/bugs", icon: Bug },
-  { name: "Test Executions", href: "/test-executions", icon: PlayCircle },
-  { name: "Reports", href: "/reports", icon: ClipboardList, hidden: true },
-  { name: "Logs", href: "/logs", icon: FileText, hidden: true },
-  { name: "AI Assistant", href: "/ai-assistant", icon: Bot, hidden: true },
+  { nameKey: "nav.dashboard", href: "/", icon: Home },
+  { nameKey: "nav.projects", href: "/projects", icon: FolderKanban },
+  { nameKey: "nav.endpoints", href: "/endpoints", icon: BarChart3 },
+  { nameKey: "nav.testCases", href: "/test-cases", icon: TestTube },
+  { nameKey: "nav.testSuites", href: "/test-suites", icon: Layers },
+  { nameKey: "nav.bugs", href: "/bugs", icon: Bug },
+  { nameKey: "nav.testExecutions", href: "/test-executions", icon: PlayCircle },
+  { nameKey: "nav.aiAssistant", href: "/ai-assistant", icon: Bot, hidden: true },
 ];
 
+import LanguageToggle from "./LanguageToggle";
+
 export default function Layout({ children }: LayoutProps) {
+  const { t } = useTranslation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -124,7 +125,7 @@ export default function Layout({ children }: LayoutProps) {
                 const isActive = location.pathname === item.href;
                 return (
                   <Link
-                    key={item.name}
+                    key={item.nameKey}
                     to={item.href}
                     className={cn(
                       "flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors mb-1",
@@ -135,7 +136,7 @@ export default function Layout({ children }: LayoutProps) {
                     onClick={() => setSidebarOpen(false)}
                   >
                     <item.icon className="h-5 w-5" />
-                    <span>{item.name}</span>
+                    <span>{t(item.nameKey)}</span>
                   </Link>
                 );
               })}
@@ -179,7 +180,7 @@ export default function Layout({ children }: LayoutProps) {
               const isActive = location.pathname === item.href;
               return (
                 <Link
-                  key={item.name}
+                  key={item.nameKey}
                   to={item.href}
                   className={cn(
                     "flex items-center rounded-lg text-sm font-medium transition-colors mb-1",
@@ -190,10 +191,11 @@ export default function Layout({ children }: LayoutProps) {
                       ? "bg-sidebar-accent text-sidebar-accent-foreground [&_svg]:text-sidebar-primary"
                       : "text-muted-foreground hover:text-foreground hover:bg-sidebar-accent-hover dark:hover:bg-sidebar-accent-hover",
                   )}
-                  title={sidebarCollapsed ? item.name : undefined}
+                  title={sidebarCollapsed ? t(item.nameKey) : undefined}
+                  aria-label={sidebarCollapsed ? t(item.nameKey) : undefined}
                 >
                   <item.icon className="h-5 w-5" />
-                  {!sidebarCollapsed && <span>{item.name}</span>}
+                  {!sidebarCollapsed && <span>{t(item.nameKey)}</span>}
                 </Link>
               );
             })}
@@ -214,14 +216,14 @@ export default function Layout({ children }: LayoutProps) {
                 "w-full",
                 sidebarCollapsed ? "justify-center" : "justify-start",
               )}
-              title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              title={sidebarCollapsed ? t("nav.expand") : t("nav.collapse")}
             >
               {sidebarCollapsed ? (
                 <ChevronRight className="h-4 w-4" />
               ) : (
                 <>
                   <ChevronLeft className="h-4 w-4 mr-2" />
-                  <span>Collapse</span>
+                  <span>{t("nav.collapse")}</span>
                 </>
               )}
             </Button>
@@ -238,6 +240,7 @@ export default function Layout({ children }: LayoutProps) {
             size="icon"
             onClick={() => setSidebarOpen(true)}
             className="lg:hidden"
+            aria-label={t("nav.openMenu")}
           >
             <Menu className="h-5 w-5" />
           </Button>
@@ -248,12 +251,15 @@ export default function Layout({ children }: LayoutProps) {
                 Omega Testing
               </h1>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-1 sm:gap-2">
+              <LanguageToggle />
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={toggleDarkMode}
                 className="h-8 w-8"
+                title={darkMode ? t("theme.light") : t("theme.dark")}
+                aria-label={darkMode ? t("theme.light") : t("theme.dark")}
               >
                 {darkMode ? (
                   <Sun className="h-4 w-4" />
@@ -268,7 +274,7 @@ export default function Layout({ children }: LayoutProps) {
                 asChild
                 className="h-8 w-8"
               >
-                <Link to="/settings">
+                <Link to="/settings" aria-label={t("nav.settings")}>
                   <Settings className="h-4 w-4" />
                 </Link>
               </Button>
@@ -279,7 +285,7 @@ export default function Layout({ children }: LayoutProps) {
                 className="flex items-center gap-2"
               >
                 <RefreshCw className="h-4 w-4" />
-                Sync Project
+                {t("nav.syncProject")}
               </Button>
             </div>
           </div>

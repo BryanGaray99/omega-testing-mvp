@@ -27,6 +27,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { TestCase } from "@/components/types/testCase.types";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface TestCaseCardProps {
   testCase: TestCase;
@@ -49,6 +50,7 @@ export default function TestCaseCard({
   openDropdownId,
   setOpenDropdownId,
 }: TestCaseCardProps) {
+  const { t } = useTranslation();
   const { isExecuting, showExecuted, getSuiteExecutionId } = useExecution();
   
   // Obtener el executionId real para este test case, o usar el testCaseId como fallback
@@ -118,16 +120,15 @@ export default function TestCaseCard({
 
   const getExecutionStatusText = (lastRunStatus?: string, lastRun?: string) => {
     if (!lastRun) {
-      return "PENDING";
+      return t("testCases.statusPendingBadge");
     }
-    
     switch (lastRunStatus) {
       case "passed":
-        return "PASSED";
+        return t("testCases.statusPassedBadge");
       case "failed":
-        return "FAILED";
+        return t("testCases.statusFailedBadge");
       default:
-        return "UNKNOWN";
+        return t("testCases.statusUnknownBadge");
     }
   };
 
@@ -173,14 +174,14 @@ export default function TestCaseCard({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("testCases.actions")}</DropdownMenuLabel>
               <DropdownMenuItem onClick={() => onViewDetails(testCase)}>
                 <Eye className="mr-2 h-4 w-4" />
-                View Details
+                {t("testCases.viewDetails")}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => onEdit(testCase)}>
                 <Edit className="mr-2 h-4 w-4" />
-                Edit Test Case
+                {t("testCases.editTestCase")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -188,7 +189,7 @@ export default function TestCaseCard({
                 onClick={() => onDelete(testCase)}
               >
                 <Trash2 className="mr-2 h-4 w-4" />
-                Delete Test Case
+                {t("testCases.deleteTestCase")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -218,16 +219,16 @@ export default function TestCaseCard({
                </span>
              </div>
              <div className="flex justify-between text-sm">
-               <span className="text-muted-foreground">Section:</span>
+               <span className="text-muted-foreground">{t("testCases.sectionLabel")}</span>
                <span className="font-medium">{testCase.section}</span>
              </div>
              <div className="flex justify-between text-sm">
-               <span className="text-muted-foreground">Entity:</span>
+               <span className="text-muted-foreground">{t("testCases.entityLabel")}</span>
                <span className="font-medium">{testCase.entityName}</span>
              </div>
            </div>
            <div className="flex justify-between text-sm">
-             <span className="text-muted-foreground">Tags:</span>
+             <span className="text-muted-foreground">{t("testCases.tagsLabel")}</span>
              <div className="flex flex-wrap gap-1">
                {testCase.tags.map((tag) => (
                  <Badge key={tag} variant="secondary" className="text-xs">
@@ -272,7 +273,7 @@ export default function TestCaseCard({
                  onClick={handleNavigateToExecution}
                >
                  <ExternalLink className="h-4 w-4 mr-2" />
-                 View Execution
+                 {t("testCases.viewExecution")}
                </Button>
              ) : (
                <Button
@@ -283,7 +284,7 @@ export default function TestCaseCard({
                  disabled={isExecuting(executionId)}
                >
                  <Play className="h-4 w-4 mr-2" />
-                 {isExecuting(executionId) ? 'Executing...' : 'Run Test'}
+                 {isExecuting(executionId) ? t("testCases.executing") : t("testCases.runTest")}
                </Button>
              )}
            </div>

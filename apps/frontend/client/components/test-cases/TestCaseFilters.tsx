@@ -9,6 +9,7 @@ import {
 import { Search, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface ProjectOption {
   id: string;
@@ -99,13 +100,12 @@ export default function TestCaseFilters({
             </SelectContent>
           </Select>
 
-          {/* Section */}
           <Select value={sectionFilter} onValueChange={(v) => { setSectionFilter(v); setEntityFilter('all'); }}>
             <SelectTrigger className="w-[160px]">
-              <SelectValue placeholder="All Sections" />
+              <SelectValue placeholder={t("testCases.allSections")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Sections</SelectItem>
+              <SelectItem value="all">{t("testCases.allSections")}</SelectItem>
               {sections.map((s) => (
                 <SelectItem key={s} value={s}>{s}</SelectItem>
               ))}
@@ -125,52 +125,48 @@ export default function TestCaseFilters({
             </SelectContent>
           </Select>
 
-          {/* Method */}
           <Select value={methodFilter} onValueChange={setMethodFilter}>
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="All Methods" />
+              <SelectValue placeholder={t("testCases.allMethods")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Methods</SelectItem>
+              <SelectItem value="all">{t("testCases.allMethods")}</SelectItem>
               {methods.map((m) => (
                 <SelectItem key={m} value={m}>{m}</SelectItem>
               ))}
             </SelectContent>
           </Select>
 
-          {/* Execution Status */}
           <Select value={statusFilter} onValueChange={setStatusFilter}>
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="All Status" />
+              <SelectValue placeholder={t("testCases.allStatus")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="pending">Pending</SelectItem>
-              <SelectItem value="passed">Passed</SelectItem>
-              <SelectItem value="failed">Failed</SelectItem>
+              <SelectItem value="all">{t("testCases.allStatus")}</SelectItem>
+              <SelectItem value="pending">{t("testCases.statusPending")}</SelectItem>
+              <SelectItem value="passed">{t("testCases.statusPassed")}</SelectItem>
+              <SelectItem value="failed">{t("testCases.statusFailed")}</SelectItem>
             </SelectContent>
           </Select>
 
-          {/* Sort by */}
           <Select value={sortBy} onValueChange={(v) => setSortBy(v as any)}>
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="Created At" />
+              <SelectValue placeholder={t("testCases.sortCreatedAt")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="updatedAt">Update At</SelectItem>
-              <SelectItem value="createdAt">Created At</SelectItem>
-              <SelectItem value="lastRun">Last Run</SelectItem>
+              <SelectItem value="updatedAt">{t("testCases.sortUpdatedAt")}</SelectItem>
+              <SelectItem value="createdAt">{t("testCases.sortCreatedAt")}</SelectItem>
+              <SelectItem value="lastRun">{t("testCases.sortLastRun")}</SelectItem>
             </SelectContent>
           </Select>
 
-          {/* Sort order */}
           <Select value={sortOrder} onValueChange={(v) => setSortOrder(v as any)}>
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="Order" />
+              <SelectValue placeholder={t("testCases.sortOrder")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="desc">Desc</SelectItem>
-              <SelectItem value="asc">Asc</SelectItem>
+              <SelectItem value="desc">{t("testCases.orderDesc")}</SelectItem>
+              <SelectItem value="asc">{t("testCases.orderAsc")}</SelectItem>
             </SelectContent>
           </Select>
         </div>

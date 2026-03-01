@@ -5,8 +5,9 @@ import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import { ExecutionProvider } from "./contexts/ExecutionContext";
 import Layout from "./components/Layout";
 import SettingsLayout from "./components/SettingsLayout";
@@ -19,19 +20,12 @@ import TestCases from "./pages/TestCases";
 import TestSuites from "./pages/TestSuites";
 import Bugs from "./pages/Bugs";
 import TestExecutions from "./pages/TestExecutions";
-import Reports from "./pages/Reports";
-import Logs from "./pages/Logs";
 import AIAssistant from "./pages/AIAssistant";
-import Settings from "./pages/Settings";
-import ProfileSettings from "./pages/settings/Profile";
-import SecuritySettings from "./pages/settings/Security";
-import GitHubSettings from "./pages/settings/GitHub";
 import OpenAISettings from "./pages/settings/OpenAI";
-import TokensSettings from "./pages/settings/Tokens";
-import NotificationsSettings from "./pages/settings/Notifications";
 import AppearanceSettings from "./pages/settings/Appearance";
-import ExportSettings from "./pages/settings/Export";
 import DangerZoneSettings from "./pages/settings/DangerZone";
+import Documentation from "./pages/settings/Documentation";
+import TestsReport from "./pages/settings/TestsReport";
 import NotFound from "./pages/NotFound";
 import BackendLoaderOverlay from "./components/BackendLoaderOverlay";
 
@@ -40,6 +34,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
+      <LanguageProvider>
       <ExecutionProvider>
         <TooltipProvider>
         <BackendLoaderOverlay />
@@ -107,22 +102,6 @@ const App = () => (
               }
             />
             <Route
-              path="/reports"
-              element={
-                <Layout>
-                  <Reports />
-                </Layout>
-              }
-            />
-            <Route
-              path="/logs"
-              element={
-                <Layout>
-                  <Logs />
-                </Layout>
-              }
-            />
-            <Route
               path="/ai-assistant"
               element={
                 <Layout>
@@ -131,53 +110,13 @@ const App = () => (
               }
             />
 
-            {/* Settings Routes */}
-            <Route path="/settings" element={<Settings />} />
-            <Route
-              path="/settings/profile"
-              element={
-                <SettingsLayout>
-                  <ProfileSettings />
-                </SettingsLayout>
-              }
-            />
-            <Route
-              path="/settings/security"
-              element={
-                <SettingsLayout>
-                  <SecuritySettings />
-                </SettingsLayout>
-              }
-            />
-            <Route
-              path="/settings/github"
-              element={
-                <SettingsLayout>
-                  <GitHubSettings />
-                </SettingsLayout>
-              }
-            />
+            {/* Settings Routes - /settings redirects to OpenAI (full sidebar with Documentation, etc.) */}
+            <Route path="/settings" element={<Navigate to="/settings/documentation" replace />} />
             <Route
               path="/settings/openai"
               element={
                 <SettingsLayout>
                   <OpenAISettings />
-                </SettingsLayout>
-              }
-            />
-            <Route
-              path="/settings/tokens"
-              element={
-                <SettingsLayout>
-                  <TokensSettings />
-                </SettingsLayout>
-              }
-            />
-            <Route
-              path="/settings/notifications"
-              element={
-                <SettingsLayout>
-                  <NotificationsSettings />
                 </SettingsLayout>
               }
             />
@@ -190,18 +129,26 @@ const App = () => (
               }
             />
             <Route
-              path="/settings/export"
-              element={
-                <SettingsLayout>
-                  <ExportSettings />
-                </SettingsLayout>
-              }
-            />
-            <Route
               path="/settings/danger"
               element={
                 <SettingsLayout>
                   <DangerZoneSettings />
+                </SettingsLayout>
+              }
+            />
+            <Route
+              path="/settings/documentation"
+              element={
+                <SettingsLayout>
+                  <Documentation />
+                </SettingsLayout>
+              }
+            />
+            <Route
+              path="/settings/tests"
+              element={
+                <SettingsLayout>
+                  <TestsReport />
                 </SettingsLayout>
               }
             />
@@ -219,6 +166,7 @@ const App = () => (
         </BrowserRouter>
               </TooltipProvider>
       </ExecutionProvider>
+      </LanguageProvider>
     </AuthProvider>
   </QueryClientProvider>
 );

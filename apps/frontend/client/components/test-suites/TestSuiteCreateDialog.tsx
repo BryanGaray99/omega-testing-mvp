@@ -19,6 +19,8 @@ import {
 import { getProjectSectionsAndEntities, getProjectEntities } from "@/services/testCaseService";
 import { testSuiteService } from "@/services/testSuiteService";
 import { getMethodColor as getMethodColorClass } from "@/lib/colors";
+import { useTranslation } from "@/contexts/LanguageContext";
+import { replaceParams } from "@/lib/translations";
 
 interface ProjectOption {
   id: string;
@@ -56,6 +58,7 @@ export default function TestSuiteCreateDialog({
   projects,
   onCreateWithData,
 }: TestSuiteCreateDialogProps) {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("basic");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -130,8 +133,8 @@ export default function TestSuiteCreateDialog({
       setEntity(""); // Reset entity when project changes
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to load sections and entities",
+        title: t("common.error"),
+        description: t("suiteCreate.toastFailedSections"),
         variant: "destructive",
       });
     } finally {
@@ -147,8 +150,8 @@ export default function TestSuiteCreateDialog({
       setEntity(""); // Reset entity when section changes
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to load entities",
+        title: t("common.error"),
+        description: t("suiteCreate.toastFailedEntities"),
         variant: "destructive",
       });
     } finally {
@@ -168,8 +171,8 @@ export default function TestSuiteCreateDialog({
       setAvailableTestCases(filteredTestCases);
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to load test cases",
+        title: t("common.error"),
+        description: t("suiteCreate.toastFailedTestCases"),
         variant: "destructive",
       });
     } finally {
@@ -190,8 +193,8 @@ export default function TestSuiteCreateDialog({
         // Don't show error toast for 404 as it's expected when no test suites exist
       } else {
         toast({
-          title: "Error",
-          description: "Failed to load test suites",
+          title: t("common.error"),
+          description: t("suiteCreate.toastFailedTestSuites"),
           variant: "destructive",
         });
       }
@@ -246,8 +249,8 @@ export default function TestSuiteCreateDialog({
   const handleSubmit = async () => {
     if (!selectedProjectId) {
       toast({
-        title: "Validation Error",
-        description: "Project is required",
+        title: t("caseCreate.validationError"),
+        description: t("suiteCreate.validationProject"),
         variant: "destructive",
       });
       return;
@@ -255,8 +258,8 @@ export default function TestSuiteCreateDialog({
 
     if (!name.trim()) {
       toast({
-        title: "Validation Error",
-        description: "Test suite name is required",
+        title: t("caseCreate.validationError"),
+        description: t("suiteCreate.validationName"),
         variant: "destructive",
       });
       return;
@@ -264,8 +267,8 @@ export default function TestSuiteCreateDialog({
 
     if (!section) {
       toast({
-        title: "Validation Error",
-        description: "Section is required",
+        title: t("caseCreate.validationError"),
+        description: t("suiteCreate.validationSection"),
         variant: "destructive",
       });
       return;
@@ -273,8 +276,8 @@ export default function TestSuiteCreateDialog({
 
     if (type === 'test_set' && !entity) {
       toast({
-        title: "Validation Error",
-        description: "Entity is required for Test Set",
+        title: t("caseCreate.validationError"),
+        description: t("suiteCreate.validationEntity"),
         variant: "destructive",
       });
       return;
@@ -282,8 +285,8 @@ export default function TestSuiteCreateDialog({
 
     if (type === 'test_set' && selectedTestCases.length === 0) {
       toast({
-        title: "Validation Error",
-        description: "Please select at least one test case for Test Set",
+        title: t("caseCreate.validationError"),
+        description: t("suiteCreate.validationOneTestCase"),
         variant: "destructive",
       });
       return;
@@ -291,8 +294,8 @@ export default function TestSuiteCreateDialog({
 
     if (type === 'test_plan' && selectedTestSuites.length === 0) {
       toast({
-        title: "Validation Error",
-        description: "Please select at least one test suite for Test Plan",
+        title: t("caseCreate.validationError"),
+        description: t("suiteCreate.validationOneTestSuite"),
         variant: "destructive",
       });
       return;
@@ -315,8 +318,8 @@ export default function TestSuiteCreateDialog({
       handleClose();
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to create test suite",
+        title: t("common.error"),
+        description: t("suiteCreate.toastFailedCreate"),
         variant: "destructive",
       });
     } finally {
@@ -380,18 +383,18 @@ export default function TestSuiteCreateDialog({
         <DialogHeader className="flex-shrink-0">
           <DialogTitle className="flex items-center gap-2">
             <Layers className="h-5 w-5" />
-            Create Test Suite
+            {t("suiteCreate.title")}
           </DialogTitle>
           <DialogDescription>
-            Create a new test suite to organize and manage your test cases
+            {t("suiteCreate.description")}
           </DialogDescription>
         </DialogHeader>
 
         <div className="flex-1 min-h-0 flex flex-col">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col min-h-0">
             <TabsList className="grid w-full grid-cols-2 flex-shrink-0">
-              <TabsTrigger value="basic">Basic Information</TabsTrigger>
-              <TabsTrigger value="content">Content Selection</TabsTrigger>
+              <TabsTrigger value="basic">{t("suiteCreate.basicInfo")}</TabsTrigger>
+              <TabsTrigger value="content">{t("suiteCreate.contentSelection")}</TabsTrigger>
             </TabsList>
 
             <div className="flex-1 overflow-y-auto mt-4 pr-2 pb-4 min-h-0 max-h-[60vh]">
@@ -399,10 +402,10 @@ export default function TestSuiteCreateDialog({
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-3">
                     <div>
-                      <Label htmlFor="project">Project *</Label>
+                      <Label htmlFor="project">{t("suiteCreate.projectRequired")}</Label>
                       <Select value={selectedProjectId} onValueChange={setSelectedProjectId}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select project" />
+                          <SelectValue placeholder={t("suiteCreate.placeholderProject")} />
                         </SelectTrigger>
                         <SelectContent>
                           {projects.map((project) => (
@@ -415,24 +418,24 @@ export default function TestSuiteCreateDialog({
                     </div>
 
                     <div>
-                      <Label htmlFor="name">Name *</Label>
+                      <Label htmlFor="name">{t("suiteCreate.nameRequired")}</Label>
                       <Input
                         id="name"
-                        placeholder="Enter test suite name"
+                        placeholder={t("suiteCreate.placeholderName")}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="type">Type *</Label>
+                      <Label htmlFor="type">{t("suiteCreate.typeRequired")}</Label>
                       <Select value={type} onValueChange={(value: 'test_set' | 'test_plan') => setType(value)}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="test_set">Test Set</SelectItem>
-                          <SelectItem value="test_plan">Test Plan</SelectItem>
+                          <SelectItem value="test_set">{t("suiteCreate.typeTestSet")}</SelectItem>
+                          <SelectItem value="test_plan">{t("suiteCreate.typeTestPlan")}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -440,10 +443,10 @@ export default function TestSuiteCreateDialog({
 
                   <div className="space-y-3">
                     <div>
-                      <Label htmlFor="description">Description</Label>
+                      <Label htmlFor="description">{t("suiteCreate.descriptionLabel")}</Label>
                       <Textarea
                         id="description"
-                        placeholder="Describe the purpose of this test suite"
+                        placeholder={t("suiteCreate.placeholderDescription")}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         rows={4}
@@ -451,11 +454,11 @@ export default function TestSuiteCreateDialog({
                     </div>
 
                     <div>
-                      <Label htmlFor="tags">Tags</Label>
+                      <Label htmlFor="tags">{t("suiteCreate.tagsLabel")}</Label>
                       <div className="flex gap-2">
                         <Input
                           id="tags"
-                          placeholder="Add tag"
+                          placeholder={t("suiteCreate.placeholderTag")}
                           value={tagInput}
                           onChange={(e) => setTagInput(e.target.value)}
                           onKeyPress={(e) => {
@@ -505,10 +508,10 @@ export default function TestSuiteCreateDialog({
                 {/* Section and Entity row - below the tabs */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="section">Section *</Label>
+                    <Label htmlFor="section">{t("suiteCreate.sectionRequired")}</Label>
                     <Select value={section} onValueChange={setSection} disabled={isLoadingSections}>
                       <SelectTrigger>
-                        <SelectValue placeholder={isLoadingSections ? "Loading..." : "Select section"} />
+                        <SelectValue placeholder={isLoadingSections ? t("suiteCreate.loading") : t("suiteCreate.placeholderSection")} />
                       </SelectTrigger>
                       <SelectContent>
                         {availableSections.map((sectionName) => (
@@ -522,13 +525,13 @@ export default function TestSuiteCreateDialog({
 
                   {type === 'test_set' && (
                     <div>
-                      <Label htmlFor="entity">Entity *</Label>
+                      <Label htmlFor="entity">{t("suiteCreate.entityRequired")}</Label>
                       <Select value={entity} onValueChange={setEntity} disabled={!section || isLoadingEntities}>
                         <SelectTrigger>
                           <SelectValue placeholder={
-                            !section ? "Select section first" : 
-                            isLoadingEntities ? "Loading entities..." : 
-                            "Select entity"
+                            !section ? t("suiteCreate.selectSectionFirst") : 
+                            isLoadingEntities ? t("suiteCreate.loadingEntities") : 
+                            t("suiteCreate.placeholderEntity")
                           } />
                         </SelectTrigger>
                         <SelectContent>
@@ -549,18 +552,18 @@ export default function TestSuiteCreateDialog({
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-lg font-semibold">Select Test Cases</h3>
+                        <h3 className="text-lg font-semibold">{t("suiteCreate.selectTestCases")}</h3>
                         <p className="text-sm text-muted-foreground">
-                          Choose test cases for {section} - {entity}
+                          {replaceParams(t("suiteCreate.chooseTestCasesFor"), { section, entity })}
                         </p>
                       </div>
                       <div className="flex items-center gap-2">
                         <Select value={methodFilter} onValueChange={setMethodFilter}>
                           <SelectTrigger className="w-32">
-                            <SelectValue placeholder="Method" />
+                            <SelectValue placeholder={t("suiteCreate.methodPlaceholder")} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="all">All Methods</SelectItem>
+                            <SelectItem value="all">{t("suiteCreate.allMethods")}</SelectItem>
                             {availableMethods.map((method) => (
                               <SelectItem key={method} value={method}>
                                 {method}
@@ -571,10 +574,10 @@ export default function TestSuiteCreateDialog({
 
                         <Select value={testTypeFilter} onValueChange={setTestTypeFilter}>
                           <SelectTrigger className="w-32">
-                            <SelectValue placeholder="Type" />
+                            <SelectValue placeholder={t("suiteCreate.typePlaceholder")} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="all">All Types</SelectItem>
+                            <SelectItem value="all">{t("suiteCreate.allTypes")}</SelectItem>
                             {availableTestTypes.map((testType) => (
                               <SelectItem key={testType} value={testType}>
                                 {testType}
@@ -590,7 +593,7 @@ export default function TestSuiteCreateDialog({
                         <CardContent className="p-6 text-center">
                           <FileText className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
                           <p className="text-sm text-muted-foreground">
-                            Please select a project first.
+                            {t("suiteCreate.selectProjectFirst")}
                           </p>
                         </CardContent>
                       </Card>
@@ -599,7 +602,7 @@ export default function TestSuiteCreateDialog({
                         <CardContent className="p-6 text-center">
                           <FileText className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
                           <p className="text-sm text-muted-foreground">
-                            Please select Section and Entity in Basic Information to load available test cases.
+                            {t("suiteCreate.selectSectionEntityFirst")}
                           </p>
                         </CardContent>
                       </Card>
@@ -607,7 +610,7 @@ export default function TestSuiteCreateDialog({
                       <Card>
                         <CardContent className="p-6 text-center">
                           <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2" />
-                          <p className="text-sm">Loading test cases...</p>
+                          <p className="text-sm">{t("suiteCreate.loadingTestCases")}</p>
                         </CardContent>
                       </Card>
                     ) : (
@@ -619,10 +622,10 @@ export default function TestSuiteCreateDialog({
                                 checked={selectedTestCases.length === filteredTestCases.length && filteredTestCases.length > 0}
                                 onCheckedChange={handleSelectAllTestCases}
                               />
-                              <span className="font-medium">Select All</span>
+                              <span className="font-medium">{t("suiteCreate.selectAll")}</span>
                             </div>
                             <Badge variant="secondary">
-                              {selectedTestCases.length} selected
+                              {replaceParams(t("suiteCreate.selected"), { count: String(selectedTestCases.length) })}
                             </Badge>
                           </div>
                         </CardHeader>
@@ -663,13 +666,13 @@ export default function TestSuiteCreateDialog({
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-lg font-semibold">Select Test Sets</h3>
+                        <h3 className="text-lg font-semibold">{t("suiteCreate.selectTestSets")}</h3>
                         <p className="text-sm text-muted-foreground">
-                          Choose test sets to include in this test plan
+                          {t("suiteCreate.chooseTestSets")}
                         </p>
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        {selectedTestSuites.length} of {availableTestSuites.length} selected
+                        {replaceParams(t("suiteCreate.ofSelected"), { selected: String(selectedTestSuites.length), total: String(availableTestSuites.length) })}
                       </div>
                     </div>
 
@@ -678,7 +681,7 @@ export default function TestSuiteCreateDialog({
                         <CardContent className="p-6 text-center">
                           <FileText className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
                           <p className="text-sm text-muted-foreground">
-                            Please select a project first.
+                            {t("suiteCreate.selectProjectFirst")}
                           </p>
                         </CardContent>
                       </Card>
@@ -686,7 +689,7 @@ export default function TestSuiteCreateDialog({
                       <Card>
                         <CardContent className="p-6 text-center">
                           <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2" />
-                          <p className="text-sm">Loading test suites...</p>
+                          <p className="text-sm">{t("suiteCreate.loadingTestSuites")}</p>
                         </CardContent>
                       </Card>
                     ) : (
@@ -698,10 +701,10 @@ export default function TestSuiteCreateDialog({
                                 checked={selectedTestSuites.length === availableTestSuites.length && availableTestSuites.length > 0}
                                 onCheckedChange={handleSelectAllTestSuites}
                               />
-                              <span className="font-medium">Select All</span>
+                              <span className="font-medium">{t("suiteCreate.selectAll")}</span>
                             </div>
                             <Badge variant="secondary">
-                              {selectedTestSuites.length} selected
+                              {replaceParams(t("suiteCreate.selected"), { count: String(selectedTestSuites.length) })}
                             </Badge>
                           </div>
                         </CardHeader>
@@ -734,18 +737,18 @@ export default function TestSuiteCreateDialog({
 
         <DialogFooter className="flex-shrink-0 mt-4">
           <Button variant="outline" onClick={handleClose} disabled={isSubmitting}>
-            Cancel
+            {t("common.cancel")}
           </Button>
           <Button onClick={handleSubmit} disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Creating...
+                {t("suiteCreate.creating")}
               </>
             ) : (
               <>
                 <Plus className="h-4 w-4 mr-2" />
-                Create Test Suite
+                {t("suiteCreate.createButton")}
               </>
             )}
           </Button>

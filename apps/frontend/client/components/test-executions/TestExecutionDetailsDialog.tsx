@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from '@/contexts/LanguageContext';
+import { replaceParams } from '@/lib/translations';
 import {
   Dialog,
   DialogContent,
@@ -65,6 +67,7 @@ export default function TestExecutionDetailsDialog({
   onNavigateToTestCase,
   onNavigateToTestSuite,
 }: TestExecutionDetailsDialogProps) {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('execution-info');
   const [expandedResults, setExpandedResults] = useState<Set<string>>(new Set());
 
@@ -213,19 +216,19 @@ export default function TestExecutionDetailsDialog({
     };
 
     if (!steps || steps.length === 0) {
-      return <p className="text-sm text-muted-foreground">No steps data available</p>;
+      return <p className="text-sm text-muted-foreground">{t("exec.noStepsData")}</p>;
     }
 
     return (
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Step Name</TableHead>
-            <TableHead>Type</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Duration</TableHead>
-            <TableHead>Timestamp</TableHead>
-            <TableHead>Error Message</TableHead>
+            <TableHead>{t("exec.stepName")}</TableHead>
+            <TableHead>{t("exec.type")}</TableHead>
+            <TableHead>{t("exec.status")}</TableHead>
+            <TableHead>{t("exec.durationCol")}</TableHead>
+            <TableHead>{t("exec.timestamp")}</TableHead>
+            <TableHead>{t("exec.errorMessageCol")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -237,7 +240,7 @@ export default function TestExecutionDetailsDialog({
                 <div className="flex items-center gap-2">
                   {step.isHook ? (
                     <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1E3A8A] dark:text-[#93C5FD] dark:border-[#1D4ED8]">
-                      {step.hookType || 'Hook'}
+                      {step.hookType || t("exec.hook")}
                     </Badge>
                   ) : null}
                   {step.stepName}
@@ -246,11 +249,11 @@ export default function TestExecutionDetailsDialog({
               <TableCell>
                 {step.isHook ? (
                   <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1E3A8A] dark:text-[#93C5FD] dark:border-[#1D4ED8]">
-                    Hook
+                    {t("exec.hook")}
                   </Badge>
                 ) : (
                   <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200 dark:bg-[#052E26] dark:text-[#34D399] dark:border-[#065F46]">
-                    Step
+                    {t("exec.step")}
                   </Badge>
                 )}
               </TableCell>
@@ -285,7 +288,7 @@ export default function TestExecutionDetailsDialog({
                         ) : (
                           <ChevronRight className="h-3 w-3" />
                         )}
-                        <span className="text-xs">View Error</span>
+                        <span className="text-xs">{t("exec.viewError")}</span>
                       </div>
                     </Button>
                     {expandedErrors.has(index) && (
@@ -314,50 +317,50 @@ export default function TestExecutionDetailsDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Play className="h-5 w-5" />
-            Test Execution Details
+            {t("exec.detailsTitle")}
           </DialogTitle>
           <DialogDescription>
-            Execution ID: {execution.executionId}
+            {t("exec.detailsExecutionId")} {execution.executionId}
           </DialogDescription>
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="execution-info">Execution Info</TabsTrigger>
-            <TabsTrigger value="test-results">Test Results</TabsTrigger>
-            <TabsTrigger value="steps-details">Steps Details</TabsTrigger>
+            <TabsTrigger value="execution-info">{t("exec.tabExecutionInfo")}</TabsTrigger>
+            <TabsTrigger value="test-results">{t("exec.tabTestResults")}</TabsTrigger>
+            <TabsTrigger value="steps-details">{t("exec.tabStepsDetails")}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="execution-info" className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               {/* Execution Details */}
               <div className="border rounded-lg p-3">
-                <h4 className="font-medium mb-2">Execution Information</h4>
+                <h4 className="font-medium mb-2">{t("exec.executionInformation")}</h4>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Status:</span>
+                    <span className="text-sm font-medium">{t("exec.statusColon")}</span>
                     <Badge variant="outline" className={getStatusColor(execution.status)}>
                       {getStatusIcon(execution.status)}
                       <span className="ml-1">{execution.status.toUpperCase()}</span>
                     </Badge>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Entity:</span>
+                    <span className="text-sm font-medium">{t("exec.entityColon")}</span>
                     <span className="text-sm">{execution.entityName}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Section:</span>
+                    <span className="text-sm font-medium">{t("exec.sectionColon")}</span>
                     <span className="text-sm">{execution.section || 'N/A'}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Feature:</span>
+                    <span className="text-sm font-medium">{t("exec.featureColon")}</span>
                     <span className="text-sm">{execution.feature || 'N/A'}</span>
                   </div>
                   {execution.totalScenarios === 1 ? (
                     // For individual test cases
                     <>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium">Test Case ID:</span>
+                        <span className="text-sm font-medium">{t("exec.testCaseIdColon")}</span>
                         <span className="text-sm">
                           {execution.testCaseId && execution.testCaseId !== 'N/A' ? (
                             <TooltipProvider>
@@ -372,7 +375,7 @@ export default function TestExecutionDetailsDialog({
                                   </button>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                  <p>Navigate to Test Case</p>
+                                  <p>{t("exec.navigateToTestCase")}</p>
                                 </TooltipContent>
                               </Tooltip>
                             </TooltipProvider>
@@ -384,7 +387,7 @@ export default function TestExecutionDetailsDialog({
 
                       {execution.scenarioName && (
                         <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium">Scenario:</span>
+                          <span className="text-sm font-medium">{t("exec.scenarioColon")}</span>
                           <span className="text-sm">{execution.scenarioName}</span>
                         </div>
                       )}
@@ -393,16 +396,16 @@ export default function TestExecutionDetailsDialog({
                     // For test suites
                     <>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium">Type:</span>
-                        <span className="text-sm">Test Suite</span>
+                        <span className="text-sm font-medium">{t("exec.typeColon")}</span>
+                        <span className="text-sm">{t("exec.testSuite")}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium">Scenarios:</span>
-                        <span className="text-sm">{execution.totalScenarios} scenarios</span>
+                        <span className="text-sm font-medium">{t("exec.scenariosColon")}</span>
+                        <span className="text-sm">{replaceParams(t("exec.scenariosCount"), { count: String(execution.totalScenarios) })}</span>
                       </div>
                       {execution.specificScenario && (
                         <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium">Scenarios List:</span>
+                          <span className="text-sm font-medium">{t("exec.scenariosList")}</span>
                           <span className="text-sm text-right max-w-xs">
                             {execution.specificScenario.split(',').map((scenario, index) => (
                               <div key={index} className="text-xs text-muted-foreground">
@@ -413,7 +416,7 @@ export default function TestExecutionDetailsDialog({
                         </div>
                       )}
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium">Test Suite ID:</span>
+                        <span className="text-sm font-medium">{t("exec.testSuiteIdColon")}</span>
                         <span className="text-sm">
                           {execution.testSuiteId && execution.testSuiteId !== 'N/A' ? (
                             <TooltipProvider>
@@ -428,7 +431,7 @@ export default function TestExecutionDetailsDialog({
                                   </button>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                  <p>Navigate to Test Suite</p>
+                                  <p>{t("exec.navigateToTestSuite")}</p>
                                 </TooltipContent>
                               </Tooltip>
                             </TooltipProvider>
@@ -444,51 +447,51 @@ export default function TestExecutionDetailsDialog({
 
               {/* Statistics */}
               <div className="border rounded-lg p-3">
-                <h4 className="font-medium mb-2">Statistics</h4>
+                <h4 className="font-medium mb-2">{t("exec.statistics")}</h4>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Total Scenarios:</span>
+                    <span className="text-sm font-medium">{t("exec.totalScenariosColon")}</span>
                     <span className="text-sm font-bold">{execution.totalScenarios}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Passed:</span>
+                    <span className="text-sm font-medium">{t("exec.passedColon")}</span>
                     <span className="text-sm font-bold text-green-600 dark:text-[#34D399]">{execution.passedScenarios}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Failed:</span>
+                    <span className="text-sm font-medium">{t("exec.failedColon")}</span>
                     <span className="text-sm font-bold text-red-600 dark:text-[#F87171]">{execution.failedScenarios}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Success Rate:</span>
+                    <span className="text-sm font-medium">{t("exec.successRateColon")}</span>
                     <span className="text-sm font-bold">{getSuccessRate()}%</span>
                   </div>
                   {execution.totalSteps && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">Total Steps:</span>
+                      <span className="text-sm font-medium">{t("exec.totalStepsColon")}</span>
                       <span className="text-sm font-bold">{execution.totalSteps}</span>
                     </div>
                   )}
                   {execution.passedSteps !== undefined && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">Steps Passed:</span>
+                      <span className="text-sm font-medium">{t("exec.stepsPassed")}</span>
                       <span className="text-sm font-bold text-green-600 dark:text-[#34D399]">{execution.passedSteps}</span>
                     </div>
                   )}
                   {execution.failedSteps !== undefined && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">Steps Failed:</span>
+                      <span className="text-sm font-medium">{t("exec.stepsFailed")}</span>
                       <span className="text-sm font-bold text-red-600 dark:text-[#F87171]">{execution.failedSteps}</span>
                     </div>
                   )}
                   {execution.stepSuccessRate !== undefined && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">Step Success Rate:</span>
+                      <span className="text-sm font-medium">{t("exec.stepSuccessRateColon")}</span>
                       <span className="text-sm font-bold">{execution.stepSuccessRate}%</span>
                     </div>
                   )}
                   {execution.executionTime > 0 && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">Duration:</span>
+                      <span className="text-sm font-medium">{t("exec.durationColon")}</span>
                       <span className="text-sm">{formatDuration(execution.executionTime)}</span>
                     </div>
                   )}
@@ -498,15 +501,15 @@ export default function TestExecutionDetailsDialog({
 
             {/* Timestamps */}
             <div className="border rounded-lg p-3">
-              <h4 className="font-medium mb-2">Timestamps</h4>
+              <h4 className="font-medium mb-2">{t("exec.timestamps")}</h4>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <span className="text-sm font-medium">Started At:</span>
+                  <span className="text-sm font-medium">{t("exec.startedAtColon")}</span>
                   <p className="text-sm">{formatDate(execution.startedAt)}</p>
                 </div>
                 {execution.completedAt && (
                   <div>
-                    <span className="text-sm font-medium">Completed At:</span>
+                    <span className="text-sm font-medium">{t("exec.completedAtColon")}</span>
                     <p className="text-sm">{formatDate(execution.completedAt)}</p>
                   </div>
                 )}
@@ -516,7 +519,7 @@ export default function TestExecutionDetailsDialog({
             {/* Error Message */}
             {execution.errorMessage && (
               <div className="border rounded-lg p-3">
-                <h4 className="font-medium mb-2">Error Message</h4>
+                <h4 className="font-medium mb-2">{t("exec.errorMessage")}</h4>
                 <div className="text-sm bg-red-50 border border-red-200 rounded p-2 dark:bg-[#3F1D1D] dark:border-[#7F1D1D] dark:text-[#FCA5A5]">
                   {execution.errorMessage}
                 </div>
@@ -526,7 +529,7 @@ export default function TestExecutionDetailsDialog({
             {/* Metadata */}
             {execution.metadata && (
               <div className="border rounded-lg p-3">
-                <h4 className="font-medium mb-2">Metadata</h4>
+                <h4 className="font-medium mb-2">{t("exec.metadata")}</h4>
                 <div className="text-sm bg-muted rounded p-2 font-mono">
                   <pre className="whitespace-pre-wrap">
                     {typeof execution.metadata === 'string' 
@@ -540,29 +543,29 @@ export default function TestExecutionDetailsDialog({
 
           <TabsContent value="test-results" className="space-y-3">
             <div className="border rounded-lg p-3">
-              <h4 className="font-medium mb-2">Test Results</h4>
+              <h4 className="font-medium mb-2">{t("exec.tabTestResults")}</h4>
               {!hasTestResultsData ? (
-                <div className="text-center py-4 text-muted-foreground">No test results found</div>
+                <div className="text-center py-4 text-muted-foreground">{t("exec.noTestResults")}</div>
               ) : (
                 <div className="space-y-4">
                   {execution.totalScenarios === 1 ? (
                     // For individual test cases
                     <div className="border rounded-lg p-3">
-                      <h5 className="font-medium mb-2">Scenario: {execution?.scenarioName}</h5>
+                      <h5 className="font-medium mb-2">{t("exec.scenarioLabel")} {execution?.scenarioName}</h5>
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <span className="font-medium">Status:</span>
+                          <span className="font-medium">{t("exec.statusColon")}</span>
                           <Badge variant="outline" className={`ml-2 ${getStatusColor(execution?.status || TestExecutionStatus.PENDING)}`}>
                             {getStatusIcon(execution?.status || TestExecutionStatus.PENDING)}
                             <span className="ml-1">{execution?.status?.toUpperCase()}</span>
                           </Badge>
                         </div>
                         <div>
-                          <span className="font-medium">Duration:</span>
+                          <span className="font-medium">{t("exec.durationColon")}</span>
                           <span className="ml-2">{formatDuration(execution?.executionTime || 0)}</span>
                         </div>
                         <div>
-                          <span className="font-medium">Test Case ID:</span>
+                          <span className="font-medium">{t("exec.testCaseIdColon")}</span>
                           <span className="ml-2">
                             {execution?.testCaseId && execution.testCaseId !== 'N/A' ? (
                               <TooltipProvider>
@@ -577,7 +580,7 @@ export default function TestExecutionDetailsDialog({
                                     </button>
                                   </TooltipTrigger>
                                   <TooltipContent>
-                                    <p>Navigate to Test Case</p>
+                                    <p>{t("exec.navigateToTestCase")}</p>
                                   </TooltipContent>
                                 </Tooltip>
                               </TooltipProvider>
@@ -587,7 +590,7 @@ export default function TestExecutionDetailsDialog({
                           </span>
                         </div>
                         <div>
-                          <span className="font-medium">Method:</span>
+                          <span className="font-medium">{t("exec.method")}</span>
                           <span className="ml-2">{execution?.testCaseMethod || execution?.method || 'N/A'}</span>
                         </div>
                       </div>
@@ -595,7 +598,7 @@ export default function TestExecutionDetailsDialog({
                       {/* Error Message */}
                       {execution?.errorMessage && (
                         <div className="mt-3">
-                          <span className="text-sm font-medium">Error:</span>
+                          <span className="text-sm font-medium">{t("exec.errorMessage")}</span>
                           <div className="text-sm bg-red-50 border border-red-200 rounded p-2 mt-1 dark:bg-[#3F1D1D] dark:border-[#7F1D1D] dark:text-[#FCA5A5]">
                             {execution.errorMessage}
                           </div>
@@ -606,29 +609,29 @@ export default function TestExecutionDetailsDialog({
                     // For test suites
                     <div className="space-y-3">
                       <div className="border rounded-lg p-3">
-                        <h5 className="font-medium mb-2">Test Suite Summary</h5>
+                        <h5 className="font-medium mb-2">{t("exec.testSuiteSummary")}</h5>
                         <div className="grid grid-cols-2 gap-4 text-sm">
                           <div>
-                            <span className="font-medium">Status:</span>
+                            <span className="font-medium">{t("exec.statusColon")}</span>
                             <Badge variant="outline" className={`ml-2 ${getStatusColor(execution?.status || TestExecutionStatus.PENDING)}`}>
                               {getStatusIcon(execution?.status || TestExecutionStatus.PENDING)}
                               <span className="ml-1">{execution?.status?.toUpperCase()}</span>
                             </Badge>
                           </div>
                           <div>
-                            <span className="font-medium">Duration:</span>
+                            <span className="font-medium">{t("exec.durationColon")}</span>
                             <span className="ml-2">{formatDuration(execution?.executionTime || 0)}</span>
                           </div>
                           <div>
-                            <span className="font-medium">Total Scenarios:</span>
+                            <span className="font-medium">{t("exec.totalScenariosColon")}</span>
                             <span className="ml-2">{execution?.totalScenarios}</span>
                           </div>
                           <div>
-                            <span className="font-medium">Success Rate:</span>
+                            <span className="font-medium">{t("exec.successRateColon")}</span>
                             <span className="ml-2">{getSuccessRate()}%</span>
                           </div>
                           <div>
-                            <span className="font-medium">Test Suite ID:</span>
+                            <span className="font-medium">{t("exec.testSuiteIdColon")}</span>
                             <span className="ml-2">
                               {execution?.testSuiteId && execution.testSuiteId !== 'N/A' ? (
                                 <TooltipProvider>
@@ -643,7 +646,7 @@ export default function TestExecutionDetailsDialog({
                                       </button>
                                     </TooltipTrigger>
                                     <TooltipContent>
-                                      <p>Navigate to Test Suite</p>
+                                      <p>{t("exec.navigateToTestSuite")}</p>
                                     </TooltipContent>
                                   </Tooltip>
                                 </TooltipProvider>
@@ -658,13 +661,13 @@ export default function TestExecutionDetailsDialog({
                       {/* Individual Scenarios */}
                       {execution.specificScenario && (
                         <div className="space-y-2">
-                          <h6 className="font-medium text-sm">Individual Scenarios:</h6>
+                          <h6 className="font-medium text-sm">{t("exec.individualScenarios")}</h6>
                           {execution.specificScenario.split(',').map((scenarioName, index) => (
                             <div key={index} className="border rounded p-2 bg-gray-50 dark:bg-[#1E293B]">
                               <div className="flex items-center justify-between">
                                 <span className="text-sm font-medium">{scenarioName.trim()}</span>
                                 <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200 dark:bg-[#052E26] dark:text-[#34D399] dark:border-[#065F46]">
-                                  Passed
+                                  {t("exec.passed")}
                                 </Badge>
                               </div>
                             </div>
@@ -675,7 +678,7 @@ export default function TestExecutionDetailsDialog({
                       {/* Error Message */}
                       {execution?.errorMessage && (
                         <div className="mt-3">
-                          <span className="text-sm font-medium">Error:</span>
+                          <span className="text-sm font-medium">{t("exec.errorMessage")}</span>
                           <div className="text-sm bg-red-50 border border-red-200 rounded p-2 mt-1 dark:bg-[#3F1D1D] dark:border-[#7F1D1D] dark:text-[#FCA5A5]">
                             {execution.errorMessage}
                           </div>
@@ -690,9 +693,9 @@ export default function TestExecutionDetailsDialog({
 
           <TabsContent value="steps-details" className="space-y-3">
             <div className="border rounded-lg p-3">
-              <h4 className="font-medium mb-2">Steps Details</h4>
+              <h4 className="font-medium mb-2">{t("exec.stepsDetails")}</h4>
               {!hasExecutionData ? (
-                <div className="text-center py-4 text-muted-foreground">No steps details found</div>
+                <div className="text-center py-4 text-muted-foreground">{t("exec.noStepsDetails")}</div>
               ) : (
                  <div className="space-y-4">
                    {/* Usar la nueva estructura anidada para TODOS los casos */}
@@ -706,7 +709,7 @@ export default function TestExecutionDetailsDialog({
                                  <ChevronRight className="h-4 w-4" />
                                  <span className="font-medium">{scenario.scenarioName}</span>
                                  <Badge variant="outline" className="text-xs">
-                                   {scenario.examples.length} {scenario.examples.length === 1 ? 'Example' : 'Examples'}
+                                   {scenario.examples.length} {scenario.examples.length === 1 ? t("exec.example") : t("exec.examples")}
                                  </Badge>
                                </div>
                              </Button>
@@ -728,7 +731,7 @@ export default function TestExecutionDetailsDialog({
                                              {example.status}
                                            </Badge>
                                            <Badge variant="outline" className="text-xs">
-                                             {example.steps.length} steps
+                                             {replaceParams(t("exec.stepsCount"), { count: String(example.steps.length) })}
                                            </Badge>
                                          </div>
                                        </div>
@@ -747,7 +750,7 @@ export default function TestExecutionDetailsDialog({
                    ) : (
                      // Fallback para casos sin estructura anidada (datos antiguos)
                      <div className="border rounded p-3">
-                       <h5 className="font-medium mb-2">{execution?.scenarioName || 'Steps'}</h5>
+                       <h5 className="font-medium mb-2">{execution?.scenarioName || t("exec.stepsDetails")}</h5>
                        <StepsTable steps={execution?.allSteps || []} />
                      </div>
                    )}

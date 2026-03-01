@@ -9,8 +9,10 @@ import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 export default function Projects() {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const {
     // State
@@ -70,14 +72,14 @@ export default function Projects() {
       <div className="p-6 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Projects</h1>
+            <h1 className="text-3xl font-bold text-foreground">{t("projects.title")}</h1>
             <p className="mt-2 text-muted-foreground">
-              Manage your testing projects and configurations
+              {t("projects.subtitle")}
             </p>
           </div>
         </div>
         <div className="text-center py-12">
-          <p className="text-muted-foreground">Loading projects...</p>
+          <p className="text-muted-foreground">{t("projects.loading")}</p>
         </div>
       </div>
     );
@@ -88,12 +90,11 @@ export default function Projects() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Projects</h1>
+          <h1 className="text-3xl font-bold text-foreground">{t("projects.title")}</h1>
           <p className="mt-2 text-muted-foreground">
-            Manage your testing projects and configurations
+            {t("projects.subtitle")}
           </p>
         </div>
-        {/* Contenedor de botones alineados a la derecha */}
         <div className="flex flex-row gap-2 ml-auto">
           <Button
             variant="outline"
@@ -105,7 +106,7 @@ export default function Projects() {
             ) : (
               <RefreshCw className="h-4 w-4 mr-2" />
             )}
-            {isRefreshing ? "Refreshing..." : "Refresh Data"}
+            {isRefreshing ? t("projects.refreshing") : t("projects.refreshData")}
           </Button>
           <ProjectRegisterDialog
             isOpen={isCreateDialogOpen}

@@ -26,6 +26,8 @@ import { CreateBugDto, BugType, BugSeverity, BugPriority, FailedExecution } from
 import { getProjectSectionsAndEntities, getProjectEntities } from "@/services/testCaseService";
 import { testSuiteService } from "@/services/testSuiteService";
 import { bugService } from "@/services/bugService";
+import { useTranslation } from "@/contexts/LanguageContext";
+import { replaceParams } from "@/lib/translations";
 
 interface ProjectOption {
   id: string;
@@ -60,6 +62,7 @@ export default function BugCreateDialog({
   onCreateBug,
   isCreating,
 }: BugCreateDialogProps) {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("basic");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -136,8 +139,8 @@ export default function BugCreateDialog({
       setSelectedTestCase(null);
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to load sections and entities",
+        title: t("common.error"),
+        description: t("bugs.toastFailedSections"),
         variant: "destructive",
       });
     } finally {
@@ -155,8 +158,8 @@ export default function BugCreateDialog({
       setSelectedTestCase(null);
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to load entities",
+        title: t("common.error"),
+        description: t("bugs.toastFailedEntities"),
         variant: "destructive",
       });
     } finally {
@@ -176,8 +179,8 @@ export default function BugCreateDialog({
       setSelectedTestCase(null);
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to load test cases",
+        title: t("common.error"),
+        description: t("bugs.toastFailedTestCases"),
         variant: "destructive",
       });
     } finally {
@@ -196,8 +199,8 @@ export default function BugCreateDialog({
       setSelectedExecution(null);
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to load failed executions",
+        title: t("common.error"),
+        description: t("bugs.toastFailedExecutions"),
         variant: "destructive",
       });
     } finally {
@@ -208,7 +211,7 @@ export default function BugCreateDialog({
   const handleTestCaseSelect = (testCaseId: string) => {
     const testCase = availableTestCases.find(tc => tc.testCaseId === testCaseId);
     if (testCase) {
-      setSelectedTestCaseId((testCase as any)?.id || "");
+      setSelectedTestCaseId(testCase.testCaseId);
       setSelectedTestCase(testCase);
     }
   };
@@ -247,8 +250,8 @@ export default function BugCreateDialog({
   const handleSubmit = async () => {
     if (!title.trim() || !description.trim()) {
       toast({
-        title: "Validation Error",
-        description: "Please fill in title and description",
+        title: t("caseCreate.validationError"),
+        description: t("bugs.toastValidation"),
         variant: "destructive",
       });
       return;
@@ -315,19 +318,19 @@ export default function BugCreateDialog({
         <DialogHeader className="flex-shrink-0">
           <DialogTitle className="flex items-center gap-2">
             <Bug className="h-5 w-5" />
-            Create Bug Report
+            {t("bugs.createTitle")}
           </DialogTitle>
           <DialogDescription>
-            Create a new bug report with detailed information about the issue
+            {t("bugs.createDescription")}
           </DialogDescription>
         </DialogHeader>
 
         <div className="flex-1 min-h-0 flex flex-col">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col min-h-0">
             <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
-              <TabsTrigger value="basic">Basic Info</TabsTrigger>
-              <TabsTrigger value="errors">Error Details</TabsTrigger>
-              <TabsTrigger value="context">Context</TabsTrigger>
+              <TabsTrigger value="basic">{t("bugs.tabBasicInfo")}</TabsTrigger>
+              <TabsTrigger value="errors">{t("bugs.tabErrorDetails")}</TabsTrigger>
+              <TabsTrigger value="context">{t("bugs.tabContext")}</TabsTrigger>
             </TabsList>
 
             <div className="flex-1 overflow-y-auto mt-4 pr-2 pb-4 min-h-0 max-h-[60vh]">
@@ -338,29 +341,29 @@ export default function BugCreateDialog({
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-4">
                       <div>
-                        <Label htmlFor="title">Title *</Label>
+                        <Label htmlFor="title">{t("bugs.labelTitle")}</Label>
                         <Input
                           id="title"
-                          placeholder="Enter bug title"
+                          placeholder={t("bugs.placeholderTitle")}
                           value={title}
                           onChange={(e) => setTitle(e.target.value)}
                         />
                       </div>
                       <div>
-                        <Label htmlFor="environment">Environment</Label>
+                        <Label htmlFor="environment">{t("bugs.labelEnvironment")}</Label>
                         <Input
                           id="environment"
-                          placeholder="e.g., development, staging, production"
+                          placeholder={t("bugs.placeholderEnvironment")}
                           value={environment}
                           onChange={(e) => setEnvironment(e.target.value)}
                         />
                       </div>
                     </div>
                     <div>
-                      <Label htmlFor="description">Description *</Label>
+                      <Label htmlFor="description">{t("bugs.labelDescription")}</Label>
                       <Textarea
                         id="description"
-                        placeholder="Describe the bug in detail"
+                        placeholder={t("bugs.placeholderDescription")}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         rows={6}
@@ -371,44 +374,44 @@ export default function BugCreateDialog({
                   {/* Type, Severity, Priority row */}
                   <div className="grid grid-cols-3 gap-4">
                     <div>
-                      <Label htmlFor="type">Type *</Label>
+                      <Label htmlFor="type">{t("bugs.labelType")}</Label>
                       <Select value={type} onValueChange={(value: BugType) => setType(value)}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value={BugType.SYSTEM_BUG}>System Bug</SelectItem>
-                          <SelectItem value={BugType.FRAMEWORK_ERROR}>Framework Error</SelectItem>
-                          <SelectItem value={BugType.TEST_FAILURE}>Test Failure</SelectItem>
-                          <SelectItem value={BugType.ENVIRONMENT_ISSUE}>Environment Issue</SelectItem>
+                          <SelectItem value={BugType.SYSTEM_BUG}>{t("bugs.typeSystemBug")}</SelectItem>
+                          <SelectItem value={BugType.FRAMEWORK_ERROR}>{t("bugs.typeFrameworkError")}</SelectItem>
+                          <SelectItem value={BugType.TEST_FAILURE}>{t("bugs.typeTestFailure")}</SelectItem>
+                          <SelectItem value={BugType.ENVIRONMENT_ISSUE}>{t("bugs.typeEnvironmentIssue")}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="severity">Severity *</Label>
+                      <Label htmlFor="severity">{t("bugs.labelSeverity")}</Label>
                       <Select value={severity} onValueChange={(value: BugSeverity) => setSeverity(value)}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value={BugSeverity.LOW}>Low</SelectItem>
-                          <SelectItem value={BugSeverity.MEDIUM}>Medium</SelectItem>
-                          <SelectItem value={BugSeverity.HIGH}>High</SelectItem>
-                          <SelectItem value={BugSeverity.CRITICAL}>Critical</SelectItem>
+                          <SelectItem value={BugSeverity.LOW}>{t("bugs.severityLow")}</SelectItem>
+                          <SelectItem value={BugSeverity.MEDIUM}>{t("bugs.severityMedium")}</SelectItem>
+                          <SelectItem value={BugSeverity.HIGH}>{t("bugs.severityHigh")}</SelectItem>
+                          <SelectItem value={BugSeverity.CRITICAL}>{t("bugs.severityCritical")}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="priority">Priority</Label>
+                      <Label htmlFor="priority">{t("bugs.labelPriority")}</Label>
                       <Select value={priority} onValueChange={(value: BugPriority) => setPriority(value)}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value={BugPriority.LOW}>Low</SelectItem>
-                          <SelectItem value={BugPriority.MEDIUM}>Medium</SelectItem>
-                          <SelectItem value={BugPriority.HIGH}>High</SelectItem>
-                          <SelectItem value={BugPriority.CRITICAL}>Critical</SelectItem>
+                          <SelectItem value={BugPriority.LOW}>{t("bugs.severityLow")}</SelectItem>
+                          <SelectItem value={BugPriority.MEDIUM}>{t("bugs.severityMedium")}</SelectItem>
+                          <SelectItem value={BugPriority.HIGH}>{t("bugs.severityHigh")}</SelectItem>
+                          <SelectItem value={BugPriority.CRITICAL}>{t("bugs.severityCritical")}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -421,20 +424,20 @@ export default function BugCreateDialog({
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="errorMessage">Error Message</Label>
+                      <Label htmlFor="errorMessage">{t("bugs.labelErrorMessage")}</Label>
                       <Textarea
                         id="errorMessage"
-                        placeholder="Enter the error message or description"
+                        placeholder={t("bugs.placeholderErrorMessage")}
                         value={errorMessage}
                         onChange={(e) => setErrorMessage(e.target.value)}
                         rows={4}
                       />
                     </div>
                     <div>
-                      <Label htmlFor="errorStack">Error Stack Trace</Label>
+                      <Label htmlFor="errorStack">{t("bugs.labelErrorStack")}</Label>
                       <Textarea
                         id="errorStack"
-                        placeholder="Enter the full error stack trace"
+                        placeholder={t("bugs.placeholderErrorStack")}
                         value={errorStack}
                         onChange={(e) => setErrorStack(e.target.value)}
                         rows={4}
@@ -444,19 +447,19 @@ export default function BugCreateDialog({
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="errorType">Error Type</Label>
+                      <Label htmlFor="errorType">{t("bugs.labelErrorType")}</Label>
                       <Input
                         id="errorType"
-                        placeholder="e.g., HTTPError, TypeError, AssertionError"
+                        placeholder={t("bugs.placeholderErrorType")}
                         value={errorType}
                         onChange={(e) => setErrorType(e.target.value)}
                       />
                     </div>
                     <div>
-                      <Label htmlFor="errorCode">Error Code</Label>
+                      <Label htmlFor="errorCode">{t("bugs.labelErrorCode")}</Label>
                       <Input
                         id="errorCode"
-                        placeholder="e.g., 500, 404, 400"
+                        placeholder={t("bugs.placeholderErrorCode")}
                         value={errorCode}
                         onChange={(e) => setErrorCode(e.target.value)}
                       />
@@ -471,10 +474,10 @@ export default function BugCreateDialog({
                   {/* Project, Section, Entity Selection - Single row */}
                   <div className="grid grid-cols-3 gap-4">
                     <div>
-                      <Label htmlFor="project">Project *</Label>
+                      <Label htmlFor="project">{t("caseCreate.labelProject")}</Label>
                       <Select value={selectedProjectId} onValueChange={setSelectedProjectId}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select project" />
+                          <SelectValue placeholder={t("bugs.selectProject")} />
                         </SelectTrigger>
                         <SelectContent>
                           {projects.map((project) => (
@@ -487,10 +490,10 @@ export default function BugCreateDialog({
                     </div>
 
                     <div>
-                      <Label htmlFor="section">Section *</Label>
+                      <Label htmlFor="section">{t("caseCreate.labelSection")}</Label>
                       <Select value={section} onValueChange={setSection} disabled={isLoadingSections}>
                         <SelectTrigger>
-                          <SelectValue placeholder={isLoadingSections ? "Loading..." : "Select section"} />
+                          <SelectValue placeholder={isLoadingSections ? t("bugs.loading") : t("bugs.selectSection")} />
                         </SelectTrigger>
                         <SelectContent>
                           {availableSections.map((sectionName) => (
@@ -503,13 +506,13 @@ export default function BugCreateDialog({
                     </div>
 
                     <div>
-                      <Label htmlFor="entity">Entity *</Label>
+                      <Label htmlFor="entity">{t("caseCreate.labelEntity")}</Label>
                       <Select value={entity} onValueChange={setEntity} disabled={!section || isLoadingEntities}>
                         <SelectTrigger>
                           <SelectValue placeholder={
-                            !section ? "Select section first" : 
-                            isLoadingEntities ? "Loading entities..." : 
-                            "Select entity"
+                            !section ? t("bugs.selectSectionFirst") : 
+                            isLoadingEntities ? t("bugs.loadingEntities") : 
+                            t("bugs.selectEntity")
                           } />
                         </SelectTrigger>
                         <SelectContent>
@@ -529,22 +532,22 @@ export default function BugCreateDialog({
                       {/* Test Cases Column */}
                       <div className="space-y-3">
                         <div>
-                          <Label htmlFor="testCase">Test Cases *</Label>
+                          <Label htmlFor="testCase">{t("bugs.testCasesLabel")}</Label>
                           <p className="text-sm text-muted-foreground">
-                            Select a test case from {section} - {entity}
+                            {replaceParams(t("bugs.selectTestCaseFrom"), { section, entity })}
                           </p>
                         </div>
 
                         {isLoadingTestCases ? (
                           <div className="flex items-center justify-center p-4">
                             <Loader2 className="h-4 w-4 animate-spin" />
-                            <span className="ml-2 text-sm">Loading test cases...</span>
+                            <span className="ml-2 text-sm">{t("bugs.loadingTestCases")}</span>
                           </div>
                         ) : availableTestCases.length === 0 ? (
                           <div className="text-center p-4 border rounded-lg">
                             <FileText className="h-6 w-6 text-muted-foreground mx-auto mb-2" />
                             <p className="text-sm text-muted-foreground">
-                              No test cases found for {section} - {entity}
+                              {replaceParams(t("bugs.noTestCasesFor"), { section, entity })}
                             </p>
                           </div>
                         ) : (
@@ -553,7 +556,7 @@ export default function BugCreateDialog({
                               <Card
                                 key={testCase.testCaseId}
                                 className={`cursor-pointer transition-colors ${
-                                  selectedTestCaseId === (testCase as any)?.id
+                                  selectedTestCaseId === testCase.testCaseId
                                     ? "ring-2 ring-primary bg-primary/5"
                                     : "hover:bg-muted/50"
                                 }`}
@@ -568,7 +571,7 @@ export default function BugCreateDialog({
                                       <h4 className="font-medium text-sm truncate">{testCase.name}</h4>
                                     </div>
                                     <Checkbox
-                                      checked={selectedTestCaseId === (testCase as any)?.id}
+                                      checked={selectedTestCaseId === testCase.testCaseId}
                                       onChange={() => handleTestCaseSelect(testCase.testCaseId)}
                                     />
                                   </div>
@@ -582,9 +585,9 @@ export default function BugCreateDialog({
                       {/* Failed Executions Column */}
                       <div className="space-y-3">
                         <div>
-                          <h3 className="text-sm font-medium">Failed Executions</h3>
+                          <h3 className="text-sm font-medium">{t("bugs.failedExecutions")}</h3>
                           <p className="text-sm text-muted-foreground">
-                            Select a failed execution to auto-fill bug details
+                            {t("bugs.selectFailedToAutofill")}
                           </p>
                         </div>
 
@@ -592,19 +595,19 @@ export default function BugCreateDialog({
                           <div className="text-center p-4 border rounded-lg">
                             <AlertTriangle className="h-6 w-6 text-muted-foreground mx-auto mb-2" />
                             <p className="text-sm text-muted-foreground">
-                              Please select a test case first
+                              {t("bugs.selectTestCaseFirst")}
                             </p>
                           </div>
                         ) : isLoadingFailedExecutions ? (
                           <div className="flex items-center justify-center p-4">
                             <Loader2 className="h-4 w-4 animate-spin" />
-                            <span className="ml-2 text-sm">Loading failed executions...</span>
+                            <span className="ml-2 text-sm">{t("bugs.loadingFailedExecutions")}</span>
                           </div>
                         ) : testCaseFailedExecutions.length === 0 ? (
                           <div className="text-center p-4 border rounded-lg">
                             <CheckCircle className="h-6 w-6 text-muted-foreground mx-auto mb-2" />
                             <p className="text-sm text-muted-foreground">
-                              No failed executions found for this test case
+                              {t("bugs.noFailedExecutions")}
                             </p>
                           </div>
                         ) : (
@@ -648,18 +651,18 @@ export default function BugCreateDialog({
                   {selectedTestCase && (
                     <Card className="bg-muted/30">
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-sm">Selected Test Case</CardTitle>
+                        <CardTitle className="text-sm">{t("bugs.selectedTestCase")}</CardTitle>
                       </CardHeader>
                       <CardContent className="pt-0">
                         <div className="grid grid-cols-2 gap-2 text-sm">
                           <div>
-                            <span className="font-medium">ID:</span> {selectedTestCase.testCaseId}
+                            <span className="font-medium">{t("bugs.idLabel")}</span> {selectedTestCase.testCaseId}
                           </div>
                           <div>
-                            <span className="font-medium">Name:</span> {selectedTestCase.name}
+                            <span className="font-medium">{t("bugs.nameLabel")}</span> {selectedTestCase.name}
                           </div>
                           <div>
-                            <span className="font-medium">Section:</span> {selectedTestCase.section}
+                            <span className="font-medium">{t("bugs.sectionLabel")}</span> {selectedTestCase.section}
                           </div>
                           <div>
                             <span className="font-medium">Entity:</span> {selectedTestCase.entityName}
@@ -671,7 +674,7 @@ export default function BugCreateDialog({
                           )}
                           {selectedTestCase.testType && (
                             <div>
-                              <span className="font-medium">Type:</span> {selectedTestCase.testType}
+                              <span className="font-medium">{t("bugs.typeLabel")}</span> {selectedTestCase.testType}
                             </div>
                           )}
                         </div>
@@ -683,15 +686,15 @@ export default function BugCreateDialog({
                   {selectedExecution && (
                     <Card className="bg-muted/30">
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-sm">Selected Execution</CardTitle>
+                        <CardTitle className="text-sm">{t("bugs.selectedExecution")}</CardTitle>
                       </CardHeader>
                       <CardContent className="pt-0">
                         <div className="grid grid-cols-2 gap-2 text-sm">
                           <div>
-                            <span className="font-medium">Execution ID:</span> {selectedExecution.executionId}
+                            <span className="font-medium">{t("bugs.executionIdLabel")}</span> {selectedExecution.executionId}
                           </div>
                           <div>
-                            <span className="font-medium">Test Case:</span> {selectedExecution.testCaseName}
+                            <span className="font-medium">{t("bugs.testCaseLabel")}</span> {selectedExecution.testCaseName}
                           </div>
                           <div>
                             <span className="font-medium">Entity:</span> {selectedExecution.entityName}
@@ -700,10 +703,10 @@ export default function BugCreateDialog({
                             <span className="font-medium">Method:</span> {selectedExecution.method}
                           </div>
                           <div>
-                            <span className="font-medium">Endpoint:</span> {selectedExecution.endpoint}
+                            <span className="font-medium">{t("bugs.endpointLabel")}</span> {selectedExecution.endpoint}
                           </div>
                           <div>
-                            <span className="font-medium">Date:</span> {new Date(selectedExecution.executionDate).toLocaleDateString()}
+                            <span className="font-medium">{t("bugs.dateLabel")}</span> {new Date(selectedExecution.executionDate).toLocaleDateString()}
                           </div>
                         </div>
                       </CardContent>
@@ -717,38 +720,35 @@ export default function BugCreateDialog({
 
         <DialogFooter className="flex-shrink-0">
           <Button variant="outline" onClick={handleClose} disabled={isSubmitting}>
-            Cancel
+            {t("bugs.cancel")}
           </Button>
           
-          {/* Basic Info Tab - Next button */}
           {activeTab === "basic" && (
             <Button onClick={handleNext}>
-              Next
+              {t("bugs.next")}
             </Button>
           )}
           
-          {/* Error Details Tab - Back and Next buttons */}
           {activeTab === "errors" && (
             <>
               <Button variant="outline" onClick={handleBack}>
-                Back
+                {t("bugs.back")}
               </Button>
               <Button onClick={handleNext}>
-                Next
+                {t("bugs.next")}
               </Button>
             </>
           )}
           
-          {/* Context Tab - Create Bug button */}
           {activeTab === "context" && (
             <Button onClick={handleSubmit} disabled={isSubmitting || isCreating}>
               {isSubmitting || isCreating ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  Creating...
+                  {t("bugs.creating")}
                 </>
               ) : (
-                "Create Bug"
+                t("bugs.createBug")
               )}
             </Button>
           )}

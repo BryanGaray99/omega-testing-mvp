@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { normalizeTimeToSeconds } from '@/lib/utils';
 import { Progress } from "@/components/ui/progress";
+import { useTranslation } from "@/contexts/LanguageContext";
 import {
   BarChart3,
   CheckCircle,
@@ -42,6 +43,7 @@ async function fetchGlobalExecutionSummary() {
 }
 
 export default function Dashboard() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [isRefreshing, setIsRefreshing] = useState(false);
   // 1. Obtener proyectos
@@ -105,10 +107,10 @@ export default function Dashboard() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground">
-            Welcome to Omega Testing
+            {t("dashboard.welcome")}
           </h1>
           <p className="mt-2 text-muted-foreground">
-            Your comprehensive assistant for api testing administration
+            {t("dashboard.subtitle")}
           </p>
         </div>
         <div className="mt-4 sm:mt-0 flex space-x-3">
@@ -122,22 +124,24 @@ export default function Dashboard() {
             ) : (
               <RefreshCw className="h-4 w-4 mr-2" />
             )}
-            {isRefreshing ? "Refreshing..." : "Refresh Data"}
+            {isRefreshing ? t("dashboard.refreshing") : t("dashboard.refreshData")}
           </Button>
           <Button asChild>
             <Link to="/projects">
               <Plus className="h-4 w-4 mr-2" />
-              New Project
+              {t("dashboard.newProject")}
             </Link>
           </Button>
         </div>
       </div>
 
       {/* Key Metrics */}
+      <section aria-labelledby="metrics-heading">
+        <h2 id="metrics-heading" className="sr-only">{t("dashboard.metricsHeading")}</h2>
       <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-500 ${isRefreshing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Projects</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">{t("dashboard.totalProjects")}</CardTitle>
             <FolderKanban className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -146,7 +150,7 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Endpoints</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">{t("dashboard.totalEndpoints")}</CardTitle>
             <BarChart3 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -155,17 +159,17 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Success Rate</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">{t("dashboard.successRate")}</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">{loading ? "-" : `${successRate.toFixed(1)}%`}</div>
-            <Progress value={successRate} className="mt-2" />
+            <Progress value={successRate} className="mt-2" aria-label={t("dashboard.successRate")} />
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Passed Tests</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">{t("dashboard.passedTests")}</CardTitle>
             <CheckCircle className="h-4 w-4 text-[#34D399]" />
           </CardHeader>
           <CardContent>
@@ -174,7 +178,7 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Failed Tests</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">{t("dashboard.failedTests")}</CardTitle>
             <XCircle className="h-4 w-4 text-[#F87171]" />
           </CardHeader>
           <CardContent>
@@ -183,7 +187,7 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Average Execution Time</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">{t("dashboard.averageExecutionTime")}</CardTitle>
             <Clock className="h-4 w-4 text-[#FBBF24]" />
           </CardHeader>
           <CardContent>
@@ -191,6 +195,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </div>
+      </section>
     </div>
   );
 }

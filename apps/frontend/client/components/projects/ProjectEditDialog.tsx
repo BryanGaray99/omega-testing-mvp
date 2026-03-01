@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface Project {
   id: string;
@@ -52,22 +53,23 @@ export default function ProjectEditDialog({
   onCancel,
   isPending,
 }: ProjectEditDialogProps) {
+  const { t } = useTranslation();
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
-          <DialogTitle>Edit Project</DialogTitle>
+          <DialogTitle>{t("projects.editTitle")}</DialogTitle>
           <DialogDescription>
-            Update the project configuration. Note: Project name and type cannot be changed.
+            {t("projects.editDescription")}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
-            <Label htmlFor="edit-display-name">Display Name</Label>
+            <Label htmlFor="edit-display-name">{t("projects.fieldDisplayName")}</Label>
             <Input
               id="edit-display-name"
               name="edit-display-name"
-              placeholder="e.g., E-commerce Platform API"
+              placeholder={t("projects.placeholderDisplayName")}
               value={editProjectData.displayName}
               onChange={(e) =>
                 setEditProjectData({
@@ -78,11 +80,11 @@ export default function ProjectEditDialog({
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="edit-base-url">Base URL</Label>
+            <Label htmlFor="edit-base-url">{t("projects.fieldBaseUrl")}</Label>
             <Input
               id="edit-base-url"
               name="edit-base-url"
-              placeholder="https://api.example.com"
+              placeholder={t("projects.placeholderBaseUrl")}
               value={editProjectData.baseUrl}
               onChange={(e) =>
                 setEditProjectData({ ...editProjectData, baseUrl: e.target.value })
@@ -90,11 +92,11 @@ export default function ProjectEditDialog({
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="edit-basePath">Base Path (Optional)</Label>
+            <Label htmlFor="edit-basePath">{t("projects.fieldBasePathOptional")}</Label>
             <Input
               id="edit-basePath"
               name="edit-basePath"
-              placeholder="/v1/api"
+              placeholder={t("projects.placeholderBasePath")}
               value={editProjectData.basePath}
               onChange={(e) =>
                 setEditProjectData({
@@ -107,10 +109,10 @@ export default function ProjectEditDialog({
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onCancel}>
-            Cancel
+            {t("common.cancel")}
           </Button>
           <Button onClick={onUpdateProject} disabled={isPending}>
-            {isPending ? "Updating..." : "Update Project"}
+            {isPending ? t("projects.updating") : t("projects.updateProject")}
           </Button>
         </DialogFooter>
       </DialogContent>

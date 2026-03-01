@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from "@/contexts/LanguageContext";
+import { replaceParams } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -27,6 +29,7 @@ import { bugService } from "@/services/bugService";
 import { getPriorityColor, getSeverityColor } from '@/lib/colors';
 
 export default function Bugs() {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { filteredProjects } = useProjects();
@@ -157,8 +160,8 @@ export default function Bugs() {
     mutationFn: (bugData: any) => bugService.createBug(currentProjectId, bugData),
     onSuccess: () => {
       toast({
-        title: "Bug Created",
-        description: "Bug has been created successfully",
+        title: t("bugs.toastCreated"),
+        description: t("bugs.toastCreatedDesc"),
       });
       queryClient.invalidateQueries({ queryKey: ['bugs'] });
       queryClient.invalidateQueries({ queryKey: ['bugStatistics'] });
@@ -166,8 +169,8 @@ export default function Bugs() {
     },
     onError: (error: any) => {
       toast({
-        title: "Create Failed",
-        description: error.message || "Failed to create bug",
+        title: t("bugs.toastCreateFailed"),
+        description: error.message || t("bugs.toastCreateFailedDesc"),
         variant: "destructive",
       });
     },
@@ -179,16 +182,16 @@ export default function Bugs() {
       bugService.updateBug(currentProjectId, bugId, bugData),
     onSuccess: () => {
       toast({
-        title: "Bug Updated",
-        description: "Bug has been updated successfully",
+        title: t("bugs.toastUpdated"),
+        description: t("bugs.toastUpdatedDesc"),
       });
       queryClient.invalidateQueries({ queryKey: ['bugs'] });
       queryClient.invalidateQueries({ queryKey: ['bugStatistics'] });
     },
     onError: (error: any) => {
       toast({
-        title: "Update Failed",
-        description: error.message || "Failed to update bug",
+        title: t("bugs.toastUpdateFailed"),
+        description: error.message || t("bugs.toastUpdateFailedDesc"),
         variant: "destructive",
       });
     },
@@ -199,8 +202,8 @@ export default function Bugs() {
     mutationFn: (bugId: string) => bugService.deleteBug(currentProjectId, bugId),
     onSuccess: () => {
       toast({
-        title: "Bug Deleted",
-        description: "Bug has been deleted successfully",
+        title: t("bugs.toastDeleted"),
+        description: t("bugs.toastDeletedDesc"),
       });
       queryClient.invalidateQueries({ queryKey: ['bugs'] });
       queryClient.invalidateQueries({ queryKey: ['bugStatistics'] });
@@ -210,8 +213,8 @@ export default function Bugs() {
     },
     onError: (error: any) => {
       toast({
-        title: "Delete Failed",
-        description: error.message || "Failed to delete bug",
+        title: t("bugs.toastDeleteFailed"),
+        description: error.message || t("bugs.toastDeleteFailedDesc"),
         variant: "destructive",
       });
     },
@@ -256,13 +259,13 @@ export default function Bugs() {
     try {
       await refetch();
       toast({
-        title: "Refreshed",
-        description: "Bug data has been refreshed",
+        title: t("bugs.toastRefreshed"),
+        description: t("bugs.toastRefreshedDesc"),
       });
     } catch (error) {
       toast({
-        title: "Refresh Failed",
-        description: "Failed to refresh bug data",
+        title: t("bugs.toastRefreshFailed"),
+        description: t("bugs.toastRefreshFailedDesc"),
         variant: "destructive",
       });
     } finally {
@@ -286,9 +289,9 @@ export default function Bugs() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Bugs</h1>
+          <h1 className="text-3xl font-bold">{t("nav.bugs")}</h1>
           <p className="mt-2 text-muted-foreground">
-            Track and manage bugs found during test execution
+            {t("bugs.subtitle")}
           </p>
         </div>
         {/* Contenedor de botones alineados a la derecha */}
@@ -303,11 +306,11 @@ export default function Bugs() {
             ) : (
               <RefreshCw className="h-4 w-4 mr-2" />
             )}
-            {isRefreshing ? "Refreshing..." : "Refresh Data"}
+            {isRefreshing ? t("bugs.refreshing") : t("bugs.refreshData")}
           </Button>
           <Button onClick={() => setIsCreateDialogOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            Create Bug
+            {t("bugs.createBug")}
           </Button>
         </div>
       </div>
@@ -344,15 +347,15 @@ export default function Bugs() {
           ) : bugs.length === 0 ? (
             <div className="text-center py-12">
               <BugIcon className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No Bugs Found</h3>
+              <h3 className="text-lg font-semibold mb-2">{t("bugs.emptyTitle")}</h3>
               <p className="text-muted-foreground mb-4">
                 {filters.search || filters.type || filters.status
-                  ? 'No bugs match your current filters.'
-                  : 'Get started by creating your first bug report.'}
+                  ? t("bugs.emptyFiltered")
+                  : t("bugs.emptyNone")}
               </p>
               <Button onClick={() => setIsCreateDialogOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
-                Create Bug
+                {t("bugs.createBug")}
               </Button>
             </div>
           ) : (
@@ -389,15 +392,15 @@ export default function Bugs() {
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem onClick={() => handleViewDetails(bug)}>
                             <Eye className="mr-2 h-4 w-4" />
-                            View Details
+                            {t("bugs.viewDetails")}
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => handleEdit(bug)}>
                             <Edit className="mr-2 h-4 w-4" />
-                            Edit Bug
+                            {t("bugs.menuEditBug")}
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => handleDelete(bug)} className="text-white [&_svg]:text-[#F87171]">
                             <Trash2 className="mr-2 h-4 w-4" />
-                            Delete Bug
+                            {t("bugs.deleteBugButton")}
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
@@ -422,15 +425,15 @@ export default function Bugs() {
                               <>
                                 <span className="flex items-center gap-1">
                                   <AlertTriangle className="h-3 w-3 text-red-500" />
-                                  <span>Open</span>
-                                </span>
-                              </>
+<span>{t("bugs.statusOpen")}</span>
+                            </span>
+                          </>
                             )}
                             {bug.status === "in_progress" && (
                               <>
                                 <span className="flex items-center gap-1">
                                   <Clock className="h-3 w-3 text-purple-500" />
-                                  <span>In Progress</span>
+                                  <span>{t("bugs.statusInProgress")}</span>
                                 </span>
                               </>
                             )}
@@ -438,7 +441,7 @@ export default function Bugs() {
                               <>
                                 <span className="flex items-center gap-1">
                                   <CheckCircle className="h-3 w-3 text-green-500" />
-                                  <span>Resolved</span>
+                                  <span>{t("bugs.statusResolved")}</span>
                                 </span>
                               </>
                             )}
@@ -446,7 +449,7 @@ export default function Bugs() {
                               <>
                                 <span className="flex items-center gap-1">
                                   <XCircle className="h-3 w-3 text-gray-500" />
-                                  <span>Closed</span>
+                                  <span>{t("bugs.statusClosed")}</span>
                                 </span>
                               </>
                             )}
@@ -456,25 +459,25 @@ export default function Bugs() {
                           <SelectItem value="open">
                             <span className="flex items-center gap-1">
                               <AlertTriangle className="h-3 w-3 text-red-500" />
-                              <span>Open</span>
+                              <span>{t("bugs.statusOpen")}</span>
                             </span>
                           </SelectItem>
                           <SelectItem value="in_progress">
                             <span className="flex items-center gap-1">
                               <Clock className="h-3 w-3 text-purple-500" />
-                              <span>In Progress</span>
+                              <span>{t("bugs.statusInProgress")}</span>
                             </span>
                           </SelectItem>
                           <SelectItem value="resolved">
                             <span className="flex items-center gap-1">
                               <CheckCircle className="h-3 w-3 text-green-500" />
-                              <span>Resolved</span>
+                              <span>{t("bugs.statusResolved")}</span>
                             </span>
                           </SelectItem>
                           <SelectItem value="closed">
                             <span className="flex items-center gap-1">
                               <XCircle className="h-3 w-3 text-gray-500" />
-                              <span>Closed</span>
+                              <span>{t("bugs.statusClosed")}</span>
                             </span>
                           </SelectItem>
                         </SelectContent>
@@ -491,13 +494,13 @@ export default function Bugs() {
                       </div>
                       {bug.section && (
                         <div className="flex justify-between text-sm">
-                          <span className="text-muted-foreground">Section:</span>
+                          <span className="text-muted-foreground">{t("bugs.sectionLabel")}</span>
                           <span className="font-medium">{bug.section}</span>
                         </div>
                       )}
                       {bug.entity && (
                         <div className="flex justify-between text-sm">
-                          <span className="text-muted-foreground">Entity:</span>
+                          <span className="text-muted-foreground">{t("bugs.entityLabel")}</span>
                           <span className="font-medium">{bug.entity}</span>
                         </div>
                       )}
@@ -506,13 +509,13 @@ export default function Bugs() {
                     {/* Priority and Severity in same row */}
                     <div className="flex justify-between text-sm mb-3">
                       <div>
-                        <span className="text-muted-foreground">Priority:</span>
+                        <span className="text-muted-foreground">{t("bugs.priorityColon")}</span>
                         <span className={`ml-1 font-medium px-2 py-1 rounded text-xs ${getPriorityBadgeClass(bug.priority)}`}>
                           {bug.priority}
                         </span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Severity:</span>
+                        <span className="text-muted-foreground">{t("bugs.severityColon")}</span>
                         <span className={`ml-1 font-medium px-2 py-1 rounded text-xs ${getSeverityBadgeClass(bug.severity)}`}>
                           {bug.severity}
                         </span>
@@ -524,7 +527,7 @@ export default function Bugs() {
                       <div className="p-2 bg-red-50 dark:bg-[#3F1D1D] border border-red-200 dark:border-[#7F1D1D] rounded text-xs">
                         <div className="flex items-center space-x-1 text-red-700 dark:text-[#FCA5A5] mb-1">
                           <span>⚠️</span>
-                          <span className="font-medium">Error:</span>
+                          <span className="font-medium">{t("bugs.errorLabel")}</span>
                         </div>
                         <p className="text-red-600 dark:text-[#FCA5A5] line-clamp-2">
                           {bug.errorMessage}
@@ -539,7 +542,7 @@ export default function Bugs() {
       {totalPages > 1 && (
                 <div className="flex items-center justify-between mt-6">
                   <div className="text-sm text-muted-foreground">
-                    Showing {((filters.page - 1) * filters.limit) + 1} to {Math.min(filters.page * filters.limit, totalItems)} of {totalItems} bugs
+                    {replaceParams(t("bugs.showing"), { from: String(((filters.page - 1) * filters.limit) + 1), to: String(Math.min(filters.page * filters.limit, totalItems)), total: String(totalItems) })}
                   </div>
                   <div className="flex items-center space-x-2">
           <Button 
@@ -548,10 +551,10 @@ export default function Bugs() {
                       onClick={() => handleFiltersChange({ ...filters, page: filters.page - 1 })}
                       disabled={filters.page === 1}
           >
-                      Previous
+                      {t("bugs.paginationPrevious")}
           </Button>
                     <span className="text-sm">
-                      Page {filters.page} of {totalPages}
+                      {replaceParams(t("bugs.pageOf"), { current: String(filters.page), total: String(totalPages) })}
           </span>
           <Button 
             variant="outline" 
@@ -559,7 +562,7 @@ export default function Bugs() {
                       onClick={() => handleFiltersChange({ ...filters, page: filters.page + 1 })}
                       disabled={filters.page === totalPages}
           >
-                      Next
+                      {t("bugs.paginationNext")}
           </Button>
                   </div>
         </div>

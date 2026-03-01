@@ -25,6 +25,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { TestSuite } from "@/services/testSuiteService";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface TestSuiteCardProps {
   testSuite: TestSuite;
@@ -49,6 +50,7 @@ export default function TestSuiteCard({
   openDropdownId,
   setOpenDropdownId,
 }: TestSuiteCardProps) {
+  const { t } = useTranslation();
   const { isExecuting, showExecuted, getSuiteExecutionId } = useExecution();
   
   // Obtener el executionId real para este test suite, o usar el suiteId como fallback
@@ -64,6 +66,23 @@ export default function TestSuiteCard({
         return <Layers className="h-5 w-5" />;
       default:
         return <Layers className="h-5 w-5" />;
+    }
+  };
+
+  const getStatusLabel = (status: string) => {
+    switch (status) {
+      case "pending":
+        return t("testSuites.statusPending");
+      case "running":
+        return t("testSuites.statusRunning");
+      case "passed":
+        return t("testSuites.statusPassed");
+      case "failed":
+        return t("testSuites.statusFailed");
+      case "skipped":
+        return t("testSuites.statusSkipped");
+      default:
+        return status;
     }
   };
 
@@ -122,7 +141,7 @@ export default function TestSuiteCard({
           <div className="flex items-center space-x-2">
             {getExecutionStatusIcon(testSuite.status)}
             <Badge className={getStatusColor(testSuite.status)}>
-              {testSuite.status.toUpperCase()}
+              {getStatusLabel(testSuite.status)}
             </Badge>
             {testSuite.lastExecutedAt && (
               <span className="text-xs text-muted-foreground">
@@ -140,14 +159,14 @@ export default function TestSuiteCard({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("testSuites.actions")}</DropdownMenuLabel>
               <DropdownMenuItem onClick={() => onViewDetails(testSuite)}>
                 <Eye className="mr-2 h-4 w-4" />
-                View Details
+                {t("testSuites.viewDetails")}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => onEdit(testSuite)}>
                 <Edit className="mr-2 h-4 w-4" />
-                Edit Test Suite
+                {t("testSuites.editTestSuite")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -155,7 +174,7 @@ export default function TestSuiteCard({
                 onClick={() => onDelete(testSuite)}
               >
                 <Trash2 className="mr-2 h-4 w-4" />
-                Delete Test Suite
+                {t("testSuites.deleteTestSuite")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -164,7 +183,7 @@ export default function TestSuiteCard({
         <CardTitle className="text-lg">{testSuite.name}</CardTitle>
         <div className="flex flex-wrap gap-2 mt-2">
           <span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 dark:bg-[#1E3A8A] text-blue-800 dark:text-[#93C5FD]">
-            {testSuite.type === 'test_set' ? 'Test Set' : 'Test Plan'}
+            {testSuite.type === "test_set" ? t("testSuites.typeTestSet") : t("testSuites.typeTestPlan")}
           </span>
           {testSuite.section && (
             <span className="px-2 py-1 rounded text-xs font-medium bg-gray-100 dark:bg-[#1F2937] text-gray-800 dark:text-[#9CA3AF]">
@@ -178,20 +197,20 @@ export default function TestSuiteCard({
         <div className="space-y-3 flex-1">
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Project:</span>
+              <span className="text-muted-foreground">{t("testSuites.projectLabel")}</span>
               <span className="font-medium">
                 {projects.find(p => p.id === testSuite.projectId)?.name || testSuite.projectId}
               </span>
             </div>
             {testSuite.section && (
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Section:</span>
+                <span className="text-muted-foreground">{t("testSuites.sectionLabel")}</span>
                 <span className="font-medium">{testSuite.section}</span>
               </div>
             )}
             {testSuite.entity && (
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Entity:</span>
+                <span className="text-muted-foreground">{t("testSuites.entityLabel")}</span>
                 <span className="font-medium">{testSuite.entity}</span>
               </div>
             )}
@@ -200,7 +219,7 @@ export default function TestSuiteCard({
           {testSuite.type === 'test_plan' && testSuite.testSets && testSuite.testSets.length > 0 && (
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Test Sets:</span>
+                <span className="text-muted-foreground">{t("testSuites.testSetsLabel")}</span>
                 <span className="font-medium">{testSuite.testSets.length}</span>
               </div>
             </div>
@@ -209,20 +228,20 @@ export default function TestSuiteCard({
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div>
               <span className="text-muted-foreground">
-                {testSuite.type === 'test_plan' ? 'Total Cases:' : 'Test Cases:'}
+                {testSuite.type === "test_plan" ? t("testSuites.totalCasesLabel") : t("testSuites.testCasesLabel")}
               </span>
               <span className="ml-1 font-medium">{testSuite.totalTestCases}</span>
             </div>
             <div>
-              <span className="text-muted-foreground">Passed:</span>
+              <span className="text-muted-foreground">{t("testSuites.passedLabel")}</span>
               <span className="ml-1 font-medium text-[#34D399]">{testSuite.passedTestCases}</span>
             </div>
             <div>
-              <span className="text-muted-foreground">Failed:</span>
+              <span className="text-muted-foreground">{t("testSuites.failedLabel")}</span>
               <span className="ml-1 font-medium text-[#F87171]">{testSuite.failedTestCases}</span>
             </div>
             <div>
-              <span className="text-muted-foreground">Skipped:</span>
+              <span className="text-muted-foreground">{t("testSuites.skippedLabel")}</span>
               <span className="ml-1 font-medium text-[#FBBF24]">{testSuite.skippedTestCases}</span>
             </div>
           </div>
@@ -262,7 +281,7 @@ export default function TestSuiteCard({
                 onClick={handleNavigateToExecution}
               >
                 <ExternalLink className="h-4 w-4 mr-2" />
-                View Execution
+                {t("testSuites.viewExecution")}
               </Button>
             ) : (
               <Button
@@ -273,7 +292,7 @@ export default function TestSuiteCard({
                 disabled={isExecuting(executionId)}
               >
                 <Play className="h-4 w-4 mr-2" />
-                {isExecuting(executionId) ? 'Executing...' : 'Execute Test Suite'}
+                {isExecuting(executionId) ? t("testSuites.executing") : t("testSuites.executeTestSuite")}
               </Button>
             )}
           </div>

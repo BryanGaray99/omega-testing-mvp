@@ -44,6 +44,8 @@ import {
   useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { useTranslation } from '@/contexts/LanguageContext';
+import { replaceParams } from '@/lib/translations';
 
 interface Step {
   id: string;
@@ -267,6 +269,7 @@ export default function ScenarioEditor({
   isPending = false,
   onChange,
 }: ScenarioEditorProps) {
+  const { t } = useTranslation();
   const [steps, setSteps] = useState<Step[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const [availableSteps, setAvailableSteps] = useState<OrganizedSteps | null>(null);
@@ -381,7 +384,7 @@ export default function ScenarioEditor({
   const loadAvailableSteps = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/v1/api'}/projects/${projectId}/test-cases/step-templates/organized`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL || "/v1/api"}/projects/${projectId}/test-cases/step-templates/organized`);
       if (response.ok) {
         const result = await response.json();
         console.log('Available steps response:', result);
@@ -905,7 +908,7 @@ export default function ScenarioEditor({
                           <div className="relative w-36">
                             <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                             <Input
-                              placeholder={`Search ${stepType.toLowerCase()} steps...`}
+                              placeholder={replaceParams(t("scenario.searchStepsPlaceholder"), { type: stepType.toLowerCase() })}
                               value={searchTerm}
                               onChange={(e) => updateStepSearchTerm(stepType, e.target.value)}
                               className="pl-8 text-sm h-8"
@@ -964,13 +967,13 @@ export default function ScenarioEditor({
           onClick={onCancel}
           disabled={isPending}
         >
-          Cancel
+          {t("scenario.cancel")}
         </Button>
         <Button
           onClick={handleSave}
           disabled={isPending}
         >
-          {isPending ? 'Saving...' : 'Save Scenario'}
+          {isPending ? t("scenario.saving") : t("scenario.saveScenario")}
         </Button>
       </div>
     </div>

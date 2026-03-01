@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Loader2, RefreshCw, CheckCircle, XCircle, FolderKanban } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000/v1/api";
+const API_BASE = import.meta.env.VITE_API_URL || "/v1/api";
 
 interface Project {
   id: string;

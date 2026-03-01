@@ -98,7 +98,7 @@ export function useTestCases() {
         setTestCases(allTestCases);
         
         // Load projects data
-        const projectsResponse = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/v1/api'}/projects`);
+        const projectsResponse = await fetch(`${import.meta.env.VITE_API_URL || "/v1/api"}/projects`);
         if (projectsResponse.ok) {
           const projectsData = await projectsResponse.json();
           setProjects(projectsData.data || []);

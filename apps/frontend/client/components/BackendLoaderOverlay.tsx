@@ -29,11 +29,8 @@ export default function BackendLoaderOverlay() {
     let mounted = true;
     const controller = new AbortController();
 
-    // En modo split (frontend 5173, backend 3000) usar URL absoluta; si no, relativa
-    const envBase = (import.meta as any).env?.VITE_API_URL;
-    const base = envBase || (typeof window !== "undefined" && window.location.port === "5173"
-      ? "http://localhost:3000/v1/api"
-      : "/v1/api");
+    // Misma base que el resto de la app: env o /v1/api (proxy en dev y en build)
+    const base = (import.meta as any).env?.VITE_API_URL || (import.meta as any).env?.VITE_API_BASE_URL || "/v1/api";
     const url = `${base}/health`;
 
     async function waitForBackend() {

@@ -7,6 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Search } from "lucide-react";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface EndpointFiltersProps {
   searchTerm: string;
@@ -31,12 +32,13 @@ export default function EndpointFilters({
   setStatusFilter,
   projects,
 }: EndpointFiltersProps) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col sm:flex-row gap-4">
       <div className="relative flex-1">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
-          placeholder="Search endpoints..."
+          placeholder={t("endpoints.searchPlaceholder")}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="pl-10"
@@ -45,10 +47,10 @@ export default function EndpointFilters({
       <div className="flex gap-2">
         <Select value={projectFilter} onValueChange={setProjectFilter}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="All Projects" />
+            <SelectValue placeholder={t("endpoints.allProjects")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Projects</SelectItem>
+            <SelectItem value="all">{t("endpoints.allProjects")}</SelectItem>
             {projects.map((project) => (
               <SelectItem key={project.id} value={project.id}>
                 {project.displayName || project.name}
@@ -58,10 +60,10 @@ export default function EndpointFilters({
         </Select>
         <Select value={methodFilter} onValueChange={setMethodFilter}>
           <SelectTrigger className="w-[120px]">
-            <SelectValue placeholder="Method" />
+            <SelectValue placeholder={t("endpoints.method")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Methods</SelectItem>
+            <SelectItem value="all">{t("endpoints.allMethods")}</SelectItem>
             <SelectItem value="GET">GET</SelectItem>
             <SelectItem value="POST">POST</SelectItem>
             <SelectItem value="PUT">PUT</SelectItem>
@@ -70,15 +72,15 @@ export default function EndpointFilters({
         </Select>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger className="w-[120px]">
-            <SelectValue placeholder="Status" />
+            <SelectValue placeholder={t("endpoints.status")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Status</SelectItem>
-            <SelectItem value="ready">Ready</SelectItem>
-            <SelectItem value="analyzing">Analyzing</SelectItem>
-            <SelectItem value="generating">Generating</SelectItem>
-            <SelectItem value="pending">Pending</SelectItem>
-            <SelectItem value="failed">Failed</SelectItem>
+            <SelectItem value="all">{t("endpoints.allStatus")}</SelectItem>
+            <SelectItem value="ready">{t("endpoints.statusReady")}</SelectItem>
+            <SelectItem value="analyzing">{t("endpoints.statusAnalyzing")}</SelectItem>
+            <SelectItem value="generating">{t("endpoints.statusGenerating")}</SelectItem>
+            <SelectItem value="pending">{t("endpoints.statusPending")}</SelectItem>
+            <SelectItem value="failed">{t("endpoints.statusFailed")}</SelectItem>
           </SelectContent>
         </Select>
       </div>

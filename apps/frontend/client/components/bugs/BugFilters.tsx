@@ -1,3 +1,4 @@
+import { useTranslation } from "@/contexts/LanguageContext";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -33,6 +34,7 @@ export function BugFilters({
   failedExecutions,
   loadingFailedExecutions,
 }: BugFiltersProps) {
+  const { t } = useTranslation();
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [sections, setSections] = useState<string[]>([]);
   const [entities, setEntities] = useState<string[]>([]);
@@ -122,7 +124,7 @@ export function BugFilters({
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search bugs..."
+            placeholder={t("bugs.searchPlaceholder")}
             value={filters.search || ''}
             onChange={(e) => handleFilterChange('search', e.target.value)}
             className="pl-10"
@@ -142,10 +144,10 @@ export function BugFilters({
             onValueChange={(value) => handleFilterChange('projectId', value === 'all' ? undefined : value)}
           >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="All Projects" />
+              <SelectValue placeholder={t("bugs.allProjects")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Projects</SelectItem>
+              <SelectItem value="all">{t("bugs.allProjects")}</SelectItem>
               {projects.map((project) => (
                 <SelectItem key={project.id} value={project.id}>
                   {project.displayName || project.name || project.id}
@@ -161,10 +163,10 @@ export function BugFilters({
             disabled={!filters.projectId || loadingSections}
           >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder={loadingSections ? "Loading..." : "All Sections"} />
+              <SelectValue placeholder={loadingSections ? t("bugs.loadingLabel") : t("bugs.allSections")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Sections</SelectItem>
+              <SelectItem value="all">{t("bugs.allSections")}</SelectItem>
               {sections.map((section) => (
                 <SelectItem key={section} value={section}>
                   {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -180,10 +182,10 @@ export function BugFilters({
             disabled={!filters.section || loadingEntities}
           >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder={loadingEntities ? "Loading..." : "All Entities"} />
+              <SelectValue placeholder={loadingEntities ? t("bugs.loadingLabel") : t("bugs.allEntities")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Entities</SelectItem>
+              <SelectItem value="all">{t("bugs.allEntities")}</SelectItem>
               {entities.map((entity) => (
                 <SelectItem key={entity} value={entity}>
                   {entity}
@@ -198,14 +200,14 @@ export function BugFilters({
             onValueChange={(value) => handleFilterChange('type', value === 'all' ? undefined : value)}
           >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="All Types" />
+              <SelectValue placeholder={t("bugs.allTypes")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value={BugType.SYSTEM_BUG}>System Bug</SelectItem>
-              <SelectItem value={BugType.FRAMEWORK_ERROR}>Framework Error</SelectItem>
-              <SelectItem value={BugType.TEST_FAILURE}>Test Failure</SelectItem>
-              <SelectItem value={BugType.ENVIRONMENT_ISSUE}>Environment Issue</SelectItem>
+              <SelectItem value="all">{t("bugs.allTypes")}</SelectItem>
+              <SelectItem value={BugType.SYSTEM_BUG}>{t("bugs.typeSystemBug")}</SelectItem>
+              <SelectItem value={BugType.FRAMEWORK_ERROR}>{t("bugs.typeFrameworkError")}</SelectItem>
+              <SelectItem value={BugType.TEST_FAILURE}>{t("bugs.typeTestFailure")}</SelectItem>
+              <SelectItem value={BugType.ENVIRONMENT_ISSUE}>{t("bugs.typeEnvironmentIssue")}</SelectItem>
             </SelectContent>
           </Select>
 
@@ -215,14 +217,14 @@ export function BugFilters({
             onValueChange={(value) => handleFilterChange('severity', value === 'all' ? undefined : value)}
           >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="All Severities" />
+              <SelectValue placeholder={t("bugs.allSeverities")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Severities</SelectItem>
-              <SelectItem value={BugSeverity.LOW}>Low</SelectItem>
-              <SelectItem value={BugSeverity.MEDIUM}>Medium</SelectItem>
-              <SelectItem value={BugSeverity.HIGH}>High</SelectItem>
-              <SelectItem value={BugSeverity.CRITICAL}>Critical</SelectItem>
+              <SelectItem value="all">{t("bugs.allSeverities")}</SelectItem>
+              <SelectItem value={BugSeverity.LOW}>{t("bugs.severityLow")}</SelectItem>
+              <SelectItem value={BugSeverity.MEDIUM}>{t("bugs.severityMedium")}</SelectItem>
+              <SelectItem value={BugSeverity.HIGH}>{t("bugs.severityHigh")}</SelectItem>
+              <SelectItem value={BugSeverity.CRITICAL}>{t("bugs.severityCritical")}</SelectItem>
             </SelectContent>
           </Select>
 
@@ -232,14 +234,14 @@ export function BugFilters({
             onValueChange={(value) => handleFilterChange('priority', value === 'all' ? undefined : value)}
           >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="All Priorities" />
+              <SelectValue placeholder={t("bugs.allPriorities")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Priorities</SelectItem>
-              <SelectItem value={BugPriority.LOW}>Low</SelectItem>
-              <SelectItem value={BugPriority.MEDIUM}>Medium</SelectItem>
-              <SelectItem value={BugPriority.HIGH}>High</SelectItem>
-              <SelectItem value={BugPriority.CRITICAL}>Critical</SelectItem>
+              <SelectItem value="all">{t("bugs.allPriorities")}</SelectItem>
+              <SelectItem value={BugPriority.LOW}>{t("bugs.severityLow")}</SelectItem>
+              <SelectItem value={BugPriority.MEDIUM}>{t("bugs.severityMedium")}</SelectItem>
+              <SelectItem value={BugPriority.HIGH}>{t("bugs.severityHigh")}</SelectItem>
+              <SelectItem value={BugPriority.CRITICAL}>{t("bugs.severityCritical")}</SelectItem>
             </SelectContent>
           </Select>
 
@@ -249,32 +251,32 @@ export function BugFilters({
             onValueChange={(value) => handleFilterChange('status', value === 'all' ? undefined : value)}
           >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="All Statuses" />
+              <SelectValue placeholder={t("bugs.allStatuses")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Statuses</SelectItem>
+              <SelectItem value="all">{t("bugs.allStatuses")}</SelectItem>
               <SelectItem value={BugStatus.OPEN} className="flex items-center gap-1">
                 <span className="flex items-center gap-1">
                   <AlertTriangle className="h-3 w-3 text-red-500" />
-                  <span>Open</span>
+                  <span>{t("bugs.statusOpen")}</span>
                 </span>
               </SelectItem>
               <SelectItem value={BugStatus.IN_PROGRESS} className="flex items-center gap-1">
                 <span className="flex items-center gap-1">
                   <Clock className="h-3 w-3 text-purple-500" />
-                  <span>In Progress</span>
+                  <span>{t("bugs.statusInProgress")}</span>
                 </span>
               </SelectItem>
               <SelectItem value={BugStatus.RESOLVED} className="flex items-center gap-1">
                 <span className="flex items-center gap-1">
                   <CheckCircle className="h-3 w-3 text-green-500" />
-                  <span>Resolved</span>
+                  <span>{t("bugs.statusResolved")}</span>
                 </span>
               </SelectItem>
               <SelectItem value={BugStatus.CLOSED} className="flex items-center gap-1">
                 <span className="flex items-center gap-1">
                   <XCircle className="h-3 w-3 text-gray-500" />
-                  <span>Closed</span>
+                  <span>{t("bugs.statusClosed")}</span>
                 </span>
               </SelectItem>
             </SelectContent>
@@ -288,16 +290,16 @@ export function BugFilters({
             onValueChange={(value) => handleFilterChange('sortBy', value)}
           >
             <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder="Sort by" />
+              <SelectValue placeholder={t("bugs.sortBy")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="reportedAt">Reported Date</SelectItem>
-              <SelectItem value="title">Title</SelectItem>
-              <SelectItem value="severity">Severity</SelectItem>
-              <SelectItem value="priority">Priority</SelectItem>
-              <SelectItem value="status">Status</SelectItem>
-              <SelectItem value="createdAt">Created Date</SelectItem>
-              <SelectItem value="updatedAt">Updated Date</SelectItem>
+              <SelectItem value="reportedAt">{t("bugs.sortReportedAt")}</SelectItem>
+              <SelectItem value="title">{t("bugs.sortTitle")}</SelectItem>
+              <SelectItem value="severity">{t("bugs.sortSeverity")}</SelectItem>
+              <SelectItem value="priority">{t("bugs.sortPriority")}</SelectItem>
+              <SelectItem value="status">{t("bugs.sortStatus")}</SelectItem>
+              <SelectItem value="createdAt">{t("bugs.sortCreatedAt")}</SelectItem>
+              <SelectItem value="updatedAt">{t("bugs.sortUpdatedAt")}</SelectItem>
             </SelectContent>
           </Select>
 
@@ -307,11 +309,11 @@ export function BugFilters({
             onValueChange={(value) => handleFilterChange('sortOrder', value)}
           >
             <SelectTrigger className="w-[120px]">
-              <SelectValue placeholder="Order" />
+              <SelectValue placeholder={t("bugs.order")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="DESC">Descending</SelectItem>
-              <SelectItem value="ASC">Ascending</SelectItem>
+              <SelectItem value="DESC">{t("bugs.descending")}</SelectItem>
+              <SelectItem value="ASC">{t("bugs.ascending")}</SelectItem>
             </SelectContent>
           </Select>
         </div>

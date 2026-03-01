@@ -2,8 +2,8 @@
 curl --location 'http://localhost:3000/v1/api/projects' \
 --header 'Content-Type: application/json' \
 --data '{
-    "name": "mi-proyecto-test-1",
-    "displayName": "Mi Proyecto de Testing E2E",
+    "name": "my-test-project-1",
+    "displayName": "My E2E Testing Project",
     "baseUrl": "http://localhost:3004",
     "basePath": "/v1/api",
     "type": "playwright-bdd"

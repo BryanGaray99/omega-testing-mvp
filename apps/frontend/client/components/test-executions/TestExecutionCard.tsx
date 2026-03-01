@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useTranslation } from '@/contexts/LanguageContext';
+import { replaceParams } from '@/lib/translations';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -42,11 +44,13 @@ export function TestExecutionCard({
   onViewDetails,
   onDelete,
   onNavigateToTestExecution,
-  projectName = 'Current Project',
+  projectName,
   openDropdownId,
   setOpenDropdownId
 }: TestExecutionCardProps) {
+  const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
+  const displayProjectName = projectName ?? t("exec.currentProject");
 
   const getStatusColor = (status: TestExecutionStatus) => {
     switch (status) {
@@ -192,7 +196,7 @@ export function TestExecutionCard({
                                      <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => onViewDetails(execution)}>
                 <Eye className="h-4 w-4 mr-2" />
-                View Details
+                {t("exec.viewDetails")}
               </DropdownMenuItem>
               {onDelete && (
                 <DropdownMenuItem
@@ -200,7 +204,7 @@ export function TestExecutionCard({
                   onClick={() => onDelete(execution)}
                 >
                   <Trash2 className="h-4 w-4 mr-2" />
-                  Delete Execution
+                  {t("exec.deleteExecution")}
                 </DropdownMenuItem>
               )}
             </DropdownMenuContent>
@@ -210,15 +214,15 @@ export function TestExecutionCard({
         {/* Project Structure */}
         <div className="space-y-1 mb-3 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
-            <span className="font-medium">Project:</span>
-            <span>{projectName}</span>
+            <span className="font-medium">{t("exec.project")}</span>
+            <span>{displayProjectName}</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="font-medium">Section:</span>
+            <span className="font-medium">{t("exec.section")}</span>
             <span>{execution.section || execution.testCaseTestType || execution.testType || 'N/A'}</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="font-medium">Entity:</span>
+            <span className="font-medium">{t("exec.entity")}</span>
             <span>{execution.entityName || 'N/A'}</span>
           </div>
         </div>
@@ -227,11 +231,11 @@ export function TestExecutionCard({
         <div className="grid grid-cols-2 gap-2 mb-3">
           <div className="text-center p-2 bg-green-50 dark:bg-[#052E26] rounded border border-green-200 dark:border-[#065F46]">
             <div className="text-lg font-bold text-green-600 dark:text-[#34D399]">{execution.passedScenarios}</div>
-            <div className="text-xs text-green-700 dark:text-[#34D399]">Scenarios Passed</div>
+            <div className="text-xs text-green-700 dark:text-[#34D399]">{t("exec.scenariosPassed")}</div>
           </div>
           <div className="text-center p-2 bg-red-50 dark:bg-[#3F1D1D] rounded border border-red-200 dark:border-[#7F1D1D]">
             <div className="text-lg font-bold text-red-600 dark:text-[#F87171]">{execution.failedScenarios}</div>
-            <div className="text-xs text-red-700 dark:text-[#F87171]">Scenarios Failed</div>
+            <div className="text-xs text-red-700 dark:text-[#F87171]">{t("exec.scenariosFailed")}</div>
           </div>
         </div>
 
@@ -240,43 +244,43 @@ export function TestExecutionCard({
           {/* Only show Test Case ID, Method, and Test Type for individual test case executions */}
           {!execution.testSuiteId && execution.testCaseId && execution.testCaseId !== 'N/A' && (
             <div className="flex items-center justify-between">
-              <span className="text-muted-foreground">Test Case ID:</span>
+              <span className="text-muted-foreground">{t("exec.testCaseId")}</span>
               <span className="font-medium">{execution.testCaseId}</span>
             </div>
           )}
           {!execution.testSuiteId && (execution.method || execution.testCaseMethod) && (
             <div className="flex items-center justify-between">
-              <span className="text-muted-foreground">Method:</span>
+              <span className="text-muted-foreground">{t("exec.method")}</span>
               <span className="font-medium">{execution.testCaseMethod || execution.method}</span>
             </div>
           )}
           {!execution.testSuiteId && (
             <div className="flex items-center justify-between">
-              <span className="text-muted-foreground">Test Type:</span>
+              <span className="text-muted-foreground">{t("exec.testType")}</span>
               <span className="font-medium">{execution.testCaseTestType || execution.testType}</span>
             </div>
           )}
           <div className="flex items-center justify-between">
-            <span className="text-muted-foreground">Duration:</span>
+            <span className="text-muted-foreground">{t("exec.duration")}</span>
             <div className="flex items-center gap-1">
               <Timer className="h-3 w-3" />
               <span className="font-medium">{formatDuration(execution.executionTime)}</span>
             </div>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-muted-foreground">Started:</span>
+            <span className="text-muted-foreground">{t("exec.started")}</span>
             <span className="font-medium">{formatDate(execution.startedAt)}</span>
           </div>
           {execution.stepSuccessRate !== undefined && (
             <div className="flex items-center justify-between">
-              <span className="text-muted-foreground">Step Success Rate:</span>
+              <span className="text-muted-foreground">{t("exec.stepSuccessRate")}</span>
               <span className="font-medium">{execution.stepSuccessRate}%</span>
             </div>
           )}
           {execution.resultsCount && execution.resultsCount > 0 && (
             <div className="flex items-center justify-between">
-              <span className="text-muted-foreground">Results:</span>
-              <span className="font-medium">{execution.resultsCount} scenario(s)</span>
+              <span className="text-muted-foreground">{t("exec.resultsCount")}</span>
+              <span className="font-medium">{replaceParams(t("exec.resultsScenarios"), { count: String(execution.resultsCount) })}</span>
             </div>
           )}
         </div>
@@ -286,7 +290,7 @@ export function TestExecutionCard({
           <div className="mt-3 p-2 bg-red-50 dark:bg-[#3F1D1D] border border-red-200 dark:border-[#7F1D1D] rounded text-xs">
             <div className="flex items-center gap-1 text-red-700 dark:text-[#FCA5A5] mb-1">
               <XCircle className="h-3 w-3" />
-              <span className="font-medium">Error:</span>
+              <span className="font-medium">{t("exec.errorLabel")}</span>
             </div>
             <p className="text-red-600 dark:text-[#FCA5A5] line-clamp-2">
               {execution.errorMessage}

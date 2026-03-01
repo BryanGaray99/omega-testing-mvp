@@ -36,6 +36,7 @@ import {
 } from "lucide-react";
 import { Endpoint, EndpointMethod, FieldDefinition } from "../types/endpoint.types";
 import { getMethodColor } from "@/lib/colors";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface EndpointComprehensiveDialogProps {
   isOpen: boolean;
@@ -101,8 +102,8 @@ export default function EndpointComprehensiveDialog({
     return Object.keys(validations).filter(key => key !== 'required');
   };
 
-  // Estado para controlar si se muestran las validaciones para cada campo
   const [showValidationsForField, setShowValidationsForField] = React.useState<Record<string, boolean>>({});
+  const { t } = useTranslation();
 
   // Inicializar el estado de validaciones cuando se abre el diálogo
   React.useEffect(() => {
@@ -176,42 +177,42 @@ export default function EndpointComprehensiveDialog({
       <DialogContent className="sm:max-w-[900px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {selectedEndpoint?.name || "Endpoint Details"}
+            {selectedEndpoint?.name || t("endpoints.endpointDetails")}
           </DialogTitle>
           <DialogDescription>
-            View and edit endpoint details, generated artifacts, and analysis results.
+            {t("endpoints.viewEditEndpointDescription")}
           </DialogDescription>
         </DialogHeader>
         
         <Tabs defaultValue="basic" className="w-full">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="basic">Basic Info</TabsTrigger>
-            <TabsTrigger value="methods">Methods</TabsTrigger>
-            <TabsTrigger value="artifacts">Generated Artifacts</TabsTrigger>
-            <TabsTrigger value="analysis">Analysis Results</TabsTrigger>
-            <TabsTrigger value="timestamps">Timestamps</TabsTrigger>
+            <TabsTrigger value="basic">{t("endpoints.basicInfo")}</TabsTrigger>
+            <TabsTrigger value="methods">{t("endpoints.methods")}</TabsTrigger>
+            <TabsTrigger value="artifacts">{t("endpoints.generatedArtifacts")}</TabsTrigger>
+            <TabsTrigger value="analysis">{t("endpoints.analysisResults")}</TabsTrigger>
+            <TabsTrigger value="timestamps">{t("endpoints.timestamps")}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="basic" className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-lg">Basic Information</h3>
+              <h3 className="font-semibold text-lg">{t("endpoints.basicInformation")}</h3>
             </div>
 
             <div className="border rounded-lg p-4">
-              <h4 className="font-medium mb-3">Endpoint Details</h4>
+              <h4 className="font-medium mb-3">{t("endpoints.endpointDetailsLabel")}</h4>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Project</label>
-                  <p className="text-sm">{selectedEndpoint.projectName || 'Unknown Project'}</p>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.project")}</label>
+                  <p className="text-sm">{selectedEndpoint.projectName || t("endpoints.unknownProject")}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Base URL + API Path</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.baseUrlPath")}</label>
                   <p className="text-sm font-mono bg-muted px-2 py-1 rounded text-xs">
                     {projects.find(p => p.id === selectedEndpoint.projectId)?.baseUrl || 'http://localhost:3004'}{projects.find(p => p.id === selectedEndpoint.projectId)?.basePath || '/v1/api'}{selectedEndpoint.path}
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Section</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.section")}</label>
                   {isEditing ? (
                     <Input
                       value={editingComprehensiveEndpoint?.section || ''}
@@ -230,7 +231,7 @@ export default function EndpointComprehensiveDialog({
                   )}
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Entity</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.entity").replace(" *", "")}</label>
                   {isEditing ? (
                     <Input
                       value={editingComprehensiveEndpoint?.entityName || ''}
@@ -249,7 +250,7 @@ export default function EndpointComprehensiveDialog({
                   )}
                 </div>
                 <div className="col-span-2">
-                  <label className="text-sm font-medium text-muted-foreground">Path</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("endpoints.path").replace(" *", "")}</label>
                   {isEditing ? (
                     <Input
                       value={editingComprehensiveEndpoint?.path || ''}

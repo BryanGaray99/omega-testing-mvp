@@ -1,3 +1,5 @@
+import { useTranslation } from "@/contexts/LanguageContext";
+import { replaceParams } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,20 +34,21 @@ export default function TestExecutionDeleteDialog({
   onCancel,
   isPending,
 }: TestExecutionDeleteDialogProps) {
+  const { t } = useTranslation();
+  const id = deletingExecution?.executionId ?? "";
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-destructive">Delete Test Execution</DialogTitle>
+          <DialogTitle className="text-destructive">{t("exec.deleteTitle")}</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete the test execution
-            <strong> "{deletingExecution?.executionId}"</strong> and all its associated results.
+            {replaceParams(t("exec.deleteDescription"), { id })}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <Label htmlFor="delete-confirmation">
-              Type <strong>"{deletingExecution?.executionId}"</strong> to confirm
+              {replaceParams(t("exec.typeToConfirm"), { id })}
             </Label>
             <Input
               id="delete-confirmation"
@@ -58,20 +61,20 @@ export default function TestExecutionDeleteDialog({
           </div>
           <div className="p-3 bg-destructive/10 rounded-lg">
             <p className="text-xs text-destructive">
-              This will delete the test execution from the database and remove all associated test results and metadata.
+              {t("exec.deleteWarning")}
             </p>
           </div>
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onCancel}>
-            Cancel
+            {t("common.cancel")}
           </Button>
           <Button 
             variant="destructive"
             onClick={onConfirmDelete}
             disabled={isPending || deleteConfirmation !== deletingExecution?.executionId}
           >
-            {isPending ? "Deleting..." : "Delete Test Execution"}
+            {isPending ? t("exec.deleting") : t("exec.deleteButton")}
           </Button>
         </DialogFooter>
       </DialogContent>

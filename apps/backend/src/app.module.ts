@@ -39,6 +39,8 @@ import { TestSuite } from './modules/test-suites/entities/test-suite.entity';
 import { BugsModule } from './modules/bugs/bugs.module';
 import { TestSuitesModule } from './modules/test-suites/test-suites.module';
 import { SyncModule } from './modules/sync/sync.module';
+import { DataModule } from './modules/data/data.module';
+import { TestReportService } from './test-report/test-report.service';
 
 /**
  * Main Application Module
@@ -101,8 +103,9 @@ import { SyncModule } from './modules/sync/sync.module';
     BugsModule,
     TestSuitesModule,
     SyncModule,
+    DataModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, TestReportService],
 })
 export class AppModule {}

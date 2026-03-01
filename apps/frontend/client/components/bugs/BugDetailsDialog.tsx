@@ -44,6 +44,7 @@ import {
 } from '@/components/ui/tooltip';
 import { getPriorityColor, getSeverityColor, getStatusColor } from '@/lib/colors';
 import { normalizeTimeToSeconds } from '@/lib/utils';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 interface BugDetailsDialogProps {
   isOpen: boolean;
@@ -64,6 +65,7 @@ export default function BugDetailsDialog({
   onDelete,
   onClose,
 }: BugDetailsDialogProps) {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('basic-info');
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState<Partial<UpdateBugDto>>({});
@@ -136,10 +138,10 @@ export default function BugDetailsDialog({
             <div>
               <DialogTitle className="flex items-center gap-2">
                 <BugIcon className="h-5 w-5" />
-                Bug Details
+                {t("bugs.detailsTitle")}
               </DialogTitle>
               <DialogDescription>
-                Bug ID: {bug.bugId}
+                {t("bugs.detailsBugId")} {bug.bugId}
               </DialogDescription>
             </div>
           </div>
@@ -147,27 +149,26 @@ export default function BugDetailsDialog({
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="basic-info">Basic Info</TabsTrigger>
-            <TabsTrigger value="context">Context</TabsTrigger>
-            <TabsTrigger value="error-details">Error Details</TabsTrigger>
-            <TabsTrigger value="timestamps">Timestamps</TabsTrigger>
+            <TabsTrigger value="basic-info">{t("bugs.tabBasicInfo")}</TabsTrigger>
+            <TabsTrigger value="context">{t("bugs.tabContext")}</TabsTrigger>
+            <TabsTrigger value="error-details">{t("bugs.tabErrorDetails")}</TabsTrigger>
+            <TabsTrigger value="timestamps">{t("bugs.tabTimestamps")}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="basic-info" className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
-              {/* Bug Details */}
               <div className="border rounded-lg p-3">
-                <h4 className="font-medium mb-2">Bug Information</h4>
+                <h4 className="font-medium mb-2">{t("bugs.bugInformation")}</h4>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-2">
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Bug ID</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t("bugs.bugId")}</label>
                       <p className="text-sm font-mono bg-muted px-2 py-1 rounded text-xs">
                         {bug.bugId}
                       </p>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Title</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t("bugs.titleLabel")}</label>
                       {isEditing ? (
                         <Input
                           value={formData.title ?? bug.title}
@@ -179,7 +180,7 @@ export default function BugDetailsDialog({
                       )}
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Type</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t("bugs.typeLabel")}</label>
                       {isEditing ? (
                         <Select
                           value={formData.type ?? bug.type}
@@ -189,10 +190,10 @@ export default function BugDetailsDialog({
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value={BugType.SYSTEM_BUG}>System Bug</SelectItem>
-                            <SelectItem value={BugType.FRAMEWORK_ERROR}>Framework Error</SelectItem>
-                            <SelectItem value={BugType.TEST_FAILURE}>Test Failure</SelectItem>
-                            <SelectItem value={BugType.ENVIRONMENT_ISSUE}>Environment Issue</SelectItem>
+                            <SelectItem value={BugType.SYSTEM_BUG}>{t("bugs.typeSystemBug")}</SelectItem>
+                            <SelectItem value={BugType.FRAMEWORK_ERROR}>{t("bugs.typeFrameworkError")}</SelectItem>
+                            <SelectItem value={BugType.TEST_FAILURE}>{t("bugs.typeTestFailure")}</SelectItem>
+                            <SelectItem value={BugType.ENVIRONMENT_ISSUE}>{t("bugs.typeEnvironmentIssue")}</SelectItem>
                           </SelectContent>
                         </Select>
                       ) : (
@@ -202,7 +203,7 @@ export default function BugDetailsDialog({
                   </div>
                   <div className="space-y-2">
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Environment</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t("bugs.environmentLabel")}</label>
                       {isEditing ? (
                         <Input
                           value={formData.environment ?? bug.environment ?? ""}
@@ -214,7 +215,7 @@ export default function BugDetailsDialog({
                       )}
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Status</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t("bugs.statusLabel")}</label>
                       {isEditing ? (
                         <Select
                           value={formData.status ?? bug.status}
@@ -224,10 +225,10 @@ export default function BugDetailsDialog({
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value={BugStatus.OPEN}>Open</SelectItem>
-                            <SelectItem value={BugStatus.IN_PROGRESS}>In Progress</SelectItem>
-                            <SelectItem value={BugStatus.RESOLVED}>Resolved</SelectItem>
-                            <SelectItem value={BugStatus.CLOSED}>Closed</SelectItem>
+                            <SelectItem value={BugStatus.OPEN}>{t("bugs.statusOpen")}</SelectItem>
+                            <SelectItem value={BugStatus.IN_PROGRESS}>{t("bugs.statusInProgress")}</SelectItem>
+                            <SelectItem value={BugStatus.RESOLVED}>{t("bugs.statusResolved")}</SelectItem>
+                            <SelectItem value={BugStatus.CLOSED}>{t("bugs.statusClosed")}</SelectItem>
                           </SelectContent>
                         </Select>
                       ) : (
@@ -244,10 +245,10 @@ export default function BugDetailsDialog({
 
               {/* Bug Configuration */}
               <div className="border rounded-lg p-3">
-                <h4 className="font-medium mb-2">Bug Configuration</h4>
+                <h4 className="font-medium mb-2">{t("bugs.bugConfiguration")}</h4>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Severity</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t("bugs.severityLabel")}</label>
                     {isEditing ? (
                       <Select
                         value={formData.severity ?? bug.severity}
@@ -257,10 +258,10 @@ export default function BugDetailsDialog({
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value={BugSeverity.LOW}>Low</SelectItem>
-                          <SelectItem value={BugSeverity.MEDIUM}>Medium</SelectItem>
-                          <SelectItem value={BugSeverity.HIGH}>High</SelectItem>
-                          <SelectItem value={BugSeverity.CRITICAL}>Critical</SelectItem>
+                          <SelectItem value={BugSeverity.LOW}>{t("bugs.severityLow")}</SelectItem>
+                          <SelectItem value={BugSeverity.MEDIUM}>{t("bugs.severityMedium")}</SelectItem>
+                          <SelectItem value={BugSeverity.HIGH}>{t("bugs.severityHigh")}</SelectItem>
+                          <SelectItem value={BugSeverity.CRITICAL}>{t("bugs.severityCritical")}</SelectItem>
                         </SelectContent>
                       </Select>
                     ) : (
@@ -272,7 +273,7 @@ export default function BugDetailsDialog({
                     )}
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-muted-foreground">Priority</label>
+                    <label className="text-sm font-medium text-muted-foreground">{t("bugs.priorityLabel")}</label>
                     {isEditing ? (
                       <Select
                         value={formData.priority ?? bug.priority}
@@ -282,10 +283,10 @@ export default function BugDetailsDialog({
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value={BugPriority.LOW}>Low</SelectItem>
-                          <SelectItem value={BugPriority.MEDIUM}>Medium</SelectItem>
-                          <SelectItem value={BugPriority.HIGH}>High</SelectItem>
-                          <SelectItem value={BugPriority.CRITICAL}>Critical</SelectItem>
+                          <SelectItem value={BugPriority.LOW}>{t("bugs.severityLow")}</SelectItem>
+                          <SelectItem value={BugPriority.MEDIUM}>{t("bugs.severityMedium")}</SelectItem>
+                          <SelectItem value={BugPriority.HIGH}>{t("bugs.severityHigh")}</SelectItem>
+                          <SelectItem value={BugPriority.CRITICAL}>{t("bugs.severityCritical")}</SelectItem>
                         </SelectContent>
                       </Select>
                     ) : (
@@ -539,17 +540,17 @@ export default function BugDetailsDialog({
             {!isEditing ? (
               <Button variant="default" onClick={() => setIsEditing(true)}>
                 <Edit className="h-4 w-4 mr-2" />
-                Edit
+                {t("bugs.editBug")}
               </Button>
             ) : (
               <>
                 <Button variant="outline" onClick={handleCancel}>
                   <X className="h-4 w-4 mr-2" />
-                  Cancel
+                  {t("bugs.cancelEdit")}
                 </Button>
                 <Button onClick={handleSave} disabled={isUpdating}>
                   <Save className="h-4 w-4 mr-2" />
-                  {isUpdating ? "Saving..." : "Save"}
+                  {isUpdating ? t("bugs.saving") : t("bugs.saveBug")}
                 </Button>
               </>
             )}
@@ -558,7 +559,7 @@ export default function BugDetailsDialog({
               onClick={onDelete}
             >
               <Trash2 className="h-4 w-4 mr-2" />
-              Delete Bug
+              {t("bugs.deleteBugButton")}
             </Button>
           </div>
         </DialogFooter>

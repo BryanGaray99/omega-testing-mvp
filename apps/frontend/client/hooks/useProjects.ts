@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 
-// API Configuration
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/v1/api";
+// API Configuration (relative /v1/api works in dev via proxy and in build when server proxies to backend)
+const API_BASE = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || "/v1/api";
 
 interface Project {
   id: string;

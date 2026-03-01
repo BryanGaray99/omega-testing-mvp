@@ -1,360 +1,360 @@
-# 🚀 Central Backend MVP - Generador de Proyectos de Testing
+# 🚀 Central Backend MVP - Testing Project Generator
 
-## Repositorio Frontend - Trabajo de titulación 
+## Backend Repository - Thesis Project
 
-## Autor: Bryan Enrique Garay Benavidez
+## Author: Bryan Enrique Garay Benavidez
 
-## 📋 Descripción del Proyecto
+## 📋 Project Description
 
-Este es el **motor de generación** de un sistema completo de testing automatizado. Su propósito es crear automáticamente proyectos de testing Playwright + BDD en TypeScript a partir de una configuración simple.
+This is the **generation engine** of a complete automated testing system. Its purpose is to automatically create Playwright + BDD testing projects in TypeScript from a simple configuration.
 
-## 🏗️ Arquitectura del MVP
+## 🏗️ MVP Architecture
 
-![Arquitectura del MVP](arquitectura.png)
+![MVP Architecture](arquitectura.png)
 
-### Componentes del diagrama
+### Diagram Components
 
 - **Public Frontend**
-  - *Tecnologías*: Landing Page (React + TypeScript, AWS Amplify)
-  - *Descripción*: Portal web que reúne documentación, descargas y recursos de soporte, facilitando el acceso y la adopción de la solución desde cualquier entorno.
+  - *Technologies*: Landing Page (React + TypeScript, AWS Amplify)
+  - *Description*: Web portal that brings together documentation, downloads, and support resources, facilitating access and adoption of the solution from any environment.
 
 - **Admin Dashboard**
-  - *Tecnologías*: Dashboard privado (React + TypeScript, AWS Amplify, Cognito)
-  - *Descripción*: Panel exclusivo para administración y monitoreo, con acceso restringido para el owner, permitiendo ajustes operativos y control centralizado del sistema.
+  - *Technologies*: Private dashboard (React + TypeScript, AWS Amplify, Cognito)
+  - *Description*: Exclusive panel for administration and monitoring, with restricted access for the owner, enabling operational adjustments and centralized system control.
 
 - **Local User Environment**
-  - *Tecnologías*: Dashboard local (React + TypeScript), Backend local (NestJS + TypeScript), Repositorio Git
-  - *Descripción*: Entorno ejecutado en la máquina del usuario para gestionar pruebas, configuraciones y versionado, manteniendo privacidad y control total de los datos.
+  - *Technologies*: Local dashboard (React + TypeScript), Local backend (NestJS + TypeScript), Git repository
+  - *Description*: Environment running on the user's machine to manage tests, configurations, and versioning, maintaining full privacy and control of data.
 
 - **AI Service**
-  - *Tecnologías*: OpenAI API (modelo fine-tuned)
-  - *Descripción*: Servicio externo que genera y edita casos de prueba a partir de lenguaje natural, integrando capacidades avanzadas de automatización sin exponer datos sensibles.
+  - *Technologies*: OpenAI API (fine-tuned model)
+  - *Description*: External service that generates and edits test cases from natural language, integrating advanced automation capabilities without exposing sensitive data.
 
 - **Cloud Backend**
-  - *Tecnologías*: API REST (AWS Lambda + NestJS + TypeScript), RDS (PostgreSQL), Secrets Manager, CloudWatch, S3
-  - *Descripción*: Núcleo serverless que procesa solicitudes de IA, gestiona usuarios, almacena métricas y logs, protege credenciales y administra archivos grandes de manera segura y escalable.
+  - *Technologies*: REST API (AWS Lambda + NestJS + TypeScript), RDS (PostgreSQL), Secrets Manager, CloudWatch, S3
+  - *Description*: Serverless core that processes AI requests, manages users, stores metrics and logs, protects credentials, and securely and scalably manages large files.
 
-### Herramientas, versiones y librerías principales
+### Main tools, versions and libraries
 
 - **Frontend (React + TypeScript)**
-  - Librerías: React 18+, TypeScript 4+, AWS Amplify para despliegue y hosting, integración con AWS Cognito para autenticación.
-  - Herramientas de documentación y descarga integradas en la landing page.
+  - Libraries: React 18+, TypeScript 4+, AWS Amplify for deployment and hosting, integration with AWS Cognito for authentication.
+  - Documentation and download tools integrated into the landing page.
 
 - **Admin Dashboard**
-  - React 18+, TypeScript, AWS Amplify, AWS Cognito para autenticación y control de acceso.
+  - React 18+, TypeScript, AWS Amplify, AWS Cognito for authentication and access control.
 
-- **Backend Local (NestJS + TypeScript)**
-  - NestJS 9+, TypeScript 4+, TypeORM para persistencia local (SQLite en MVP), middlewares de validación y logging.
-  - Autenticación JWT (planificada para futuras fases), gestión de proyectos y endpoints vía API REST.
+- **Local Backend (NestJS + TypeScript)**
+  - NestJS 9+, TypeScript 4+, TypeORM for local persistence (SQLite in MVP), validation and logging middlewares.
+  - JWT authentication (planned for future phases), project management and endpoints via REST API.
 
-- **Repositorio Git**
-  - Git local/remoto para versionado y control de cambios de los proyectos generados.
+- **Git Repository**
+  - Local/remote Git for versioning and change control of generated projects.
 
 - **AI Service**
-  - OpenAI API (modelos fine-tuned, integración vía REST), sin almacenamiento de datos sensibles en la nube.
+  - OpenAI API (fine-tuned models, REST integration), no storage of sensitive data in the cloud.
 
 - **Cloud Backend (Serverless)**
-  - AWS Lambda (Node.js 18+), NestJS, PostgreSQL (AWS RDS), AWS Secrets Manager para gestión de credenciales, AWS CloudWatch para logs y métricas, AWS S3 para almacenamiento de archivos grandes.
-  - Middlewares de seguridad, validación y logging.
-  - Autenticación y autorización mediante API Keys y AWS Cognito.
+  - AWS Lambda (Node.js 18+), NestJS, PostgreSQL (AWS RDS), AWS Secrets Manager for credential management, AWS CloudWatch for logs and metrics, AWS S3 for large file storage.
+  - Security, validation and logging middlewares.
+  - Authentication and authorization via API Keys and AWS Cognito.
 
 ---
 
-## 📋 Requisitos
+## 📋 Requirements
 
-- **Node.js** (versión 18 o superior)
-- **npm** (incluido con Node.js)
+- **Node.js** (version 18 or higher)
+- **npm** (included with Node.js)
 
-## 🎯 Propósito de este MVP
+## 🎯 Purpose of this MVP
 
-Este es el **motor de generación** del sistema completo. Se enfoca en crear proyectos de testing automáticamente desde una configuración simple. 
+This is the **generation engine** of the complete system. It focuses on creating testing projects automatically from a simple configuration.
 
-**¿Por qué instalación directa?**
-- Este MVP está diseñado para ejecutarse **localmente** donde se generarán los proyectos
-- Genera archivos, instala dependencias y ejecuta comandos npm/playwright
-- En contenedores sería costoso y complejo manejar múltiples instalaciones de dependencias
-- La parte que irá en la nube (con IA) será una fase posterior separada
+**Why direct installation?**
+- This MVP is designed to run **locally** where projects will be generated
+- It generates files, installs dependencies, and runs npm/playwright commands
+- In containers it would be costly and complex to manage multiple dependency installations
+- The part that will go to the cloud (with AI) will be a separate later phase
 
-## 🚀 Instalación y Ejecución
+## 🚀 Installation and Running
 
-### Método 1: Instalación Directa con Node.js (⭐ RECOMENDADO)
+### Method 1: Direct Installation with Node.js (⭐ RECOMMENDED)
 
-Este es el método recomendado para este MVP del motor de generación.
+This is the recommended method for this generation engine MVP.
 
-#### 1. Clonar el Repositorio
+#### 1. Clone the Repository
 ```bash
 git clone https://github.com/BryanGaray99/central-backend-mvp.git
 cd central-backend-mvp
 ```
 
-#### 2. Configurar Variables de Entorno
+#### 2. Configure Environment Variables
 ```bash
-# Copiar el archivo de ejemplo
+# Copy the example file
 cp .env.example .env
 
-# Editar las variables según tu configuración
-# Especialmente importante:
-# - PORT: Puerto del servidor (default: 3000)
-# - DATABASE_PATH: Ruta de la base de datos SQLite
-# - PLAYWRIGHT_WORKSPACES_PATH: Ruta para los workspaces generados
+# Edit variables according to your setup
+# Especially important:
+# - PORT: Server port (default: 3000)
+# - DATABASE_PATH: SQLite database path
+# - PLAYWRIGHT_WORKSPACES_PATH: Path for generated workspaces
 ```
 
-#### 3. Instalar Dependencias
+#### 3. Install Dependencies
 ```bash
 npm install
 ```
 
-#### 4. Ejecutar el Servidor
+#### 4. Run the Server
 ```bash
 npm run start:dev
 ```
 
-#### 5. Verificar que Funciona
+#### 5. Verify It Works
 - **API**: http://localhost:3000
-- **Documentación**: http://localhost:3000/docs
+- **Documentation**: http://localhost:3000/docs
 - **Health Check**: http://localhost:3000/v1/api/health
 
-### ⚠️ Configuración del Archivo .env
+### ⚠️ .env File Configuration
 
-Asegúrate de que tu archivo `.env` contenga las siguientes variables según el ejemplo `.env.example`:
+Make sure your `.env` file contains the following variables as in the `.env.example`:
 
 ```env
-# Puerto del servidor
+# Server port
 PORT=3000
 
-# Ruta de la base de datos SQLite
+# SQLite database path
 DATABASE_PATH=central-backend.sqlite
 
-# Ruta donde se crearán los workspaces de Playwright
+# Path where Playwright workspaces will be created
 PLAYWRIGHT_WORKSPACES_PATH=../playwright-workspaces
 
-# Nivel de logging
+# Logging level
 LOG_LEVEL=debug
 
-# Clave secreta JWT (para futuras integraciones)
+# JWT secret key (for future integrations)
 JWT_SECRET=your-secret-key
 
-# API Key (para futuras integraciones de seguridad)
+# API Key (for future security integrations)
 API_KEY=your-api-key
 
-# Configuración de generación
+# Generation configuration
 OVERRIDE_EXISTING=false
 
-# Ruta al directorio de plantillas base
+# Path to base template directory
 TEMPLATE_DIR=../e-commerce.playwright-testing-model
 ```
 
-### Método 2: Con Docker (Solo para desarrollo/pruebas)
+### Method 2: With Docker (Development/testing only)
 
-⚠️ **Nota**: Se configuró el Docker pero lo ideal sería instalarlo localmente ya que este MVP es para la parte de la solución que se instalaría localmente. 
+⚠️ **Note**: Docker is configured for convenience, but the recommended approach is to install and run the backend locally, since this MVP is the part of the solution that is intended to run on the user's machine.
 
 ```bash
 docker-compose up --build
 ```
 
-### 🎯 ¿Qué hace este MVP?
+### 🎯 What Does This MVP Do?
 
-1. **Genera proyectos completos** de testing con Playwright + Cucumber
-2. **Instala automáticamente** todas las dependencias necesarias
-3. **Crea la estructura de carpetas** estándar para BDD
-4. **Genera archivos de configuración** (playwright.config.ts, cucumber.cjs, etc.)
-5. **Ejecuta health checks** para validar que todo funciona
-6. **Gestiona endpoints** para analizar APIs y generar artefactos de testing
+1. **Generates complete projects** for testing with Playwright + Cucumber
+2. **Automatically installs** all required dependencies
+3. **Creates the standard folder structure** for BDD
+4. **Generates configuration files** (playwright.config.ts, cucumber.cjs, etc.)
+5. **Runs health checks** to validate that everything works
+6. **Manages endpoints** to analyze APIs and generate testing artifacts
 
-### 🏗️ Arquitectura del Sistema Completo
+### 🏗️ Complete System Architecture
 
-Este MVP es la **primera parte** de un sistema más grande:
+This MVP is the **first part** of a larger system:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    SISTEMA COMPLETO                         │
+│                    COMPLETE SYSTEM                          │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│   Backend con IA - Fase Posterior                           │
-│  ├── Ejecuta en la nube con Docker                          │
-│  ├── Recibe peticiones en lenguaje natural                  │
-│  ├── Traduce a JSON de generación                           │
-│  └── Se comunica con este motor local                       │
+│   AI Backend - Later Phase                                  │
+│  ├── Runs in the cloud with Docker                          │
+│  ├── Receives requests in natural language                  │
+│  ├── Translates to generation JSON                          │
+│  └── Communicates with this local engine                    │
 │                                                             │
-│  Motor de Generación (Este MVP)                             │
-│  ├── Ejecuta localmente                                     │
-│  ├── Genera proyectos de testing                            │
-│  ├── Instala dependencias                                   │
-│  └── Valida que todo funcione                               │
+│  Generation Engine (This MVP)                               │
+│  ├── Runs locally                                           │
+│  ├── Generates testing projects                             │
+│  ├── Installs dependencies                                  │
+│  └── Validates that everything works                        │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## 📊 Status Actual del MVP
+## 📊 Current MVP Status
 
-### ✅ **Completado**
-- ✅ Backend NestJS con TypeORM y SQLite
-- ✅ Sistema de detección automática de puertos (3000, 3001, 3002)
-- ✅ Generación de proyectos Playwright + BDD
-- ✅ Instalación automática de dependencias
-- ✅ Health checks robustos
-- ✅ Sistema de colas para generación asíncrona
-- ✅ Limpieza automática en caso de fallos
-- ✅ Gestión de workspaces aislados
-- ✅ API REST completa con Swagger
-- ✅ Validación de entrada y manejo de errores
-- ✅ Módulo de endpoints para análisis de APIs
+### ✅ **Completed**
+- ✅ NestJS backend with TypeORM and SQLite
+- ✅ Automatic port detection system (3000, 3001, 3002)
+- ✅ Playwright + BDD project generation
+- ✅ Automatic dependency installation
+- ✅ Robust health checks
+- ✅ Queue system for asynchronous generation
+- ✅ Automatic cleanup on failure
+- ✅ Isolated workspace management
+- ✅ Complete REST API with Swagger
+- ✅ Input validation and error handling
+- ✅ Endpoints module for API analysis
 
-### 🔄 **En Desarrollo**
-- 🔄 Generación de artefactos de testing (features, steps, fixtures)
-- 🔄 Análisis automático de endpoints de APIs
-- 🔄 Validación de proyectos generados
+### 🔄 **In Development**
+- 🔄 Testing artifact generation (features, steps, fixtures)
+- 🔄 Automatic API endpoint analysis
+- 🔄 Generated project validation
 
-### 📋 **Próximos Pasos**
-- 📋 Módulo de casos de prueba específicos
-- 📋 Sistema de ejecución y reportes
-- 📋 Integración con el backend de IA (fase posterior)
+### 📋 **Next Steps**
+- 📋 Specific test case module
+- 📋 Execution and reporting system
+- 📋 AI backend integration (later phase)
 
 
-## 📚 Endpoints Disponibles
+## 📚 Available Endpoints
 
-### Proyectos
-- `POST /projects` - Crear proyecto
-- `GET /projects` - Listar proyectos
-- `GET /projects/:id` - Obtener proyecto
-- `PUT /projects/:id` - Actualizar proyecto
-- `DELETE /projects/:id` - Eliminar proyecto
+### Projects
+- `POST /projects` - Create project
+- `GET /projects` - List projects
+- `GET /projects/:id` - Get project
+- `PUT /projects/:id` - Update project
+- `DELETE /projects/:id` - Delete project
 
 ### Endpoints
-- `POST /endpoints/register` - Registrar y analizar endpoint
-- `GET /endpoints/:projectId` - Listar endpoints de un proyecto
-- `PUT /endpoints/:id` - Actualizar endpoint
-- `DELETE /endpoints/:id` - Eliminar endpoint
+- `POST /endpoints/register` - Register and analyze endpoint
+- `GET /endpoints/:projectId` - List endpoints for a project
+- `PUT /endpoints/:id` - Update endpoint
+- `DELETE /endpoints/:id` - Delete endpoint
 
 ### Test Cases
-- `POST /test-cases` - Crear caso de prueba
-- `GET /test-cases` - Listar casos de prueba
-- `GET /test-cases/:id` - Obtener caso de prueba
-- `PUT /test-cases/:id` - Actualizar caso de prueba
-- `DELETE /test-cases/:id` - Eliminar caso de prueba
-- `POST /test-cases/:id/duplicate` - Duplicar caso de prueba
-- `GET /test-cases/:id/export` - Exportar caso de prueba
+- `POST /test-cases` - Create test case
+- `GET /test-cases` - List test cases
+- `GET /test-cases/:id` - Get test case
+- `PUT /test-cases/:id` - Update test case
+- `DELETE /test-cases/:id` - Delete test case
+- `POST /test-cases/:id/duplicate` - Duplicate test case
+- `GET /test-cases/:id/export` - Export test case
 
 ### Test Steps
-- `POST /test-cases/steps` - Crear plantilla de step
-- `GET /test-cases/steps` - Listar plantillas de steps
-- `GET /test-cases/steps/:id` - Obtener plantilla de step
-- `PUT /test-cases/steps/:id` - Actualizar plantilla de step
-- `DELETE /test-cases/steps/:id` - Eliminar plantilla de step
+- `POST /test-cases/steps` - Create step template
+- `GET /test-cases/steps` - List step templates
+- `GET /test-cases/steps/:id` - Get step template
+- `PUT /test-cases/steps/:id` - Update step template
+- `DELETE /test-cases/steps/:id` - Delete step template
 
 ### Test Execution
-- `POST /test-execution/execute` - Ejecutar tests
-- `GET /test-execution/status` - Obtener estado de ejecución
-- `GET /test-execution/results` - Obtener resultados
-- `POST /test-execution/stop` - Detener ejecución
-- `GET /test-execution/history` - Historial de ejecuciones
+- `POST /test-execution/execute` - Execute tests
+- `GET /test-execution/status` - Get execution status
+- `GET /test-execution/results` - Get results
+- `POST /test-execution/stop` - Stop execution
+- `GET /test-execution/history` - Execution history
 
-## 🧪 Probar la API
+## 🧪 Testing the API
 
-### Crear un Proyecto
+### Create a Project
 ```bash
 curl -X POST http://localhost:3000/projects \
 -H "Content-Type: application/json" \
 -d '{
-  "name": "mi-proyecto-test",
-  "displayName": "Mi Proyecto de Testing",
+  "name": "my-test-project",
+  "displayName": "My Testing Project",
   "baseUrl": "http://localhost:3004",
   "metadata": {
-    "author": "Tu Nombre",
-    "description": "Proyecto de prueba"
+    "author": "Your Name",
+    "description": "Test project"
   }
 }'
 ```
 
-### Listar Proyectos
+### List Projects
 ```bash
 curl http://localhost:3000/projects
 ```
 
-### Verificar Health
+### Verify Health
 ```bash
 curl http://localhost:3000/health
 ```
 
-## 🛠️ Scripts Disponibles
+## 🛠️ Available Scripts
 
 ```bash
-npm run start:dev    # Desarrollo (hot reload)
-npm run build        # Construir para producción
-npm run start:prod   # Ejecutar en producción
-npm run test         # Ejecutar tests
+npm run start:dev    # Development (hot reload)
+npm run build        # Build for production
+npm run start:prod   # Run in production
+npm run test         # Run tests
 ```
 
-## 🛠️ Solución de Problemas
+## 🛠️ Troubleshooting
 
-### Puerto ocupado
-El sistema automáticamente prueba puertos 3000, 3001 y 3002. Si todos están ocupados, puedes especificar manualmente:
+### Port in use
+The system automatically tries ports 3000, 3001, and 3002. If all are in use, you can specify manually:
 ```bash
 PORT=3003 npm run start:dev
 ```
 
-### Problemas de dependencias
+### Dependency issues
 ```bash
 npm cache clean --force
 rm -rf node_modules package-lock.json
 npm install
 ```
 
-### Base de datos corrupta
+### Corrupted database
 ```bash
 rm central-backend.sqlite
 npm run start:dev
 ```
 
-### Configuración opcional con .env
-Si quieres personalizar la configuración, puedes crear un archivo `.env`:
+### Optional configuration with .env
+If you want to customize the configuration, you can create an `.env` file:
 ```bash
-# Crear archivo .env (opcional)
+# Create .env file (optional)
 cp .env.example .env
 
-# Editar las variables según tus necesidades
-nano .env  # o usar tu editor preferido
+# Edit variables according to your needs
+nano .env  # or use your preferred editor
 ```
 
-### Variables de entorno disponibles
-Si creas un archivo `.env`, puedes configurar estas variables:
-- `PORT`: Puerto del servidor (default: 3000)
-- `PLAYWRIGHT_WORKSPACES_PATH`: Ruta para workspaces (default: ../playwright-workspaces)
-- `LOG_LEVEL`: Nivel de logging (default: debug)
-- `JWT_SECRET`: Clave secreta JWT (default: your-secret-key)
-- `API_KEY`: API Key para seguridad (default: your-api-key)
+### Available environment variables
+If you create an `.env` file, you can configure these variables:
+- `PORT`: Server port (default: 3000)
+- `PLAYWRIGHT_WORKSPACES_PATH`: Path for workspaces (default: ../playwright-workspaces)
+- `LOG_LEVEL`: Logging level (default: debug)
+- `JWT_SECRET`: JWT secret key (default: your-secret-key)
+- `API_KEY`: API Key for security (default: your-api-key)
 
-## 📁 Estructura
+## 📁 Structure
 
 ```
 src/
 ├── modules/
-│   ├── projects/     # Gestión de proyectos
-│   ├── endpoints/    # Gestión de endpoints
-│   └── workspace/    # Gestión de workspaces
-├── common/           # Utilidades comunes
-└── main.ts          # Punto de entrada
+│   ├── projects/     # Project management
+│   ├── endpoints/    # Endpoint management
+│   └── workspace/    # Workspace management
+├── common/           # Common utilities
+└── main.ts          # Entry point
 ```
 
-## 📝 Notas Importantes
+## 📝 Important Notes
 
-- **Ejecución Local**: Este MVP está diseñado para ejecutarse localmente donde se generarán los proyectos
-- **Base de datos**: SQLite se crea automáticamente en la ruta `../playwright-workspaces/central-backend.sqlite`
-- **Workspaces**: Se generan en la ruta `../playwright-workspaces` por defecto
-- **Documentación**: Swagger UI disponible en `/docs`
-- **Configuración**: El proyecto funciona sin archivo `.env` usando valores por defecto
-- **Variables opcionales**: Puedes crear un archivo `.env` para personalizar la configuración
+- **Local Execution**: This MVP is designed to run locally where projects will be generated
+- **Database**: SQLite is created automatically at path `../playwright-workspaces/central-backend.sqlite`
+- **Workspaces**: Generated at path `../playwright-workspaces` by default
+- **Documentation**: Swagger UI available at `/docs`
+- **Configuration**: The project works without an `.env` file using default values
+- **Optional variables**: You can create an `.env` file to customize the configuration
 
-## 🔮 Arquitectura Futura
+## 🔮 Future Architecture
 
-Este MVP es solo la primera parte del sistema completo:
+This MVP is only the first part of the complete system:
 
-1. **Motor de Generación** (este MVP) - Ejecuta localmente
-2. **Backend con IA** (fase posterior) - Ejecuta en la nube con Docker
-   - Gestiona peticiones de lenguaje natural
-   - Traduce descripciones a JSON de generación
-   - Se comunica con este motor local
+1. **Generation Engine** (this MVP) - Runs locally
+2. **AI Backend** (later phase) - Runs in the cloud with Docker
+   - Handles natural language requests
+   - Translates descriptions to generation JSON
+   - Communicates with this local engine
 
 ---
 
-**¡Listo! El servidor estará ejecutándose en http://localhost:3000**
+**Done! The server will be running at http://localhost:3000**

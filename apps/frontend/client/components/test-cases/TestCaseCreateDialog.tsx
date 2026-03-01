@@ -25,6 +25,8 @@ import {
   ChevronRight
 } from "lucide-react";
 import { suggestTestCases, createTestCase, getProjectSectionsAndEntities, getProjectEntities } from "@/services/testCaseService";
+import { useTranslation } from "@/contexts/LanguageContext";
+import { replaceParams } from "@/lib/translations";
 
 interface ProjectOption {
   id: string;
@@ -59,6 +61,7 @@ export default function TestCaseCreateDialog({
   projects,
   onCreateWithData,
 }: TestCaseCreateDialogProps) {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("predef");
   const [subTab, setSubTab] = useState("basic");
@@ -213,14 +216,14 @@ export default function TestCaseCreateDialog({
   const getProjectName = (p?: ProjectOption) => p?.name || p?.id || "";
 
   const validatePredefined = (scenario: string, tags: string[]) => {
-    if (!projectId) return "Project is required";
-    if (!section) return "Section is required";
-    if (!entityName) return "Entity is required";
-    if (!method) return "Method is required";
-    if (!testType) return "Test type is required";
-    if (!description) return "Description is required";
-    if (!scenario.trim()) return "Scenario is required";
-    if (tags.length === 0) return "At least one tag is required";
+    if (!projectId) return t("caseCreate.validationProjectRequired");
+    if (!section) return t("caseCreate.validationSectionRequired");
+    if (!entityName) return t("caseCreate.validationEntityRequired");
+    if (!method) return t("caseCreate.validationMethodRequired");
+    if (!testType) return t("caseCreate.validationTestTypeRequired");
+    if (!description) return t("caseCreate.validationDescriptionRequired");
+    if (!scenario.trim()) return t("caseCreate.validationScenarioRequired");
+    if (tags.length === 0) return t("caseCreate.validationTagRequired");
     return null;
   };
 
@@ -228,7 +231,7 @@ export default function TestCaseCreateDialog({
     if (isSubmitting) return;
     const err = validatePredefined(scenario, stepTags);
     if (err) {
-      toast({ title: "Validation error", description: err, variant: "destructive" });
+      toast({ title: t("caseCreate.validationError"), description: err, variant: "destructive" });
       setScenarioText(scenario);
       setScenarioTags(stepTags);
       return;
@@ -250,11 +253,11 @@ export default function TestCaseCreateDialog({
       };
       
       await createTestCase(testCaseData);
-      toast({ title: "Success", description: "Test case created successfully" });
+      toast({ title: t("common.success"), description: t("caseCreate.toastSuccess") });
       onCreateWithData(testCaseData, projectId);
       onOpenChange(false);
     } catch (e: any) {
-      toast({ title: "Error", description: e?.message || "Failed to create test case", variant: "destructive" });
+      toast({ title: t("common.error"), description: e?.message || t("caseCreate.toastError"), variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }
@@ -262,7 +265,7 @@ export default function TestCaseCreateDialog({
 
   const handleSuggest = async () => {
     if (!projectId || !entityName || !section || !suggestRequirements) {
-      toast({ title: "Validation error", description: "Project, Section, Entity and Requirements are required", variant: "destructive" });
+      toast({ title: t("caseCreate.validationError"), description: t("caseCreate.validationProjectSectionEntityReq"), variant: "destructive" });
       return;
     }
 
@@ -292,14 +295,14 @@ export default function TestCaseCreateDialog({
       const next = [...suggestions, item];
       setSuggestions(next);
       localStorage.setItem(suggestionsKey, JSON.stringify({ items: next }));
-      toast({ title: "Suggestions generated", description: `${res.totalSuggestions} AI suggestions added to local cache` });
+      toast({ title: t("common.success"), description: replaceParams(t("caseCreate.toastSuggestionsGenerated"), { count: String(res.totalSuggestions) }) });
     } catch (e:any) {
-      toast({ title: "Error", description: e?.message || "Failed to generate suggestions", variant: "destructive" });
+      toast({ title: t("common.error"), description: e?.message || t("caseCreate.toastFailedSuggestions"), variant: "destructive" });
     }
   };
 
   const ensureAssistant = async (operationType: 'generate' | 'suggest'): Promise<boolean> => {
-    const coreBase = import.meta.env.VITE_CORE_AGENT_URL || import.meta.env.VITE_API_URL || 'http://localhost:3000/v1/api';
+    const coreBase = import.meta.env.VITE_CORE_AGENT_URL || import.meta.env.VITE_API_URL || "/v1/api";
     try {
       const res = await fetch(`${coreBase}/projects/${projectId}/ai/assistant`, { method: 'GET' });
       if (res.ok) return true;
@@ -329,7 +332,7 @@ export default function TestCaseCreateDialog({
 
   const handleGenerateWithAI = async () => {
     if (!projectId || !entityName || !section || !aiRequirements) {
-      toast({ title: "Validation error", description: "Project, Section, Entity and Requirements are required", variant: "destructive" });
+      toast({ title: t("caseCreate.validationError"), description: t("caseCreate.validationProjectSectionEntityReq"), variant: "destructive" });
       return;
     }
 
@@ -349,7 +352,7 @@ export default function TestCaseCreateDialog({
     setAiMeta(null);
     setGenerationProgress('processing');
     try {
-      const base = import.meta.env.VITE_API_URL || 'http://localhost:3000/v1/api';
+      const base = import.meta.env.VITE_API_URL || "/v1/api";
       setGenerationProgress('analyzing');
       const res = await fetch(`${base}/projects/${projectId}/test-cases/ai/generate`, {
         method: 'POST',
@@ -431,33 +434,33 @@ export default function TestCaseCreateDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[1000px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Create Test Case</DialogTitle>
+          <DialogTitle>{t("caseCreate.title")}</DialogTitle>
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="predef">Predefined</TabsTrigger>
-            <TabsTrigger value="ai">AI</TabsTrigger>
-            <TabsTrigger value="suggest">Suggested</TabsTrigger>
+            <TabsTrigger value="predef">{t("caseCreate.tabPredefined")}</TabsTrigger>
+            <TabsTrigger value="ai">{t("caseCreate.tabAi")}</TabsTrigger>
+            <TabsTrigger value="suggest">{t("caseCreate.tabSuggested")}</TabsTrigger>
           </TabsList>
 
           {/* Predefined */}
           <TabsContent value="predef" className="space-y-3">
             <div className="border rounded-lg p-3">
-              <h4 className="font-medium mb-2">Create case with existing steps</h4>
+              <h4 className="font-medium mb-2">{t("caseCreate.predefSubtitle")}</h4>
               <Tabs value={subTab} onValueChange={setSubTab} className="w-full">
                 <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="basic">Basic Info</TabsTrigger>
-                  <TabsTrigger value="scenario">Scenario</TabsTrigger>
+                  <TabsTrigger value="basic">{t("caseCreate.subTabBasicInfo")}</TabsTrigger>
+                  <TabsTrigger value="scenario">{t("caseCreate.subTabScenario")}</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="basic" className="space-y-3">
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Project</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelProject")}</label>
                       <Select value={projectId} onValueChange={setProjectId}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select project" />
+                          <SelectValue placeholder={t("caseCreate.placeholderSelectProject")} />
                         </SelectTrigger>
                         <SelectContent>
                           {projects.map((p) => (
@@ -467,10 +470,10 @@ export default function TestCaseCreateDialog({
                       </Select>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Section</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelSection")}</label>
                       <Select value={section} onValueChange={setSection} disabled={isLoadingSections}>
                         <SelectTrigger>
-                          <SelectValue placeholder={isLoadingSections ? "Loading sections..." : "Select section"} />
+                          <SelectValue placeholder={isLoadingSections ? t("caseCreate.placeholderLoadingSections") : t("caseCreate.placeholderSelectSection")} />
                         </SelectTrigger>
                         <SelectContent>
                           {availableSections.map((s) => (
@@ -479,17 +482,17 @@ export default function TestCaseCreateDialog({
                         </SelectContent>
                       </Select>
                       {availableSections.length === 0 && !isLoadingSections && (
-                        <p className="text-xs text-muted-foreground mt-1">No sections available for this project</p>
+                        <p className="text-xs text-muted-foreground mt-1">{t("caseCreate.msgNoSectionsAvailable")}</p>
                       )}
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Entity</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelEntity")}</label>
                       <Select value={entityName} onValueChange={setEntityName} disabled={!section || isLoadingEntities}>
                         <SelectTrigger>
                           <SelectValue placeholder={
-                            !section ? "Select section first" : 
-                            isLoadingEntities ? "Loading entities..." : 
-                            "Select entity"
+                            !section ? t("caseCreate.placeholderSelectSectionFirst") : 
+                            isLoadingEntities ? t("caseCreate.placeholderLoadingEntities") : 
+                            t("caseCreate.placeholderSelectEntity")
                           } />
                         </SelectTrigger>
                         <SelectContent>
@@ -499,17 +502,17 @@ export default function TestCaseCreateDialog({
                         </SelectContent>
                       </Select>
                       {!section && (
-                        <p className="text-xs text-muted-foreground mt-1">Select a section first</p>
+                        <p className="text-xs text-muted-foreground mt-1">{t("caseCreate.msgSelectSectionFirst")}</p>
                       )}
                       {section && availableEntities.length === 0 && !isLoadingEntities && (
-                        <p className="text-xs text-muted-foreground mt-1">No entities available for this section</p>
+                        <p className="text-xs text-muted-foreground mt-1">{t("caseCreate.msgNoEntitiesAvailable")}</p>
                       )}
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Method</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelMethod")}</label>
                       <Select value={method} onValueChange={setMethod}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select method" />
+                          <SelectValue placeholder={t("caseCreate.placeholderSelectMethod")} />
                         </SelectTrigger>
                         <SelectContent>
                           {methodsForSelection.map((m) => (
@@ -519,21 +522,21 @@ export default function TestCaseCreateDialog({
                       </Select>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Test Type</label>
+                      <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelTestType")}</label>
                       <Select value={testType} onValueChange={setTestType}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select test type" />
+                          <SelectValue placeholder={t("caseCreate.placeholderSelectTestType")} />
                         </SelectTrigger>
                         <SelectContent>
-                          {testTypesForSelection.map((t) => (
-                            <SelectItem key={t} value={t}>{t}</SelectItem>
+                          {testTypesForSelection.map((typeVal) => (
+                            <SelectItem key={typeVal} value={typeVal}>{typeVal}</SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-muted-foreground">Description</label>
-                      <Input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Test case description" />
+                      <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelDescription")}</label>
+                      <Input value={description} onChange={(e) => setDescription(e.target.value)} placeholder={t("caseCreate.placeholderTestCaseDescription")} />
                     </div>
                   </div>
                 </TabsContent>
@@ -581,13 +584,13 @@ export default function TestCaseCreateDialog({
           {/* AI */}
           <TabsContent value="ai" className="space-y-3">
             <div className="border rounded-lg p-3">
-              <h4 className="font-medium mb-2">Create scenarios and new steps with AI</h4>
+              <h4 className="font-medium mb-2">{t("caseCreate.aiSubtitle")}</h4>
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Project</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelProject")}</label>
                   <Select value={projectId} onValueChange={setProjectId}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select project" />
+                      <SelectValue placeholder={t("caseCreate.placeholderSelectProject")} />
                     </SelectTrigger>
                     <SelectContent>
                       {projects.map((p) => (
@@ -637,8 +640,8 @@ export default function TestCaseCreateDialog({
                 </div>
               </div>
               <div className="mt-3">
-                <label className="text-sm font-medium text-muted-foreground">Requirements</label>
-                <Textarea rows={3} value={aiRequirements} onChange={(e) => setAiRequirements(e.target.value)} placeholder="Describe what you want to test..." />
+                <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelRequirements")}</label>
+                <Textarea rows={3} value={aiRequirements} onChange={(e) => setAiRequirements(e.target.value)} placeholder={t("caseCreate.placeholderDescribeWhatToTest")} />
               </div>
               <div className="mt-3 flex justify-end">
                 <Button 
@@ -650,7 +653,7 @@ export default function TestCaseCreateDialog({
                   ) : (
                     <Sparkles className="h-4 w-4 mr-2" />
                   )}
-                  {isGenerating ? 'Generating...' : 'Generate with AI'}
+                  {isGenerating ? t("caseCreate.btnGenerating") : t("caseCreate.btnGenerateWithAi")}
                 </Button>
               </div>
             </div>
@@ -658,27 +661,27 @@ export default function TestCaseCreateDialog({
             <div className="border rounded-lg p-3">
               <Tabs value={activeGeneratedTab} onValueChange={(v) => setActiveGeneratedTab(v as 'req' | 'gen')} className="w-full">
                 <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="req">Requirements</TabsTrigger>
-                  <TabsTrigger value="gen">Generated</TabsTrigger>
+                  <TabsTrigger value="req">{t("caseCreate.tabRequirements")}</TabsTrigger>
+                  <TabsTrigger value="gen">{t("caseCreate.tabGenerated")}</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="req" className="space-y-3">
                   <div className="text-sm text-muted-foreground">
-                    Enter your requirements above and click "Generate with AI" to create test scenarios.
+                    {t("caseCreate.instructionEnterRequirements")}
                   </div>
                 </TabsContent>
 
                 <TabsContent value="gen" className="space-y-3">
                   {generationProgress === 'idle' ? (
-                    <div className="text-sm text-muted-foreground">No content generated yet</div>
+                    <div className="text-sm text-muted-foreground">{t("caseCreate.noContentGenerated")}</div>
                   ) : generationProgress === 'processing' || generationProgress === 'analyzing' || generationProgress === 'generating' ? (
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <Loader2 className="h-4 w-4 animate-spin" />
                         <span className="text-sm">
-                          {generationProgress === 'processing' && 'Processing request...'}
-                          {generationProgress === 'analyzing' && 'Analyzing existing files...'}
-                          {generationProgress === 'generating' && 'Generating with AI...'}
+                          {generationProgress === 'processing' && t("caseCreate.processingRequest")}
+                          {generationProgress === 'analyzing' && t("caseCreate.analyzingFiles")}
+                          {generationProgress === 'generating' && t("caseCreate.generatingWithAi")}
                         </span>
                       </div>
                       <div className="w-full bg-secondary rounded-full h-2">
@@ -692,7 +695,7 @@ export default function TestCaseCreateDialog({
                     <div className="space-y-3">
                       {generatedScenario && (
                         <div>
-                          <div className="text-xs font-medium text-muted-foreground mb-1">Generated Scenario</div>
+                          <div className="text-xs font-medium text-muted-foreground mb-1">{t("caseCreate.generatedScenarioLabel")}</div>
                           <pre className="p-3 text-xs bg-muted rounded overflow-auto whitespace-pre-wrap">
                             {generatedScenario}
                           </pre>
@@ -700,9 +703,9 @@ export default function TestCaseCreateDialog({
                       )}
                       {generatedSteps && (
                         <div>
-                          <div className="text-xs font-medium text-muted-foreground mb-1">Steps</div>
+                          <div className="text-xs font-medium text-muted-foreground mb-1">{t("caseCreate.stepsLabel")}</div>
                           <pre className="p-3 text-xs bg-muted rounded overflow-auto whitespace-pre-wrap">
-                            {typeof generatedSteps === 'string' ? generatedSteps : 'No steps generated'}
+                            {typeof generatedSteps === 'string' ? generatedSteps : t("caseCreate.noStepsGenerated")}
                           </pre>
                         </div>
                       )}
@@ -717,7 +720,7 @@ export default function TestCaseCreateDialog({
                       {generatedScenario && (
                         <div className="flex justify-end pt-2 border-t">
                           <Button variant="outline" size="sm" onClick={resetAIForm}>
-                            Generate Another
+                            {t("caseCreate.generateAnother")}
                           </Button>
                         </div>
                       )}
@@ -731,13 +734,13 @@ export default function TestCaseCreateDialog({
           {/* Suggested */}
           <TabsContent value="suggest" className="space-y-3">
             <div className="border rounded-lg p-3">
-              <h4 className="font-medium mb-2">Suggest test cases</h4>
+              <h4 className="font-medium mb-2">{t("caseCreate.suggestSubtitle")}</h4>
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Project</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelProject")}</label>
                   <Select value={projectId} onValueChange={setProjectId}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select project" />
+                      <SelectValue placeholder={t("caseCreate.placeholderSelectProject")} />
                     </SelectTrigger>
                     <SelectContent>
                       {projects.map((p) => (
@@ -747,10 +750,10 @@ export default function TestCaseCreateDialog({
                   </Select>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Section</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelSection")}</label>
                   <Select value={section} onValueChange={setSection} disabled={isLoadingSections}>
                     <SelectTrigger>
-                      <SelectValue placeholder={isLoadingSections ? "Loading sections..." : "Select section"} />
+                      <SelectValue placeholder={isLoadingSections ? t("caseCreate.placeholderLoadingSections") : t("caseCreate.placeholderSelectSection")} />
                     </SelectTrigger>
                     <SelectContent>
                       {availableSections.map((s) => (
@@ -759,17 +762,17 @@ export default function TestCaseCreateDialog({
                     </SelectContent>
                   </Select>
                   {availableSections.length === 0 && !isLoadingSections && (
-                    <p className="text-xs text-muted-foreground mt-1">No sections available for this project</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t("caseCreate.msgNoSectionsAvailable")}</p>
                   )}
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">Entity</label>
+                  <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelEntity")}</label>
                   <Select value={entityName} onValueChange={setEntityName} disabled={!section || isLoadingEntities}>
                     <SelectTrigger>
                       <SelectValue placeholder={
-                        !section ? "Select section first" : 
-                        isLoadingEntities ? "Loading entities..." : 
-                        "Select entity"
+                        !section ? t("caseCreate.placeholderSelectSectionFirst") : 
+                        isLoadingEntities ? t("caseCreate.placeholderLoadingEntities") : 
+                        t("caseCreate.placeholderSelectEntity")
                       } />
                     </SelectTrigger>
                     <SelectContent>
@@ -779,16 +782,16 @@ export default function TestCaseCreateDialog({
                     </SelectContent>
                   </Select>
                   {!section && (
-                    <p className="text-xs text-muted-foreground mt-1">Select a section first</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t("caseCreate.msgSelectSectionFirst")}</p>
                   )}
                   {section && availableEntities.length === 0 && !isLoadingEntities && (
-                    <p className="text-xs text-muted-foreground mt-1">No entities available for this section</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t("caseCreate.msgNoEntitiesAvailable")}</p>
                   )}
                 </div>
               </div>
               <div className="mt-3">
-                <label className="text-sm font-medium text-muted-foreground">Requirements</label>
-                <Textarea rows={3} value={suggestRequirements} onChange={(e) => setSuggestRequirements(e.target.value)} placeholder="Describe what kind of test cases you want suggestions for..." />
+                <label className="text-sm font-medium text-muted-foreground">{t("caseCreate.labelRequirements")}</label>
+                <Textarea rows={3} value={suggestRequirements} onChange={(e) => setSuggestRequirements(e.target.value)} placeholder={t("caseCreate.placeholderDescribeSuggestions")} />
               </div>
               <div className="mt-3 flex justify-end">
                 <Button 
@@ -800,7 +803,7 @@ export default function TestCaseCreateDialog({
                   ) : (
                     <ListChecks className="h-4 w-4 mr-2" />
                   )}
-                  {isSuggesting ? 'Generating...' : 'Generate Suggestions'}
+                  {isSuggesting ? t("caseCreate.btnGenerating") : t("caseCreate.btnGenerateSuggestions")}
                 </Button>
               </div>
             </div>
@@ -810,7 +813,7 @@ export default function TestCaseCreateDialog({
                 className="flex items-center justify-between mb-3 cursor-pointer"
                 onClick={() => setIsSuggestionsCollapsed(!isSuggestionsCollapsed)}
               >
-                <h4 className="font-medium">Saved suggestions</h4>
+                <h4 className="font-medium">{t("caseCreate.savedSuggestions")}</h4>
                 <div className="flex items-center gap-2">
                   {suggestions.length > 0 && (
                     <div className="flex items-center gap-2">
@@ -820,15 +823,15 @@ export default function TestCaseCreateDialog({
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all">All</SelectItem>
-                          <SelectItem value="recent">Recent</SelectItem>
-                          <SelectItem value="entity">By Entity</SelectItem>
+                          <SelectItem value="all">{t("caseCreate.filterAll")}</SelectItem>
+                          <SelectItem value="recent">{t("caseCreate.filterRecent")}</SelectItem>
+                          <SelectItem value="entity">{t("caseCreate.filterByEntity")}</SelectItem>
                         </SelectContent>
                       </Select>
                       {suggestionFilter === 'entity' && (
                         <Select value={selectedEntityFilter} onValueChange={setSelectedEntityFilter}>
                           <SelectTrigger className="w-32">
-                            <SelectValue placeholder="Entity" />
+                            <SelectValue placeholder={t("caseCreate.placeholderEntity")} />
                           </SelectTrigger>
                           <SelectContent>
                             {uniqueEntities.map((entity) => (
@@ -840,7 +843,7 @@ export default function TestCaseCreateDialog({
                     </div>
                   )}
                   <div className="flex items-center gap-1">
-                    <span className="text-sm text-muted-foreground">{filteredSuggestions.length} suggestions</span>
+                    <span className="text-sm text-muted-foreground">{replaceParams(t("caseCreate.suggestionsCount"), { count: String(filteredSuggestions.length) })}</span>
                     {isSuggestionsCollapsed ? (
                       <ChevronRight className="h-4 w-4 text-muted-foreground" />
                     ) : (
@@ -853,7 +856,7 @@ export default function TestCaseCreateDialog({
               {!isSuggestionsCollapsed && (
                 <>
                   {suggestions.length === 0 ? (
-                    <div className="text-sm text-muted-foreground">No suggestions yet</div>
+                    <div className="text-sm text-muted-foreground">{t("caseCreate.noSuggestionsYet")}</div>
                   ) : (
                     <div className="space-y-3">
                       {filteredSuggestions.map((s) => (
@@ -872,7 +875,7 @@ export default function TestCaseCreateDialog({
                                   variant="ghost" 
                                   size="sm" 
                                   onClick={() => removeSuggestion(s.id)}>
-                                  Delete
+                                  {t("caseCreate.delete")}
                                 </Button>
                               </div>
                             </div>
@@ -926,9 +929,9 @@ export default function TestCaseCreateDialog({
               <Input value={assistantName} onChange={(e) => setAssistantName(e.target.value)} placeholder="My Testing Assistant" />
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsAssistantDialogOpen(false)}>Cancel</Button>
+              <Button variant="outline" onClick={() => setIsAssistantDialogOpen(false)}>{t("common.cancel")}</Button>
               <Button disabled={!assistantName || isCreatingAssistant} onClick={async () => {
-                const coreBase = import.meta.env.VITE_CORE_AGENT_URL || import.meta.env.VITE_API_URL || 'http://localhost:3000/v1/api';
+                const coreBase = import.meta.env.VITE_CORE_AGENT_URL || import.meta.env.VITE_API_URL || "/v1/api";
                 try {
                   setIsCreatingAssistant(true);
                   const res = await fetch(`${coreBase}/projects/${projectId}/ai/assistant/init`, {
@@ -974,7 +977,7 @@ export default function TestCaseCreateDialog({
 
         {(activeTab !== 'predef' || subTab !== 'scenario') && (
           <DialogFooter>
-            <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
+            <Button variant="outline" onClick={() => onOpenChange(false)}>{t("common.cancel")}</Button>
           </DialogFooter>
         )}
       </DialogContent>

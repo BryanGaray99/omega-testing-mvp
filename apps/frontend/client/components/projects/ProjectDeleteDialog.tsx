@@ -9,6 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useTranslation } from "@/contexts/LanguageContext";
+import { replaceParams } from "@/lib/translations";
 
 interface Project {
   id: string;
@@ -46,25 +48,26 @@ export default function ProjectDeleteDialog({
   onCancel,
   isPending,
 }: ProjectDeleteDialogProps) {
+  const { t } = useTranslation();
+  const name = deletingProject?.name ?? "";
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-destructive">Delete Project</DialogTitle>
+          <DialogTitle className="text-destructive">{t("projects.deleteTitle")}</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete the project
-            <strong> "{deletingProject?.name}"</strong> and all its associated data.
+            {replaceParams(t("projects.deleteDescription"), { name })}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <Label htmlFor="delete-confirmation">
-              Type <strong>"{deletingProject?.name}"</strong> to confirm
+              {replaceParams(t("projects.deleteTypeToConfirm"), { name })}
             </Label>
             <Input
               id="delete-confirmation"
               name="delete-confirmation"
-              placeholder={deletingProject?.name}
+              placeholder={name}
               value={deleteConfirmation}
               onChange={(e) => setDeleteConfirmation(e.target.value)}
               className="border-destructive focus:border-destructive"
@@ -73,14 +76,14 @@ export default function ProjectDeleteDialog({
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onCancel}>
-            Cancel
+            {t("common.cancel")}
           </Button>
           <Button 
             variant="destructive"
             onClick={onConfirmDelete}
             disabled={isPending || deleteConfirmation !== deletingProject?.name}
           >
-            {isPending ? "Deleting..." : "Delete Project"}
+            {isPending ? t("projects.deleting") : t("projects.deleteProject")}
           </Button>
         </DialogFooter>
       </DialogContent>

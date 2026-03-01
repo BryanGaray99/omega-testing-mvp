@@ -19,7 +19,6 @@ export default function ExportSettings() {
     projects: true,
     testCases: true,
     executions: true,
-    reports: true,
     settings: false,
   });
   const [isExporting, setIsExporting] = useState(false);
@@ -111,16 +110,6 @@ export default function ExportSettings() {
                     }
                   />
                   <Label htmlFor="export-executions">Execution Results</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="export-reports"
-                    checked={includeData.reports}
-                    onCheckedChange={(checked) =>
-                      setIncludeData({ ...includeData, reports: !!checked })
-                    }
-                  />
-                  <Label htmlFor="export-reports">Reports & Analytics</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox

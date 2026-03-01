@@ -38,7 +38,7 @@ export default function Settings() {
     setConnectionStatus('checking');
     
     try {
-      const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/v1/api';
+      const API_BASE = import.meta.env.VITE_API_URL || "/v1/api";
       const response = await fetch(`${API_BASE}/ai/check-status`);
       
       if (response.ok) {
@@ -86,7 +86,7 @@ export default function Settings() {
 
     setIsLoading(true);
     try {
-      const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/v1/api';
+      const API_BASE = import.meta.env.VITE_API_URL || "/v1/api";
       const response = await fetch(`${API_BASE}/ai/test-connection`, {
         method: 'POST',
         headers: {
@@ -122,7 +122,7 @@ export default function Settings() {
 
     setIsSaving(true);
     try {
-      const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/v1/api';
+      const API_BASE = import.meta.env.VITE_API_URL || "/v1/api";
       const response = await fetch(`${API_BASE}/ai/save-api-key`, {
         method: 'POST',
         headers: {

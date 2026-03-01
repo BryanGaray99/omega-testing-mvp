@@ -7,8 +7,10 @@ import EndpointEmptyState from "@/components/endpoints/EndpointEmptyState";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 export default function Endpoints() {
+  const { t } = useTranslation();
   const {
     // State
     loading,
@@ -85,12 +87,11 @@ export default function Endpoints() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Endpoints</h1>
+          <h1 className="text-3xl font-bold text-foreground">{t("endpoints.title")}</h1>
           <p className="mt-2 text-muted-foreground">
-            Manage API endpoints and generate testing artifacts
+            {t("endpoints.subtitle")}
           </p>
         </div>
-        {/* Contenedor de botones alineados a la derecha */}
         <div className="flex flex-row gap-2 ml-auto">
           <Button
             variant="outline"
@@ -102,7 +103,7 @@ export default function Endpoints() {
             ) : (
               <RefreshCw className="h-4 w-4 mr-2" />
             )}
-            {isRefreshing ? "Refreshing..." : "Refresh Data"}
+            {isRefreshing ? t("endpoints.refreshing") : t("endpoints.refreshData")}
           </Button>
           <EndpointRegisterDialog
             isOpen={isRegisterDialogOpen}

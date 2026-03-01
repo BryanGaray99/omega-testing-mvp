@@ -11,6 +11,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Layers, Search, Filter, MoreHorizontal, RefreshCw } from 'lucide-react';
 import { useProjects } from '@/hooks/useProjects';
+import { useTranslation } from '@/contexts/LanguageContext';
+import { replaceParams } from '@/lib/translations';
 import { testSuiteService, TestSuite } from '@/services/testSuiteService';
 import TestSuiteFilters from '@/components/test-suites/TestSuiteFilters';
 import TestSuiteCreateDialog from '@/components/test-suites/TestSuiteCreateDialog';
@@ -20,6 +22,7 @@ import TestSuiteDeleteDialog from '@/components/test-suites/TestSuiteDeleteDialo
 import TestSuiteEditDialog from '@/components/test-suites/TestSuiteEditDialog';
 
 export default function TestSuites() {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -399,12 +402,12 @@ export default function TestSuites() {
     return (
       <div className="p-6">
         <div className="text-center">
-          <h2 className="text-xl font-semibold text-red-600">Error Loading Test Suites</h2>
+          <h2 className="text-xl font-semibold text-red-600">{t("testSuites.errorLoading")}</h2>
           <p className="text-muted-foreground mt-2">
-            {error instanceof Error ? error.message : 'An unknown error occurred'}
+            {error instanceof Error ? error.message : "An unknown error occurred"}
           </p>
           <Button onClick={() => refetch()} className="mt-4">
-            Retry
+            {t("testSuites.retry")}
           </Button>
         </div>
       </div>
@@ -416,12 +419,11 @@ export default function TestSuites() {
              {/* Header */}
        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
          <div>
-           <h1 className="text-3xl font-bold">Test Suites</h1>
+           <h1 className="text-3xl font-bold">{t("testSuites.title")}</h1>
            <p className="mt-2 text-muted-foreground">
-             Manage and organize your test cases into test sets and test plans
+             {t("testSuites.subtitle")}
            </p>
          </div>
-         {/* Contenedor de botones alineados a la derecha */}
          <div className="flex flex-row gap-2 ml-auto">
            <Button
              variant="outline"
@@ -433,11 +435,11 @@ export default function TestSuites() {
              ) : (
                <RefreshCw className="h-4 w-4 mr-2" />
              )}
-             {isRefreshing ? "Refreshing..." : "Refresh Data"}
+             {isRefreshing ? t("testSuites.refreshing") : t("testSuites.refreshData")}
            </Button>
            <Button onClick={() => setIsCreateDialogOpen(true)}>
              <Plus className="h-4 w-4 mr-2" />
-             Create Test Suite
+             {t("testSuites.createTestSuite")}
            </Button>
          </div>
        </div>
@@ -484,15 +486,15 @@ export default function TestSuites() {
       ) : testSuites.length === 0 ? (
         <div className="text-center py-12">
           <Layers className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-          <h3 className="text-lg font-semibold mb-2">No Test Suites Found</h3>
+          <h3 className="text-lg font-semibold mb-2">{t("testSuites.emptyTitle")}</h3>
           <p className="text-muted-foreground mb-4">
-            {searchTerm || projectFilter !== 'all' || typeFilter !== 'all' || statusFilter !== 'all'
-              ? 'No test suites match your current filters.'
-              : 'Get started by creating your first test suite.'}
+            {searchTerm || projectFilter !== "all" || typeFilter !== "all" || statusFilter !== "all"
+              ? t("testSuites.emptyFiltered")
+              : t("testSuites.emptyGetStarted")}
           </p>
           <Button onClick={() => setIsCreateDialogOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            Create Test Suite
+            {t("testSuites.createTestSuite")}
           </Button>
         </div>
       ) : (
@@ -519,7 +521,11 @@ export default function TestSuites() {
           {totalPages > 1 && (
             <div className="flex items-center justify-between">
               <div className="text-sm text-muted-foreground">
-                Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems} test suites
+                {replaceParams(t("testSuites.showingOf"), {
+                  from: ((currentPage - 1) * itemsPerPage) + 1,
+                  to: Math.min(currentPage * itemsPerPage, totalItems),
+                  total: totalItems,
+                })}
               </div>
               <div className="flex items-center space-x-2">
                 <Button
@@ -528,10 +534,10 @@ export default function TestSuites() {
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
                 >
-                  Previous
+                  {t("testSuites.previous")}
                 </Button>
                 <span className="text-sm">
-                  Page {currentPage} of {totalPages}
+                  {replaceParams(t("testSuites.pageOf"), { current: currentPage, total: totalPages })}
                 </span>
                 <Button
                   variant="outline"
@@ -539,7 +545,7 @@ export default function TestSuites() {
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={currentPage === totalPages}
                 >
-                  Next
+                  {t("testSuites.next")}
                 </Button>
               </div>
             </div>
