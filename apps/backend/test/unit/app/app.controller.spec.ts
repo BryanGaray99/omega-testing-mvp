@@ -25,8 +25,12 @@ describe('AppController', () => {
     expect(controller).toBeDefined();
   });
 
-  describe('getHealth', () => {
-    it('should return success and healthy status', () => {
+  describe('App (controller, service)', () => {
+    it('AppModule', () => {
+      expect(controller).toBeDefined();
+    });
+
+    it('GET /health → 200', () => {
       const result = controller.getHealth();
       expect(result.success).toBe(true);
       expect(result.data?.status).toBe('healthy');
@@ -35,10 +39,8 @@ describe('AppController', () => {
       expect(result.data?.services?.database).toBe('connected');
       expect(result.message).toBe('Service is healthy');
     });
-  });
 
-  describe('getHello', () => {
-    it('should return welcome message and documentation', () => {
+    it('GET / → 200 welcome', () => {
       const result = controller.getHello();
       expect(result.success).toBe(true);
       expect(result.data?.message).toContain('Central Backend MVP');

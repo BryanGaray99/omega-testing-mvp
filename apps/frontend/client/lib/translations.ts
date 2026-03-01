@@ -35,7 +35,7 @@ const en = {
   // Tests report (Settings > Pruebas)
   "testsReport.pageTitle": "System Test Report",
   "testsReport.title": "Title",
-  "testsReport.subtitle": "Summary of test levels: backend unit & e2e, frontend unit & a11y, Lighthouse. Run commands from the terminal.",
+  "testsReport.subtitle": "Summary of test levels: backend unit & e2e, frontend a11y & Lighthouse. Tests run locally in development (not in production). Results are read from test-results/ (backend: unit-results.json, e2e-results.json; frontend: a11y, lighthouse). Use «View command» to see the terminal command.",
   "testsReport.backendUnit": "Backend — Unit tests",
   "testsReport.backendE2e": "Backend — E2E tests",
   "testsReport.frontendUnit": "Frontend — Unit & accessibility",
@@ -1257,7 +1257,7 @@ const es: Record<TranslationKey, string> = {
   "settings.footer": "Omega Testing Configuración v1.0",
 
   "testsReport.pageTitle": "Reporte de pruebas del sistema",
-  "testsReport.subtitle": "Resumen de niveles de prueba: backend unit y e2e, frontend unit y a11y, Lighthouse. Ejecutar desde la terminal.",
+  "testsReport.subtitle": "Resumen de niveles de prueba: backend unit y e2e, frontend a11y y Lighthouse. Las pruebas se ejecutan en desarrollo local (no en producción). Los resultados se leen de test-results/ (backend: unit-results.json, e2e-results.json; frontend: a11y, lighthouse). Usa «Ver comando» para ver el comando en la terminal.",
   "testsReport.backendUnit": "Backend — Pruebas unitarias",
   "testsReport.backendE2e": "Backend — Pruebas E2E",
   "testsReport.frontendUnit": "Frontend — Unitarias y accesibilidad",

@@ -5,7 +5,6 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import { spawn } from 'child_process';
 
 export type TestReportRow = {
   title: string;
@@ -137,36 +136,5 @@ export class TestReportService {
     if (e2eSuite) dto.backendE2e = e2eSuite;
 
     return dto;
-  }
-
-  /**
-   * Starts the given test suite (unit or e2e) in a detached process so it does not block
-   * the main app. On Windows uses a silent CMD (no window). Caller should poll getReport()
-   * to obtain results when the run finishes.
-   */
-  runSuiteInBackground(suite: 'unit' | 'e2e'): { started: true } {
-    const backendRoot = path.resolve(__dirname, '..', '..');
-    const script = suite === 'unit' ? 'test' : 'test:e2e';
-
-    if (process.platform === 'win32') {
-      // CMD silenciosa: sin ventana, proceso desacoplado para no bloquear ni afectar el hilo principal
-      const child = spawn('cmd.exe', ['/c', `npm run ${script}`], {
-        cwd: backendRoot,
-        detached: true,
-        stdio: 'ignore',
-        windowsHide: true,
-        shell: false,
-      });
-      child.unref();
-    } else {
-      const child = spawn('npm', ['run', script], {
-        cwd: backendRoot,
-        detached: true,
-        stdio: 'ignore',
-      });
-      child.unref();
-    }
-
-    return { started: true };
   }
 }

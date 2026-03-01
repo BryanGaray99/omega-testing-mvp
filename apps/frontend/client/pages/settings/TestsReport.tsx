@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,6 @@ import {
 } from "@/components/ui/collapsible";
 import {
   ClipboardCheck,
-  Play,
   Server,
   Globe,
   Gauge,
@@ -70,25 +69,25 @@ type TestSuiteData = {
   aspectsDetail?: AspectsDetail;
 };
 
-/** Estandar: mismos pasos en cada controlador (unit). */
+/** Standard: same steps for each controller (unit). All copy in English. */
 const BACKEND_UNIT_CONTROLLER_CHILDREN: TestRow[] = [
-  { title: "Servicio mock inyectado", result: "pass", value: "OK", duration: "—", description: "Mock del servicio en el controlador (Test.createTestingModule)." },
-  { title: "Peticiones HTTP (GET/POST/PATCH/DELETE)", result: "pass", value: "OK", duration: "—", description: "Supertest: métodos según recurso, rutas y params." },
-  { title: "Validación DTOs (class-validator)", result: "pass", value: "OK", duration: "—", description: "Body shape, transform, códigos 422 en payload inválido." },
-  { title: "Códigos de estado HTTP", result: "pass", value: "OK", duration: "—", description: "200, 201, 404, 422 según operación y existencia del recurso." },
-  { title: "Formato de respuesta (body)", result: "pass", value: "OK", duration: "—", description: "Estructura esperada, TransformInterceptor." },
+  { title: "Injected service mock", result: "pass", value: "OK", duration: "—", description: "Mock of the service in the controller (Test.createTestingModule)." },
+  { title: "HTTP requests (GET/POST/PATCH/DELETE)", result: "pass", value: "OK", duration: "—", description: "Supertest: methods per resource, routes and params." },
+  { title: "DTO validation (class-validator)", result: "pass", value: "OK", duration: "—", description: "Body shape, transform, 422 on invalid payload." },
+  { title: "HTTP status codes", result: "pass", value: "OK", duration: "—", description: "200, 201, 404, 422 per operation and resource existence." },
+  { title: "Response format (body)", result: "pass", value: "OK", duration: "—", description: "Expected structure, TransformInterceptor." },
 ];
 const BACKEND_UNIT_SERVICE_CHILDREN: TestRow[] = [
-  { title: "Dependencias inyectadas", result: "pass", value: "OK", duration: "—", description: "Módulo de prueba con providers/mocks." },
-  { title: "Métodos bajo prueba", result: "pass", value: "OK", duration: "—", description: "Lógica de negocio o utilidades (getPath, listProjects, buildFilter, etc.)." },
-  { title: "Casos borde", result: "pass", value: "OK", duration: "—", description: "Vacío, límites, parámetros inválidos." },
+  { title: "Injected dependencies", result: "pass", value: "OK", duration: "—", description: "Test module with providers/mocks." },
+  { title: "Methods under test", result: "pass", value: "OK", duration: "—", description: "Business logic or utilities (getPath, listProjects, buildFilter, etc.)." },
+  { title: "Edge cases", result: "pass", value: "OK", duration: "—", description: "Empty, limits, invalid parameters." },
 ];
 
 const REFERENCE_BACKEND_UNIT_ROWS: TestRow[] = [
   { title: "App (controller, service)", result: "pass", value: "OK", duration: "~0.5s", description: "Bootstrap and health checks.", children: [
-    { title: "AppModule", result: "pass", value: "OK", duration: "—", description: "Módulo de prueba con AppModule." },
+    { title: "AppModule", result: "pass", value: "OK", duration: "—", description: "Test module with AppModule." },
     { title: "GET /health → 200", result: "pass", value: "OK", duration: "—", description: "body.healthy." },
-    { title: "GET / → 200 welcome", result: "pass", value: "OK", duration: "—", description: "Mensaje de bienvenida." },
+    { title: "GET / → 200 welcome", result: "pass", value: "OK", duration: "—", description: "Welcome message." },
   ]},
   ...(["Projects", "Endpoints", "Test Cases", "Test Suites", "Bugs", "Sync", "AI"] as const).map((name) => ({
     title: `${name} controller`,
@@ -383,106 +382,41 @@ function ExpandableRow({
   );
 }
 
-type SuiteId = 'backendUnit' | 'backendE2e';
-
-function TestSuiteSection({
-  data,
-  suiteId = null,
-  onRunSuite,
-  running = false,
-}: {
-  data: TestSuiteData;
-  suiteId?: SuiteId | null;
-  onRunSuite?: (id: SuiteId) => Promise<void>;
-  running?: boolean;
-}) {
+function TestSuiteSection({ data }: { data: TestSuiteData }) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
-  const [runningLocal, setRunningLocal] = useState(false);
-  const canRunNow = !!suiteId && !!onRunSuite;
-  const isRunning = running || runningLocal;
 
   const successRate =
     data.passed + data.failed > 0
       ? Math.round((data.passed / (data.passed + data.failed)) * 100)
       : 0;
 
-  async function handleRunNow() {
-    if (!suiteId || !onRunSuite) return;
-    setRunningLocal(true);
-    try {
-      await onRunSuite(suiteId);
-      setOpen(false);
-    } finally {
-      setRunningLocal(false);
-    }
-  }
-
   return (
-    <Card className={isRunning ? "ring-2 ring-primary/30" : ""}>
+    <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="flex items-center gap-2 text-lg">
           {data.icon}
           <span>{t(data.titleKey)}</span>
         </CardTitle>
-        <div className="flex items-center gap-2">
-          {canRunNow ? (
-            <Button
-              size="sm"
-              className="gap-2"
-              disabled={isRunning}
-              onClick={handleRunNow}
-            >
-              {isRunning ? (
-                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-              ) : (
-                <Play className="h-4 w-4" />
-              )}
-              {isRunning ? t("testsReport.running") : t("testsReport.runSuite")}
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button size="sm" variant="outline" className="gap-2">
+              {t("testsReport.viewCommand") || "Ver comando"}
             </Button>
-          ) : null}
-          <Dialog open={open} onOpenChange={(next) => !isRunning && setOpen(next)}>
-            <DialogTrigger asChild>
-              <Button
-                size="sm"
-                variant={canRunNow ? "ghost" : "outline"}
-                className="gap-2"
-                disabled={isRunning}
-              >
-                {canRunNow ? t("testsReport.viewCommand") || "Ver comando" : t("testsReport.runSuite")}
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-lg" onPointerDownOutside={(e) => isRunning && e.preventDefault()}>
-              <DialogHeader>
-                <DialogTitle>{t("testsReport.runCommandTitle")}</DialogTitle>
-              </DialogHeader>
-              <p className="text-sm text-muted-foreground mb-2">
-                {t("testsReport.runCommandHint")}
-              </p>
-              {isRunning && (
-                <div className="mb-3 flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2 text-sm text-foreground">
-                  <Loader2 className="h-4 w-4 shrink-0 animate-spin text-primary" aria-hidden />
-                  <span>{t("testsReport.running")}</span>
-                  <span className="text-muted-foreground">— {t("testsReport.runningHint")}</span>
-                </div>
-              )}
-              <pre className="rounded-lg bg-muted p-4 text-sm overflow-x-auto">
-                <code>{data.runCommand}</code>
-              </pre>
-              {canRunNow && (
-                <Button onClick={handleRunNow} disabled={isRunning} className="gap-2 w-full sm:w-auto">
-                  {isRunning ? (
-                    <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-                  ) : (
-                    <Play className="h-4 w-4" />
-                  )}
-                  {isRunning ? t("testsReport.running") : t("testsReport.runNow")}
-                </Button>
-              )}
-            </DialogContent>
-          </Dialog>
-        </div>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-lg">
+            <DialogHeader>
+              <DialogTitle>{t("testsReport.runCommandTitle")}</DialogTitle>
+            </DialogHeader>
+            <p className="text-sm text-muted-foreground mb-2">
+              {t("testsReport.runCommandHint")}
+            </p>
+            <pre className="rounded-lg bg-muted p-4 text-sm overflow-x-auto">
+              <code>{data.runCommand}</code>
+            </pre>
+          </DialogContent>
+        </Dialog>
       </CardHeader>
       <CardContent className="space-y-4">
         {data.aspectsDetail && (
@@ -501,19 +435,10 @@ function TestSuiteSection({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.rows.length === 0 && !isRunning ? (
+              {data.rows.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                     {t("testsReport.noData")}
-                  </TableCell>
-                </TableRow>
-              ) : data.rows.length === 0 && isRunning ? (
-                <TableRow>
-                  <TableCell colSpan={6} className="text-center py-6">
-                    <span className="inline-flex items-center gap-2 text-muted-foreground">
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      {t("testsReport.running")}
-                    </span>
                   </TableCell>
                 </TableRow>
               ) : (
@@ -525,7 +450,7 @@ function TestSuiteSection({
                     expanded={expandedRow === i}
                     onToggle={() => setExpandedRow(expandedRow === i ? null : i)}
                     t={t}
-                    resultLoading={isRunning}
+                    resultLoading={false}
                   />
                 ))
               )}
@@ -533,53 +458,33 @@ function TestSuiteSection({
           </Table>
         </div>
 
-        {/* Estado / logs de ejecución debajo de la tabla */}
         <div className="rounded-md border bg-muted/20 px-3 py-2 min-h-[44px] flex items-center">
-          {isRunning ? (
-            <div className="flex items-center gap-2 text-sm text-foreground">
-              <Loader2 className="h-4 w-4 shrink-0 animate-spin text-primary" aria-hidden />
-              <span>{t("testsReport.running")}</span>
-              <span className="text-muted-foreground">— {t("testsReport.runningHint")}</span>
-            </div>
-          ) : (
-            <p className="text-sm text-muted-foreground">
-              {data.passed + data.failed > 0
-                ? t("testsReport.lastRunReady") || "Resultados de la última ejecución listos."
-                : t("testsReport.runToSeeResults") || "Ejecuta la suite para ver resultados y el gráfico."}
-            </p>
-          )}
+          <p className="text-sm text-muted-foreground">
+            {data.passed + data.failed > 0
+              ? t("testsReport.lastRunReady") || "Resultados de la última ejecución (desarrollo local)."
+              : t("testsReport.runToSeeResults") || "Ejecuta la suite en tu terminal para ver resultados. Los datos se leen de test-results/ (backend: unit-results.json, e2e-results.json; frontend: a11y, lighthouse)."}
+          </p>
         </div>
 
-        {/* Gráfico y KPIs: solo cuando no está ejecutando */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t">
-          {isRunning ? (
-            <div className="col-span-full flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-10 text-muted-foreground">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" aria-hidden />
-              <p className="text-sm font-medium">{t("testsReport.waitingForResults") || "Esperando resultados…"}</p>
-              <p className="text-xs">{t("testsReport.chartWhenReady") || "El gráfico se mostrará al terminar."}</p>
+          <div>
+            <h4 className="text-sm font-medium mb-2">{t("testsReport.summaryChart")}</h4>
+            <SummaryChart passed={data.passed} failed={data.failed} />
+          </div>
+          <div className="flex flex-col justify-center gap-2">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-muted-foreground">{t("testsReport.total")}</span>
+              <span className="font-medium">{data.passed + data.failed}</span>
             </div>
-          ) : (
-            <>
-              <div>
-                <h4 className="text-sm font-medium mb-2">{t("testsReport.summaryChart")}</h4>
-                <SummaryChart passed={data.passed} failed={data.failed} />
-              </div>
-              <div className="flex flex-col justify-center gap-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">{t("testsReport.total")}</span>
-                  <span className="font-medium">{data.passed + data.failed}</span>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">{t("testsReport.kpiSuccessRate")}</span>
-                  <span className="font-medium">{successRate}%</span>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">{t("testsReport.kpiTotalTime")}</span>
-                  <span className="font-medium">{data.totalTime}</span>
-                </div>
-              </div>
-            </>
-          )}
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-muted-foreground">{t("testsReport.kpiSuccessRate")}</span>
+              <span className="font-medium">{successRate}%</span>
+            </div>
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-muted-foreground">{t("testsReport.kpiTotalTime")}</span>
+              <span className="font-medium">{data.totalTime}</span>
+            </div>
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -595,8 +500,6 @@ export default function TestsReport() {
   const [frontendUnit, setFrontendUnit] = useState<TestSuiteData | null>(null);
   const [frontendLighthouse, setFrontendLighthouse] = useState<TestSuiteData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [runningSuite, setRunningSuite] = useState<SuiteId | null>(null);
-  const pollIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const mapApiRows = (suite: { rows: Array<{ title: string; result: string; value: string; duration: string; description: string; failure?: string }>; passed: number; failed: number; totalTime: string }): TestRow[] =>
     suite.rows.map((r) => ({
@@ -657,61 +560,6 @@ export default function TestsReport() {
       });
     }
   };
-
-  async function handleRunSuite(suiteId: SuiteId) {
-    if (pollIntervalRef.current) {
-      clearInterval(pollIntervalRef.current);
-      pollIntervalRef.current = null;
-    }
-    setRunningSuite(suiteId);
-    try {
-      const res = await fetch(`${API_BASE}/test-report/run`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ suite: suiteId === "backendUnit" ? "unit" : "e2e" }),
-      });
-      const data = res.ok ? await res.json().catch(() => ({})) : {};
-      // 202 Accepted = pruebas arrancadas en segundo plano; hacer polling
-      if (res.status === 202 || data.started === true) {
-        const POLL_MS = 4000;
-        const MAX_POLL_MS = 3 * 60 * 1000; // 3 minutos
-        let elapsed = 0;
-        pollIntervalRef.current = setInterval(async () => {
-          elapsed += POLL_MS;
-          try {
-            const r = await fetch(`${API_BASE}/test-report`);
-            if (r.ok) {
-              const report = await r.json();
-              applyReportToState(report);
-            }
-          } catch {
-            // ignorar errores de polling
-          }
-          if (elapsed >= MAX_POLL_MS && pollIntervalRef.current) {
-            clearInterval(pollIntervalRef.current);
-            pollIntervalRef.current = null;
-            setRunningSuite(null);
-          }
-        }, POLL_MS);
-        return;
-      }
-      if (!res.ok) throw new Error("Run failed");
-      applyReportToState(data);
-    } catch {
-      setReferenceBackend();
-    } finally {
-      if (!pollIntervalRef.current) setRunningSuite(null);
-    }
-  }
-
-  useEffect(() => {
-    return () => {
-      if (pollIntervalRef.current) {
-        clearInterval(pollIntervalRef.current);
-        pollIntervalRef.current = null;
-      }
-    };
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -845,22 +693,8 @@ export default function TestsReport() {
         </div>
       </div>
 
-      {backendUnit && (
-        <TestSuiteSection
-          data={backendUnit}
-          suiteId="backendUnit"
-          onRunSuite={handleRunSuite}
-          running={runningSuite === "backendUnit"}
-        />
-      )}
-      {backendE2e && (
-        <TestSuiteSection
-          data={backendE2e}
-          suiteId="backendE2e"
-          onRunSuite={handleRunSuite}
-          running={runningSuite === "backendE2e"}
-        />
-      )}
+      {backendUnit && <TestSuiteSection data={backendUnit} />}
+      {backendE2e && <TestSuiteSection data={backendE2e} />}
       {frontendUnit && <TestSuiteSection data={frontendUnit} />}
       {frontendLighthouse && <TestSuiteSection data={frontendLighthouse} />}
     </div>

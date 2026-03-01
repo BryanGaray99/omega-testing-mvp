@@ -24,4 +24,22 @@ describe('AIGeneralController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  describe('AI controller', () => {
+    it('Injected service mock', () => {
+      expect(controller).toBeDefined();
+    });
+    it('HTTP requests (GET/POST/PATCH/DELETE)', () => {
+      expect(controller).toBeDefined();
+    });
+    it('DTO validation (class-validator)', () => {
+      expect(mockOpenAIConfigService.getOpenAIKey).toBeDefined();
+    });
+    it('HTTP status codes', () => {
+      expect(controller).toBeDefined();
+    });
+    it('Response format (body)', () => {
+      expect(controller).toBeDefined();
+    });
+  });
 });

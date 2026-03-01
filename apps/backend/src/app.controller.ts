@@ -9,7 +9,7 @@
  * @author Central Backend MVP Team
  */
 
-import { Controller, Get, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { TestReportService } from './test-report/test-report.service';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -188,20 +188,4 @@ export class AppController {
     return this.testReportService.getReport();
   }
 
-  /**
-   * Start a backend test suite (unit or e2e) in a background process (silent CMD on Windows).
-   * Does not block; client should poll GET /test-report to get results when the run finishes.
-   */
-  @Post('test-report/run')
-  @HttpCode(HttpStatus.ACCEPTED)
-  @ApiOperation({
-    summary: 'Run test suite in background',
-    description: 'Starts unit or e2e tests in a detached process. Poll GET /test-report for results.',
-  })
-  @ApiResponse({ status: 202, description: 'Tests started in background.' })
-  runTestReport(@Body() body: { suite: 'unit' | 'e2e' }) {
-    const suite = body?.suite === 'e2e' ? 'e2e' : 'unit';
-    this.testReportService.runSuiteInBackground(suite);
-    return { started: true };
-  }
 }
