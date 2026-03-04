@@ -46,7 +46,7 @@ npx omega-testing-mvp start-local
 
 Demo screenshot:
 
-![Omega Testing dashboard](https://github.com/BryanGaray99/omega-testing-mvp/resources/Dashboard.png)
+![Omega Testing dashboard](https://github.com/BryanGaray99/omega-testing-mvp/blob/main/resources/Dashboard.png)
 
 The backend generates Playwright + Cucumber (BDD) projects with ready-to-run structure and exposes a **REST API** with **Swagger** at `/docs`.
 
