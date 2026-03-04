@@ -40,6 +40,7 @@ import { BugsModule } from './modules/bugs/bugs.module';
 import { TestSuitesModule } from './modules/test-suites/test-suites.module';
 import { SyncModule } from './modules/sync/sync.module';
 import { DataModule } from './modules/data/data.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { TestReportService } from './test-report/test-report.service';
 
 /**
@@ -104,6 +105,7 @@ import { TestReportService } from './test-report/test-report.service';
     TestSuitesModule,
     SyncModule,
     DataModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService, TestReportService],
