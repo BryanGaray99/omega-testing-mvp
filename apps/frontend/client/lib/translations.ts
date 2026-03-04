@@ -104,7 +104,7 @@ const en = {
   "dashboard.overview": "Overview",
   "dashboard.testCases": "Test Cases",
   "dashboard.bugsByPriority": "Bugs by priority",
-  "dashboard.bugsHeatmap": "Bugs by day (last year)",
+  "dashboard.bugsHeatmap": "Bugs by day (current year)",
 
   // Common
   "common.cancel": "Cancel",
@@ -1345,7 +1345,7 @@ const es: Record<TranslationKey, string> = {
   "dashboard.overview": "Resumen",
   "dashboard.testCases": "Casos de prueba",
   "dashboard.bugsByPriority": "Bugs por prioridad",
-  "dashboard.bugsHeatmap": "Bugs por día (último año)",
+  "dashboard.bugsHeatmap": "Bugs por día (año actual)",
 
   "common.cancel": "Cancelar",
   "common.previousPage": "Página anterior",
