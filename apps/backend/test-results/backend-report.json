@@ -1,0 +1,1346 @@
+{
+  "backendUnit": {
+    "rows": [
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "76ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "WorkspaceService"
+        ]
+      },
+      {
+        "title": "unit demo (always passing)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "7ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "WorkspaceService",
+          "Demo (unit)"
+        ]
+      },
+      {
+        "title": "Injected dependencies",
+        "result": "pass",
+        "value": "OK",
+        "duration": "11ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "WorkspaceService",
+          "Workspace service"
+        ]
+      },
+      {
+        "title": "Methods under test",
+        "result": "pass",
+        "value": "OK",
+        "duration": "8ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "WorkspaceService",
+          "Workspace service"
+        ]
+      },
+      {
+        "title": "Edge cases",
+        "result": "pass",
+        "value": "OK",
+        "duration": "5ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "WorkspaceService",
+          "Workspace service"
+        ]
+      },
+      {
+        "title": "should return joined path for given name",
+        "result": "pass",
+        "value": "OK",
+        "duration": "7ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "WorkspaceService",
+          "getWorkspacePath"
+        ]
+      },
+      {
+        "title": "should return array of directory names",
+        "result": "pass",
+        "value": "OK",
+        "duration": "18ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "WorkspaceService",
+          "listWorkspaces"
+        ]
+      },
+      {
+        "title": "should return false for non-existent workspace",
+        "result": "pass",
+        "value": "OK",
+        "duration": "19ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "WorkspaceService",
+          "workspaceExists"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "93ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AIGeneralController"
+        ]
+      },
+      {
+        "title": "Injected service mock",
+        "result": "pass",
+        "value": "OK",
+        "duration": "5ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AIGeneralController",
+          "AI controller"
+        ]
+      },
+      {
+        "title": "HTTP requests (GET/POST/PATCH/DELETE)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "10ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AIGeneralController",
+          "AI controller"
+        ]
+      },
+      {
+        "title": "DTO validation (class-validator)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "6ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AIGeneralController",
+          "AI controller"
+        ]
+      },
+      {
+        "title": "HTTP status codes",
+        "result": "pass",
+        "value": "OK",
+        "duration": "9ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AIGeneralController",
+          "AI controller"
+        ]
+      },
+      {
+        "title": "Response format (body)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "4ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AIGeneralController",
+          "AI controller"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "87ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestCasesController"
+        ]
+      },
+      {
+        "title": "Injected service mock",
+        "result": "pass",
+        "value": "OK",
+        "duration": "7ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestCasesController",
+          "Test Cases controller"
+        ]
+      },
+      {
+        "title": "HTTP requests GET POST PATCH DELETE",
+        "result": "pass",
+        "value": "OK",
+        "duration": "7ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestCasesController",
+          "Test Cases controller"
+        ]
+      },
+      {
+        "title": "DTO validation class-validator",
+        "result": "pass",
+        "value": "OK",
+        "duration": "5ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestCasesController",
+          "Test Cases controller"
+        ]
+      },
+      {
+        "title": "HTTP status codes",
+        "result": "pass",
+        "value": "OK",
+        "duration": "8ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestCasesController",
+          "Test Cases controller"
+        ]
+      },
+      {
+        "title": "Response format body",
+        "result": "pass",
+        "value": "OK",
+        "duration": "7ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestCasesController",
+          "Test Cases controller"
+        ]
+      },
+      {
+        "title": "listAllTestCases should return array",
+        "result": "pass",
+        "value": "OK",
+        "duration": "12ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestCasesController"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "19ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppService"
+        ]
+      },
+      {
+        "title": "should return \"Omega Testing!\"",
+        "result": "pass",
+        "value": "OK",
+        "duration": "5ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppService",
+          "getHello"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "197ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "DataService"
+        ]
+      },
+      {
+        "title": "should delete all entities and return counts",
+        "result": "pass",
+        "value": "OK",
+        "duration": "11ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "DataService",
+          "resetAll"
+        ]
+      },
+      {
+        "title": "Injected dependencies",
+        "result": "pass",
+        "value": "OK",
+        "duration": "94ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "Test execution filter utils"
+        ]
+      },
+      {
+        "title": "Methods under test",
+        "result": "pass",
+        "value": "OK",
+        "duration": "1ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "Test execution filter utils"
+        ]
+      },
+      {
+        "title": "Edge cases",
+        "result": "pass",
+        "value": "OK",
+        "duration": "1ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "Test execution filter utils"
+        ]
+      },
+      {
+        "title": "should return empty string when dto has no filters",
+        "result": "pass",
+        "value": "OK",
+        "duration": "2ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "buildCucumberFilter"
+        ]
+      },
+      {
+        "title": "should include entity require path when entityName is set",
+        "result": "pass",
+        "value": "OK",
+        "duration": "2ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "buildCucumberFilter"
+        ]
+      },
+      {
+        "title": "should include tags when tags array is set",
+        "result": "pass",
+        "value": "OK",
+        "duration": "1ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "buildCucumberFilter"
+        ]
+      },
+      {
+        "title": "should include specific scenario name when set",
+        "result": "pass",
+        "value": "OK",
+        "duration": "2ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "buildCucumberFilter"
+        ]
+      },
+      {
+        "title": "should include positive test type tag when testType is positive",
+        "result": "pass",
+        "value": "OK",
+        "duration": "3ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "buildCucumberFilter"
+        ]
+      },
+      {
+        "title": "should include method tag when method is set",
+        "result": "pass",
+        "value": "OK",
+        "duration": "2ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "buildCucumberFilter"
+        ]
+      },
+      {
+        "title": "should return true when no filters are set",
+        "result": "pass",
+        "value": "OK",
+        "duration": "30ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "validateScenarioAgainstFilters"
+        ]
+      },
+      {
+        "title": "should return false when entityName does not match feature name",
+        "result": "pass",
+        "value": "OK",
+        "duration": "1ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "validateScenarioAgainstFilters"
+        ]
+      },
+      {
+        "title": "should return true when entityName matches feature name",
+        "result": "pass",
+        "value": "OK",
+        "duration": "1ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "validateScenarioAgainstFilters"
+        ]
+      },
+      {
+        "title": "should return false when method tag is required but missing",
+        "result": "pass",
+        "value": "OK",
+        "duration": "0ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "validateScenarioAgainstFilters"
+        ]
+      },
+      {
+        "title": "should return true when scenario name matches specificScenario",
+        "result": "pass",
+        "value": "OK",
+        "duration": "1ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "validateScenarioAgainstFilters"
+        ]
+      },
+      {
+        "title": "should return empty array when feature file does not exist",
+        "result": "pass",
+        "value": "OK",
+        "duration": "4ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestFilterUtils",
+          "getAvailableScenarios"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "205ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "SyncController"
+        ]
+      },
+      {
+        "title": "Injected service mock",
+        "result": "pass",
+        "value": "OK",
+        "duration": "22ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "SyncController",
+          "Sync controller"
+        ]
+      },
+      {
+        "title": "HTTP requests (GET/POST/PATCH/DELETE)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "63ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "SyncController",
+          "Sync controller"
+        ]
+      },
+      {
+        "title": "DTO validation (class-validator)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "24ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "SyncController",
+          "Sync controller"
+        ]
+      },
+      {
+        "title": "HTTP status codes",
+        "result": "pass",
+        "value": "OK",
+        "duration": "17ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "SyncController",
+          "Sync controller"
+        ]
+      },
+      {
+        "title": "Response format (body)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "11ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "SyncController",
+          "Sync controller"
+        ]
+      },
+      {
+        "title": "syncProject should call service with projectId",
+        "result": "pass",
+        "value": "OK",
+        "duration": "19ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "SyncController"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "571ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "DataController"
+        ]
+      },
+      {
+        "title": "should call dataService.resetAll and return success response",
+        "result": "pass",
+        "value": "OK",
+        "duration": "75ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "DataController",
+          "resetAll"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "848ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestSuitesController"
+        ]
+      },
+      {
+        "title": "Injected service mock",
+        "result": "pass",
+        "value": "OK",
+        "duration": "48ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestSuitesController",
+          "Test Suites controller"
+        ]
+      },
+      {
+        "title": "HTTP requests GET POST PATCH DELETE",
+        "result": "pass",
+        "value": "OK",
+        "duration": "23ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestSuitesController",
+          "Test Suites controller"
+        ]
+      },
+      {
+        "title": "DTO validation class-validator",
+        "result": "pass",
+        "value": "OK",
+        "duration": "19ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestSuitesController",
+          "Test Suites controller"
+        ]
+      },
+      {
+        "title": "HTTP status codes",
+        "result": "pass",
+        "value": "OK",
+        "duration": "37ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestSuitesController",
+          "Test Suites controller"
+        ]
+      },
+      {
+        "title": "Response format body",
+        "result": "pass",
+        "value": "OK",
+        "duration": "16ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestSuitesController",
+          "Test Suites controller"
+        ]
+      },
+      {
+        "title": "getTestSuites should return array",
+        "result": "pass",
+        "value": "OK",
+        "duration": "117ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "TestSuitesController"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "231ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "ProjectsController"
+        ]
+      },
+      {
+        "title": "Injected service mock",
+        "result": "pass",
+        "value": "OK",
+        "duration": "16ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "ProjectsController",
+          "Projects controller"
+        ]
+      },
+      {
+        "title": "HTTP requests GET POST PATCH DELETE",
+        "result": "pass",
+        "value": "OK",
+        "duration": "10ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "ProjectsController",
+          "Projects controller"
+        ]
+      },
+      {
+        "title": "DTO validation class-validator",
+        "result": "pass",
+        "value": "OK",
+        "duration": "17ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "ProjectsController",
+          "Projects controller"
+        ]
+      },
+      {
+        "title": "HTTP status codes",
+        "result": "pass",
+        "value": "OK",
+        "duration": "13ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "ProjectsController",
+          "Projects controller"
+        ]
+      },
+      {
+        "title": "Response format body",
+        "result": "pass",
+        "value": "OK",
+        "duration": "6ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "ProjectsController",
+          "Projects controller"
+        ]
+      },
+      {
+        "title": "should return array of projects",
+        "result": "pass",
+        "value": "OK",
+        "duration": "64ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "ProjectsController",
+          "findAll"
+        ]
+      },
+      {
+        "title": "should call service.create with dto",
+        "result": "pass",
+        "value": "OK",
+        "duration": "11ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "ProjectsController",
+          "create"
+        ]
+      },
+      {
+        "title": "should return success message with id",
+        "result": "pass",
+        "value": "OK",
+        "duration": "13ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "ProjectsController",
+          "remove"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "717ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "BugsGeneralController"
+        ]
+      },
+      {
+        "title": "Injected service mock",
+        "result": "pass",
+        "value": "OK",
+        "duration": "54ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "BugsGeneralController",
+          "Bugs controller"
+        ]
+      },
+      {
+        "title": "HTTP requests GET POST PATCH DELETE",
+        "result": "pass",
+        "value": "OK",
+        "duration": "48ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "BugsGeneralController",
+          "Bugs controller"
+        ]
+      },
+      {
+        "title": "DTO validation class-validator",
+        "result": "pass",
+        "value": "OK",
+        "duration": "16ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "BugsGeneralController",
+          "Bugs controller"
+        ]
+      },
+      {
+        "title": "HTTP status codes",
+        "result": "pass",
+        "value": "OK",
+        "duration": "45ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "BugsGeneralController",
+          "Bugs controller"
+        ]
+      },
+      {
+        "title": "Response format body",
+        "result": "pass",
+        "value": "OK",
+        "duration": "7ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "BugsGeneralController",
+          "Bugs controller"
+        ]
+      },
+      {
+        "title": "getAllBugs should call service and return result",
+        "result": "pass",
+        "value": "OK",
+        "duration": "34ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "BugsGeneralController"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "364ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "EndpointsController"
+        ]
+      },
+      {
+        "title": "Injected service mock",
+        "result": "pass",
+        "value": "OK",
+        "duration": "13ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "EndpointsController",
+          "Endpoints controller"
+        ]
+      },
+      {
+        "title": "HTTP requests (GET/POST/PATCH/DELETE)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "35ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "EndpointsController",
+          "Endpoints controller"
+        ]
+      },
+      {
+        "title": "DTO validation (class-validator)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "12ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "EndpointsController",
+          "Endpoints controller"
+        ]
+      },
+      {
+        "title": "HTTP status codes",
+        "result": "pass",
+        "value": "OK",
+        "duration": "22ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "EndpointsController",
+          "Endpoints controller"
+        ]
+      },
+      {
+        "title": "Response format (body)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "12ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "EndpointsController",
+          "Endpoints controller"
+        ]
+      },
+      {
+        "title": "listAllEndpoints should return array",
+        "result": "pass",
+        "value": "OK",
+        "duration": "38ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "EndpointsController"
+        ]
+      },
+      {
+        "title": "should be defined",
+        "result": "pass",
+        "value": "OK",
+        "duration": "6ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController"
+        ]
+      },
+      {
+        "title": "AppModule",
+        "result": "pass",
+        "value": "OK",
+        "duration": "2ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController",
+          "App (controller, service)"
+        ]
+      },
+      {
+        "title": "GET /health → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "4ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController",
+          "App (controller, service)"
+        ]
+      },
+      {
+        "title": "GET / → 200 welcome",
+        "result": "pass",
+        "value": "OK",
+        "duration": "3ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController",
+          "App (controller, service)"
+        ]
+      }
+    ],
+    "passed": 83,
+    "failed": 0,
+    "totalTime": "387.6s"
+  },
+  "backendE2e": {
+    "rows": [
+      {
+        "title": "GET /health → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "106ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Health & Welcome"
+        ]
+      },
+      {
+        "title": "GET / → 200 welcome",
+        "result": "pass",
+        "value": "OK",
+        "duration": "55ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Health & Welcome"
+        ]
+      },
+      {
+        "title": "POST → 201 create",
+        "result": "pass",
+        "value": "OK",
+        "duration": "184ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Projects CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET list → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "74ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Projects CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET by id → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "45ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Projects CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "PATCH → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "55ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Projects CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "DELETE → 200/204",
+        "result": "pass",
+        "value": "OK",
+        "duration": "2.1s",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Projects CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "404 when resource does not exist",
+        "result": "pass",
+        "value": "OK",
+        "duration": "52ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Projects CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET route exists → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "44ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Endpoints CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET list → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "38ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Endpoints CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET by id → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "32ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Endpoints CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "PATCH → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "39ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Endpoints CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "DELETE → 200/204",
+        "result": "pass",
+        "value": "OK",
+        "duration": "38ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Endpoints CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "404 when resource does not exist",
+        "result": "pass",
+        "value": "OK",
+        "duration": "39ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Endpoints CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET route exists → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "38ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Cases CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET list → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "41ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Cases CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET by id → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "38ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Cases CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "PATCH → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "41ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Cases CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "DELETE → 200/204",
+        "result": "pass",
+        "value": "OK",
+        "duration": "49ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Cases CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "404 when resource does not exist",
+        "result": "pass",
+        "value": "OK",
+        "duration": "36ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Cases CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET route exists → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "38ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Suites CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET list → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "87ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Suites CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET by id → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "38ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Suites CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "PATCH → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "36ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Suites CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "DELETE → 200/204",
+        "result": "pass",
+        "value": "OK",
+        "duration": "40ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Suites CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "404 when resource does not exist",
+        "result": "pass",
+        "value": "OK",
+        "duration": "36ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Test Suites CRUD (e2e)"
+        ]
+      },
+      {
+        "title": "GET list → 200",
+        "result": "pass",
+        "value": "OK",
+        "duration": "50ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Bugs & Executions (e2e)"
+        ]
+      },
+      {
+        "title": "POST → 201",
+        "result": "pass",
+        "value": "OK",
+        "duration": "38ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Bugs & Executions (e2e)"
+        ]
+      },
+      {
+        "title": "Query params and status codes",
+        "result": "pass",
+        "value": "OK",
+        "duration": "37ms",
+        "description": "Passed",
+        "ancestorTitles": [
+          "AppController (e2e)",
+          "Bugs & Executions (e2e)"
+        ]
+      }
+    ],
+    "passed": 29,
+    "failed": 0,
+    "totalTime": "26.1s"
+  },
+  "frontendLighthouse": {
+    "rows": [
+      {
+        "title": "Dashboard (/)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "17.5s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 52 and desired threshold was 25 accessibility record is 96 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "Projects (/projects)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "14.7s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 56.00000000000001 and desired threshold was 25 accessibility record is 88 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "Endpoints (/endpoints)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "14.5s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 68 and desired threshold was 25 accessibility record is 88 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "Test-Cases (/test-cases)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "15.3s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 62 and desired threshold was 25 accessibility record is 96 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "Test-Suites (/test-suites)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "13.9s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 70 and desired threshold was 25 accessibility record is 88 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "Bugs (/bugs)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "15.2s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 70 and desired threshold was 25 accessibility record is 88 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "Test-Executions (/test-executions)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "14.4s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 69 and desired threshold was 25 accessibility record is 88 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "AI-Assistant (/ai-assistant)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "14.2s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 64 and desired threshold was 25 accessibility record is 94 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "Settings-Documentation (/settings/documentation)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "15.6s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 61 and desired threshold was 25 accessibility record is 94 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "Settings-Appearance (/settings/appearance)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "14.3s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 71 and desired threshold was 25 accessibility record is 96 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "Settings-OpenAI (/settings/openai)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "18.3s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 71 and desired threshold was 25 accessibility record is 92 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      },
+      {
+        "title": "Settings-DangerZone (/settings/danger)",
+        "result": "pass",
+        "value": "OK",
+        "duration": "16.9s",
+        "description": "Lighthouse thresholds met",
+        "ancestorTitles": [],
+        "metricsText": "performance record is 61 and desired threshold was 25 accessibility record is 95 and desired threshold was 85 best-practices record is 100 and desired threshold was 85 seo record is 100 and desired threshold was 50"
+      }
+    ],
+    "passed": 12,
+    "failed": 0,
+    "totalTime": "184.7s"
+  }
+}

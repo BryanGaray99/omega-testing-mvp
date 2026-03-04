@@ -1,0 +1,508 @@
+{
+  "numFailedTestSuites": 0,
+  "numFailedTests": 0,
+  "numPassedTestSuites": 1,
+  "numPassedTests": 29,
+  "numPendingTestSuites": 0,
+  "numPendingTests": 0,
+  "numRuntimeErrorTestSuites": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 1,
+  "numTotalTests": 29,
+  "openHandles": [],
+  "snapshot": {
+    "added": 0,
+    "didUpdate": false,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0
+  },
+  "startTime": 1772584809847,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Health & Welcome"
+          ],
+          "duration": 106,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Health & Welcome GET /health → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET /health → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Health & Welcome"
+          ],
+          "duration": 55,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Health & Welcome GET / → 200 welcome",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 3,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET / → 200 welcome"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Projects CRUD (e2e)"
+          ],
+          "duration": 184,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Projects CRUD (e2e) POST → 201 create",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "POST → 201 create"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Projects CRUD (e2e)"
+          ],
+          "duration": 74,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Projects CRUD (e2e) GET list → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET list → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Projects CRUD (e2e)"
+          ],
+          "duration": 45,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Projects CRUD (e2e) GET by id → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET by id → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Projects CRUD (e2e)"
+          ],
+          "duration": 55,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Projects CRUD (e2e) PATCH → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "PATCH → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Projects CRUD (e2e)"
+          ],
+          "duration": 2095,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Projects CRUD (e2e) DELETE → 200/204",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DELETE → 200/204"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Projects CRUD (e2e)"
+          ],
+          "duration": 52,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Projects CRUD (e2e) 404 when resource does not exist",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "404 when resource does not exist"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Endpoints CRUD (e2e)"
+          ],
+          "duration": 44,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Endpoints CRUD (e2e) GET route exists → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET route exists → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Endpoints CRUD (e2e)"
+          ],
+          "duration": 38,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Endpoints CRUD (e2e) GET list → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 0,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET list → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Endpoints CRUD (e2e)"
+          ],
+          "duration": 32,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Endpoints CRUD (e2e) GET by id → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET by id → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Endpoints CRUD (e2e)"
+          ],
+          "duration": 39,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Endpoints CRUD (e2e) PATCH → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "PATCH → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Endpoints CRUD (e2e)"
+          ],
+          "duration": 38,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Endpoints CRUD (e2e) DELETE → 200/204",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DELETE → 200/204"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Endpoints CRUD (e2e)"
+          ],
+          "duration": 39,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Endpoints CRUD (e2e) 404 when resource does not exist",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "404 when resource does not exist"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Cases CRUD (e2e)"
+          ],
+          "duration": 38,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Cases CRUD (e2e) GET route exists → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET route exists → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Cases CRUD (e2e)"
+          ],
+          "duration": 41,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Cases CRUD (e2e) GET list → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 0,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET list → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Cases CRUD (e2e)"
+          ],
+          "duration": 38,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Cases CRUD (e2e) GET by id → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET by id → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Cases CRUD (e2e)"
+          ],
+          "duration": 41,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Cases CRUD (e2e) PATCH → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "PATCH → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Cases CRUD (e2e)"
+          ],
+          "duration": 49,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Cases CRUD (e2e) DELETE → 200/204",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DELETE → 200/204"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Cases CRUD (e2e)"
+          ],
+          "duration": 36,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Cases CRUD (e2e) 404 when resource does not exist",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "404 when resource does not exist"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Suites CRUD (e2e)"
+          ],
+          "duration": 38,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Suites CRUD (e2e) GET route exists → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET route exists → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Suites CRUD (e2e)"
+          ],
+          "duration": 87,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Suites CRUD (e2e) GET list → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET list → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Suites CRUD (e2e)"
+          ],
+          "duration": 38,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Suites CRUD (e2e) GET by id → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET by id → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Suites CRUD (e2e)"
+          ],
+          "duration": 36,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Suites CRUD (e2e) PATCH → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "PATCH → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Suites CRUD (e2e)"
+          ],
+          "duration": 40,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Suites CRUD (e2e) DELETE → 200/204",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DELETE → 200/204"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Test Suites CRUD (e2e)"
+          ],
+          "duration": 36,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Test Suites CRUD (e2e) 404 when resource does not exist",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "404 when resource does not exist"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Bugs & Executions (e2e)"
+          ],
+          "duration": 50,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Bugs & Executions (e2e) GET list → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET list → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Bugs & Executions (e2e)"
+          ],
+          "duration": 38,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Bugs & Executions (e2e) POST → 201",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "POST → 201"
+        },
+        {
+          "ancestorTitles": [
+            "AppController (e2e)",
+            "Bugs & Executions (e2e)"
+          ],
+          "duration": 37,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController (e2e) Bugs & Executions (e2e) Query params and status codes",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Query params and status codes"
+        }
+      ],
+      "endTime": 1772584836839,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\e2e\\app.e2e-spec.ts",
+      "startTime": 1772584810709,
+      "status": "passed",
+      "summary": ""
+    }
+  ],
+  "wasInterrupted": false
+}

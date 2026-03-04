@@ -1,0 +1,326 @@
+{
+  "rows": [
+    {
+      "title": "GET /health → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "106ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Health & Welcome"
+      ]
+    },
+    {
+      "title": "GET / → 200 welcome",
+      "result": "pass",
+      "value": "OK",
+      "duration": "55ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Health & Welcome"
+      ]
+    },
+    {
+      "title": "POST → 201 create",
+      "result": "pass",
+      "value": "OK",
+      "duration": "184ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Projects CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET list → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "74ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Projects CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET by id → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "45ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Projects CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "PATCH → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "55ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Projects CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "DELETE → 200/204",
+      "result": "pass",
+      "value": "OK",
+      "duration": "2.1s",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Projects CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "404 when resource does not exist",
+      "result": "pass",
+      "value": "OK",
+      "duration": "52ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Projects CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET route exists → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "44ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Endpoints CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET list → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "38ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Endpoints CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET by id → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "32ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Endpoints CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "PATCH → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "39ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Endpoints CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "DELETE → 200/204",
+      "result": "pass",
+      "value": "OK",
+      "duration": "38ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Endpoints CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "404 when resource does not exist",
+      "result": "pass",
+      "value": "OK",
+      "duration": "39ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Endpoints CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET route exists → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "38ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Cases CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET list → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "41ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Cases CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET by id → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "38ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Cases CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "PATCH → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "41ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Cases CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "DELETE → 200/204",
+      "result": "pass",
+      "value": "OK",
+      "duration": "49ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Cases CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "404 when resource does not exist",
+      "result": "pass",
+      "value": "OK",
+      "duration": "36ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Cases CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET route exists → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "38ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Suites CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET list → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "87ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Suites CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET by id → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "38ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Suites CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "PATCH → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "36ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Suites CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "DELETE → 200/204",
+      "result": "pass",
+      "value": "OK",
+      "duration": "40ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Suites CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "404 when resource does not exist",
+      "result": "pass",
+      "value": "OK",
+      "duration": "36ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Test Suites CRUD (e2e)"
+      ]
+    },
+    {
+      "title": "GET list → 200",
+      "result": "pass",
+      "value": "OK",
+      "duration": "50ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Bugs & Executions (e2e)"
+      ]
+    },
+    {
+      "title": "POST → 201",
+      "result": "pass",
+      "value": "OK",
+      "duration": "38ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Bugs & Executions (e2e)"
+      ]
+    },
+    {
+      "title": "Query params and status codes",
+      "result": "pass",
+      "value": "OK",
+      "duration": "37ms",
+      "description": "Passed",
+      "ancestorTitles": [
+        "AppController (e2e)",
+        "Bugs & Executions (e2e)"
+      ]
+    }
+  ],
+  "passed": 29,
+  "failed": 0,
+  "totalTime": "26.1s"
+}

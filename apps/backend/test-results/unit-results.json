@@ -1,0 +1,1475 @@
+{
+  "numFailedTestSuites": 0,
+  "numFailedTests": 0,
+  "numPassedTestSuites": 13,
+  "numPassedTests": 83,
+  "numPendingTestSuites": 0,
+  "numPendingTests": 0,
+  "numRuntimeErrorTestSuites": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 13,
+  "numTotalTests": 83,
+  "openHandles": [],
+  "snapshot": {
+    "added": 0,
+    "didUpdate": false,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0
+  },
+  "startTime": 1772584753442,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "WorkspaceService"
+          ],
+          "duration": 76,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "WorkspaceService should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "WorkspaceService",
+            "Demo (unit)"
+          ],
+          "duration": 7,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "WorkspaceService Demo (unit) unit demo (always passing)",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "unit demo (always passing)"
+        },
+        {
+          "ancestorTitles": [
+            "WorkspaceService",
+            "Workspace service"
+          ],
+          "duration": 11,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "WorkspaceService Workspace service Injected dependencies",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Injected dependencies"
+        },
+        {
+          "ancestorTitles": [
+            "WorkspaceService",
+            "Workspace service"
+          ],
+          "duration": 8,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "WorkspaceService Workspace service Methods under test",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 3,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Methods under test"
+        },
+        {
+          "ancestorTitles": [
+            "WorkspaceService",
+            "Workspace service"
+          ],
+          "duration": 5,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "WorkspaceService Workspace service Edge cases",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Edge cases"
+        },
+        {
+          "ancestorTitles": [
+            "WorkspaceService",
+            "getWorkspacePath"
+          ],
+          "duration": 7,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "WorkspaceService getWorkspacePath should return joined path for given name",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return joined path for given name"
+        },
+        {
+          "ancestorTitles": [
+            "WorkspaceService",
+            "listWorkspaces"
+          ],
+          "duration": 18,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "WorkspaceService listWorkspaces should return array of directory names",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return array of directory names"
+        },
+        {
+          "ancestorTitles": [
+            "WorkspaceService",
+            "workspaceExists"
+          ],
+          "duration": 19,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "WorkspaceService workspaceExists should return false for non-existent workspace",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return false for non-existent workspace"
+        }
+      ],
+      "endTime": 1772584784764,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\workspace\\workspace.service.spec.ts",
+      "startTime": 1772584757465,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "AIGeneralController"
+          ],
+          "duration": 93,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AIGeneralController should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "AIGeneralController",
+            "AI controller"
+          ],
+          "duration": 5,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AIGeneralController AI controller Injected service mock",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Injected service mock"
+        },
+        {
+          "ancestorTitles": [
+            "AIGeneralController",
+            "AI controller"
+          ],
+          "duration": 10,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AIGeneralController AI controller HTTP requests (GET/POST/PATCH/DELETE)",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP requests (GET/POST/PATCH/DELETE)"
+        },
+        {
+          "ancestorTitles": [
+            "AIGeneralController",
+            "AI controller"
+          ],
+          "duration": 6,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AIGeneralController AI controller DTO validation (class-validator)",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DTO validation (class-validator)"
+        },
+        {
+          "ancestorTitles": [
+            "AIGeneralController",
+            "AI controller"
+          ],
+          "duration": 9,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AIGeneralController AI controller HTTP status codes",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP status codes"
+        },
+        {
+          "ancestorTitles": [
+            "AIGeneralController",
+            "AI controller"
+          ],
+          "duration": 4,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AIGeneralController AI controller Response format (body)",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Response format (body)"
+        }
+      ],
+      "endTime": 1772584786195,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\ai\\controllers\\ai-general.controller.spec.ts",
+      "startTime": 1772584757383,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "TestCasesController"
+          ],
+          "duration": 87,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestCasesController should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "TestCasesController",
+            "Test Cases controller"
+          ],
+          "duration": 7,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestCasesController Test Cases controller Injected service mock",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Injected service mock"
+        },
+        {
+          "ancestorTitles": [
+            "TestCasesController",
+            "Test Cases controller"
+          ],
+          "duration": 7,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestCasesController Test Cases controller HTTP requests GET POST PATCH DELETE",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP requests GET POST PATCH DELETE"
+        },
+        {
+          "ancestorTitles": [
+            "TestCasesController",
+            "Test Cases controller"
+          ],
+          "duration": 5,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestCasesController Test Cases controller DTO validation class-validator",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DTO validation class-validator"
+        },
+        {
+          "ancestorTitles": [
+            "TestCasesController",
+            "Test Cases controller"
+          ],
+          "duration": 8,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestCasesController Test Cases controller HTTP status codes",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP status codes"
+        },
+        {
+          "ancestorTitles": [
+            "TestCasesController",
+            "Test Cases controller"
+          ],
+          "duration": 7,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestCasesController Test Cases controller Response format body",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Response format body"
+        },
+        {
+          "ancestorTitles": [
+            "TestCasesController"
+          ],
+          "duration": 12,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestCasesController listAllTestCases should return array",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "listAllTestCases should return array"
+        }
+      ],
+      "endTime": 1772584787738,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\test-cases\\controllers\\test-cases.controller.spec.ts",
+      "startTime": 1772584756203,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "AppService"
+          ],
+          "duration": 19,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppService should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "AppService",
+            "getHello"
+          ],
+          "duration": 5,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppService getHello should return \"Omega Testing!\"",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return \"Omega Testing!\""
+        }
+      ],
+      "endTime": 1772584787991,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\app\\app.service.spec.ts",
+      "startTime": 1772584786218,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "DataService"
+          ],
+          "duration": 197,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "DataService should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "DataService",
+            "resetAll"
+          ],
+          "duration": 11,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "DataService resetAll should delete all entities and return counts",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 3,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should delete all entities and return counts"
+        }
+      ],
+      "endTime": 1772584788184,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\data\\data.service.spec.ts",
+      "startTime": 1772584757350,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "Test execution filter utils"
+          ],
+          "duration": 94,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils Test execution filter utils Injected dependencies",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Injected dependencies"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "Test execution filter utils"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils Test execution filter utils Methods under test",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Methods under test"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "Test execution filter utils"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils Test execution filter utils Edge cases",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Edge cases"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "buildCucumberFilter"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils buildCucumberFilter should return empty string when dto has no filters",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return empty string when dto has no filters"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "buildCucumberFilter"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils buildCucumberFilter should include entity require path when entityName is set",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should include entity require path when entityName is set"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "buildCucumberFilter"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils buildCucumberFilter should include tags when tags array is set",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should include tags when tags array is set"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "buildCucumberFilter"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils buildCucumberFilter should include specific scenario name when set",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should include specific scenario name when set"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "buildCucumberFilter"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils buildCucumberFilter should include positive test type tag when testType is positive",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should include positive test type tag when testType is positive"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "buildCucumberFilter"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils buildCucumberFilter should include method tag when method is set",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should include method tag when method is set"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "validateScenarioAgainstFilters"
+          ],
+          "duration": 30,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils validateScenarioAgainstFilters should return true when no filters are set",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return true when no filters are set"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "validateScenarioAgainstFilters"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils validateScenarioAgainstFilters should return false when entityName does not match feature name",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return false when entityName does not match feature name"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "validateScenarioAgainstFilters"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils validateScenarioAgainstFilters should return true when entityName matches feature name",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return true when entityName matches feature name"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "validateScenarioAgainstFilters"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils validateScenarioAgainstFilters should return false when method tag is required but missing",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return false when method tag is required but missing"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "validateScenarioAgainstFilters"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils validateScenarioAgainstFilters should return true when scenario name matches specificScenario",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return true when scenario name matches specificScenario"
+        },
+        {
+          "ancestorTitles": [
+            "TestFilterUtils",
+            "getAvailableScenarios"
+          ],
+          "duration": 4,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestFilterUtils getAvailableScenarios should return empty array when feature file does not exist",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return empty array when feature file does not exist"
+        }
+      ],
+      "endTime": 1772584788485,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\test-execution\\utils\\test-filter.utils.spec.ts",
+      "startTime": 1772584757347,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "SyncController"
+          ],
+          "duration": 205,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "SyncController should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "SyncController",
+            "Sync controller"
+          ],
+          "duration": 22,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "SyncController Sync controller Injected service mock",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Injected service mock"
+        },
+        {
+          "ancestorTitles": [
+            "SyncController",
+            "Sync controller"
+          ],
+          "duration": 63,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "SyncController Sync controller HTTP requests (GET/POST/PATCH/DELETE)",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP requests (GET/POST/PATCH/DELETE)"
+        },
+        {
+          "ancestorTitles": [
+            "SyncController",
+            "Sync controller"
+          ],
+          "duration": 24,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "SyncController Sync controller DTO validation (class-validator)",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DTO validation (class-validator)"
+        },
+        {
+          "ancestorTitles": [
+            "SyncController",
+            "Sync controller"
+          ],
+          "duration": 17,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "SyncController Sync controller HTTP status codes",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP status codes"
+        },
+        {
+          "ancestorTitles": [
+            "SyncController",
+            "Sync controller"
+          ],
+          "duration": 11,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "SyncController Sync controller Response format (body)",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Response format (body)"
+        },
+        {
+          "ancestorTitles": [
+            "SyncController"
+          ],
+          "duration": 19,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "SyncController syncProject should call service with projectId",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "syncProject should call service with projectId"
+        }
+      ],
+      "endTime": 1772584790905,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\sync\\controllers\\sync.controller.spec.ts",
+      "startTime": 1772584757520,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "DataController"
+          ],
+          "duration": 571,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "DataController should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "DataController",
+            "resetAll"
+          ],
+          "duration": 75,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "DataController resetAll should call dataService.resetAll and return success response",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 4,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should call dataService.resetAll and return success response"
+        }
+      ],
+      "endTime": 1772584791566,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\data\\data.controller.spec.ts",
+      "startTime": 1772584756036,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "TestSuitesController"
+          ],
+          "duration": 848,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestSuitesController should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "TestSuitesController",
+            "Test Suites controller"
+          ],
+          "duration": 48,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestSuitesController Test Suites controller Injected service mock",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Injected service mock"
+        },
+        {
+          "ancestorTitles": [
+            "TestSuitesController",
+            "Test Suites controller"
+          ],
+          "duration": 23,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestSuitesController Test Suites controller HTTP requests GET POST PATCH DELETE",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP requests GET POST PATCH DELETE"
+        },
+        {
+          "ancestorTitles": [
+            "TestSuitesController",
+            "Test Suites controller"
+          ],
+          "duration": 19,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestSuitesController Test Suites controller DTO validation class-validator",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DTO validation class-validator"
+        },
+        {
+          "ancestorTitles": [
+            "TestSuitesController",
+            "Test Suites controller"
+          ],
+          "duration": 37,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestSuitesController Test Suites controller HTTP status codes",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP status codes"
+        },
+        {
+          "ancestorTitles": [
+            "TestSuitesController",
+            "Test Suites controller"
+          ],
+          "duration": 16,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestSuitesController Test Suites controller Response format body",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Response format body"
+        },
+        {
+          "ancestorTitles": [
+            "TestSuitesController"
+          ],
+          "duration": 117,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "TestSuitesController getTestSuites should return array",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "getTestSuites should return array"
+        }
+      ],
+      "endTime": 1772584794015,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\test-suites\\controllers\\test-suites.controller.spec.ts",
+      "startTime": 1772584756240,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "ProjectsController"
+          ],
+          "duration": 231,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "ProjectsController should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "ProjectsController",
+            "Projects controller"
+          ],
+          "duration": 16,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "ProjectsController Projects controller Injected service mock",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Injected service mock"
+        },
+        {
+          "ancestorTitles": [
+            "ProjectsController",
+            "Projects controller"
+          ],
+          "duration": 10,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "ProjectsController Projects controller HTTP requests GET POST PATCH DELETE",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 3,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP requests GET POST PATCH DELETE"
+        },
+        {
+          "ancestorTitles": [
+            "ProjectsController",
+            "Projects controller"
+          ],
+          "duration": 17,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "ProjectsController Projects controller DTO validation class-validator",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DTO validation class-validator"
+        },
+        {
+          "ancestorTitles": [
+            "ProjectsController",
+            "Projects controller"
+          ],
+          "duration": 13,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "ProjectsController Projects controller HTTP status codes",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP status codes"
+        },
+        {
+          "ancestorTitles": [
+            "ProjectsController",
+            "Projects controller"
+          ],
+          "duration": 6,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "ProjectsController Projects controller Response format body",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Response format body"
+        },
+        {
+          "ancestorTitles": [
+            "ProjectsController",
+            "findAll"
+          ],
+          "duration": 64,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "ProjectsController findAll should return array of projects",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return array of projects"
+        },
+        {
+          "ancestorTitles": [
+            "ProjectsController",
+            "create"
+          ],
+          "duration": 11,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "ProjectsController create should call service.create with dto",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should call service.create with dto"
+        },
+        {
+          "ancestorTitles": [
+            "ProjectsController",
+            "remove"
+          ],
+          "duration": 13,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "ProjectsController remove should return success message with id",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 3,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should return success message with id"
+        }
+      ],
+      "endTime": 1772584794374,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\projects\\projects.controller.spec.ts",
+      "startTime": 1772584756598,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "BugsGeneralController"
+          ],
+          "duration": 717,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "BugsGeneralController should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "BugsGeneralController",
+            "Bugs controller"
+          ],
+          "duration": 54,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "BugsGeneralController Bugs controller Injected service mock",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Injected service mock"
+        },
+        {
+          "ancestorTitles": [
+            "BugsGeneralController",
+            "Bugs controller"
+          ],
+          "duration": 48,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "BugsGeneralController Bugs controller HTTP requests GET POST PATCH DELETE",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP requests GET POST PATCH DELETE"
+        },
+        {
+          "ancestorTitles": [
+            "BugsGeneralController",
+            "Bugs controller"
+          ],
+          "duration": 16,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "BugsGeneralController Bugs controller DTO validation class-validator",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DTO validation class-validator"
+        },
+        {
+          "ancestorTitles": [
+            "BugsGeneralController",
+            "Bugs controller"
+          ],
+          "duration": 45,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "BugsGeneralController Bugs controller HTTP status codes",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP status codes"
+        },
+        {
+          "ancestorTitles": [
+            "BugsGeneralController",
+            "Bugs controller"
+          ],
+          "duration": 7,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "BugsGeneralController Bugs controller Response format body",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Response format body"
+        },
+        {
+          "ancestorTitles": [
+            "BugsGeneralController"
+          ],
+          "duration": 34,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "BugsGeneralController getAllBugs should call service and return result",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 3,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "getAllBugs should call service and return result"
+        }
+      ],
+      "endTime": 1772584794748,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\bugs\\controllers\\bugs-general.controller.spec.ts",
+      "startTime": 1772584756659,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "EndpointsController"
+          ],
+          "duration": 364,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "EndpointsController should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "EndpointsController",
+            "Endpoints controller"
+          ],
+          "duration": 13,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "EndpointsController Endpoints controller Injected service mock",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Injected service mock"
+        },
+        {
+          "ancestorTitles": [
+            "EndpointsController",
+            "Endpoints controller"
+          ],
+          "duration": 35,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "EndpointsController Endpoints controller HTTP requests (GET/POST/PATCH/DELETE)",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP requests (GET/POST/PATCH/DELETE)"
+        },
+        {
+          "ancestorTitles": [
+            "EndpointsController",
+            "Endpoints controller"
+          ],
+          "duration": 12,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "EndpointsController Endpoints controller DTO validation (class-validator)",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "DTO validation (class-validator)"
+        },
+        {
+          "ancestorTitles": [
+            "EndpointsController",
+            "Endpoints controller"
+          ],
+          "duration": 22,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "EndpointsController Endpoints controller HTTP status codes",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "HTTP status codes"
+        },
+        {
+          "ancestorTitles": [
+            "EndpointsController",
+            "Endpoints controller"
+          ],
+          "duration": 12,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "EndpointsController Endpoints controller Response format (body)",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "Response format (body)"
+        },
+        {
+          "ancestorTitles": [
+            "EndpointsController"
+          ],
+          "duration": 38,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "EndpointsController listAllEndpoints should return array",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "listAllEndpoints should return array"
+        }
+      ],
+      "endTime": 1772584795170,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\modules\\endpoints\\controllers\\endpoints.controller.spec.ts",
+      "startTime": 1772584756732,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "AppController"
+          ],
+          "duration": 6,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController should be defined",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "should be defined"
+        },
+        {
+          "ancestorTitles": [
+            "AppController",
+            "App (controller, service)"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController App (controller, service) AppModule",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "AppModule"
+        },
+        {
+          "ancestorTitles": [
+            "AppController",
+            "App (controller, service)"
+          ],
+          "duration": 4,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController App (controller, service) GET /health → 200",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 6,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET /health → 200"
+        },
+        {
+          "ancestorTitles": [
+            "AppController",
+            "App (controller, service)"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "AppController App (controller, service) GET / → 200 welcome",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 4,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "GET / → 200 welcome"
+        }
+      ],
+      "endTime": 1772584799958,
+      "message": "",
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\unit\\app\\app.controller.spec.ts",
+      "startTime": 1772584784784,
+      "status": "passed",
+      "summary": ""
+    }
+  ],
+  "wasInterrupted": false
+}
