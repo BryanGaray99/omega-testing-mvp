@@ -169,7 +169,7 @@ export default function TestCaseCard({
             onOpenChange={(open) => setOpenDropdownId(open ? testCase.testCaseId : null)}
           >
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0 text-foreground hover:text-foreground">
+              <Button variant="ghost" className="h-8 w-8 p-0 text-foreground hover:text-foreground" aria-label={t("testCases.actions") || "Open actions menu"}>
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>

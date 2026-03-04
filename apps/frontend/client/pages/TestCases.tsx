@@ -243,7 +243,8 @@ export default function TestCases() {
         setSortOrder={setSortOrder}
       />
 
-      {/* Test Cases Grid */}
+      {/* Test Cases Grid - h2 para orden secuencial de headings (Lighthouse a11y) */}
+      <h2 className="sr-only">Test case list</h2>
       <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500 ${isRefreshing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
         {visibleTestCases.map((testCase) => (
                <TestCaseCard
@@ -263,13 +264,13 @@ export default function TestCases() {
       {/* Pagination */}
       {filteredTestCases.length > 0 && (
         <div className="flex items-center justify-center gap-3">
-          <Button variant="outline" size="sm" disabled={currentPage === 1} onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}>
+          <Button variant="outline" size="sm" disabled={currentPage === 1} onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} aria-label={t("common.previousPage") || "Previous page"}>
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <span className="text-sm text-muted-foreground">
             {replaceParams(t("testCases.pageOf"), { current: currentPage, total: totalPages })}
           </span>
-          <Button variant="outline" size="sm" disabled={currentPage === totalPages} onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}>
+          <Button variant="outline" size="sm" disabled={currentPage === totalPages} onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))} aria-label={t("common.nextPage") || "Next page"}>
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>

@@ -24,7 +24,7 @@ const en = {
   "lang.label": "Language",
 
   // Settings
-  "settings.title": "",
+  "settings.title": "Settings",
   "settings.docs": "Docs",
   "settings.openai": "OpenAI Configuration",
   "settings.appearance": "Appearance",
@@ -35,10 +35,9 @@ const en = {
   // Tests report (Settings > Pruebas)
   "testsReport.pageTitle": "System Test Report",
   "testsReport.title": "Title",
-  "testsReport.subtitle": "Summary of test levels: backend unit & e2e, frontend a11y & Lighthouse. Tests run locally in development (not in production). Results are read from test-results/ (backend: unit-results.json, e2e-results.json; frontend: a11y, lighthouse). Use «View command» to see the terminal command.",
+  "testsReport.subtitle": "Summary of test levels: backend unit & e2e, frontend Lighthouse. Tests run locally in development (not in production). Results are read from test-results/ (backend: unit-results.json, e2e-results.json; frontend: lighthouse). Use «View command» to see the terminal command.",
   "testsReport.backendUnit": "Backend — Unit tests",
   "testsReport.backendE2e": "Backend — E2E tests",
-  "testsReport.frontendUnit": "Frontend — Unit & accessibility",
   "testsReport.frontendLighthouse": "Frontend — Lighthouse audits",
   "testsReport.module": "Module / Suite",
   "testsReport.result": "Result",
@@ -52,6 +51,7 @@ const en = {
   "testsReport.runCommandHint": "Run in terminal from the project root (omega-testing-mvp or monorepo root):",
   "testsReport.runNow": "Run now",
   "testsReport.viewCommand": "View command",
+  "testsReport.reload": "Reload results",
   "testsReport.running": "Running…",
   "testsReport.runningHint": "This may take one or two minutes.",
   "testsReport.lastRunReady": "Last run results ready.",
@@ -91,6 +91,9 @@ const en = {
 
   // Common
   "common.cancel": "Cancel",
+  "common.previousPage": "Previous page",
+  "common.nextPage": "Next page",
+  "nav.closeMenu": "Close menu",
 
   // Projects
   "projects.title": "Projects",
@@ -1248,7 +1251,7 @@ const es: Record<TranslationKey, string> = {
   "lang.spanish": "Español",
   "lang.label": "Idioma",
 
-  "settings.title": "",
+  "settings.title": "Configuración",
   "settings.docs": "Docs",
   "settings.openai": "Configuración OpenAI",
   "settings.appearance": "Apariencia",
@@ -1257,10 +1260,9 @@ const es: Record<TranslationKey, string> = {
   "settings.footer": "Omega Testing Configuración v1.0",
 
   "testsReport.pageTitle": "Reporte de pruebas del sistema",
-  "testsReport.subtitle": "Resumen de niveles de prueba: backend unit y e2e, frontend a11y y Lighthouse. Las pruebas se ejecutan en desarrollo local (no en producción). Los resultados se leen de test-results/ (backend: unit-results.json, e2e-results.json; frontend: a11y, lighthouse). Usa «Ver comando» para ver el comando en la terminal.",
+  "testsReport.subtitle": "Resumen de niveles de prueba: backend unit y e2e, frontend Lighthouse. Las pruebas se ejecutan en desarrollo local (no en producción). Los resultados se leen de test-results/ (backend: unit-results.json, e2e-results.json; frontend: lighthouse). Usa «Ver comando» para ver el comando en la terminal.",
   "testsReport.backendUnit": "Backend — Pruebas unitarias",
   "testsReport.backendE2e": "Backend — Pruebas E2E",
-  "testsReport.frontendUnit": "Frontend — Unitarias y accesibilidad",
   "testsReport.frontendLighthouse": "Frontend — Auditorías Lighthouse",
   "testsReport.title": "Título",
   "testsReport.module": "Módulo / Conjunto",
@@ -1275,6 +1277,7 @@ const es: Record<TranslationKey, string> = {
   "testsReport.runCommandHint": "Ejecutar en la terminal desde la raíz del proyecto (omega-testing-mvp o monorepo):",
   "testsReport.runNow": "Ejecutar ahora",
   "testsReport.viewCommand": "Ver comando",
+  "testsReport.reload": "Recargar resultados",
   "testsReport.running": "Ejecutando…",
   "testsReport.runningHint": "Puede tardar uno o dos minutos.",
   "testsReport.lastRunReady": "Resultados de la última ejecución listos.",
@@ -1311,6 +1314,9 @@ const es: Record<TranslationKey, string> = {
   "dashboard.metricsHeading": "Métricas clave",
 
   "common.cancel": "Cancelar",
+  "common.previousPage": "Página anterior",
+  "common.nextPage": "Página siguiente",
+  "nav.closeMenu": "Cerrar menú",
 
   "projects.title": "Proyectos",
   "projects.subtitle": "Gestiona tus proyectos de pruebas y su configuración",

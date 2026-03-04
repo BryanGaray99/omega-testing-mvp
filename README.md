@@ -157,7 +157,21 @@ npm run build          # Production: build frontend + backend → dist/
 npm run start          # Start app (no build, uses existing dist/)
 npm run build:dist     # Alias for build
 npm run health         # Health check utility (local)
+npm run test:all       # Run backend unit + e2e + frontend Lighthouse
 ```
+
+## Test suites overview
+
+- **Backend unit tests** (`npm run test -w apps/backend`): NestJS unit tests for controllers, services, DTO validation, HTTP codes and response shape.
+- **Backend E2E tests** (`npm run test:e2e -w apps/backend`): Supertest-based end-to-end API checks (health, CRUD flows, error cases) against the real HTTP server.
+- **Frontend Lighthouse audits** (`npm run test:lighthouse -w apps/frontend`): Playwright-driven Lighthouse runs (Performance, Accessibility, Best Practices, SEO) for all key screens.
+
+The **Settings → Tests Report** page consumes data from:
+
+- `apps/backend/test-results/unit-results.json` and `e2e-results.json` (Jest JSON output)
+- `apps/frontend/test-results/frontend-lighthouse-results.json` (Playwright JSON reporter for Lighthouse)
+
+These files are normalized by the backend into `apps/backend/test-results/backend-report.json`, which is what the `/v1/api/test-report` endpoint returns and what the UI renders.
 
 ## Troubleshooting
 
@@ -174,5 +188,5 @@ npm run health         # Health check utility (local)
 
 ## Author
 
-Bryan Garay
+Bryan Enrique Garay Benavidez
 b.garay.adm@gmail.com

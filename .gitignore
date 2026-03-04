@@ -42,6 +42,9 @@ playwright-workspaces/
 apps/frontend/.vite
 apps/frontend/.cache
 apps/frontend/build
+apps/frontend/test-results/
+apps/frontend/playwright-report/
+apps/frontend/lighthouse-reports/
 
 # Misc
 *.local

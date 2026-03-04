@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 .config/
+
+# Playwright / Lighthouse artifacts (generated)
+test-results/
+playwright-report/
+lighthouse-reports/

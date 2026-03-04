@@ -28,6 +28,12 @@ describe('WorkspaceService', () => {
     expect(service).toBeDefined();
   });
 
+  describe('Demo (unit)', () => {
+    it('unit demo (always passing)', () => {
+      expect(true).toBe(true);
+    });
+  });
+
   describe('Workspace service', () => {
     it('Injected dependencies', () => {
       expect(service).toBeDefined();

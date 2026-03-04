@@ -59,6 +59,29 @@ async function main() {
   console.log(chalk.green('Copying backend build...'));
   copyDir(backendSrc, backendDest);
 
+  // Preserve existing test results so Settings > Tests Report still shows data after build/npm pack
+  const backendTestResultsSrc = path.join(root, 'apps', 'backend', 'test-results');
+  const frontendTestResultsSrc = path.join(root, 'apps', 'frontend', 'test-results');
+  const testResultsDest = path.join(distDir, 'backend', 'test-results');
+  if (fs.existsSync(backendTestResultsSrc) || fs.existsSync(frontendTestResultsSrc)) {
+    if (!fs.existsSync(testResultsDest)) {
+      fs.mkdirSync(testResultsDest, { recursive: true });
+    }
+    const backendJson = ['unit-results.json', 'e2e-results.json'];
+    for (const name of backendJson) {
+      const src = path.join(backendTestResultsSrc, name);
+      if (fs.existsSync(src)) {
+        fs.copyFileSync(src, path.join(testResultsDest, name));
+        console.log(chalk.gray('  Copied test-results/' + name));
+      }
+    }
+    const lighthouseSrc = path.join(frontendTestResultsSrc, 'frontend-lighthouse-results.json');
+    if (fs.existsSync(lighthouseSrc)) {
+      fs.copyFileSync(lighthouseSrc, path.join(testResultsDest, 'frontend-lighthouse-results.json'));
+      console.log(chalk.gray('  Copied test-results/frontend-lighthouse-results.json'));
+    }
+  }
+
   console.log(chalk.green.bold('Distribution package ready.'));
   console.log('Frontend ->', frontendDest);
   console.log('Backend  ->', backendDest);

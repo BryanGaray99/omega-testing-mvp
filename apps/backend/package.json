@@ -14,11 +14,11 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "node -e \"require('fs').mkdirSync('test-results',{recursive:true})\" && jest --json --outputFile=test-results/unit-results.json",
+    "test": "node scripts/run-tests-with-pretty-output.js",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --config ./test/jest-unit.json --runInBand",
-    "test:e2e": "node -e \"require('fs').mkdirSync('test-results',{recursive:true})\" && jest --config ./test/jest-e2e.json --json --outputFile=test-results/e2e-results.json"
+    "test:e2e": "node scripts/run-tests-with-pretty-output.js e2e"
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.0",

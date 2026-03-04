@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "@/contexts/LanguageContext";
+import type { TranslationKey } from "@/lib/translations";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -58,7 +59,7 @@ type AspectsBySection = { type: "bySection"; sections: { title: string; items: s
 type AspectsDetail = AspectsFlat | AspectsBySection;
 
 type TestSuiteData = {
-  titleKey: string;
+  titleKey: TranslationKey;
   icon: React.ReactNode;
   rows: TestRow[];
   passed: number;
@@ -127,16 +128,6 @@ const REFERENCE_BACKEND_E2E_ROWS: TestRow[] = [
   ]},
 ];
 
-/** Estandar: mismas comprobaciones a11y en cada pantalla. */
-const FRONTEND_A11Y_CHILDREN: TestRow[] = [
-  { title: "aria-label en controles", result: "pass", value: "OK", duration: "—", description: "Botones, enlaces, formularios, Selects y filtros con nombre accesible." },
-  { title: "axe-core runA11yAudit", result: "pass", value: "OK", duration: "—", description: "toHaveNoViolations (heading-order en baseline si aplica)." },
-  { title: "color-contrast", result: "pass", value: "OK", duration: "—", description: "Contraste de color (regla color-contrast)." },
-  { title: "button-name", result: "pass", value: "OK", duration: "—", description: "Botones y enlaces con nombre discernible." },
-  { title: "Estructura de encabezados", result: "pass", value: "OK", duration: "—", description: "Heading order, landmarks." },
-  { title: "Roles ARIA y landmarks", result: "pass", value: "OK", duration: "—", description: "Roles y landmarks correctos." },
-];
-
 const FRONTEND_A11Y_SCREENS = [
   { name: "Layout", path: "Layout", duration: "~2.8s", desc: "Navegación y shell." },
   { name: "Dashboard", path: "Dashboard", duration: "~2.3s", desc: "Métricas y tarjetas." },
@@ -154,42 +145,39 @@ const REFERENCE_FRONTEND_UNIT_ROWS: TestRow[] = FRONTEND_A11Y_SCREENS.map(({ nam
   value: "OK",
   duration,
   description: desc,
-  children: FRONTEND_A11Y_CHILDREN,
+  children: [],
 }));
 
-/** Estandar: mismas categorías Lighthouse en cada URL. */
-const LIGHTHOUSE_CHILDREN: TestRow[] = [
-  { title: "Performance", result: "pass", value: "≥25", duration: "—", description: "FCP, LCP, TBT, CLS, Speed Index." },
-  { title: "Accessibility", result: "pass", value: "≥85", duration: "—", description: "aria-label, contraste, teclado, ARIA." },
-  { title: "Best Practices", result: "pass", value: "≥85", duration: "—", description: "CSP, consola, buenas prácticas." },
-  { title: "SEO", result: "pass", value: "≥50", duration: "—", description: "title, meta, enlaces." },
-];
-
+// Names and order must match e2e/lighthouse/lighthouse.spec.ts (mainScreens).
 const LIGHTHOUSE_SCREENS = [
   { path: "/", name: "Dashboard", duration: "~50s" },
   { path: "/projects", name: "Projects", duration: "~55s" },
   { path: "/endpoints", name: "Endpoints", duration: "~52s" },
-  { path: "/test-cases", name: "Test Cases", duration: "~65s" },
-  { path: "/test-suites", name: "Test Suites", duration: "~65s" },
+  { path: "/test-cases", name: "Test-Cases", duration: "~65s" },
+  { path: "/test-suites", name: "Test-Suites", duration: "~65s" },
   { path: "/bugs", name: "Bugs", duration: "~55s" },
-  { path: "/test-executions", name: "Test Executions", duration: "~58s" },
-  { path: "/ai-assistant", name: "AI Assistant", duration: "~53s" },
-  { path: "/settings/documentation", name: "Settings Documentation", duration: "~58s" },
-  { path: "/settings/appearance", name: "Settings Appearance", duration: "~52s" },
-  { path: "/settings/openai", name: "Settings OpenAI", duration: "~51s" },
-  { path: "/settings/danger", name: "Settings Danger", duration: "~50s" },
+  { path: "/test-executions", name: "Test-Executions", duration: "~58s" },
+  { path: "/ai-assistant", name: "AI-Assistant", duration: "~53s" },
+  { path: "/settings/documentation", name: "Settings-Documentation", duration: "~58s" },
+  { path: "/settings/appearance", name: "Settings-Appearance", duration: "~52s" },
+  { path: "/settings/openai", name: "Settings-OpenAI", duration: "~51s" },
+  { path: "/settings/danger", name: "Settings-DangerZone", duration: "~50s" },
 ];
 
 const REFERENCE_LIGHTHOUSE_ROWS: TestRow[] = LIGHTHOUSE_SCREENS.map(({ path, name, duration }) => ({
   title: `${name} (${path})`,
   result: "pass" as const,
-  value: "Perf ≥25, A11y ≥85",
+  value: "",
   duration,
-  description: "Performance, Accessibility, Best Practices, SEO.",
-  children: LIGHTHOUSE_CHILDREN,
+  description: "",
+  children: [],
 }));
 
-const PIE_COLORS = { pass: "hsl(var(--success))", fail: "hsl(var(--destructive))" };
+// Brighter, high-contrast colors for dark mode dashboards.
+const PIE_COLORS = {
+  pass: "#22c55e", // bright green (tailwind emerald-500)
+  fail: "#ef4444", // bright red (tailwind red-500)
+};
 
 function SummaryChart({ passed, failed }: { passed: number; failed: number }) {
   const { t } = useTranslation();
@@ -198,6 +186,11 @@ function SummaryChart({ passed, failed }: { passed: number; failed: number }) {
     { name: t("testsReport.failed"), value: failed, color: PIE_COLORS.fail },
   ].filter((d) => d.value > 0);
   if (data.length === 0) return null;
+  const legendFormatter = (value: string) => {
+    if (value === t("testsReport.passed")) return `${value} (${passed})`;
+    if (value === t("testsReport.failed")) return `${value} (${failed})`;
+    return value;
+  };
   return (
     <div className="h-[180px] w-full max-w-[200px] mx-auto">
       <ResponsiveContainer width="100%" height="100%">
@@ -210,14 +203,13 @@ function SummaryChart({ passed, failed }: { passed: number; failed: number }) {
             outerRadius={60}
             paddingAngle={2}
             dataKey="value"
-            label={({ name, value }) => `${name}: ${value}`}
           >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
-          <Tooltip formatter={(value: number) => [value, ""]} />
-          <Legend />
+          <Tooltip formatter={(value: number, _name, entry) => [`${value}`, entry?.payload?.name as string]} />
+          <Legend formatter={legendFormatter} />
         </PieChart>
       </ResponsiveContainer>
     </div>
@@ -318,7 +310,9 @@ function ExpandableRow({
           <Clock className="h-3 w-3 text-muted-foreground" />
           {row.duration}
         </TableCell>
-        <TableCell className="text-muted-foreground text-sm max-w-[280px]">
+        <TableCell
+          className={`${row.result === "fail" ? "text-foreground" : "text-muted-foreground"} text-sm max-w-[280px]`}
+        >
           {row.description}
         </TableCell>
       </TableRow>
@@ -369,9 +363,9 @@ function ExpandableRow({
       {expanded && hasFailure && (
         <TableRow className="bg-muted/20 hover:bg-muted/20">
           <TableCell colSpan={6} className="py-4">
-            <div className="pl-4 border-l-2 border-destructive/30">
-              <p className="text-sm font-medium text-destructive mb-1">{t("testsReport.failure")}</p>
-              <pre className="text-sm text-destructive/90 whitespace-pre-wrap break-words font-sans">
+            <div className="pl-4 border-l-2 border-red-500/60">
+              <p className="text-sm font-medium text-red-400 mb-1">{t("testsReport.failure")}</p>
+              <pre className="text-sm text-red-300 whitespace-pre-wrap break-words font-sans">
                 {row.failure}
               </pre>
             </div>
@@ -461,8 +455,8 @@ function TestSuiteSection({ data }: { data: TestSuiteData }) {
         <div className="rounded-md border bg-muted/20 px-3 py-2 min-h-[44px] flex items-center">
           <p className="text-sm text-muted-foreground">
             {data.passed + data.failed > 0
-              ? t("testsReport.lastRunReady") || "Resultados de la última ejecución (desarrollo local)."
-              : t("testsReport.runToSeeResults") || "Ejecuta la suite en tu terminal para ver resultados. Los datos se leen de test-results/ (backend: unit-results.json, e2e-results.json; frontend: a11y, lighthouse)."}
+              ? t("testsReport.lastRunReady") || "Last run results ready (local development)."
+              : t("testsReport.runToSeeResults") || "Run the suite to see results. Data is read from test-results/ (backend: unit-results.json, e2e-results.json; frontend: Lighthouse)."}
           </p>
         </div>
 
@@ -497,49 +491,336 @@ export default function TestsReport() {
 
   const [backendUnit, setBackendUnit] = useState<TestSuiteData | null>(null);
   const [backendE2e, setBackendE2e] = useState<TestSuiteData | null>(null);
-  const [frontendUnit, setFrontendUnit] = useState<TestSuiteData | null>(null);
   const [frontendLighthouse, setFrontendLighthouse] = useState<TestSuiteData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [reloading, setReloading] = useState(false);
 
-  const mapApiRows = (suite: { rows: Array<{ title: string; result: string; value: string; duration: string; description: string; failure?: string }>; passed: number; failed: number; totalTime: string }): TestRow[] =>
-    suite.rows.map((r) => ({
-      title: r.title,
-      result: r.result === "pass" ? "pass" : "fail",
-      value: r.value,
-      duration: r.duration,
-      description: r.description,
-      failure: r.failure,
-    }));
+  type ApiRow = { title: string; result: string; value: string; duration: string; description: string; failure?: string; ancestorTitles?: string[]; metricsText?: string };
 
-  const setReferenceBackend = () => {
-    setBackendUnit({
-      titleKey: "testsReport.backendUnit",
-      icon: <Server className="h-5 w-5" />,
-      rows: REFERENCE_BACKEND_UNIT_ROWS,
-      passed: REFERENCE_BACKEND_UNIT_ROWS.length,
-      failed: 0,
-      totalTime: "~2.5s",
-      runCommand: "npm run test --workspace=apps/backend",
-      aspectsDetail: { type: "flat", items: ["Validación de DTOs (class-validator, transform)", "Respuestas HTTP correctas", "Uso de mocks e inyección NestJS", "Filtros y excepciones (HttpExceptionFilter)", "Interceptores de respuesta"] },
-    });
-    setBackendE2e({
-      titleKey: "testsReport.backendE2e",
-      icon: <Server className="h-5 w-5" />,
-      rows: REFERENCE_BACKEND_E2E_ROWS,
-      passed: REFERENCE_BACKEND_E2E_ROWS.length,
-      failed: 0,
-      totalTime: "~4s",
-      runCommand: "npm run test:e2e --workspace=apps/backend",
-      aspectsDetail: { type: "flat", items: ["Health: GET /v1/api/health", "Projects/Endpoints/Test Cases/Test Suites/Bugs CRUD e2e", "Códigos HTTP y formato de respuesta"] },
-    });
+  const mapApiRow = (r: ApiRow): TestRow & { ancestorTitles?: string[]; metricsText?: string } => ({
+    title: r.title,
+    result: r.result === "pass" ? "pass" : "fail",
+    value: r.value,
+    duration: r.duration,
+    description: r.description,
+    failure: r.failure,
+    ancestorTitles: r.ancestorTitles,
+    ...(r.metricsText != null ? { metricsText: r.metricsText } : {}),
+  });
+
+  const SUITE_DESCRIPTIONS: Record<string, string> = {
+    "App (controller, service)": "Bootstrap and health checks.",
+    "Projects controller": "CRUD and list projects.",
+    "Endpoints controller": "Endpoints CRUD.",
+    "Test Cases controller": "Test cases CRUD.",
+    "Test Suites controller": "Test suites CRUD.",
+    "Bugs controller": "Bugs general API.",
+    "Sync controller": "Sync operations.",
+    "AI controller": "AI general endpoints.",
+    "Workspace service": "Workspace path and config.",
+    "DEMO failure (unit)": "Intentional failure for demo.",
+    "Test execution filter utils": "Filter and pagination utilities.",
+    "Data service": "Data reset and seed.",
+    "Data controller": "Data reset endpoint.",
+    "Health & Welcome": "GET /health, GET / returns 200.",
+    "Projects CRUD (e2e)": "Create, list, get, update, delete projects.",
+    "Endpoints CRUD (e2e)": "Endpoints under a project.",
+    "Test Cases CRUD (e2e)": "Test cases under a project.",
+    "Test Suites CRUD (e2e)": "Test suites and associations.",
+    "Bugs & Executions (e2e)": "Bugs and test execution endpoints.",
   };
 
-  const applyReportToState = (data: { backendUnit?: { rows: unknown[]; passed: number; failed: number; totalTime: string }; backendE2e?: { rows: unknown[]; passed: number; failed: number; totalTime: string } }) => {
+  const UNIT_SUITE_ORDER = [
+    "App (controller, service)", "Projects controller", "Endpoints controller", "Test Cases controller",
+    "Test Suites controller", "Bugs controller", "Sync controller", "AI controller",
+    "Workspace service", "Test execution filter utils", "Data service", "Data controller",
+  ];
+  const E2E_SUITE_ORDER = [
+    "Health & Welcome", "Projects CRUD (e2e)", "Endpoints CRUD (e2e)", "Test Cases CRUD (e2e)",
+    "Test Suites CRUD (e2e)", "Bugs & Executions (e2e)",
+  ];
+
+  /** Maps Jest root describe to display suite for unit tests (e.g. findAll → "Projects controller"). */
+  const UNIT_ROOT_TO_SUITE: Record<string, string> = {
+    "AppController": "App (controller, service)",
+    "AppService": "App (controller, service)",
+    "ProjectsController": "Projects controller",
+    "EndpointsController": "Endpoints controller",
+    "TestCasesController": "Test Cases controller",
+    "TestSuitesController": "Test Suites controller",
+    "BugsGeneralController": "Bugs controller",
+    "SyncController": "Sync controller",
+    "AIGeneralController": "AI controller",
+    "WorkspaceService": "Workspace service",
+    "TestFilterUtils": "Test execution filter utils",
+    "DataService": "Data service",
+    "DataController": "Data controller",
+  };
+
+  /** E2E: root describe is always "AppController (e2e)"; map to first suite for any orphan test. */
+  const E2E_ROOT_TO_SUITE: Record<string, string> = {
+    "AppController (e2e)": "Health & Welcome",
+  };
+
+  function getSuiteKey(titles: string[], order: string[], rootToSuite?: Record<string, string>): string {
+    const knownSuites = new Set(order);
+    if (titles.length >= 2 && knownSuites.has(titles[titles.length - 1]!))
+      return titles[titles.length - 1]!;
+    if (titles.length >= 1) {
+      const root = titles[0]!;
+      if (rootToSuite && rootToSuite[root]) return rootToSuite[root];
+      return root;
+    }
+    return "(root)";
+  }
+
+  function groupRowsBySuite(apiRows: (TestRow & { ancestorTitles?: string[] })[], order: string[], rootToSuite?: Record<string, string>): TestRow[] {
+    const bySuite = new Map<string, (TestRow & { ancestorTitles?: string[] })[]>();
+    for (const row of apiRows) {
+      const titles = row.ancestorTitles ?? [];
+      const key = getSuiteKey(titles, order, rootToSuite);
+      if (!bySuite.has(key)) bySuite.set(key, []);
+      bySuite.get(key)!.push(row);
+    }
+    const seen = new Set<string>();
+    const out: TestRow[] = [];
+    for (const suiteName of order) {
+      const children = bySuite.get(suiteName);
+      if (!children) continue;
+      seen.add(suiteName);
+      const hasFailure = children.some((c) => c.result === "fail");
+      const totalMs = children.reduce((sum, c) => {
+        const m = c.duration.match(/^(\d+(?:\.\d+)?)(ms|s)$/);
+        if (!m) return sum;
+        const v = parseFloat(m[1]!);
+        return sum + (m[2] === "s" ? v * 1000 : v);
+      }, 0);
+      const durationStr = totalMs >= 1000 ? `~${(totalMs / 1000).toFixed(1)}s` : totalMs > 0 ? `~${totalMs}ms` : "—";
+      const childRows: TestRow[] = children.map(({ ancestorTitles: _a, ...c }) => c);
+      out.push({
+        title: suiteName,
+        result: hasFailure ? "fail" : "pass",
+        value: hasFailure ? "FAIL" : "OK",
+        duration: durationStr,
+        description: SUITE_DESCRIPTIONS[suiteName] ?? (children.length > 1 ? `${children.length} tests` : "Module tests"),
+        children: childRows,
+      });
+    }
+    const rest = Array.from(bySuite.entries()).filter(([k]) => !seen.has(k)).sort((a, b) => a[0].localeCompare(b[0]));
+    for (const [suiteName, children] of rest) {
+      const hasFailure = children.some((c) => c.result === "fail");
+      const totalMs = children.reduce((sum, c) => {
+        const m = c.duration.match(/^(\d+(?:\.\d+)?)(ms|s)$/);
+        if (!m) return sum;
+        const v = parseFloat(m[1]!);
+        return sum + (m[2] === "s" ? v * 1000 : v);
+      }, 0);
+      const durationStr = totalMs >= 1000 ? `~${(totalMs / 1000).toFixed(1)}s` : totalMs > 0 ? `~${totalMs}ms` : "—";
+      const childRows: TestRow[] = children.map(({ ancestorTitles: _a, ...c }) => c);
+      out.push({
+        title: suiteName,
+        result: hasFailure ? "fail" : "pass",
+        value: hasFailure ? "FAIL" : "OK",
+        duration: durationStr,
+        description: SUITE_DESCRIPTIONS[suiteName] ?? (children.length > 1 ? `${children.length} tests` : "Module tests"),
+        children: childRows,
+      });
+    }
+    return out;
+  }
+
+  /** Frontend a11y: agrupa specs Playwright por pantalla y usa cada spec como fila hija. */
+  function normalizeA11yScreenName(title: string): string {
+    const shouldIdx = title.indexOf(" should have ");
+    const base = shouldIdx >= 0 ? title.slice(0, shouldIdx) : title;
+    const parenIdx = base.indexOf(" (");
+    return (parenIdx > 0 ? base.slice(0, parenIdx) : base).trim();
+  }
+
+  function parseDurationToMs(duration: string): number {
+    const m = duration.match(/^~?(\d+(?:\.\d+)?)(ms|s)$/);
+    if (!m) return 0;
+    const v = parseFloat(m[1]!);
+    return m[2] === "s" ? v * 1000 : v;
+  }
+
+  function formatTotalMs(totalMs: number): string {
+    if (totalMs >= 1000) return `~${(totalMs / 1000).toFixed(1)}s`;
+    if (totalMs > 0) return `~${totalMs}ms`;
+    return "—";
+  }
+
+  function groupFrontendA11yByScreen(apiRows: (TestRow & { ancestorTitles?: string[] })[]): TestRow[] {
+    const byScreen = new Map<
+      string,
+      { hasFailure: boolean; totalMs: number; children: TestRow[] }
+    >();
+
+    for (const row of apiRows) {
+      const screenName = normalizeA11yScreenName(row.title);
+      if (!screenName) continue;
+      if (!byScreen.has(screenName)) {
+        byScreen.set(screenName, { hasFailure: false, totalMs: 0, children: [] });
+      }
+      const agg = byScreen.get(screenName)!;
+      if (row.result === "fail") agg.hasFailure = true;
+      agg.totalMs += parseDurationToMs(row.duration);
+      const { ancestorTitles: _a, ...child } = row;
+      agg.children.push(child);
+    }
+
+    const out: TestRow[] = [];
+    for (const screen of FRONTEND_A11Y_SCREENS) {
+      const agg = byScreen.get(screen.name);
+      if (!agg) continue;
+      const durationStr = formatTotalMs(agg.totalMs);
+      out.push({
+        title: `${screen.name} (a11y)`,
+        result: agg.hasFailure ? "fail" : "pass",
+        value: agg.hasFailure ? "FAIL" : "OK",
+        duration: durationStr,
+        description: screen.desc,
+        children: agg.children,
+      });
+    }
+
+    return out;
+  }
+
+  function normalizeLighthouseScreenName(title: string): string {
+    const parenIdx = title.indexOf(" (");
+    return (parenIdx > 0 ? title.slice(0, parenIdx) : title).trim();
+  }
+
+  function parseMetric(line: string, id: "performance" | "accessibility" | "best-practices" | "seo"): {
+    score?: number;
+    threshold?: number;
+  } {
+    const clean = line.toLowerCase();
+    if (!clean.includes(id)) return {};
+    // Ejemplos:
+    // "performance record is 51 and desired threshold was 25"
+    // "performance record is 0 and is under the 25 threshold"
+    const re1 = new RegExp(`${id} record is ([0-9.]+)[^0-9]+(?:desired )?threshold was ([0-9.]+)`, "i");
+    const re2 = new RegExp(`${id} record is ([0-9.]+)[^0-9]+under the ([0-9.]+) threshold`, "i");
+    let m = re1.exec(line);
+    if (!m) m = re2.exec(line);
+    if (!m) return {};
+    const score = parseFloat(m[1]!);
+    const threshold = parseFloat(m[2]!);
+    if (Number.isNaN(score) || Number.isNaN(threshold)) return {};
+    return { score, threshold };
+  }
+
+  function buildLighthouseChildren(row: TestRow & { failure?: string; metricsText?: string }): TestRow[] {
+    const metricsSource = row.metricsText ?? "";
+    const source = `${metricsSource}\n${row.failure ?? ""}`;
+    const lines = source.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+
+    const metrics: Record<"performance" | "accessibility" | "best-practices" | "seo", { score?: number; threshold?: number }> =
+      {
+        performance: {},
+        accessibility: {},
+        "best-practices": {},
+        seo: {},
+      };
+
+    for (const line of lines) {
+      for (const key of Object.keys(metrics) as (keyof typeof metrics)[]) {
+        const parsed = parseMetric(line, key);
+        if (parsed.score !== undefined) {
+          metrics[key] = parsed;
+        }
+      }
+    }
+
+    const hasAnyScore = (Object.keys(metrics) as (keyof typeof metrics)[]).some((k) => metrics[k].score !== undefined);
+    if (!hasAnyScore) {
+      return [];
+    }
+
+    const makeRow = (
+      title: string,
+      key: "performance" | "accessibility" | "best-practices" | "seo",
+      fallbackThreshold: number,
+      desc: string,
+    ): TestRow => {
+      const { score, threshold } = metrics[key];
+      const th = threshold ?? fallbackThreshold;
+      if (score === undefined) {
+        return {
+          title,
+          result: "pass",
+          value: `≥${th}`,
+          duration: "—",
+          description: desc,
+        };
+      }
+      const pass = score >= th;
+      const value = pass ? `${score.toFixed(0)} / ≥${th}` : `<${th}`;
+      return {
+        title,
+        result: pass ? "pass" : "fail",
+        value,
+        duration: "—",
+        description: desc,
+      };
+    };
+
+    return [
+      makeRow("Performance", "performance", 25, "FCP, LCP, TBT, CLS, Speed Index."),
+      makeRow("Accessibility", "accessibility", 85, "aria-label, contraste, teclado, ARIA."),
+      makeRow("Best Practices", "best-practices", 85, "CSP, consola, buenas prácticas."),
+      makeRow("SEO", "seo", 50, "title, meta, enlaces."),
+    ];
+  }
+
+  function orderLighthouseRows(rows: (TestRow & { ancestorTitles?: string[] })[]): TestRow[] {
+    const byScreen = new Map<string, TestRow>();
+    for (const row of rows) {
+      const name = normalizeLighthouseScreenName(row.title);
+      if (!name) continue;
+      const { ancestorTitles: _a, ...clean } = row;
+      byScreen.set(name, { ...clean, children: buildLighthouseChildren(row) });
+    }
+
+    const ordered: TestRow[] = [];
+    for (const screen of LIGHTHOUSE_SCREENS) {
+      const row = byScreen.get(screen.name);
+      if (row) {
+        ordered.push(row);
+      }
+    }
+
+    // Any remaining rows with unexpected names are appended at the end.
+    const usedNames = new Set(ordered.map((r) => normalizeLighthouseScreenName(r.title)));
+    const extras = rows
+      .filter((r) => !usedNames.has(normalizeLighthouseScreenName(r.title)))
+      .map((r) => {
+        const { ancestorTitles: _a, ...clean } = r;
+        return { ...clean, children: buildLighthouseChildren(r) };
+      })
+      .sort((a, b) => a.title.localeCompare(b.title));
+
+    return [...ordered, ...extras];
+  }
+
+  const applyReportToState = (data: {
+    backendUnit?: { rows: ApiRow[]; passed: number; failed: number; totalTime: string };
+    backendE2e?: { rows: ApiRow[]; passed: number; failed: number; totalTime: string };
+    frontendLighthouse?: { rows: ApiRow[]; passed: number; failed: number; totalTime: string };
+  }) => {
+    if (!data.backendUnit) setBackendUnit(null);
+    if (!data.backendE2e) setBackendE2e(null);
+    if (!data.frontendLighthouse) setFrontendLighthouse(null);
     if (data.backendUnit) {
+      const mapped = data.backendUnit.rows.map(mapApiRow);
+      const hasAncestors = mapped.some((r) => (r.ancestorTitles?.length ?? 0) > 0);
+      const rows = hasAncestors ? groupRowsBySuite(mapped, UNIT_SUITE_ORDER, UNIT_ROOT_TO_SUITE) : mapped.map(({ ancestorTitles: _a, ...c }) => c);
       setBackendUnit({
         titleKey: "testsReport.backendUnit",
         icon: <Server className="h-5 w-5" />,
-        rows: mapApiRows(data.backendUnit),
+        rows,
         passed: data.backendUnit.passed,
         failed: data.backendUnit.failed,
         totalTime: data.backendUnit.totalTime,
@@ -548,10 +829,13 @@ export default function TestsReport() {
       });
     }
     if (data.backendE2e) {
+      const mapped = data.backendE2e.rows.map(mapApiRow);
+      const hasAncestors = mapped.some((r) => (r.ancestorTitles?.length ?? 0) > 0);
+      const rows = hasAncestors ? groupRowsBySuite(mapped, E2E_SUITE_ORDER, E2E_ROOT_TO_SUITE) : mapped.map(({ ancestorTitles: _a, ...c }) => c);
       setBackendE2e({
         titleKey: "testsReport.backendE2e",
         icon: <Server className="h-5 w-5" />,
-        rows: mapApiRows(data.backendE2e),
+        rows,
         passed: data.backendE2e.passed,
         failed: data.backendE2e.failed,
         totalTime: data.backendE2e.totalTime,
@@ -559,117 +843,76 @@ export default function TestsReport() {
         aspectsDetail: { type: "flat", items: ["Health", "Projects/Endpoints/Test Cases/Test Suites/Bugs CRUD e2e", "Códigos HTTP y formato de respuesta"] },
       });
     }
+    if (data.frontendLighthouse) {
+      const mapped = data.frontendLighthouse.rows.map(mapApiRow);
+      const rows = orderLighthouseRows(mapped);
+      setFrontendLighthouse({
+        titleKey: "testsReport.frontendLighthouse",
+        icon: <Gauge className="h-5 w-5" />,
+        rows,
+        passed: data.frontendLighthouse.passed,
+        failed: data.frontendLighthouse.failed,
+        totalTime: data.frontendLighthouse.totalTime,
+        runCommand: "npm run test:lighthouse --workspace=apps/frontend",
+        aspectsDetail: {
+          type: "flat",
+          items: [
+            "Performance (FCP, LCP, TBT, CLS, Speed Index)",
+            "Accessibility (Lighthouse a11y checks)",
+            "Best Practices (seguridad, consola, recursos)",
+            "SEO (metadatos, enlaces, título de página)",
+          ],
+        },
+      });
+    }
+  };
+
+  const fetchAndApplyReport = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/test-report`);
+      if (!res.ok) {
+        setBackendUnit(null);
+        setBackendE2e(null);
+        setFrontendLighthouse(null);
+        return;
+      }
+      const raw = await res.json();
+      const payload = raw && typeof raw === "object" && "data" in raw ? (raw as any).data : raw;
+      if (payload && (payload.backendUnit || payload.backendE2e || payload.frontendLighthouse)) {
+        applyReportToState(payload as any);
+      } else {
+        setBackendUnit(null);
+        setBackendE2e(null);
+        setFrontendLighthouse(null);
+      }
+    } catch {
+      setBackendUnit(null);
+      setBackendE2e(null);
+      setFrontendLighthouse(null);
+    }
   };
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch(`${API_BASE}/test-report`);
-        if (!cancelled && res.ok) {
-          const data = await res.json();
-          if (data.backendUnit) {
-            setBackendUnit({
-              titleKey: "testsReport.backendUnit",
-              icon: <Server className="h-5 w-5" />,
-              rows: mapApiRows(data.backendUnit),
-              passed: data.backendUnit.passed,
-              failed: data.backendUnit.failed,
-              totalTime: data.backendUnit.totalTime,
-              runCommand: "npm run test --workspace=apps/backend",
-              aspectsDetail: {
-                type: "flat",
-                items: [
-                  "Validación de DTOs (class-validator, transform)",
-                  "Respuestas HTTP correctas (status, body shape)",
-                  "Uso de mocks (repositories, servicios) para aislar controladores",
-                  "Filtros y excepciones (HttpExceptionFilter)",
-                  "Interceptores de respuesta (TransformInterceptor)",
-                  "Inyección de dependencias y módulos NestJS",
-                  "Rutas protegidas y parámetros (params, query)",
-                ],
-              },
-            });
-          } else {
-            setBackendUnit({
-              titleKey: "testsReport.backendUnit",
-              icon: <Server className="h-5 w-5" />,
-              rows: REFERENCE_BACKEND_UNIT_ROWS,
-              passed: REFERENCE_BACKEND_UNIT_ROWS.length,
-              failed: 0,
-              totalTime: "~2.5s",
-              runCommand: "npm run test --workspace=apps/backend",
-              aspectsDetail: { type: "flat", items: ["Validación de DTOs (class-validator, transform)", "Respuestas HTTP correctas", "Uso de mocks e inyección NestJS", "Filtros y excepciones (HttpExceptionFilter)", "Interceptores de respuesta"] },
-            });
-          }
-          if (data.backendE2e) {
-            setBackendE2e({
-              titleKey: "testsReport.backendE2e",
-              icon: <Server className="h-5 w-5" />,
-              rows: mapApiRows(data.backendE2e),
-              passed: data.backendE2e.passed,
-              failed: data.backendE2e.failed,
-              totalTime: data.backendE2e.totalTime,
-              runCommand: "npm run test:e2e --workspace=apps/backend",
-              aspectsDetail: { type: "flat", items: ["Health", "Projects/Endpoints/Test Cases/Test Suites/Bugs CRUD e2e", "Códigos HTTP y formato de respuesta"] },
-            });
-          } else {
-            setBackendE2e({
-              titleKey: "testsReport.backendE2e",
-              icon: <Server className="h-5 w-5" />,
-              rows: REFERENCE_BACKEND_E2E_ROWS,
-              passed: REFERENCE_BACKEND_E2E_ROWS.length,
-              failed: 0,
-              totalTime: "~4s",
-              runCommand: "npm run test:e2e --workspace=apps/backend",
-              aspectsDetail: { type: "flat", items: ["Health: GET /v1/api/health", "Projects/Endpoints/Test Cases/Test Suites/Bugs CRUD e2e", "Códigos HTTP y formato de respuesta"] },
-            });
-          }
-        } else if (!cancelled) {
-          setReferenceBackend();
-        }
+        if (!cancelled) await fetchAndApplyReport();
       } catch {
-        if (!cancelled) setReferenceBackend();
+        if (!cancelled) {
+          setBackendUnit(null);
+          setBackendE2e(null);
+        }
       }
-      if (!cancelled) {
-        setFrontendUnit({
-          titleKey: "testsReport.frontendUnit",
-          icon: <Globe className="h-5 w-5" />,
-          rows: REFERENCE_FRONTEND_UNIT_ROWS,
-          passed: REFERENCE_FRONTEND_UNIT_ROWS.length,
-          failed: 0,
-          totalTime: "~12s",
-          runCommand: "npm run test --workspace=apps/frontend",
-          aspectsDetail: { type: "bySection", sections: [{ title: "a11y (axe-core)", items: ["aria-label", "button-name", "color-contrast", "roles ARIA"] }] },
-        });
-        setFrontendLighthouse({
-          titleKey: "testsReport.frontendLighthouse",
-          icon: <Gauge className="h-5 w-5" />,
-          rows: REFERENCE_LIGHTHOUSE_ROWS,
-          passed: REFERENCE_LIGHTHOUSE_ROWS.length,
-          failed: 0,
-          totalTime: "~4 min (14 pantallas)",
-          runCommand: "npm run test:lighthouse --workspace=apps/frontend",
-          aspectsDetail: { type: "flat", items: ["Por pantalla: Performance, Accessibility, Best Practices, SEO. Umbrales: perf ≥25, a11y ≥85, best-practices ≥85, seo ≥50."] },
-        });
-        setLoading(false);
-      }
+      if (!cancelled) setLoading(false);
     })();
     return () => { cancelled = true; };
   }, []);
 
-  function buildEmptySuite(titleKey: string, icon: React.ReactNode, runCommand: string, aspectsDetail: AspectsDetail): TestSuiteData {
-    return {
-      titleKey,
-      icon,
-      rows: [],
-      passed: 0,
-      failed: 0,
-      totalTime: "—",
-      runCommand,
-      aspectsDetail,
-    };
-  }
+  const handleReload = async () => {
+    setReloading(true);
+    await fetchAndApplyReport();
+    setReloading(false);
+  };
 
   if (loading) {
     return (
@@ -681,21 +924,34 @@ export default function TestsReport() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-start gap-3">
-        <div className="rounded-lg bg-primary/10 p-3">
-          <ClipboardCheck className="h-8 w-8 text-primary" />
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <div className="rounded-lg bg-primary/10 p-3">
+            <ClipboardCheck className="h-8 w-8 text-primary" />
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-foreground">{t("testsReport.pageTitle")}</h2>
+            <p className="mt-1 text-muted-foreground max-w-3xl">
+              {t("testsReport.subtitle")}
+            </p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-2xl font-bold text-foreground">{t("testsReport.pageTitle")}</h2>
-          <p className="mt-1 text-muted-foreground max-w-3xl">
-            {t("testsReport.subtitle")}
-          </p>
+        <div className="flex items-center gap-2">
+          <Button size="sm" variant="outline" className="gap-2" onClick={handleReload} disabled={reloading}>
+            {reloading ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+                <span>{t("testsReport.running") || "Reloading…"}</span>
+              </>
+            ) : (
+              <span>{t("testsReport.reload") || "Reload results"}</span>
+            )}
+          </Button>
         </div>
       </div>
 
       {backendUnit && <TestSuiteSection data={backendUnit} />}
       {backendE2e && <TestSuiteSection data={backendE2e} />}
-      {frontendUnit && <TestSuiteSection data={frontendUnit} />}
       {frontendLighthouse && <TestSuiteSection data={frontendLighthouse} />}
     </div>
   );

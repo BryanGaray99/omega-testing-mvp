@@ -116,6 +116,7 @@ export default function Layout({ children }: LayoutProps) {
                 variant="ghost"
                 size="icon"
                 onClick={() => setSidebarOpen(false)}
+                aria-label={t("nav.closeMenu") || "Close menu"}
               >
                 <X className="h-5 w-5" />
               </Button>
@@ -217,6 +218,7 @@ export default function Layout({ children }: LayoutProps) {
                 sidebarCollapsed ? "justify-center" : "justify-start",
               )}
               title={sidebarCollapsed ? t("nav.expand") : t("nav.collapse")}
+              aria-label={sidebarCollapsed ? t("nav.expand") : t("nav.collapse")}
             >
               {sidebarCollapsed ? (
                 <ChevronRight className="h-4 w-4" />
@@ -247,9 +249,9 @@ export default function Layout({ children }: LayoutProps) {
 
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
             <div className="flex flex-1 items-center">
-              <h1 className="text-lg font-semibold text-foreground">
+              <div className="text-lg font-semibold text-foreground" aria-hidden="true">
                 Omega Testing
-              </h1>
+              </div>
             </div>
             <div className="flex items-center gap-1 sm:gap-2">
               <LanguageToggle />
