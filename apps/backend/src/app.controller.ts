@@ -176,12 +176,12 @@ export class AppController {
 
   /**
    * Test report for Settings > Tests Report UI.
-   * Returns real data from Jest JSON outputs (unit-results.json, e2e-results.json) when present.
+   * Returns real data from Jest JSON outputs (unit-results.json, integration-api-results.json) when present.
    */
   @Get('test-report')
   @ApiOperation({
     summary: 'Test report',
-    description: 'Aggregated test results (backend unit & e2e) from last run. Run tests with --json --outputFile to populate.',
+    description: 'Aggregated test results (backend unit & integration API) from last run. Run tests with --json --outputFile to populate.',
   })
   @ApiResponse({ status: 200, description: 'Report data (may be empty if tests have not been run with JSON output).' })
   getTestReport() {

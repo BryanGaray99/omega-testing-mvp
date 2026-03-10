@@ -1,6 +1,6 @@
 # 🎯 Omega Testing Dashboard MVP - Local User Interface
 
-## Backend Repository - Thesis Project
+## Frontend — Thesis Project
 
 ## Author: Bryan Enrique Garay Benavidez
 
@@ -218,7 +218,7 @@ cd apps/frontend
 npm test
 ```
 
-### 2. E2E accessibility (Playwright + @axe-core/playwright)
+### 2. End-to-end accessibility (Playwright + @axe-core/playwright)
 
 Same set of routes in a real browser: axe scan per route plus 1–2 short flows (e.g. open Projects, open Settings → Appearance). Some axe rules are disabled for a stable baseline (e.g. color-contrast, region, button-name).
 
@@ -280,7 +280,7 @@ npm run build:client # Build client only
 npm run build:server # Build server only
 npm run start        # Run in production
 npm run test         # Run unit/component tests (Vitest + a11y)
-npm run test:e2e     # Run E2E tests (Playwright + axe)
+npm run test:e2e     # Run end-to-end tests (Playwright + axe)
 npm run test:lighthouse  # Run Lighthouse audits (Performance, A11y, SEO, Best Practices)
 npm run typecheck    # TypeScript type check
 npm run format.fix   # Format code
@@ -302,11 +302,11 @@ npm install
 ```
 
 ### Generation engine not available
-Make sure the generation engine is running:
+Make sure the generation engine (backend) is running:
 ```bash
-# In another terminal, from the backend directory
-cd ../central-backend-mvp
-npm run start:dev
+# From the monorepo root (omega-testing-mvp)
+npm run dev
+# or, backend only: npm run start:dev -w apps/backend
 ```
 
 ### API configuration

@@ -136,7 +136,7 @@ npm run test:all
 Runs:
 
 - **Backend unit** — Jest, controllers/services/DTOs.  
-- **Backend E2E** — Supertest, full API flows.  
+- **Backend Integration (API)** — Supertest, full API flows.  
 - **Frontend Lighthouse** — Playwright + Lighthouse (Performance, Accessibility, Best Practices, SEO) on key screens.
 
 Results are written to `apps/backend/test-results/` and `apps/frontend/test-results/`. The **Settings → Tests Report** page (and `/v1/api/test-report`) reads these; they are preserved in `dist/backend/test-results/` when you run `npm run build`, so the built app and npm package keep showing the latest report.

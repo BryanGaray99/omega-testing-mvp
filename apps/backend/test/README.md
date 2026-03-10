@@ -16,18 +16,18 @@ npm run test:cov
 # Unit tests in watch mode (re-run on file changes)
 npm run test:watch
 
-# Run all E2E tests (test/e2e/) — app is bootstrapped in memory
-npm run test:e2e
+# Run Integration (API) tests (test/integration-api/) — app is bootstrapped in memory
+npm run test:integration-api
 ```
 
-To run **everything** (unit + e2e) in one go:
+To run **everything** (unit + integration API) in one go:
 
 ```bash
-npm test && npm run test:e2e
+npm test && npm run test:integration-api
 ```
 
 - **Unit tests** use `jest.config.js` at the backend root, which loads `test/jest-unit.json`.
-- **E2E tests** use `test/jest-e2e.json` and a temporary SQLite DB under `PLAYWRIGHT_WORKSPACES_PATH` (no need to start the server manually).
+- **Integration (API) tests** use `test/jest-e2e.json` and a temporary SQLite DB under `PLAYWRIGHT_WORKSPACES_PATH` (no need to start the server manually).
 
 ---
 
@@ -36,7 +36,7 @@ npm test && npm run test:e2e
 ```
 test/
 ├── jest-unit.json          # Jest config for unit tests
-├── jest-e2e.json           # Jest config for E2E tests
+├── jest-e2e.json           # Jest config for Integration (API) tests
 ├── README.md               # This file
 │
 ├── unit/                   # Unit tests (by module, mirrors src/)
@@ -73,12 +73,12 @@ test/
 │           └── controllers/
 │               └── sync.controller.spec.ts
 │
-└── e2e/                    # System/API tests (app in memory)
-    └── app.e2e-spec.ts
+└── integration-api/        # Integration (API) tests (app in memory)
+    └── app.integration-api-spec.ts
 ```
 
 - **`test/unit/`** mirrors **`src/`** (app + modules). Specs import from `src/...` via Jest `moduleNameMapper`.
-- **`test/e2e/`** runs against the full app bootstrapped in memory (health, list endpoints, DTO validation).
+- **`test/integration-api/`** runs Integration (API) tests against the full app bootstrapped in memory (health, list endpoints, DTO validation).
 
 ---
 

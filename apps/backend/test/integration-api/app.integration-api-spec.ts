@@ -17,7 +17,7 @@ describe('AppController (Integration API)', () => {
 
   beforeAll(async () => {
     process.env.NODE_ENV = 'test';
-    process.env.PLAYWRIGHT_WORKSPACES_PATH = join(require('os').tmpdir(), 'omega-e2e-workspaces');
+    process.env.PLAYWRIGHT_WORKSPACES_PATH = join(require('os').tmpdir(), 'omega-integration-api-workspaces');
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
@@ -65,6 +65,7 @@ describe('AppController (Integration API)', () => {
         .expect(200)
         .expect((res) => {
           expect(res.body?.success).toBe(true);
+          // TransformInterceptor wraps controller response: body.data is the controller return, so payload is body.data.data ?? body.data
           const payload = res.body?.data?.data ?? res.body?.data;
           expect(payload?.message).toBeDefined();
           expect(payload?.documentation).toBe('/docs');
@@ -78,7 +79,7 @@ describe('AppController (Integration API)', () => {
   describe('Projects CRUD (Integration API)', () => {
     it('POST → 201 create', async () => {
       const body = {
-        name: `e2e-project-${Date.now()}`,
+        name: `integration-api-project-${Date.now()}`,
         baseUrl: 'http://localhost:3000',
       };
 
@@ -125,7 +126,7 @@ describe('AppController (Integration API)', () => {
 
       const res = await request(app.getHttpServer())
         .patch(`${basePath}/projects/${projectId}`)
-        .send({ displayName: 'Updated E2E Project' })
+        .send({ displayName: 'Updated Integration API Project' })
         .expect(200);
 
       const payload = res.body?.data ?? res.body;
@@ -144,7 +145,7 @@ describe('AppController (Integration API)', () => {
     });
 
     it('404 when resource does not exist', async () => {
-      const unknownId = 'non-existent-project-e2e';
+      const unknownId = 'non-existent-project-ia';
       const res = await request(app.getHttpServer())
         .get(`${basePath}/projects/${unknownId}`);
 
@@ -208,7 +209,7 @@ describe('AppController (Integration API)', () => {
 
     it('404 when resource does not exist', async () => {
       const res = await request(app.getHttpServer())
-        .get(`${basePath}/endpoints/non-existent-endpoint-e2e`);
+        .get(`${basePath}/endpoints/non-existent-endpoint-ia`);
       expect([200, 404]).toContain(res.status);
     });
   });
@@ -263,7 +264,7 @@ describe('AppController (Integration API)', () => {
 
     it('404 when resource does not exist', async () => {
       const res = await request(app.getHttpServer())
-        .get(`${basePath}/test-cases/non-existent-test-case-e2e`);
+        .get(`${basePath}/test-cases/non-existent-test-case-ia`);
       expect([200, 404]).toContain(res.status);
     });
   });
@@ -316,7 +317,7 @@ describe('AppController (Integration API)', () => {
 
     it('404 when resource does not exist', async () => {
       const res = await request(app.getHttpServer())
-        .get(`${basePath}/projects/non-existent-project-e2e/test-suites`)
+        .get(`${basePath}/projects/non-existent-project-ia/test-suites`)
         .expect((r) => expect([200, 404]).toContain(r.status));
     });
   });

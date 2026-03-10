@@ -4,7 +4,7 @@
       "title": "GET /health → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "68ms",
+      "duration": "61ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -15,7 +15,7 @@
       "title": "GET / → 200 welcome",
       "result": "pass",
       "value": "OK",
-      "duration": "21ms",
+      "duration": "17ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -26,7 +26,7 @@
       "title": "POST → 201 create",
       "result": "pass",
       "value": "OK",
-      "duration": "110ms",
+      "duration": "92ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -37,7 +37,7 @@
       "title": "GET list → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "37ms",
+      "duration": "34ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -48,7 +48,7 @@
       "title": "GET by id → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "23ms",
+      "duration": "29ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -59,7 +59,7 @@
       "title": "PATCH → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "35ms",
+      "duration": "32ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -81,7 +81,7 @@
       "title": "404 when resource does not exist",
       "result": "pass",
       "value": "OK",
-      "duration": "29ms",
+      "duration": "32ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -92,7 +92,7 @@
       "title": "GET route exists → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "40ms",
+      "duration": "33ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -103,7 +103,7 @@
       "title": "GET list → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "28ms",
+      "duration": "21ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -114,7 +114,7 @@
       "title": "GET by id → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "24ms",
+      "duration": "19ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -125,7 +125,7 @@
       "title": "PATCH → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "23ms",
+      "duration": "26ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -147,7 +147,7 @@
       "title": "404 when resource does not exist",
       "result": "pass",
       "value": "OK",
-      "duration": "32ms",
+      "duration": "31ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -158,7 +158,7 @@
       "title": "GET route exists → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "33ms",
+      "duration": "25ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -169,7 +169,7 @@
       "title": "GET list → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "24ms",
+      "duration": "26ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -180,7 +180,7 @@
       "title": "GET by id → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "24ms",
+      "duration": "19ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -191,7 +191,7 @@
       "title": "PATCH → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "20ms",
+      "duration": "22ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -202,7 +202,7 @@
       "title": "DELETE → 200/204",
       "result": "pass",
       "value": "OK",
-      "duration": "30ms",
+      "duration": "21ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -213,7 +213,7 @@
       "title": "404 when resource does not exist",
       "result": "pass",
       "value": "OK",
-      "duration": "27ms",
+      "duration": "22ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -224,7 +224,7 @@
       "title": "GET route exists → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "30ms",
+      "duration": "25ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -235,7 +235,7 @@
       "title": "GET list → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "50ms",
+      "duration": "42ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -246,7 +246,7 @@
       "title": "GET by id → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "19ms",
+      "duration": "21ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -257,7 +257,7 @@
       "title": "PATCH → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "26ms",
+      "duration": "21ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -268,7 +268,7 @@
       "title": "DELETE → 200/204",
       "result": "pass",
       "value": "OK",
-      "duration": "25ms",
+      "duration": "20ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -279,7 +279,7 @@
       "title": "404 when resource does not exist",
       "result": "pass",
       "value": "OK",
-      "duration": "19ms",
+      "duration": "20ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -290,7 +290,7 @@
       "title": "GET list → 200",
       "result": "pass",
       "value": "OK",
-      "duration": "31ms",
+      "duration": "25ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -301,7 +301,7 @@
       "title": "POST → 201",
       "result": "pass",
       "value": "OK",
-      "duration": "23ms",
+      "duration": "22ms",
       "description": "Passed",
       "ancestorTitles": [
         "AppController (Integration API)",
@@ -322,5 +322,5 @@
   ],
   "passed": 29,
   "failed": 0,
-  "totalTime": "10.9s"
+  "totalTime": "8.6s"
 }

@@ -6,13 +6,13 @@ const path = require('path');
  *
  * This script rewrites:
  * - test-results/unit-results.json
- * - test-results/e2e-results.json
+ * - test-results/integration-api-results.json
  *
  * keeping exactly the same data, only changing indentation.
  */
 const FILES = [
   'test-results/unit-results.json',
-  'test-results/e2e-results.json',
+  'test-results/integration-api-results.json',
 ];
 
 for (const rel of FILES) {

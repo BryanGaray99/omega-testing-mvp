@@ -7,7 +7,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  // Keep this config for potential future E2E suites.
+  // Keep this config for potential future end-to-end suites.
   // Currently the a11y suites (e2e/a11y/**) are disabled.
   testIgnore: ["a11y/**", "lighthouse/**"],
   reporter: "html",

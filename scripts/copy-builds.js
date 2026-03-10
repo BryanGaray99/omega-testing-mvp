@@ -67,7 +67,7 @@ async function main() {
     if (!fs.existsSync(testResultsDest)) {
       fs.mkdirSync(testResultsDest, { recursive: true });
     }
-    const backendJson = ['unit-results.json', 'e2e-results.json'];
+    const backendJson = ['unit-results.json', 'integration-api-results.json'];
     for (const name of backendJson) {
       const src = path.join(backendTestResultsSrc, name);
       if (fs.existsSync(src)) {

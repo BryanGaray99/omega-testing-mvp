@@ -26,7 +26,7 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1773119207659,
+  "startTime": 1773119560491,
   "success": true,
   "testResults": [
     {
@@ -36,7 +36,7 @@
             "AppController (Integration API)",
             "Health & Welcome"
           ],
-          "duration": 75,
+          "duration": 61,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Health & Welcome GET /health → 200",
@@ -68,7 +68,7 @@
             "AppController (Integration API)",
             "Projects CRUD (Integration API)"
           ],
-          "duration": 114,
+          "duration": 92,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Projects CRUD (Integration API) POST → 201 create",
@@ -84,7 +84,7 @@
             "AppController (Integration API)",
             "Projects CRUD (Integration API)"
           ],
-          "duration": 46,
+          "duration": 34,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Projects CRUD (Integration API) GET list → 200",
@@ -100,7 +100,7 @@
             "AppController (Integration API)",
             "Projects CRUD (Integration API)"
           ],
-          "duration": 21,
+          "duration": 29,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Projects CRUD (Integration API) GET by id → 200",
@@ -116,7 +116,7 @@
             "AppController (Integration API)",
             "Projects CRUD (Integration API)"
           ],
-          "duration": 46,
+          "duration": 32,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Projects CRUD (Integration API) PATCH → 200",
@@ -132,7 +132,7 @@
             "AppController (Integration API)",
             "Projects CRUD (Integration API)"
           ],
-          "duration": 2063,
+          "duration": 2061,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Projects CRUD (Integration API) DELETE → 200/204",
@@ -164,7 +164,7 @@
             "AppController (Integration API)",
             "Endpoints CRUD (Integration API)"
           ],
-          "duration": 28,
+          "duration": 33,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) GET route exists → 200",
@@ -180,7 +180,7 @@
             "AppController (Integration API)",
             "Endpoints CRUD (Integration API)"
           ],
-          "duration": 28,
+          "duration": 21,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) GET list → 200",
@@ -196,7 +196,7 @@
             "AppController (Integration API)",
             "Endpoints CRUD (Integration API)"
           ],
-          "duration": 30,
+          "duration": 19,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) GET by id → 200",
@@ -212,7 +212,7 @@
             "AppController (Integration API)",
             "Endpoints CRUD (Integration API)"
           ],
-          "duration": 20,
+          "duration": 26,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) PATCH → 200",
@@ -228,7 +228,7 @@
             "AppController (Integration API)",
             "Endpoints CRUD (Integration API)"
           ],
-          "duration": 20,
+          "duration": 21,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) DELETE → 200/204",
@@ -244,7 +244,7 @@
             "AppController (Integration API)",
             "Endpoints CRUD (Integration API)"
           ],
-          "duration": 33,
+          "duration": 31,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) 404 when resource does not exist",
@@ -260,7 +260,7 @@
             "AppController (Integration API)",
             "Test Cases CRUD (Integration API)"
           ],
-          "duration": 26,
+          "duration": 25,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) GET route exists → 200",
@@ -276,7 +276,7 @@
             "AppController (Integration API)",
             "Test Cases CRUD (Integration API)"
           ],
-          "duration": 20,
+          "duration": 26,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) GET list → 200",
@@ -292,7 +292,7 @@
             "AppController (Integration API)",
             "Test Cases CRUD (Integration API)"
           ],
-          "duration": 22,
+          "duration": 19,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) GET by id → 200",
@@ -308,7 +308,7 @@
             "AppController (Integration API)",
             "Test Cases CRUD (Integration API)"
           ],
-          "duration": 23,
+          "duration": 22,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) PATCH → 200",
@@ -324,7 +324,7 @@
             "AppController (Integration API)",
             "Test Cases CRUD (Integration API)"
           ],
-          "duration": 20,
+          "duration": 21,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) DELETE → 200/204",
@@ -340,7 +340,7 @@
             "AppController (Integration API)",
             "Test Cases CRUD (Integration API)"
           ],
-          "duration": 25,
+          "duration": 22,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) 404 when resource does not exist",
@@ -356,7 +356,7 @@
             "AppController (Integration API)",
             "Test Suites CRUD (Integration API)"
           ],
-          "duration": 23,
+          "duration": 25,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) GET route exists → 200",
@@ -372,7 +372,7 @@
             "AppController (Integration API)",
             "Test Suites CRUD (Integration API)"
           ],
-          "duration": 55,
+          "duration": 42,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) GET list → 200",
@@ -388,7 +388,7 @@
             "AppController (Integration API)",
             "Test Suites CRUD (Integration API)"
           ],
-          "duration": 19,
+          "duration": 21,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) GET by id → 200",
@@ -404,7 +404,7 @@
             "AppController (Integration API)",
             "Test Suites CRUD (Integration API)"
           ],
-          "duration": 24,
+          "duration": 21,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) PATCH → 200",
@@ -420,7 +420,7 @@
             "AppController (Integration API)",
             "Test Suites CRUD (Integration API)"
           ],
-          "duration": 27,
+          "duration": 20,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) DELETE → 200/204",
@@ -452,7 +452,7 @@
             "AppController (Integration API)",
             "Bugs & Executions (Integration API)"
           ],
-          "duration": 32,
+          "duration": 25,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Bugs & Executions (Integration API) GET list → 200",
@@ -468,7 +468,7 @@
             "AppController (Integration API)",
             "Bugs & Executions (Integration API)"
           ],
-          "duration": 19,
+          "duration": 22,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "AppController (Integration API) Bugs & Executions (Integration API) POST → 201",
@@ -496,10 +496,10 @@
           "title": "Query params and status codes"
         }
       ],
-      "endTime": 1773119219494,
+      "endTime": 1773119569447,
       "message": "",
-      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\e2e\\app.e2e-spec.ts",
-      "startTime": 1773119207985,
+      "name": "C:\\Universidad\\Tesis\\omega-testing\\omega-testing-mvp\\apps\\backend\\test\\integration-api\\app.integration-api-spec.ts",
+      "startTime": 1773119560829,
       "status": "passed",
       "summary": ""
     }

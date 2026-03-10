@@ -1,9 +1,9 @@
 {
   "moduleFileExtensions": ["js", "json", "ts"],
   "rootDir": "..",
-  "roots": ["<rootDir>/test/e2e"],
+  "roots": ["<rootDir>/test/integration-api"],
   "testEnvironment": "node",
-  "testRegex": ".e2e-spec.ts$",
+  "testRegex": ".integration-api-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
   },

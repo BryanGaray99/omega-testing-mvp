@@ -42,7 +42,7 @@ function customRender(
 }
 
 /**
- * Run axe a11y audit with the same baseline rules disabled as in E2E
+ * Run axe a11y audit with the same baseline rules disabled as in end-to-end (Playwright)
  * (e.g. heading-order) so unit tests pass while still checking other a11y rules.
  */
 export async function runA11yAudit(container: HTMLElement, options?: RunOptions) {

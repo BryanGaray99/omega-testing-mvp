@@ -207,7 +207,7 @@ export class TestReportService {
 
   /**
    * Normalizes Playwright JSON reporter output into SuiteReport.
-   * This is used for frontend a11y/e2e + Lighthouse runs.
+   * This is used for frontend a11y and Lighthouse runs.
    */
   private suiteFromPlaywright(data: PlaywrightJsonOutput | null, kind: 'frontendLighthouse'): SuiteReport | null {
     if (!data?.suites?.length) return null;
@@ -323,7 +323,7 @@ export class TestReportService {
   getReport(): TestReportDto {
     const dto: TestReportDto = {};
     const unitPath = path.join(this.backendTestResultsDir, 'unit-results.json');
-    const e2ePath = path.join(this.backendTestResultsDir, 'e2e-results.json');
+    const e2ePath = path.join(this.backendTestResultsDir, 'integration-api-results.json');
 
     const unitJson = this.readJsonIfExists<JestJsonOutput>(unitPath);
     const e2eJson = this.readJsonIfExists<JestJsonOutput>(e2ePath);
@@ -359,13 +359,13 @@ export class TestReportService {
       const prettyPath = path.join(this.backendTestResultsDir, 'backend-report.json');
       fs.writeFileSync(prettyPath, JSON.stringify(dto, null, 2), 'utf-8');
 
-      // Per-level readable reports (unit & e2e)
+      // Per-level readable reports (unit & integration API)
       if (unitSuite) {
         const unitPretty = path.join(this.backendTestResultsDir, 'unit-report.json');
         fs.writeFileSync(unitPretty, JSON.stringify(unitSuite, null, 2), 'utf-8');
       }
       if (e2eSuite) {
-        const e2ePretty = path.join(this.backendTestResultsDir, 'e2e-report.json');
+        const e2ePretty = path.join(this.backendTestResultsDir, 'integration-api-report.json');
         fs.writeFileSync(e2ePretty, JSON.stringify(e2eSuite, null, 2), 'utf-8');
       }
 

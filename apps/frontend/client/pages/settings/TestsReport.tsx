@@ -456,7 +456,7 @@ function TestSuiteSection({ data }: { data: TestSuiteData }) {
           <p className="text-sm text-muted-foreground">
             {data.passed + data.failed > 0
               ? t("testsReport.lastRunReady") || "Last run results ready (local development)."
-              : t("testsReport.runToSeeResults") || "Run the suite to see results. Data is read from test-results/ (backend: unit-results.json, e2e-results.json; frontend: Lighthouse)."}
+              : t("testsReport.runToSeeResults") || "Run the suite to see results. Data is read from test-results/ (backend: unit-results.json, integration API results; frontend: Lighthouse)."}
           </p>
         </div>
 
@@ -523,11 +523,11 @@ export default function TestsReport() {
     "Data service": "Data reset and seed.",
     "Data controller": "Data reset endpoint.",
     "Health & Welcome": "GET /health, GET / returns 200.",
-    "Projects CRUD (e2e)": "Create, list, get, update, delete projects.",
-    "Endpoints CRUD (e2e)": "Endpoints under a project.",
-    "Test Cases CRUD (e2e)": "Test cases under a project.",
-    "Test Suites CRUD (e2e)": "Test suites and associations.",
-    "Bugs & Executions (e2e)": "Bugs and test execution endpoints.",
+    "Projects CRUD (Integration API)": "Create, list, get, update, delete projects.",
+    "Endpoints CRUD (Integration API)": "Endpoints under a project.",
+    "Test Cases CRUD (Integration API)": "Test cases under a project.",
+    "Test Suites CRUD (Integration API)": "Test suites and associations.",
+    "Bugs & Executions (Integration API)": "Bugs and test execution endpoints.",
   };
 
   const UNIT_SUITE_ORDER = [
@@ -536,8 +536,8 @@ export default function TestsReport() {
     "Workspace service", "Test execution filter utils", "Data service", "Data controller",
   ];
   const E2E_SUITE_ORDER = [
-    "Health & Welcome", "Projects CRUD (e2e)", "Endpoints CRUD (e2e)", "Test Cases CRUD (e2e)",
-    "Test Suites CRUD (e2e)", "Bugs & Executions (e2e)",
+    "Health & Welcome", "Projects CRUD (Integration API)", "Endpoints CRUD (Integration API)", "Test Cases CRUD (Integration API)",
+    "Test Suites CRUD (Integration API)", "Bugs & Executions (Integration API)",
   ];
 
   /** Maps Jest root describe to display suite for unit tests (e.g. findAll → "Projects controller"). */
@@ -557,9 +557,9 @@ export default function TestsReport() {
     "DataController": "Data controller",
   };
 
-  /** E2E: root describe is always "AppController (e2e)"; map to first suite for any orphan test. */
+  /** Integration API: root describe is "AppController (Integration API)"; map to first suite for any orphan test. */
   const E2E_ROOT_TO_SUITE: Record<string, string> = {
-    "AppController (e2e)": "Health & Welcome",
+    "AppController (Integration API)": "Health & Welcome",
   };
 
   function getSuiteKey(titles: string[], order: string[], rootToSuite?: Record<string, string>): string {
@@ -839,8 +839,8 @@ export default function TestsReport() {
         passed: data.backendE2e.passed,
         failed: data.backendE2e.failed,
         totalTime: data.backendE2e.totalTime,
-        runCommand: "npm run test:e2e --workspace=apps/backend",
-        aspectsDetail: { type: "flat", items: ["Health", "Projects/Endpoints/Test Cases/Test Suites/Bugs CRUD e2e", "Códigos HTTP y formato de respuesta"] },
+        runCommand: "npm run test:integration-api --workspace=apps/backend",
+        aspectsDetail: { type: "flat", items: ["Health", "Projects/Endpoints/Test Cases/Test Suites/Bugs CRUD (Integration API)", "Códigos HTTP y formato de respuesta"] },
       });
     }
     if (data.frontendLighthouse) {
