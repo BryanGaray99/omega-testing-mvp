@@ -102,7 +102,7 @@ const REFERENCE_BACKEND_UNIT_ROWS: TestRow[] = [
   { title: "Test execution (filter utils)", result: "pass", value: "OK", duration: "~0.1s", description: "Filter and pagination utilities.", children: BACKEND_UNIT_SERVICE_CHILDREN },
 ];
 
-/** Estandar: mismos pasos E2E por recurso CRUD. */
+/** Standard: same Integration (API) steps per CRUD resource. */
 const BACKEND_E2E_CRUD_CHILDREN: TestRow[] = [
   { title: "POST → 201 creación", result: "pass", value: "OK", duration: "—", description: "Body válido, respuesta con recurso creado." },
   { title: "GET list → 200", result: "pass", value: "OK", duration: "—", description: "Listado con array, paginación si aplica." },
@@ -117,11 +117,11 @@ const REFERENCE_BACKEND_E2E_ROWS: TestRow[] = [
     { title: "GET /v1/api/health → 200", result: "pass", value: "OK", duration: "—", description: "body.healthy." },
     { title: "GET / → 200 welcome", result: "pass", value: "OK", duration: "—", description: "Mensaje de bienvenida." },
   ]},
-  { title: "Projects CRUD (e2e)", result: "pass", value: "OK", duration: "~1.5s", description: "Create, list, get, update, delete projects.", children: BACKEND_E2E_CRUD_CHILDREN },
-  { title: "Endpoints CRUD (e2e)", result: "pass", value: "OK", duration: "~0.8s", description: "Endpoints under a project.", children: BACKEND_E2E_CRUD_CHILDREN },
-  { title: "Test Cases CRUD (e2e)", result: "pass", value: "OK", duration: "~0.6s", description: "Test cases under a project.", children: BACKEND_E2E_CRUD_CHILDREN },
-  { title: "Test Suites CRUD (e2e)", result: "pass", value: "OK", duration: "~0.6s", description: "Test suites and associations.", children: BACKEND_E2E_CRUD_CHILDREN },
-  { title: "Bugs & Executions (e2e)", result: "pass", value: "OK", duration: "~0.5s", description: "Bugs and test execution endpoints.", children: [
+  { title: "Projects CRUD (Integration API)", result: "pass", value: "OK", duration: "~1.5s", description: "Create, list, get, update, delete projects.", children: BACKEND_E2E_CRUD_CHILDREN },
+  { title: "Endpoints CRUD (Integration API)", result: "pass", value: "OK", duration: "~0.8s", description: "Endpoints under a project.", children: BACKEND_E2E_CRUD_CHILDREN },
+  { title: "Test Cases CRUD (Integration API)", result: "pass", value: "OK", duration: "~0.6s", description: "Test cases under a project.", children: BACKEND_E2E_CRUD_CHILDREN },
+  { title: "Test Suites CRUD (Integration API)", result: "pass", value: "OK", duration: "~0.6s", description: "Test suites and associations.", children: BACKEND_E2E_CRUD_CHILDREN },
+  { title: "Bugs & Executions (Integration API)", result: "pass", value: "OK", duration: "~0.5s", description: "Bugs and test execution endpoints.", children: [
     { title: "GET list → 200", result: "pass", value: "OK", duration: "—", description: "Listado con filtros." },
     { title: "POST → 201", result: "pass", value: "OK", duration: "—", description: "Creación con body válido." },
     { title: "Query params y códigos", result: "pass", value: "OK", duration: "—", description: "200/201, 404 cuando no existe." },

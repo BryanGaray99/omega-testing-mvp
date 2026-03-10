@@ -33,13 +33,13 @@
       "assertionResults": [
         {
           "ancestorTitles": [
-            "AppController (e2e)",
+            "AppController (Integration API)",
             "Health & Welcome"
           ],
           "duration": 106,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Health & Welcome GET /health → 200",
+          "fullName": "AppController (Integration API) Health & Welcome GET /health → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 2,
@@ -49,13 +49,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
+            "AppController (Integration API)",
             "Health & Welcome"
           ],
           "duration": 55,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Health & Welcome GET / → 200 welcome",
+          "fullName": "AppController (Integration API) Health & Welcome GET / → 200 welcome",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 3,
@@ -65,13 +65,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Projects CRUD (e2e)"
+            "AppController (Integration API)",
+            "Projects CRUD (Integration API)"
           ],
           "duration": 184,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Projects CRUD (e2e) POST → 201 create",
+          "fullName": "AppController (Integration API) Projects CRUD (Integration API) POST → 201 create",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 2,
@@ -81,13 +81,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Projects CRUD (e2e)"
+            "AppController (Integration API)",
+            "Projects CRUD (Integration API)"
           ],
           "duration": 74,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Projects CRUD (e2e) GET list → 200",
+          "fullName": "AppController (Integration API) Projects CRUD (Integration API) GET list → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -97,13 +97,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Projects CRUD (e2e)"
+            "AppController (Integration API)",
+            "Projects CRUD (Integration API)"
           ],
           "duration": 45,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Projects CRUD (e2e) GET by id → 200",
+          "fullName": "AppController (Integration API) Projects CRUD (Integration API) GET by id → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -113,13 +113,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Projects CRUD (e2e)"
+            "AppController (Integration API)",
+            "Projects CRUD (Integration API)"
           ],
           "duration": 55,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Projects CRUD (e2e) PATCH → 200",
+          "fullName": "AppController (Integration API) Projects CRUD (Integration API) PATCH → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -129,13 +129,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Projects CRUD (e2e)"
+            "AppController (Integration API)",
+            "Projects CRUD (Integration API)"
           ],
           "duration": 2095,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Projects CRUD (e2e) DELETE → 200/204",
+          "fullName": "AppController (Integration API) Projects CRUD (Integration API) DELETE → 200/204",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -145,13 +145,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Projects CRUD (e2e)"
+            "AppController (Integration API)",
+            "Projects CRUD (Integration API)"
           ],
           "duration": 52,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Projects CRUD (e2e) 404 when resource does not exist",
+          "fullName": "AppController (Integration API) Projects CRUD (Integration API) 404 when resource does not exist",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -161,13 +161,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Endpoints CRUD (e2e)"
+            "AppController (Integration API)",
+            "Endpoints CRUD (Integration API)"
           ],
           "duration": 44,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Endpoints CRUD (e2e) GET route exists → 200",
+          "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) GET route exists → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -177,13 +177,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Endpoints CRUD (e2e)"
+            "AppController (Integration API)",
+            "Endpoints CRUD (Integration API)"
           ],
           "duration": 38,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Endpoints CRUD (e2e) GET list → 200",
+          "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) GET list → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 0,
@@ -193,13 +193,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Endpoints CRUD (e2e)"
+            "AppController (Integration API)",
+            "Endpoints CRUD (Integration API)"
           ],
           "duration": 32,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Endpoints CRUD (e2e) GET by id → 200",
+          "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) GET by id → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -209,13 +209,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Endpoints CRUD (e2e)"
+            "AppController (Integration API)",
+            "Endpoints CRUD (Integration API)"
           ],
           "duration": 39,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Endpoints CRUD (e2e) PATCH → 200",
+          "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) PATCH → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -225,13 +225,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Endpoints CRUD (e2e)"
+            "AppController (Integration API)",
+            "Endpoints CRUD (Integration API)"
           ],
           "duration": 38,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Endpoints CRUD (e2e) DELETE → 200/204",
+          "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) DELETE → 200/204",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -241,13 +241,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Endpoints CRUD (e2e)"
+            "AppController (Integration API)",
+            "Endpoints CRUD (Integration API)"
           ],
           "duration": 39,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Endpoints CRUD (e2e) 404 when resource does not exist",
+          "fullName": "AppController (Integration API) Endpoints CRUD (Integration API) 404 when resource does not exist",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -257,13 +257,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Cases CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Cases CRUD (Integration API)"
           ],
           "duration": 38,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Cases CRUD (e2e) GET route exists → 200",
+          "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) GET route exists → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -273,13 +273,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Cases CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Cases CRUD (Integration API)"
           ],
           "duration": 41,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Cases CRUD (e2e) GET list → 200",
+          "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) GET list → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 0,
@@ -289,13 +289,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Cases CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Cases CRUD (Integration API)"
           ],
           "duration": 38,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Cases CRUD (e2e) GET by id → 200",
+          "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) GET by id → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -305,13 +305,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Cases CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Cases CRUD (Integration API)"
           ],
           "duration": 41,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Cases CRUD (e2e) PATCH → 200",
+          "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) PATCH → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -321,13 +321,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Cases CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Cases CRUD (Integration API)"
           ],
           "duration": 49,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Cases CRUD (e2e) DELETE → 200/204",
+          "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) DELETE → 200/204",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -337,13 +337,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Cases CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Cases CRUD (Integration API)"
           ],
           "duration": 36,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Cases CRUD (e2e) 404 when resource does not exist",
+          "fullName": "AppController (Integration API) Test Cases CRUD (Integration API) 404 when resource does not exist",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -353,13 +353,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Suites CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Suites CRUD (Integration API)"
           ],
           "duration": 38,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Suites CRUD (e2e) GET route exists → 200",
+          "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) GET route exists → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -369,13 +369,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Suites CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Suites CRUD (Integration API)"
           ],
           "duration": 87,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Suites CRUD (e2e) GET list → 200",
+          "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) GET list → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -385,13 +385,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Suites CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Suites CRUD (Integration API)"
           ],
           "duration": 38,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Suites CRUD (e2e) GET by id → 200",
+          "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) GET by id → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -401,13 +401,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Suites CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Suites CRUD (Integration API)"
           ],
           "duration": 36,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Suites CRUD (e2e) PATCH → 200",
+          "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) PATCH → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -417,13 +417,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Suites CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Suites CRUD (Integration API)"
           ],
           "duration": 40,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Suites CRUD (e2e) DELETE → 200/204",
+          "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) DELETE → 200/204",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -433,13 +433,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Test Suites CRUD (e2e)"
+            "AppController (Integration API)",
+            "Test Suites CRUD (Integration API)"
           ],
           "duration": 36,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Test Suites CRUD (e2e) 404 when resource does not exist",
+          "fullName": "AppController (Integration API) Test Suites CRUD (Integration API) 404 when resource does not exist",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -449,13 +449,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Bugs & Executions (e2e)"
+            "AppController (Integration API)",
+            "Bugs & Executions (Integration API)"
           ],
           "duration": 50,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Bugs & Executions (e2e) GET list → 200",
+          "fullName": "AppController (Integration API) Bugs & Executions (Integration API) GET list → 200",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -465,13 +465,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Bugs & Executions (e2e)"
+            "AppController (Integration API)",
+            "Bugs & Executions (Integration API)"
           ],
           "duration": 38,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Bugs & Executions (e2e) POST → 201",
+          "fullName": "AppController (Integration API) Bugs & Executions (Integration API) POST → 201",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 1,
@@ -481,13 +481,13 @@
         },
         {
           "ancestorTitles": [
-            "AppController (e2e)",
-            "Bugs & Executions (e2e)"
+            "AppController (Integration API)",
+            "Bugs & Executions (Integration API)"
           ],
           "duration": 37,
           "failureDetails": [],
           "failureMessages": [],
-          "fullName": "AppController (e2e) Bugs & Executions (e2e) Query params and status codes",
+          "fullName": "AppController (Integration API) Bugs & Executions (Integration API) Query params and status codes",
           "invocations": 1,
           "location": null,
           "numPassingAsserts": 2,

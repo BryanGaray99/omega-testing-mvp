@@ -181,16 +181,16 @@ export default function TestCaseComprehensiveDialog({
 
   const getExecutionStatusText = (lastRunStatus?: string, lastRun?: string) => {
     if (!lastRun) {
-      return "PENDING";
+      return t("testCases.statusPendingBadge");
     }
     
     switch (lastRunStatus) {
       case "passed":
-        return "PASSED";
+        return t("testCases.statusPassedBadge");
       case "failed":
-        return "FAILED";
+        return t("testCases.statusFailedBadge");
       default:
-        return "UNKNOWN";
+        return t("testCases.statusUnknownBadge");
     }
   };
 
@@ -378,7 +378,7 @@ export default function TestCaseComprehensiveDialog({
 
                   {/* Test Configuration */}
                   <div className="border rounded-lg p-3">
-                    <h4 className="font-medium mb-2">Test Configuration</h4>
+                    <h4 className="font-medium mb-2">{t("caseDetails.testConfiguration")}</h4>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
                         <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.testType")}</label>
@@ -403,7 +403,7 @@ export default function TestCaseComprehensiveDialog({
                       <div className="mt-3 pt-3 border-t">
                         <h4 className="font-medium mb-2 flex items-center gap-2">
                           <FileText className="h-4 w-4" />
-                          Description
+                          {t("caseDetails.fieldDescription")}
                         </h4>
                         {isEditing ? (
                           <Textarea
@@ -432,17 +432,17 @@ export default function TestCaseComprehensiveDialog({
                 <div className="border rounded-lg p-3">
                   <h4 className="font-medium mb-2 flex items-center gap-2">
                     <TestTube className="h-4 w-4" />
-                    Gherkin Scenario
+                    {t("caseDetails.gherkinScenario")}
                   </h4>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-muted-foreground">Current scenario steps</span>
+                    <span className="text-sm text-muted-foreground">{t("caseDetails.currentScenarioSteps")}</span>
                     {!isEditing && (
                       <Button
                         size="sm"
                         onClick={() => setIsEditingScenario(true)}
                       >
                         <Edit className="h-4 w-4 mr-2" />
-                        Edit Scenario
+                        {t("caseDetails.editScenario")}
                       </Button>
                     )}
                   </div>
@@ -455,7 +455,7 @@ export default function TestCaseComprehensiveDialog({
               <TabsContent value="execution" className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="border rounded-lg p-3">
-                    <h4 className="font-medium mb-2">Last Execution</h4>
+                    <h4 className="font-medium mb-2">{t("caseDetails.lastExecution")}</h4>
                     <div className="space-y-2">
                       <div>
                         <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.status")}</label>
@@ -467,7 +467,7 @@ export default function TestCaseComprehensiveDialog({
                         </div>
                       </div>
                       <div>
-                        <label className="text-sm font-medium text-muted-foreground">Last Run</label>
+                        <label className="text-sm font-medium text-muted-foreground">{t("caseDetails.lastRun")}</label>
                         <div className="flex items-center gap-2">
                           {lastExecution && lastExecution.executionId && onNavigateToExecution ? (
                             <TooltipProvider>
@@ -477,18 +477,18 @@ export default function TestCaseComprehensiveDialog({
                                     onClick={() => onNavigateToExecution(lastExecution.executionId)}
                                     className="text-sm font-medium text-left text-blue-600 hover:text-blue-800 dark:text-[#60A5FA] dark:hover:text-[#93C5FD] hover:underline cursor-pointer transition-colors flex items-center gap-1"
                                   >
-                                    {testCase.lastRun ? formatDate(testCase.lastRun) : "Not executed yet"}
+                                    {testCase.lastRun ? formatDate(testCase.lastRun) : t("caseDetails.notExecutedYet")}
                                     <ExternalLink className="h-3 w-3 opacity-60" />
                                   </button>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                  <p>Ver detalles de la ejecuci?n</p>
+                                  <p>{t("caseDetails.viewExecutionDetails")}</p>
                                 </TooltipContent>
                               </Tooltip>
                             </TooltipProvider>
                           ) : (
                             <p className="text-sm">
-                              {testCase.lastRun ? formatDate(testCase.lastRun) : "Not executed yet"}
+                              {testCase.lastRun ? formatDate(testCase.lastRun) : t("caseDetails.notExecutedYet")}
                             </p>
                           )}
                         </div>
@@ -497,14 +497,14 @@ export default function TestCaseComprehensiveDialog({
                   </div>
 
                   <div className="border rounded-lg p-3">
-                    <h4 className="font-medium mb-2">Timestamps</h4>
+                    <h4 className="font-medium mb-2">{t("caseDetails.timestamps")}</h4>
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-sm text-muted-foreground">Created:</span>
+                        <span className="text-sm text-muted-foreground">{t("caseDetails.created")}</span>
                         <span className="text-sm font-medium">{formatDate(testCase.createdAt)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-sm text-muted-foreground">Updated:</span>
+                        <span className="text-sm text-muted-foreground">{t("caseDetails.updated")}</span>
                         <span className="text-sm font-medium">{formatDate(testCase.updatedAt)}</span>
                       </div>
                     </div>
@@ -521,7 +521,7 @@ export default function TestCaseComprehensiveDialog({
                       onClick={onDelete}
                     >
                       <Trash2 className="h-4 w-4 mr-2" />
-                      Delete Test Case
+                      {t("testCases.deleteTestCase")}
                     </Button>
                   </div>
               ) : (
@@ -534,7 +534,7 @@ export default function TestCaseComprehensiveDialog({
                       setEditingTestCase(selectedTestCase);
                     }}
                   >
-                    Cancel
+                    {t("common.cancel")}
                   </Button>
                   <Button 
                     size="sm"
@@ -542,7 +542,7 @@ export default function TestCaseComprehensiveDialog({
                     disabled={isUpdating}
                     className="bg-blue-700 hover:bg-blue-800"
                   >
-                    {isUpdating ? 'Saving...' : 'Update'}
+                    {isUpdating ? t("common.saving") : t("common.update")}
                   </Button>
                 </>
               )}

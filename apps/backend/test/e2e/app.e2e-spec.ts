@@ -1,5 +1,5 @@
 /**
- * E2E tests: API endpoints (smoke tests).
+ * Integration (API) tests: API endpoints (smoke tests).
  * Verifies that the app boots and main routes respond without errors.
  */
 import { Test, TestingModule } from '@nestjs/testing';
@@ -10,7 +10,7 @@ import { AppModule } from 'src/app.module';
 import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
 import { TransformInterceptor } from 'src/common/interceptors/transform.interceptor';
 
-describe('AppController (e2e)', () => {
+describe('AppController (Integration API)', () => {
   let app: INestApplication;
   const basePath = '/v1/api';
   let projectId: string | null = null;
@@ -73,9 +73,9 @@ describe('AppController (e2e)', () => {
   });
 
   //
-  // Projects CRUD (e2e)
+  // Projects CRUD (Integration API)
   //
-  describe('Projects CRUD (e2e)', () => {
+  describe('Projects CRUD (Integration API)', () => {
     it('POST → 201 create', async () => {
       const body = {
         name: `e2e-project-${Date.now()}`,
@@ -154,9 +154,9 @@ describe('AppController (e2e)', () => {
   });
 
   //
-  // Endpoints CRUD (e2e)
+  // Endpoints CRUD (Integration API)
   //
-  describe('Endpoints CRUD (e2e)', () => {
+  describe('Endpoints CRUD (Integration API)', () => {
     it('GET route exists → 200', async () => {
       // Smoke: endpoints are discovered from OpenAPI spec, here we only assert the route exists.
       const res = await request(app.getHttpServer())
@@ -214,9 +214,9 @@ describe('AppController (e2e)', () => {
   });
 
   //
-  // Test Cases CRUD (e2e)
+  // Test Cases CRUD (Integration API)
   //
-  describe('Test Cases CRUD (e2e)', () => {
+  describe('Test Cases CRUD (Integration API)', () => {
     it('GET route exists → 200', async () => {
       const res = await request(app.getHttpServer())
         .get(`${basePath}/test-cases`)
@@ -269,9 +269,9 @@ describe('AppController (e2e)', () => {
   });
 
   //
-  // Test Suites CRUD (e2e)
+  // Test Suites CRUD (Integration API)
   //
-  describe('Test Suites CRUD (e2e)', () => {
+  describe('Test Suites CRUD (Integration API)', () => {
     it('GET route exists → 200', async () => {
       const res = await request(app.getHttpServer())
         .get(`${basePath}/projects`)
@@ -322,9 +322,9 @@ describe('AppController (e2e)', () => {
   });
 
   //
-  // Bugs & Executions (e2e)
+  // Bugs & Executions (Integration API)
   //
-  describe('Bugs & Executions (e2e)', () => {
+  describe('Bugs & Executions (Integration API)', () => {
     it('GET list → 200', async () => {
       const res = await request(app.getHttpServer())
         .get(`${basePath}/bugs`)

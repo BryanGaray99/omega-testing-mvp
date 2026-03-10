@@ -193,9 +193,9 @@ export default function TestCases() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Test Cases</h1>
+          <h1 className="text-3xl font-bold text-foreground">{t("testCases.title")}</h1>
           <p className="mt-2 text-muted-foreground">
-            Create and manage test scenarios with AI assistance
+            {t("testCases.subtitle")}
           </p>
         </div>
         {/* Contenedor de botones alineados a la derecha */}
@@ -210,11 +210,11 @@ export default function TestCases() {
             ) : (
               <RefreshCw className="h-4 w-4 mr-2" />
             )}
-            {isRefreshing ? "Refreshing..." : "Refresh Data"}
+            {isRefreshing ? t("testCases.refreshing") : t("testCases.refreshData")}
           </Button>
           <Button onClick={() => setIsCreateDialogOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
-                Create Test Case
+                {t("testCases.createTestCase")}
               </Button>
         </div>
       </div>
@@ -244,7 +244,7 @@ export default function TestCases() {
       />
 
       {/* Test Cases Grid - h2 para orden secuencial de headings (Lighthouse a11y) */}
-      <h2 className="sr-only">Test case list</h2>
+      <h2 className="sr-only">{t("testCases.listAria")}</h2>
       <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500 ${isRefreshing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
         {visibleTestCases.map((testCase) => (
                <TestCaseCard
@@ -264,13 +264,13 @@ export default function TestCases() {
       {/* Pagination */}
       {filteredTestCases.length > 0 && (
         <div className="flex items-center justify-center gap-3">
-          <Button variant="outline" size="sm" disabled={currentPage === 1} onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} aria-label={t("common.previousPage") || "Previous page"}>
+          <Button variant="outline" size="sm" disabled={currentPage === 1} onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} aria-label={t("common.previousPage")}>
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <span className="text-sm text-muted-foreground">
             {replaceParams(t("testCases.pageOf"), { current: currentPage, total: totalPages })}
           </span>
-          <Button variant="outline" size="sm" disabled={currentPage === totalPages} onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))} aria-label={t("common.nextPage") || "Next page"}>
+          <Button variant="outline" size="sm" disabled={currentPage === totalPages} onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))} aria-label={t("common.nextPage")}>
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>

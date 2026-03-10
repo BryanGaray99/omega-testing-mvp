@@ -62,6 +62,7 @@ export default function TestCaseFilters({
   sortOrder,
   setSortOrder,
 }: TestCaseFiltersProps) {
+  const { t } = useTranslation();
   const getProjectName = (p: ProjectOption) => p.displayName || p.name || p.id;
   const [showAdvanced, setShowAdvanced] = useState(false);
 
@@ -71,7 +72,7 @@ export default function TestCaseFilters({
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search test cases..."
+            placeholder={t("testCases.searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -79,7 +80,7 @@ export default function TestCaseFilters({
         </div>
         <Button variant="outline" onClick={() => setShowAdvanced(v => !v)}>
           <SlidersHorizontal className="h-4 w-4 mr-2" />
-          {showAdvanced ? 'Hide Filters' : 'Show Filters'}
+          {showAdvanced ? t("testCases.hideFilters") : t("testCases.showFilters")}
         </Button>
       </div>
 
@@ -88,10 +89,10 @@ export default function TestCaseFilters({
           {/* Project */}
           <Select value={projectFilter} onValueChange={(v) => { setProjectFilter(v); setSectionFilter('all'); setEntityFilter('all'); }}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="All Projects" />
+              <SelectValue placeholder={t("testCases.allProjects")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Projects</SelectItem>
+              <SelectItem value="all">{t("testCases.allProjects")}</SelectItem>
               {projects.map((project) => (
                 <SelectItem key={project.id} value={project.id}>
                   {getProjectName(project)}
@@ -115,10 +116,10 @@ export default function TestCaseFilters({
           {/* Entity */}
           <Select value={entityFilter} onValueChange={setEntityFilter}>
             <SelectTrigger className="w-[160px]">
-              <SelectValue placeholder="All Entities" />
+              <SelectValue placeholder={t("testCases.allEntities")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Entities</SelectItem>
+              <SelectItem value="all">{t("testCases.allEntities")}</SelectItem>
               {entities.map((e) => (
                 <SelectItem key={e} value={e}>{e}</SelectItem>
               ))}

@@ -213,7 +213,7 @@ export default function TestCaseCard({
          <div className="space-y-3 flex-1">
            <div className="space-y-2">
              <div className="flex justify-between text-sm">
-               <span className="text-muted-foreground">Project:</span>
+               <span className="text-muted-foreground">{t("testCases.projectLabel")}</span>
                <span className="font-medium">
                  {projects.find(p => p.id === testCase.projectId)?.name || testCase.projectId}
                </span>
