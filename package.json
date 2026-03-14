@@ -51,7 +51,8 @@
     "prepublishOnly": "npm run build",
     "test:cli": "node bin/omega-testing.js info",
     "health": "node scripts/health-check.js",
-    "test:all": "node scripts/run-tests-all.js"
+    "test:all": "node scripts/run-tests-all.js",
+    "demo": "node scripts/demo.js"
   },
   "dependencies": {
     "chalk": "^4.1.2",

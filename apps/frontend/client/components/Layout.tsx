@@ -107,9 +107,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="fixed inset-y-0 left-0 w-64 bg-sidebar border-r border-sidebar-border">
             <div className="flex h-16 items-center justify-between px-6">
               <Link to="/" className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-lg bg-success flex items-center justify-center">
-                  <TestTube className="h-4 w-4 text-success-foreground" />
-                </div>
+                <img src="/logo.png" alt="Omega Testing" className="h-8 w-8 rounded-lg object-contain flex-shrink-0" />
                 <span className="font-bold text-foreground">Omega Testing</span>
               </Link>
               <Button
@@ -158,17 +156,13 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex h-16 items-center justify-between px-4">
             {!sidebarCollapsed && (
               <Link to="/" className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-lg bg-success flex items-center justify-center">
-                  <TestTube className="h-4 w-4 text-success-foreground" />
-                </div>
+                <img src="/logo.png" alt="Omega Testing" className="h-8 w-8 rounded-lg object-contain flex-shrink-0" />
                 <span className="font-bold text-foreground">Omega Testing</span>
               </Link>
             )}
             {sidebarCollapsed && (
               <Link to="/" className="mx-auto">
-                <div className="h-8 w-8 rounded-lg bg-success flex items-center justify-center">
-                  <TestTube className="h-4 w-4 text-success-foreground" />
-                </div>
+                <img src="/logo.png" alt="Omega Testing" className="h-8 w-8 rounded-lg object-contain flex-shrink-0" />
               </Link>
             )}
           </div>
