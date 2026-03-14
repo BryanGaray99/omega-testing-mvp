@@ -28,13 +28,19 @@ async function fetchJson(url, options = {}) {
   return text ? JSON.parse(text) : {};
 }
 
+function unwrap(res) {
+  return res?.data !== undefined ? res.data : res;
+}
+
 async function waitForProjectReady(projectId) {
   const start = Date.now();
   while (Date.now() - start < PROJECT_READY_TIMEOUT_MS) {
-    const project = await fetchJson(`${API_BASE}/projects/${projectId}`);
-    if (project.status === 'ready') return true;
-    if (project.status === 'failed') throw new Error('Project generation failed');
-    log(`  Project status: ${project.status}, waiting...`, 'cyan');
+    const raw = await fetchJson(`${API_BASE}/projects/${projectId}`);
+    const project = unwrap(raw);
+    const status = project?.status;
+    if (status === 'ready') return true;
+    if (status === 'failed') throw new Error('Project generation failed');
+    log(`  Project status: ${status}, waiting...`, 'cyan');
     await new Promise((r) => setTimeout(r, PROJECT_POLL_INTERVAL_MS));
   }
   throw new Error('Timeout waiting for project to be ready');
@@ -102,7 +108,7 @@ async function main() {
       method: 'POST',
       body: JSON.stringify(DEMO_PROJECT),
     });
-    projectId = projectRes.id;
+    projectId = projectRes.data?.id ?? projectRes.id;
     if (!projectId) {
       throw new Error('Project response missing id. Response: ' + JSON.stringify(projectRes));
     }
