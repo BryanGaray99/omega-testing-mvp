@@ -10,7 +10,7 @@ const path = require('path');
 const fs = require('fs');
 
 const API_BASE = process.env.API_BASE_URL || 'http://localhost:3000/v1/api';
-const PROJECT_READY_TIMEOUT_MS = 120000;
+const PROJECT_READY_TIMEOUT_MS = 6 * 60 * 1000; // 6 minutes (generation can take ~4 min)
 const PROJECT_POLL_INTERVAL_MS = 3000;
 
 function log(msg, color = 'reset') {
